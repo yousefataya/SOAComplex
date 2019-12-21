@@ -1,0 +1,13 @@
+<adapter-config name="CBSAutoReplyReference" adapter="db" wsdlLocation="../WSDLs/CBSAutoReplyReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="devConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CBSAutoReplyReference_ptt" operation="CBSAutoReplyReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="GET_ECC_AUTO_REPLY"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="PackageName" value="ECC_INT_PKG"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

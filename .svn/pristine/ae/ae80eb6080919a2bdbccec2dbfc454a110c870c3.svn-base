@@ -1,0 +1,92 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/apps/hcm/people/core/flex/ethnicityDFF/"
+     xmlns:ns1="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java"
+     xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Ethnicity Version 2</name>
+            <description>The ethnicity of a person as defined by the legislation. For
+                example, Asian-British in UK legislation.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key. Surrogate key." name="EthnicityId"/>
+                <oer:attribute description="Internal identifier for the person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Legislation code derived from Legal Entity." name="LegislationCode"/>
+                <oer:attribute description="New for Fusion. Column to store a person_id of who presented or declared the data to the system."
+                     name="DeclarerId"/>
+                <oer:attribute description="The person ID of the person who actually identified a person&apos;s ethnicity details."
+                     name="DeclarerPersonNumber"/>
+                <oer:attribute description="Ethnicity, defined from lookup, and valid for the Legislation Code"
+                     name="Ethnicity"/>
+                <oer:attribute description="Flag to indicate which ethnicity for a person is primary within a Legislation Code"
+                     name="PrimaryFlag"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Customer Flexfield for Ethinicity." name="EthnicityDFF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/ethnicityDFF/" schemaLocation="EthnicityDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel_1.xsd"/>
+    <xsd:complexType name="PersonEthnicity">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>EthnicityId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="EthnicityId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislationCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DeclarerId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="DeclarerPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Ethnicity" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PrimaryFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EthnicityDFF" type="ns0:EthnicityDFF" sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PersonEthnicityResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns1:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonEthnicity"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personEthnicityResult" type="PersonEthnicityResult"/>
+    <xsd:element name="personEthnicity" type="PersonEthnicity"/>
+</xsd:schema>

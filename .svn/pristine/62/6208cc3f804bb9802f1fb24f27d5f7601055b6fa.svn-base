@@ -1,0 +1,115 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Mon Feb 05 11:44:00 EET 2018
+  Author:  Mshkeeb
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess"
+         targetNamespace="http://xmlns.oracle.com/SAVEREWARDS/CreateTranaction/BPELProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SAVEREWARDS/CreateTranaction/BPELProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/CreateTranaction/CreateTransactionReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CreateTransactionReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/CreateTranaction/CreateTransactionReference"
+            location="../WSDLs/CreateTransactionReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="CreateTransactionService" bpelx:wadl="yes"/>
+        <partnerLink name="CreateTransactionReference" partnerLinkType="ns2:CreateTransactionReference_plt"
+                     partnerRole="CreateTransactionReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object" />
+        <variable name="outputVar" bpelx:json="object" />
+        <variable name="Invoke1_CreateTransactionReference_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="Invoke1_CreateTransactionReference_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="Transactionnumber" type="xsd:int"/>
+        <variable name="RESPONSE" type="xsd:string"/>
+        <variable name="composite_name" type="xsd:string"/>
+        <variable name="execution_input" type="xsd:string"/>
+        <variable name="execution_output" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="Receive1" partnerLink="CreateTransactionService" variable="inputVar" bpelx:method="CreateTranasaction"
+                 createInstance="yes"/>
+        <assign name="Assign1">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_CR_BRCH</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_CreateTransactionReference_InputVariable.InputParameters/ns3:P_CR_BRCH</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_CR_CACC</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_CreateTransactionReference_InputVariable.InputParameters/ns3:P_CR_CACC</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_DB_CACC</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_CreateTransactionReference_InputVariable.InputParameters/ns3:P_DB_CACC</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_AMNT</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_CreateTransactionReference_InputVariable.InputParameters/ns3:P_AMNT</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_PRZ_B_DESC</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_CreateTransactionReference_InputVariable.InputParameters/ns3:P_PRZ_B_DESC</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_PRZ_S_DESC</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_CreateTransactionReference_InputVariable.InputParameters/ns3:P_PRZ_S_DESC</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke1" partnerLink="CreateTransactionReference"
+                portType="ns2:CreateTransactionReference_ptt" operation="CreateTransactionReference"
+                inputVariable="Invoke1_CreateTransactionReference_InputVariable"
+                outputVariable="Invoke1_CreateTransactionReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+        <assign name="Assign2">
+            <copy>
+                <from>$Invoke1_CreateTransactionReference_OutputVariable.OutputParameters/ns3:P_TRSH_NUM</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Transactionnumber</to>
+            </copy>
+            <copy>
+                <from>$Invoke1_CreateTransactionReference_OutputVariable.OutputParameters/ns3:P_RESPONSE</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$RESPONSE</to>
+            </copy>
+        </assign>
+        <assign name="Assign3">
+            <copy>
+                <from>$Transactionnumber</from>
+                <to expressionLanguage="javascript">process.outputVar.TransactionNum</to>
+            </copy>
+            <copy>
+                <from>$RESPONSE</from>
+                <to expressionLanguage="javascript">process.outputVar.Response</to>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="CreateTransactionService" variable="outputVar" bpelx:method="CreateTranasaction"/>
+    </sequence>
+</process>

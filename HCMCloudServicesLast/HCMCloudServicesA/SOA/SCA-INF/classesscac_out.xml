@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>33</line>
+      <col/>
+      <file>BPEL/ResignationProcess.sbpel</file>
+      <name>BPEL/ResignationProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "ResignationProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>37</line>
+      <col/>
+      <file>BPEL/TransferProcess.sbpel</file>
+      <name>BPEL/TransferProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "TransferProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+</Faults>

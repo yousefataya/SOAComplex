@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="HCMEmpProfileRep"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpProfileRep/HCMEmpProfileRep"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpProfileRep/HCMEmpProfileRep"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="HCMEmpProfileRep">
+        <plnk:role name="HCMEmpProfileRepProvider" portType="client:HCMEmpProfileRep"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpProfileRep/HCMEmpProfileRep"
+                 schemaLocation="../Schemas/HCMEmpProfileRep.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="HCMEmpProfileRepRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="HCMEmpProfileRepResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="HCMEmpProfileRep">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:HCMEmpProfileRepRequestMessage"/>
+            <wsdl:output message="client:HCMEmpProfileRepResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

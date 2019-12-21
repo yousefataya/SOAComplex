@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.3.v20160526-8f41838">
+   <name>dbReference-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>dbReference.HcmEmpAddress</class>
+         <alias>HCM_EMP_ADDRESS</alias>
+         <primary-key>
+            <field table="HCM_EMP_ADDRESS" name="EMP_ACNT_NO" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="dbReferenceSelect" xsi:type="read-all-query">
+                  <reference-class>dbReference.HcmEmpAddress</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>empAcntNo</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="EMP_ACNT_NO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>empSeq</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="EMP_SEQ" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>addCode</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADD_CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>ctyCode</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="CTY_CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>ctyCode1</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="CTY_CODE1" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsPastal</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_PASTAL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsTelex</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_TELEX" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsPOBox</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_P_O_BOX" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsFax</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_FAX" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsEMail</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_E_MAIL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsTel</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_TEL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsWrite</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_WRITE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsRowStatus</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_ROW_STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>adsMobile</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="ADS_MOBILE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createdDate</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="CREATED_DATE" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createdBy</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="CREATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateCreated</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="DATE_CREATED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>modifiedBy</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="MODIFIED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateModified</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="DATE_MODIFIED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>status</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>stageObject</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="STAGE_OBJECT" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>stageObjectId</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="STAGE_OBJECT_ID" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>requestType</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="REQUEST_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>batchNum</attribute-name>
+               <field table="HCM_EMP_ADDRESS" name="BATCH_NUM" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="HCM_EMP_ADDRESS"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

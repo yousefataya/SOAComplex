@@ -1,0 +1,150 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Sun Feb 04 15:52:10 EET 2018
+  Author:  Mshkeeb
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SavePrizesProcess"
+         targetNamespace="http://xmlns.oracle.com/SAVEREWARDS/SaveRewardsOperation/SavePrizesProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SAVEREWARDS/SaveRewardsOperation/SavePrizesProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/SaveRewardsOperation/cbsReference"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/cbsReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/SaveRewardsOperation/RetriveCalculatedDataReference"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/SaveRewardsOperation/RetriveCalculateDataReference"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/sp/RetriveCalculateDataReference" suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/SaveRewardsOperation/GetChartOfAccountReference"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/sp/GetChartOfAccountReference"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/ICBS/BF_SAVEACC_PRZ_PRP/SAVEACC_TRX/"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/SaveRewardsOperation/CreateTransactionReference"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CreateTransactionReference">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/SaveRewardsOperation/cbsReference"
+            location="../WSDLs/cbsReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="SaveRewardsOperationsService" bpelx:wadl="yes"/>
+        <partnerLink name="cbsReference" partnerLinkType="ns2:cbsReference_plt" partnerRole="cbsReference_role"/>
+        <partnerLink name="CreateTransactionReference" partnerLinkType="ns10:CreateTransactionReference_plt"
+                     partnerRole="CreateTransactionReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke1_cbsReference_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="P_BAL" type="xsd:decimal"/>
+        <variable name="Status" type="xsd:string"/>
+        <variable name="P_BRCH_CODE" type="xsd:string"/>
+        <variable name="brch_code" type="xsd:string"/>
+        <variable name="Counter" type="xsd:int"/>
+        <variable name="cacc_num" type="xsd:string"/>
+        <variable name="object" bpelx:json="object"/>
+        <variable name="array" bpelx:json="array"/>
+        <variable name="TransactionNumber" type="xsd:int"/>
+        <variable name="Response" type="xsd:string"/>
+        <variable name="CreateTransactionReference_InputVariable" messageType="ns10:args_in_msg"/>
+        <variable name="CreateTransactionReference_OutputVariable" messageType="ns10:args_out_msg"/>
+    </variables>
+    <sequence name="main">
+        <pick name="Pick1" createInstance="yes">
+            <onMessage partnerLink="SaveRewardsOperationsService" variable="inputVar" bpelx:method="SavePrizes">
+                <sequence>
+                    <assign name="AssignInput">
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_bal</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_cbsReference_InputVariable.InputParameters/ns3:P_BAL</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke1" partnerLink="cbsReference" portType="ns2:cbsReference_ptt"
+                            operation="cbsReference" inputVariable="Invoke1_cbsReference_InputVariable"
+                            bpelx:invokeAsDetail="no"/>
+                    <reply name="Reply3" partnerLink="SaveRewardsOperationsService" variable="outputVar"
+                           bpelx:method="SavePrizes"/>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="SaveRewardsOperationsService" variable="inputVar" bpelx:method="CreateTransaction">
+                <sequence name="Sequence2">
+                    <assign name="AssignInput">
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_CR_BRCH</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CreateTransactionReference_InputVariable.InputParameters/ns11:P_CR_BRCH</to>
+                        </copy>
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_CR_CACC</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CreateTransactionReference_InputVariable.InputParameters/ns11:P_CR_CACC</to>
+                        </copy>
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_DB_CACC</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CreateTransactionReference_InputVariable.InputParameters/ns11:P_DB_CACC</to>
+                        </copy>
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_AMNT</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CreateTransactionReference_InputVariable.InputParameters/ns11:P_AMNT</to>
+                        </copy>
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_PRZ_B_DESC</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CreateTransactionReference_InputVariable.InputParameters/ns11:P_PRZ_B_DESC</to>
+                        </copy>
+                        <copy>
+                            <from expressionLanguage="javascript">process.inputVar.P_PRZ_S_DESC</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CreateTransactionReference_InputVariable.InputParameters/ns11:P_PRZ_S_DESC</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke3" bpelx:invokeAsDetail="no" partnerLink="CreateTransactionReference"
+                            portType="ns10:CreateTransactionReference_ptt" operation="CreateTransactionReference"
+                            inputVariable="CreateTransactionReference_InputVariable"
+                            outputVariable="CreateTransactionReference_OutputVariable"/>
+                    <assign name="AssignOutPut">
+                        <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$CreateTransactionReference_OutputVariable.OutputParameters/ns11:P_TRSH_NUM</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$TransactionNumber</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$CreateTransactionReference_OutputVariable.OutputParameters/ns11:P_RESPONSE</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Response</to>
+                        </copy>
+                    </assign>
+                    <assign name="AssignOut">
+                        <copy ignoreMissingFromData="yes">
+                            <from>$TransactionNumber</from>
+                            <to expressionLanguage="javascript">process.outputVar.TransaactionNumber</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes">
+                            <from>$Response</from>
+                            <to expressionLanguage="javascript">process.outputVar.Response</to>
+                        </copy>
+                    </assign>
+                    <reply name="Reply4" partnerLink="SaveRewardsOperationsService" variable="outputVar"
+                           bpelx:method="CreateTransaction"/>
+                </sequence>
+            </onMessage>
+        </pick>
+    </sequence>
+</process>

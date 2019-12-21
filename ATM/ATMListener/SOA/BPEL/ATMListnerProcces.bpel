@@ -1,0 +1,122 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Tue Feb 27 22:28:58 IST 2018
+  Author:  user
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ATMListnerProcces"
+               targetNamespace="http://xmlns.oracle.com/ATM/ATMListener/ATMListnerProcces"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/ATM/ATMListener/ATMListnerProcces"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/ATM/ATMListener/ATMReciveMsgReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:ns4="http://atm.fact.jo/outSocket"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns3="http://atm.fact.jo/inSocket" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ATMReciveMsgReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns6="http://atm.fact.jo/ATMSocket">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket"
+          location="../WSDLs/ATMSocket.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="ATMSocket" partnerLinkType="ns1:ATMInboundRequestReply_plt"
+                 myRole="ATMInboundRequestReply_role"/>
+    <partnerLink name="ATMReciveMsgReference" partnerLinkType="ns2:ATMReciveMsgReference_plt"
+                 partnerRole="ATMReciveMsgReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="InputVariable" messageType="ns1:inMsg_msg_requsest"/>
+    <variable name="OutputVariable" messageType="ns1:Response_msg_reply"/>
+    <variable name="ValidATMTransactionTypes" type="xsd:string"/>
+    <variable name="Invoke_ATMReciveMsg_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="Invoke_ATMReciveMsg_OutputVariable" messageType="ns2:args_out_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="Receive" partnerLink="ATMSocket" portType="ns1:ATMInboundRequestReply_ptt"
+             operation="ATMInboundRequestReply" variable="InputVariable" createInstance="yes"/>
+    <extensionActivity>
+      <bpelx:exec name="Java_FetchValidATMTransactionTypes">
+        <![CDATA[try {  
+      
+    com.dimensions.mw.utils.parameterManagement.ParameterManager paramManager =  
+        new com.dimensions.mw.utils.parameterManagement.ParameterManager();  
+    
+    String validATMTransaction =  
+            paramManager.getMandatoryParamValue("ATM_VALID_TRANSACTION_TYPES");  
+  
+    setVariableData("ValidATMTransactionTypes",validATMTransaction);  
+          
+} catch (Exception e) {  
+    String code = "";  
+    String message = "";  
+    if (e instanceof com.dimensions.mw.utils.OFMException) {  
+        code = ((com.dimensions.mw.utils.OFMException) e).getTechMessage();  
+        message = ((com.dimensions.mw.utils.OFMException) e).getTechDetails();  
+    } else {  
+        message = e.getMessage() + " | " + e.getLocalizedMessage() + " | " + e.getStackTrace().toString();  
+    }  
+    javax.xml.namespace.QName codeQName = new javax.xml.namespace.QName("http://custexp.com", code);  
+    javax.xml.namespace.QName messageQName = new javax.xml.namespace.QName("http://custexp", message);  
+    com.oracle.bpel.client.BPELFault bpelFault = new com.oracle.bpel.client.BPELFault();  
+    bpelFault.setFaultName(codeQName);  
+    bpelFault.setMessageType(messageQName);  
+    throw bpelFault;  
+}]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <if name="If_ValidTransaction">
+      <documentation>
+        <![CDATA[Valid]]>
+      </documentation>
+      <condition>contains($ValidATMTransactionTypes,substring($InputVariable.inMsg/ns6:msg,1,4))</condition>
+      <sequence name="Sequence1">
+        <assign name="Assign_ATMReciveMsgInput">
+          <copy bpelx:insertMissingToData="yes">
+            <from>$InputVariable.inMsg/ns6:msg</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ATMReciveMsg_InputVariable.InputParameters/ns5:P_INMSG</to>
+          </copy>
+        </assign>
+        <invoke name="Invoke_ATMReciveMsg" partnerLink="ATMReciveMsgReference" portType="ns2:ATMReciveMsgReference_ptt"
+                operation="ATMReciveMsgReference" inputVariable="Invoke_ATMReciveMsg_InputVariable"
+                outputVariable="Invoke_ATMReciveMsg_OutputVariable" bpelx:invokeAsDetail="no"/>
+        <assign name="Assign_ATMReciveMsgOutput">
+          <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+            <from>$Invoke_ATMReciveMsg_OutputVariable.OutputParameters/ns5:P_OUTMSG</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$OutputVariable.Response/ns4:Code</to>
+          </copy>
+        </assign>
+      </sequence>
+      <else>
+        <documentation>
+          <![CDATA[Invalid]]>
+        </documentation>
+        <empty name="DropTransaction"/>
+      </else>
+    </if>
+    <reply name="Reply" partnerLink="ATMSocket" variable="OutputVariable" portType="ns1:ATMInboundRequestReply_ptt"
+           operation="ATMInboundRequestReply"/>
+  </sequence>
+</process>

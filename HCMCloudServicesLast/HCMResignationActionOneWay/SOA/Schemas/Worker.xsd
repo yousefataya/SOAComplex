@@ -1,0 +1,180 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/" xmlns:ns2="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Worker SDO Version 2</name>
+            <description>A person within the Oracle Fusion application. This person may be an employee, a contingent worker, a contact, or a nonworker. This entity contains static biographical information about a person. For example, the person&apos;s name, date of birth, gender, personal address, and so forth.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment : HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System-generated primary key column." name="PersonId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Identified the blood group of the person." name="BloodType"/>
+                <oer:attribute description="Lookup identifies language to use for this communication."
+                     name="CorrespondenceLanguage"/>
+                <oer:attribute description="Start date of person record on system, always equal to earliest effective_start_date on per_all_people_f."
+                     name="StartDate"/>
+                <oer:attribute description="Date of birth of the person." name="DateOfBirth"/>
+                <oer:attribute description="Date of death of the person." name="DateOfDeath"/>
+                <oer:attribute description="Identifies the country where the person was born." name="CountryOfBirth"/>
+                <oer:attribute description="Region of birth, within the country of birth." name="RegionOfBirth"/>
+                <oer:attribute description="Town of birth, within the region of birth." name="TownOfBirth"/>
+                <oer:attribute description="Unique number for people who are applicants. This is in addition to PERSON_NUMBER. Allows global tracking of applicants."
+                     name="ApplicantNumber"/>
+                <oer:attribute description="This column is not currently used." name="WaiveDataProtectFlag"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Category Code" name="CategoryCode"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Specifies the action performed on the particular record. For example: HIRE, ADD PENDING WORKER, MANAGER CHANGE, etc."
+                     name="ActionCode"/>
+                <oer:attribute description="Specifies the reason for the action performed on the record."
+                     name="ReasonCode"/>
+                <oer:attribute description="This option is used to search for duplicate person records during the create new person process.  The valid options are set up in the ORA_PER_PERSON_DUP_SRCH_OPTION lookup type.  The value specified here will override the value specified at the enterprise-level."
+                     name="PersonDuplicateCheck"/>
+                <oer:attribute description="Highest level of the employment model that exists for every worker residing within a legal employer. This layer holds information regarding the type of relationship that exists between the person and the enterprise."
+                     name="WorkRelationship"/>
+                <oer:attribute description="Address of the worker." name="WorkerAddress"/>
+                <oer:attribute description="Citizenship of the worker" name="WorkerCitizenship"/>
+                <oer:attribute description="Various types of communication methods for a person" name="WorkerDeliveryMethod"/>
+                <oer:attribute description="Worker driver licence." name="WorkerDriversLicence"/>
+                <oer:attribute description="Worker Email address." name="WorkerEmail"/>
+                <oer:attribute description="Worker ethnicity." name="WorkerEthnicity"/>
+                <oer:attribute description="Worker&apos;s photograph." name="WorkerImage"/>
+                <oer:attribute description="It defines legislative specific person data. For example, legislation code, marital status, and other legislation specific data."
+                     name="WorkerLegislativeData"/>
+                <oer:attribute description="Name of the worker" name="WorkerName"/>
+                <oer:attribute description="National Identifier for the worker." name="WorkerNationalIdentifier"/>
+                <oer:attribute description="Passport of the worker." name="WorkerPassport"/>
+                <oer:attribute description="Denotes worker phone details." name="WorkerPhone"/>
+                <oer:attribute description="Religion of the worker." name="WorkerReligion"/>
+                <oer:attribute description="Worker visa." name="WorkerVisa"/>
+                <oer:attribute description="External Identifier of the worker." name="ExternalIdentifier"/>
+                <oer:attribute description="information required for provisioning a user account associated with a person."
+                     name="WorkerUserInformation"/>
+                <oer:attribute description="Customer&apos;s flexfield for worker." name="WorkerDFF"/>
+                <oer:attribute description="Extra information flexfield of the worker" name="j_WorkerExtraInformation"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/" schemaLocation="PersonDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+         schemaLocation="j_PersonExtraInformation.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:include schemaLocation="WorkRelationship.xsd"/>
+    <xsd:include schemaLocation="PersonAddress.xsd"/>
+    <xsd:include schemaLocation="PersonCitizenship.xsd"/>
+    <xsd:include schemaLocation="PersonDeliveryMethod.xsd"/>
+    <xsd:include schemaLocation="PersonDriversLicence.xsd"/>
+    <xsd:include schemaLocation="PersonEmail.xsd"/>
+    <xsd:include schemaLocation="PersonEthnicity.xsd"/>
+    <xsd:include schemaLocation="PersonImage.xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeData.xsd"/>
+    <xsd:include schemaLocation="PersonName.xsd"/>
+    <xsd:include schemaLocation="PersonNationalIdentifier.xsd"/>
+    <xsd:include schemaLocation="PersonPassport.xsd"/>
+    <xsd:include schemaLocation="PersonPhone.xsd"/>
+    <xsd:include schemaLocation="PersonReligion.xsd"/>
+    <xsd:include schemaLocation="PersonVisa.xsd"/>
+    <xsd:include schemaLocation="ExternalIdentifier.xsd"/>
+    <xsd:include schemaLocation="PersonUserInformation.xsd"/>
+    <xsd:complexType name="Worker">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>PersonId1</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BloodType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CorrespondenceLanguage" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="StartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateOfBirth" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateOfDeath" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="CountryOfBirth" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RegionOfBirth" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TownOfBirth" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ApplicantNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WaiveDataProtectFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="CategoryCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ActionCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReasonCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonDuplicateCheck" nillable="true" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkRelationship" type="WorkRelationship"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerAddress" type="PersonAddress"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerCitizenship" type="PersonCitizenship"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerDeliveryMethod" type="PersonDeliveryMethod"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerDriversLicence" type="PersonDriversLicence"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerEmail" type="PersonEmail"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerEthnicity" type="PersonEthnicity"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerImage" type="PersonImage"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerLegislativeData" type="PersonLegislativeData"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerName" type="PersonName"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerNationalIdentifier" type="PersonNationalIdentifier"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerPassport" type="PersonPassport"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerPhone" type="PersonPhone"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerReligion" type="PersonReligion"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkerVisa" type="PersonVisa"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="ExternalIdentifier" type="ExternalIdentifier"/>
+            <xsd:element minOccurs="0" name="WorkerUserInformation" type="PersonUserInformation"/>
+            <xsd:element minOccurs="0" name="WorkerDFF" type="ns1:PersonDFF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="j_WorkerExtraInformation" type="ns2:j_PersonExtraInformation"
+                 sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="WorkerResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="Worker"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="worker" type="Worker"/>
+    <xsd:element name="workerResult" type="WorkerResult"/>
+</xsd:schema>

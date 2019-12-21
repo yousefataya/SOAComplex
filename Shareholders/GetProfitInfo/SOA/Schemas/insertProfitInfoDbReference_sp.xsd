@@ -1,0 +1,18 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/insertProfitInfoDbReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/insertProfitInfoDbReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="PGET" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PCARD_ID" type="decimal" db:index="2" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PCENTER_CODE" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PSETUP_YEAR" type="decimal" db:index="4" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PSERIAL_ID" type="decimal" db:index="5" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PCASH_COMM_PROFIT" type="decimal" db:index="6" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PDIST_DATE" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PDIST_CASH_PERCENT" type="decimal" db:index="8" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PACCOUNT_SHARE" type="string" db:index="9" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PCOMPANY_SHARES" type="decimal" db:index="10" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

@@ -1,0 +1,57 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/HCMGradesProcess"
+     xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="process">
+        <complexType>
+            <sequence>
+                <element name="status" type="string"/>
+
+<!--1:insert 2:update
+
+-->
+                <element name="lsrDate" type="string"/>
+
+<!--the last sucssfuly request
+
+-->
+                <element name="key" type="string"/>
+
+<!--the key for cert
+
+-->
+                <element name="map" type="string"/>
+
+<!--map for cert
+
+-->
+                <element name="compositeLink" type="string"/>
+
+<!--compositetLink
+
+-->
+                <element name="compositeName" type="string"/>
+                <element name="requestType" type="string"/>
+
+<!--1:Scheduled 2:ondemand 
+
+-->
+                <element name="batchNumber" type="string"/>
+
+<!--sequenceDB
+
+-->
+            </sequence>
+        </complexType>
+    </element>
+    <element name="processResponse">
+        <complexType>
+            <sequence>
+                <element name="RequestResult" type="string"/>
+
+<!--Must Return S or F
+
+-->
+            </sequence>
+        </complexType>
+    </element>
+</schema>

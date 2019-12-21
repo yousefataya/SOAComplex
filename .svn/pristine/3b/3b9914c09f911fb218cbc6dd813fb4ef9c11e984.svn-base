@@ -1,0 +1,98 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/" xmlns:ns2="http://xmlns.oracle.com/apps/hcm/people/core/flex/visaPermitDFF/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Visa Details Version 2</name>
+            <description>The person visa, work permit and residency data of a person, for
+                example, visa permit number, visa permit type, visa permit
+                status, or issuing authority.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Identifies which person this row records data for" name="PersonId"/>
+                <oer:attribute description="System generated part of primary key. Surrogate key."
+                     name="VisaPermitId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Profession of holder" name="Profession"/>
+                <oer:attribute description="Visa or permit number" name="VisaPermitNumber"/>
+                <oer:attribute description="Status of visa or permit" name="VisaPermitStatus"/>
+                <oer:attribute description="Date the status came into effect" name="VisaPermitStatusDate"/>
+                <oer:attribute description="Visa or permit type" name="VisaPermitType"/>
+                <oer:attribute description="Date of issue of visa or permit" name="IssueDate"/>
+                <oer:attribute description="Expiration date of visa or permit" name="ExpirationDate"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Developer&apos;s flexfield for person visa legislative."
+                     name="PersonVisaLegDDF"/>
+                <oer:attribute description="Customer&apos;s flexfield for visa permit." name="VisaPermitDFF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+         schemaLocation="PersonVisaLegDDF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/visaPermitDFF/" schemaLocation="VisaPermitDFF.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:complexType name="PersonVisaDetails">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>VisaPermitId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="VisaPermitId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="Profession" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VisaPermitNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VisaPermitStatus" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VisaPermitStatusDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="VisaPermitType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IssueDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ExpirationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonVisaLegDDF" type="ns1:PersonVisaLegDDF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="VisaPermitDFF" type="ns2:VisaPermitDFF" sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PersonVisaDetailsResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonVisaDetails"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personVisaDetailsResult" type="PersonVisaDetailsResult"/>
+    <xsd:element name="personVisaDetails" type="PersonVisaDetails"/>
+</xsd:schema>

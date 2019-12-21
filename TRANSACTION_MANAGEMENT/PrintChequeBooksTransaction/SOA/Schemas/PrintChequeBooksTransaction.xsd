@@ -1,0 +1,101 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:PCBT="http://xmlns.fact.com/ws/PCBT"
+            targetNamespace="http://xmlns.fact.com/ws/PCBT" elementFormDefault="qualified">
+  <xsd:element name="PrintChequeBooksTransactionInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="PCBT:InputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="PCBT:InputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="PrintChequeBooksTransactionOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="PCBT:OutputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="PCBT:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="InputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionInformation" type="PCBT:InputInquiryInformationComplex"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputInquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="SequenceNumber" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="StatusInformation" type="PCBT:StatusInformationComplex"/>
+      <xsd:element name="ErrorInformation" type="PCBT:ErrorInformaitonComplex" minOccurs="0"/>
+      <xsd:element name="TransactionInformation" type="PCBT:TransactionInformationComplex" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="StatusInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformaitonComplex">
+    <xsd:sequence>
+      <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TransactionInformationComplex">
+    <xsd:sequence>
+    <xsd:element name="ResponseCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    <xsd:element name="Cheque" type="PCBT:ChequeTransactionComplex" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ChequeTransactionComplex">
+  <xsd:sequence>
+  <xsd:element name="BankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CBK_BRCH" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CACC_NUM" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CACC_CD_NUM" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CheckBookSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="FirstNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="LastNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CheckNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CBPT_CODE" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="CustomerTitle" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="PrintCustomerName1" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="PrintCustomerName2" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="BEN_NAME" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="Amount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="Fraction" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="V_TAFQET" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    <xsd:element name="TodayDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="COMP" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="Note" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="HoldNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="NO_OF_HLD" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    <xsd:element name="Address1" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="Address2" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    <xsd:element name="Address3" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="EndTitle" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+  <xsd:element name="Note2" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+
+
+  
+  </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

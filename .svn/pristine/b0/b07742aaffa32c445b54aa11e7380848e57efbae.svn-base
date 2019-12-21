@@ -1,0 +1,86 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/apps/hcm/people/core/flex/religionDFF/"
+     xmlns:ns1="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java"
+     xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Religion Version 2</name>
+            <description>A Person&apos;s religion in relevant legislation. For example,
+                Anglican in UK legislation or Christian in IN legislation.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key. Surrogate key." name="ReligionId"/>
+                <oer:attribute description="Internal identifier for the person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Legislation code derived from Legal Entity." name="LegislationCode"/>
+                <oer:attribute description="Religion, defined from lookup, and valid for the Legislation Code"
+                     name="Religion"/>
+                <oer:attribute description="Flag to indicate which religion for a person is primary within a Legislation Code"
+                     name="PrimaryFlag"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Customer&apos;s flexfield for religion." name="ReligionDFF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/religionDFF/" schemaLocation="ReligionDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel_1.xsd"/>
+    <xsd:complexType name="PersonReligionResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns1:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonReligion"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PersonReligion">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ReligionId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ReligionId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislationCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Religion" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PrimaryFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReligionDFF" type="ns0:ReligionDFF" sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personReligion" type="PersonReligion"/>
+    <xsd:element name="personReligionResult" type="PersonReligionResult"/>
+</xsd:schema>

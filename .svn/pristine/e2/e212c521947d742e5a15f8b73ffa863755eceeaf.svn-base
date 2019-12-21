@@ -1,0 +1,13 @@
+<adapter-config name="CancelAndReverseJounralTranscationReference" adapter="db" wsdlLocation="../WSDLs/CancelAndReverseJounralTranscationReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="TransactionInquiry" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CancelAndReverseJounralTranscationReference_ptt" operation="CancelAndReverseJounralTranscationReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BF_FIX_ASSEST_BANK"/>
+      <property name="ProcedureName" value="RE_VOUCHER_FIX_ASSETS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

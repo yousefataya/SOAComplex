@@ -1,0 +1,143 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/people/core/flex/contactRelshipDFF/" xmlns:ns2="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Contact Relationship Version 2</name>
+            <description>The person to person relationship details for a particular
+                person. For example spouse, parent, child, or brother.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated part of the primary key. Surrogate key."
+                     name="ContactRelationshipId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Person identifier of second person in the relationship. Foreign key to PER_ALL_PEOPLE_F."
+                     name="ContactPersonId"/>
+                <oer:attribute description="The person number of the contact. For example, Jane is an employee and John is her contact. This would be John&apos;s person number."
+                     name="ContactPersonNumber"/>
+                <oer:attribute description="Person identifier of first person in the relationship. Foreign key to PER_ALL_PEOPLE_F."
+                     name="RelatedPersonId"/>
+                <oer:attribute description="The person number for which the contact is related. For example, Jane is an employee and John is her contact. This would be Jane&apos;s person number."
+                     name="RelatedPersonNumber"/>
+                <oer:attribute description="Type of relationship between the two people concerned."
+                     name="ContactType"/>
+                <oer:attribute description="Identifies if the relationship is beneficiary or not."
+                     name="BeneficiaryFlag"/>
+                <oer:attribute description="Indicates whether the person is a potential EE bondholder."
+                     name="BondholderFlag"/>
+                <oer:attribute description="Identifier if the relationship is dependent or not." name="DependentFlag"/>
+                <oer:attribute description="Flag which distinguishes emergency contacts from other types of relationship"
+                     name="EmergencyContactFlag"/>
+                <oer:attribute description="Identifies the reason the relationship ended. Foreign key to BEN_LER_F."
+                     name="EndLifeReasonId"/>
+                <oer:attribute description="Identifies the reason the relationship started. Foreign key to BEN_LER_F."
+                     name="StartLifeReasonId"/>
+                <oer:attribute description="Indicate whether the contact relationship is created from an existing person"
+                     name="ExistingPerson"/>
+                <oer:attribute description="Indicates whether the relationship is a personal relationship."
+                     name="PersonalFlag"/>
+                <oer:attribute description="Indicates whether the second person of the relationship is the primary contact of the first person in the relationship."
+                     name="PrimaryContactFlag"/>
+                <oer:attribute description="The unique sequence number for the relationship used to identify contacts with a third party organization."
+                     name="SequenceNumber"/>
+                <oer:attribute description="Indicates whether the contact receives third party payments from the employee."
+                     name="ThirdPartyPayFlag"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Country code for the Contact." name="LegislationCode"/>
+                <oer:attribute description="Customer flexfield for contact relationship." name="ContactRelshipDFF"/>
+                <oer:attribute description="It defines a contact&apos;s data specific to a legislation that is not handled by the core fields."
+                     name="PersonContactRelLegDDF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/contactRelshipDFF/"
+         schemaLocation="ContactRelshipDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/"
+         schemaLocation="PersonContactRelLegDDF.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:complexType name="PersonContactRelationship">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContactRelationshipId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ContactRelationshipId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ContactPersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ContactPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RelatedPersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="RelatedPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ContactType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BeneficiaryFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="BondholderFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="DependentFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="EmergencyContactFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="EndLifeReasonId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="StartLifeReasonId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="ExistingPerson" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonalFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="PrimaryContactFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="SequenceNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="ThirdPartyPayFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislationCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ContactRelshipDFF" type="ns1:ContactRelshipDFF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="PersonContactRelLegDDF" type="ns2:PersonContactRelLegDDF"
+                 sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PersonContactRelationshipResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonContactRelationship"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personContactRelationshipResult" type="PersonContactRelationshipResult"/>
+    <xsd:element name="personContactRelationship" type="PersonContactRelationship"/>
+</xsd:schema>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ECCPDCAddProcess"
+     targetNamespace="http://xmlns.oracle.com/ECC/ECCPDCAdd/ECCPDCAddProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/ECC/ECCPDCAdd/ECCPDCAddProcess"
+     xmlns:ns1="http://xmlns.fact.com/ws/EPDA"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://172.20.5.204:7003/soa-infra/services/ECC/ECCPDCAdd!1.0/WSDLs/ECCPDCAddProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="ECCPDCAddProcess">
+        <plnk:role name="ECCPDCAddProcessProvider" portType="client:ECCPDCAddProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.fact.com/ws/EPDA" schemaLocation="../Schemas/ECCPDCAddWS.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ECCPDCAddProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:ECCPDCAddMessageInput"/>
+    </wsdl:message>
+    <wsdl:message name="ECCPDCAddProcessResponseMessage">
+        <wsdl:part name="payload" element="ns1:ECCPDCAddMessageOutput"/>
+    </wsdl:message>
+    <wsdl:portType name="ECCPDCAddProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ECCPDCAddProcessRequestMessage"/>
+            <wsdl:output message="client:ECCPDCAddProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ECCPDCAddProcessBinding" type="client:ECCPDCAddProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="eccpdcaddprocess_client_ep">
+        <wsdl:port name="ECCPDCAddProcess_pt" binding="client:ECCPDCAddProcessBinding">
+            <soap:address location="http://172.20.5.204:7003/soa-infra/services/ECC/ECCPDCAdd/eccpdcaddprocess_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

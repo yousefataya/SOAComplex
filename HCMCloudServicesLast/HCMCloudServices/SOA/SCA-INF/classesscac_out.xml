@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>36</line>
+      <col/>
+      <file>BPEL/GradesProcess.sbpel</file>
+      <name>BPEL/GradesProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "GradesProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>35</line>
+      <col/>
+      <file>BPEL/LocationsProcess.sbpel</file>
+      <name>BPEL/LocationsProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "LocationsProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>36</line>
+      <col/>
+      <file>BPEL/UnpaidLeaveProcess.sbpel</file>
+      <name>BPEL/UnpaidLeaveProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "UnpaidLeaveProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>33</line>
+      <col/>
+      <file>BPEL/ServiceAProcess.sbpel</file>
+      <name>BPEL/ServiceAProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "ServiceAProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>35</line>
+      <col/>
+      <file>BPEL/AccrualBalProcess.sbpel</file>
+      <name>BPEL/AccrualBalProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "AccrualBalProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>35</line>
+      <col/>
+      <file>BPEL/JobProcess.sbpel</file>
+      <name>BPEL/JobProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "JobProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='subProcess']</loc>
+      <line>35</line>
+      <col/>
+      <file>BPEL/DeparmentsProcess.sbpel</file>
+      <name>BPEL/DeparmentsProcess.sbpel</name>
+      <fix>You should place all explicit &lt;bpel:import> statements in a BPEL 2.0 process.</fix>
+      <msg>There are no explicit "import" statements in &lt;bpelx:subProcess> "DeparmentsProcess" as required by BPEL 2.0 standard.</msg>
+   </Fault>
+</Faults>

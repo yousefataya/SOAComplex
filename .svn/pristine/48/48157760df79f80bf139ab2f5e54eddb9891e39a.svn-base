@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="HCMLocationsProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMLocations!2.5/WSDLs/HCMLocationsProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="HCMLocationsProcess">
+        <plnk:role name="HCMLocationsProcessProvider" portType="client:HCMLocationsProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess"
+                 schemaLocation="../Schemas/HCMLocationsProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="HCMLocationsProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="HCMLocationsProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="HCMLocationsProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:HCMLocationsProcessRequestMessage"/>
+            <wsdl:output message="client:HCMLocationsProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="HCMLocationsProcessBinding" type="client:HCMLocationsProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="hcmlocationsprocess_service_ep">
+        <wsdl:port name="HCMLocationsProcess_pt" binding="client:HCMLocationsProcessBinding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMLocations/hcmlocationsprocess_service_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

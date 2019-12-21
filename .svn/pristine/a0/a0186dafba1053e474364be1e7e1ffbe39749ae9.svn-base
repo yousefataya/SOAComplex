@@ -1,0 +1,12 @@
+<adapter-config name="getCustomerDetailsReference" adapter="db" wsdlLocation="../WSDLs/getCustomerDetailsReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="cbsConnection2" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="getCustomerDetailsReference_ptt" operation="getCustomerDetailsReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="AI_GETCUATOMERPROFILE_KIOSYS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

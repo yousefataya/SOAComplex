@@ -1,0 +1,42 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getBranchesManagerReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getBranchesManagerReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CUR_INFO" type="db:P_CUR_INFO_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_CUR_INFO_RowSet">
+      <sequence>
+         <element name="P_CUR_INFO_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="BRANCH_CODE" type="db:string5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="LNAME" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="MANGER_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_NAME_A" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string5">
+      <restriction base="string">
+         <maxLength value="5"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+</schema>

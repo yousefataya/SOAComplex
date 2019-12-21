@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/nxsdschema"
+            targetNamespace="http://TargetNamespace.com/nxsdschema" elementFormDefault="qualified"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="US-ASCII">
+  <xsd:element name="Root-Element">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="result">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="p_stmt" maxOccurs="unbounded">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="card_id"/>
+                    <xsd:element name="card_national_No"/>
+                    <xsd:element name="card_full_name"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:annotation xmlns="">
+    <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+    <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+  </xsd:annotation>
+</xsd:schema>

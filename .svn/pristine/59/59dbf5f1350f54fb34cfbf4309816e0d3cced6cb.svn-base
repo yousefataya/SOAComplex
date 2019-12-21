@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="GCAService">RestService</doc>
+   <resources>
+      <resource path="/">
+         <method name="GET" soa:name="GCA">
+            <request>
+               <param name="CACC_NUM" style="query" type="xsd:string" default=""/>
+               <param name="BRCH_CODE" style="query" type="xsd:string" default=""/>
+               <param name="Authentication" style="query" type="xsd:string" default=""/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json"/>
+               <representation mediaType="application/xml"/>
+            </response>
+            <response status="500">
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

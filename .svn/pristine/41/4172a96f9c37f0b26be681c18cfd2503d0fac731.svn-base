@@ -1,0 +1,13 @@
+<adapter-config name="ECCPostingReference" adapter="db" wsdlLocation="../WSDLs/ECCPostingReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="devConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="ECCPostingReference_ptt" operation="ECCPostingReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="ECC_INT_PKG"/>
+      <property name="ProcedureName" value="GET_ECC_POSTING0"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

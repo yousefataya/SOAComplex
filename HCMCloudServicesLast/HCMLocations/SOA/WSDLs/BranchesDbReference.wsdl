@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="BranchesDbReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMLocations/BranchesDbReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMLocations/BranchesDbReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/BranchesDbReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="BranchesDbReference_plt" >
+    <plt:role name="BranchesDbReference_role" >
+      <plt:portType name="tns:BranchesDbReference_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/BranchesDbReference" schemaLocation="../Schemas/BranchesDbReference_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="HcmAdmBranchesCollection_msg">
+        <wsdl:part name="HcmAdmBranchesCollection" element="top:HcmAdmBranchesCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="BranchesDbReference_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:HcmAdmBranchesCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

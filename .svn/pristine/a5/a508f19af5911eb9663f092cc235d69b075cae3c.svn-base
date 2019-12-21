@@ -1,0 +1,35 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getDeputyGeneralManagerReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getDeputyGeneralManagerReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="OUT_EMP" type="db:OUT_EMP_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="OUT_EMP_RowSet">
+      <sequence>
+         <element name="OUT_EMP_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_NUMBER" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_NAME" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+</schema>

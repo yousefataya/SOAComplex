@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" xmlns:tns="http://atm.fact.jo/ATMSocket" targetNamespace="http://atm.fact.jo/ATMSocket" elementFormDefault="qualified" attributeFormDefault="unqualified" nxsd:version="NXSD" nxsd:stream="chars" nxsd:encoding="US-ASCII">
+
+
+  <xsd:element name="inMsg">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="msg" type="xsd:string" nxsd:style="terminated" nxsd:terminatedBy="${eol}"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+<xsd:annotation>
+      <xsd:appinfo>NXSDSAMPLE=demo.txt</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

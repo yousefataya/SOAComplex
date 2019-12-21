@@ -1,0 +1,11 @@
+<adapter-config name="gcadbReference" adapter="db" wsdlLocation="../WSDLs/gcadbReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="AccountExistInquiry" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="gcadbReference_ptt" operation="gcadbReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select  CACC_B_NAME from BBSD_CUST_ACCOUNTS WHERE BRCH_CODE = #BRCH_CODE   AND CACC_NUM  = #CACC_NUM"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

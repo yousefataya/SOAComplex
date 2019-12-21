@@ -1,0 +1,13 @@
+<adapter-config name="getOldSignReference" adapter="db" wsdlLocation="../WSDLs/getOldSignReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="devConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="getOldSignReference_ptt" operation="getOldSignReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="ECC_ICBS_PKG"/>
+      <property name="ProcedureName" value="GET_OLD_SIGN"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

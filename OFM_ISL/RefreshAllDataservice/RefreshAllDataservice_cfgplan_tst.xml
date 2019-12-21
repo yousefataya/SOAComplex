@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAConfigPlan xmlns="http://schemas.oracle.com/soa/configplan" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+   <composite name="RefreshAllDataservice">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="RefreshAllDataservice">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://oracle.com/sca/soapservice/OFMInMemoryUtilities/RefreshAllDataservice/RefreshAllDataservice#wsdl.endpoint(RefreshAllDataservice/RefreshAllDataservice_pt)</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>NEVER</replace>
+            </property>
+         </binding>
+      </service>
+      <property name="productVersion">
+         <replace>11.1.1.7.0</replace>
+      </property>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="RefreshAllProcess">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.config.oneWayDeliveryPolicy">
+            <replace>async.persist</replace>
+         </property>
+         <property name="bpel.config.completionPersistPolicy">
+            <replace>faulted</replace>
+         </property>
+         <property name="bpel.config.inMemoryOptimization">
+            <replace>false</replace>
+         </property>
+      </component>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for adapter: 
+	<jca:property name="QueueName"><replace>medmq1</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="RefreshAllDataservice.wsdl|RefreshAllProcess.wsdl|xsd/bpel/RefreshAllBPEL.xsd|xsd/ws/RefreshAllWS.xsd">
+      
+   
+				 <!-- OFM -->
+<searchReplace >
+<search>trngold1.wataniya-palestine.com:2002</search>
+<replace>trngold1.wataniya-palestine.com:3004</replace>
+</searchReplace>
+<!-- BSG -->
+<searchReplace >
+<search>10.200.71.190:55680</search>
+<replace>10.200.71.191:55680</replace>
+</searchReplace>
+<!-- INMS -->
+<searchReplace >
+<search>10.200.71.193:6413</search>
+<replace>10.200.71.193:6413</replace>
+</searchReplace>
+<!-- OVSC -->
+<searchReplace >
+<search>10.200.71.191:8015</search>
+<replace>10.200.71.191:8015</replace>
+</searchReplace>
+<!-- CCP -->
+<searchReplace >
+<search>10.200.71.190:5082</search>
+<replace>10.200.71.191:5082</replace>
+</searchReplace>
+<searchReplace >
+<search>10.200.71.191:5082</search>
+<replace>10.200.71.191:5082</replace>
+</searchReplace>
+<!-- BBOSS -->
+<searchReplace >
+<search>10.200.71.190:8090</search>
+<replace>10.200.71.191:8045</replace>
+</searchReplace>
+<searchReplace >
+<search>10.200.71.191:8045</search>
+<replace>10.200.71.191:8045</replace>
+</searchReplace> 
+<!-- INTENS -->
+<searchReplace >
+<search>10.200.71.197:8080</search>
+<replace>10.200.71.210:8080</replace>
+</searchReplace>
+<!-- CPM -->
+<searchReplace >
+<search>10.200.71.190:8080</search>
+<replace>10.200.71.210:8080</replace>
+</searchReplace>
+<!-- PROV -->
+<searchReplace >
+<search>devprod1.wataniya-palestine.com:6010/sst2/services/provisioning</search>
+<replace>devprod1.wataniya-palestine.com:6010/sst2/services/provisioning</replace>
+</searchReplace>
+<!-- SDS -->
+<searchReplace >
+<search>fawri_test2.wataniya.ps</search>
+<replace>fawri_test2.wataniya.ps:80</replace>
+</searchReplace> 
+<!-- CRM -->
+<searchReplace >
+<search>http://devcrm2/eai_enu/start.swe?SWEExtSource=WebService&amp;SWEExtCmd=Execute&amp;WSSOAP=1</search>
+<replace>http://tstcrm2:80/eai_enu/start.swe?SWEExtSource=WebService&amp;SWEExtCmd=Execute&amp;WSSOAP=1</replace>
+</searchReplace> 
+<!-- CRM -->
+<searchReplace >
+<search>tstcti1</search>
+<replace>tstcrm2:80</replace>
+</searchReplace>
+<!-- CRM -->
+<searchReplace >
+<search>tstcrm2</search>
+<replace>tstcrm2:80</replace>
+</searchReplace>
+<!-- CRM -->
+<searchReplace >
+<search>http://devcrm2.wataniya-palestine.com/eai_enu/start.swe?SWEExtSource=SecureWebService&amp;SWEExtCmd=Execute&amp;WSSOAP=1</search>
+<replace>http://tstcrm2:80/eai_enu/start.swe?SWEExtSource=WebService&amp;SWEExtCmd=Execute&amp;WSSOAP=1</replace>
+</searchReplace>
+<!-- CRM -->
+<searchReplace >
+<search>http://devcrm2.wataniya-palestine.com</search>
+<replace>http://tstcrm2:80</replace>
+</searchReplace>
+<!-- CRM -->
+<searchReplace >
+<search>http://devcrm2.wataniya-palestine.com/eai_enu/start.swe?SWEExtSource=WebService&amp;SWEExtCmd=Execute&amp;WSSOAP=1</search>
+<replace>http://tstcrm2:80/eai_enu/start.swe?SWEExtSource=WebService&amp;SWEExtCmd=Execute&amp;WSSOAP=1</replace>
+</searchReplace> </wsdlAndSchema>
+</SOAConfigPlan>

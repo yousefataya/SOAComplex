@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="root_descriptor_alias">HCM_EMP_TRANSFER_D</entry>
+   <entry key="HCM_EMP_TRANSFER_D.TRANS_TYPE:db_column_size">2000</entry>
+   <entry key="HCM_EMP_TRANSFER_D.DATE_CREATED:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STATUS:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STATUS:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D.ALW_VALUE:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.DATE_MODIFIED:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.BATCH_NUM:db_column_size">3000</entry>
+   <entry key="HCM_EMP_TRANSFER_D.CREATED_BY:db_column_size">30</entry>
+   <entry key="HCM_EMP_TRANSFER_D.ALW_VALUE:db_column_size">2000</entry>
+   <entry key="HCM_EMP_TRANSFER_D.TRP_SUP_NO:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STATUS:db_column_size">30</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STAGE_OBJECT_ID:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D.TRANS_TYPE:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.MODIFIED_BY:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_table_type">TABLE</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_12">BATCH_NUM</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STAGE_OBJECT_ID:db_column_size">2000</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_11">REQUEST_TYPE</entry>
+   <entry key="HCM_EMP_TRANSFER_D.ALW_CODE:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_10">STAGE_OBJECT_ID</entry>
+   <entry key="HCM_EMP_TRANSFER_D.REQUEST_TYPE:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STAGE_OBJECT:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D.TRP_SUP_NO:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_9">STAGE_OBJECT</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_8">STATUS</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STAGE_OBJECT:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_7">DATE_MODIFIED</entry>
+   <entry key="HCM_EMP_TRANSFER_D.MODIFIED_BY:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_6">MODIFIED_BY</entry>
+   <entry key="HCM_EMP_TRANSFER_D.ALW_CODE:db_column_size">2000</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_5">DATE_CREATED</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_4">CREATED_BY</entry>
+   <entry key="HCM_EMP_TRANSFER_D.ALW_CODE:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_3">TRANS_TYPE</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STAGE_OBJECT_ID:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_2">ALW_VALUE</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_1">ALW_CODE</entry>
+   <entry key="HCM_EMP_TRANSFER_D.REQUEST_TYPE:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D:db_column_0">TRP_SUP_NO</entry>
+   <entry key="HCM_EMP_TRANSFER_D.DATE_CREATED:db_column_type">DATE</entry>
+   <entry key="HCM_EMP_TRANSFER_D.STAGE_OBJECT:db_column_size">250</entry>
+   <entry key="HCM_EMP_TRANSFER_D.TRP_SUP_NO:db_column_size">2000</entry>
+   <entry key="HCM_EMP_TRANSFER_D.BATCH_NUM:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.MODIFIED_BY:db_column_size">30</entry>
+   <entry key="HCM_EMP_TRANSFER_D.TRANS_TYPE:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D.DATE_MODIFIED:db_column_type">DATE</entry>
+   <entry key="HCM_EMP_TRANSFER_D.CREATED_BY:db_column_not_null">false</entry>
+   <entry key="HCM_EMP_TRANSFER_D.REQUEST_TYPE:db_column_size">10</entry>
+   <entry key="HCM_EMP_TRANSFER_D.BATCH_NUM:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D.CREATED_BY:db_column_type">VARCHAR2</entry>
+   <entry key="HCM_EMP_TRANSFER_D.ALW_VALUE:db_column_type">VARCHAR2</entry>
+</properties>

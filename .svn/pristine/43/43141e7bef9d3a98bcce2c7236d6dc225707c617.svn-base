@@ -1,0 +1,13 @@
+<adapter-config name="getEmployeeVacationToYearReference" adapter="db" wsdlLocation="../WSDLs/getEmployeeVacationToYearReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getEmployeeVacationToYearReference_ptt" operation="getEmployeeVacationToYearReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_VACATION"/>
+      <property name="ProcedureName" value="GET_EMP_VAC_TO_END_YEAR"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

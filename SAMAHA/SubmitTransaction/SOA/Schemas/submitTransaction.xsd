@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org"
+            targetNamespace="http://www.example.org" elementFormDefault="qualified">
+  <xsd:element name="Request">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="sourceRegCode" type="xsd:string"/>
+        <xsd:element name="sourceBankCode" type="xsd:string"/>
+        <xsd:element name="sourceBranchCode" type="xsd:string"/>
+        <xsd:element name="sourceDate" type="xsd:string"/>
+        <xsd:element name="sourceRefText" type="xsd:string"/>
+        <xsd:element name="cusIdNumber" type="xsd:string"/>
+        <xsd:element name="transactionAmount" type="xsd:string"/>
+        <xsd:element name="paymentRefText" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Response">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="VoucherText" type="xsd:string"/>
+        <xsd:element name="ErrorCode" type="xsd:string"/>
+        <xsd:element name="ErrorText" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

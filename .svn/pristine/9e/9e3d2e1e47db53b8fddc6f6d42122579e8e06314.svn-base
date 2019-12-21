@@ -1,0 +1,1377 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Thu Dec 21 10:31:17 IST 2017
+  Author:  User
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="MusawamehProcess" targetNamespace="http://xmlns.oracle.com/MUSAWAMEH/MusawamehService/MusawamehProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/MUSAWAMEH/MusawamehService/MusawamehProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns1="http://services.fact"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getProductAmountLimitReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getCustomerInfoReference"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getCustomerAccountInfoReference"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getAllDocumentsNatureReference"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getAllProviderInfoReference"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getAllGoodInfoReference"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getLoanStatusReference"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerInfoReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllDocumentsNatureReference"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerAccountInfoReference"
+         xmlns:ns12="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllProviderInfoReference"
+         xmlns:ns13="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllGoodInfoReference"
+         xmlns:ns17="http://customer.bean.fact/xsd" xmlns:ns18="http://General.bean.fact/xsd"
+         xmlns:ns15="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getProductAmountLimitReference"
+         xmlns:ns16="http://common.bean.fact/xsd"
+         xmlns:ns14="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getLoanStatusReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns19="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/saveLoanRequestReference"
+         xmlns:ns20="http://xmlns.oracle.com/pcbpel/adapter/db/sp/saveLoanRequestReference"
+         xmlns:ns21="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/dbReference"
+         xmlns:ns22="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbReference"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns23="http://loan.bean.fact/xsd">
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://services.fact" location="../WSDLs/MusawamehServiceWrapper.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="MusawamehService" partnerLinkType="ns1:MusawamehService" myRole="MusawamehServicePortType"/>
+    <partnerLink name="getProductAmountLimitReference" partnerLinkType="ns2:getProductAmountLimitReference_plt"
+                 partnerRole="getProductAmountLimitReference_role"/>
+    <partnerLink name="getCustomerInfoReference" partnerLinkType="ns3:getCustomerInfoReference_plt"
+                 partnerRole="getCustomerInfoReference_role"/>
+    <partnerLink name="getCustomerAccountInfoReference" partnerLinkType="ns4:getCustomerAccountInfoReference_plt"
+                 partnerRole="getCustomerAccountInfoReference_role"/>
+    <partnerLink name="getAllDocumentsNatureReference" partnerLinkType="ns5:getAllDocumentsNatureReference_plt"
+                 partnerRole="getAllDocumentsNatureReference_role"/>
+    <partnerLink name="getAllProviderInfoReference" partnerLinkType="ns6:getAllProviderInfoReference_plt"
+                 partnerRole="getAllProviderInfoReference_role"/>
+    <partnerLink name="getAllGoodInfoReference" partnerLinkType="ns7:getAllGoodInfoReference_plt"
+                 partnerRole="getAllGoodInfoReference_role"/>
+    <partnerLink name="getLoanStatusReference" partnerLinkType="ns8:getLoanStatusReference_plt"
+                 partnerRole="getLoanStatusReference_role"/>
+    <partnerLink name="saveLoanRequestReference" partnerLinkType="ns19:saveLoanRequestReference_plt"
+                 partnerRole="saveLoanRequestReference_role"/>
+    <partnerLink name="dbReference" partnerLinkType="ns21:dbReference_plt" partnerRole="dbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="getCustomerInfo_InputVariable" messageType="ns1:getCustomerInfoRequest"/>
+    <variable name="getCustomerAccountInfo_InputVariable" messageType="ns1:getCustomerAccountInfoRequest"/>
+    <variable name="saveLoanRequest_InputVariable" messageType="ns1:saveLoanRequestRequest"/>
+    <variable name="getAllDocumentsNature_InputVariable" messageType="ns1:getAllDocumentsNatureRequest"/>
+    <variable name="getAllProviderInfo_InputVariable" messageType="ns1:getAllProviderInfoRequest"/>
+    <variable name="getAllGoodInfo_InputVariable" messageType="ns1:getAllGoodInfoRequest"/>
+    <variable name="getLoanStatus_InputVariable" messageType="ns1:getLoanStatusRequest"/>
+    <variable name="getProductAmountLimit_InputVariable" messageType="ns1:getProductAmountLimitRequest"/>
+    <variable name="getDemandReportInfo_InputVariable" messageType="ns1:getDemandReportInfoRequest"/>
+    <variable name="getLoanReportInfo_InputVariable" messageType="ns1:getLoanReportInfoRequest"/>
+    <variable name="getCustomerAccountInfo_OutputVariable" messageType="ns1:getCustomerAccountInfoResponse"/>
+    <variable name="getCustomerInfo_OutputVariable" messageType="ns1:getCustomerInfoResponse"/>
+    <variable name="saveLoanRequest_OutputVariable" messageType="ns1:saveLoanRequestResponse"/>
+    <variable name="getAllDocumentsNature_OutputVariable" messageType="ns1:getAllDocumentsNatureResponse"/>
+    <variable name="getAllProviderInfo_OutputVariable" messageType="ns1:getAllProviderInfoResponse"/>
+    <variable name="getAllGoodInfo_OutputVariable" messageType="ns1:getAllGoodInfoResponse"/>
+    <variable name="getLoanStatus_OutputVariable" messageType="ns1:getLoanStatusResponse"/>
+    <variable name="getProductAmountLimit_OutputVariable" messageType="ns1:getProductAmountLimitResponse"/>
+    <variable name="Invoke_getCustomerInfo_InputVariable" messageType="ns3:args_in_msg"/>
+    <variable name="Invoke_getCustomerInfo_OutputVariable" messageType="ns3:args_out_msg"/>
+    <variable name="Invoke_getAllDocumentsNature_InputVariable" messageType="ns5:args_in_msg"/>
+    <variable name="Invoke_getAllDocumentsNature_OutputVariable" messageType="ns5:args_out_msg"/>
+    <variable name="Invoke_getProductAmountLimit_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="Invoke_getProductAmountLimit_OutputVariable" messageType="ns2:args_out_msg"/>
+    <variable name="Invoke_getLoanStatus_InputVariable" messageType="ns8:args_in_msg"/>
+    <variable name="Invoke_getLoanStatus_OutputVariable" messageType="ns8:args_out_msg"/>
+    <variable name="Invoke_getAllGoodsInfo_InputVariable" messageType="ns7:args_in_msg"/>
+    <variable name="Invoke_getAllGoodsInfo_OutputVariable" messageType="ns7:args_out_msg"/>
+    <variable name="Invoke_getAllProviderInfo_InputVariable" messageType="ns6:args_in_msg"/>
+    <variable name="Invoke_getAllProviderInfo_OutputVariable" messageType="ns6:args_out_msg"/>
+    <variable name="Invoke_getCustomerAccountInfo_InputVariable" messageType="ns4:args_in_msg"/>
+    <variable name="Invoke_getCustomerAccountInfo_OutputVariable" messageType="ns4:args_out_msg"/>
+    <variable name="Invoke_saveLoanRequestReference_InputVariable" messageType="ns19:args_in_msg"/>
+    <variable name="Invoke_saveLoanRequestReference_OutputVariable" messageType="ns19:args_out_msg"/>
+    <variable name="Invoke1_dbReference_InputVariable" messageType="ns21:args_in_msg"/>
+    <variable name="Invoke1_dbReference_OutputVariable" messageType="ns21:args_out_msg"/>
+    <variable name="FaultCode" type="xsd:string"/>
+    <variable name="FaultString" type="xsd:string"/>
+    <variable name="strBranchNameVar" type="xsd:string"/>
+    <variable name="strCustomerAccountNumberVar" type="xsd:string"/>
+    <variable name="strCustomerNameVar" type="xsd:string"/>
+    <variable name="strCustomerMobileVar" type="xsd:string"/>
+    <variable name="CompositeName" type="xsd:string"/> 
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="SourceExecutionID" type="xsd:string"/>
+    <variable name="SourceAppUserName" type="xsd:string"/>
+    <variable name="ExecutionInput" type="xsd:string"/>
+    <variable name="SourceAppCode" type="xsd:string"/>
+    <variable name="BusinessKey" type="xsd:string"/>
+    <variable name="ExecutionID" type="xsd:string"/>
+    <variable name="ExecutionOutput" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <pick name="Pick1" createInstance="yes">
+      <onMessage partnerLink="MusawamehService" variable="getCustomerInfo_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getCustomerInfo">
+        <sequence name="getCustomerInfo"><assign name="Assign_DefaultVariables"
+                                                 xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+            <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+              <from>'Musawameh-getCustomerInfo'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+              <from>ora:getFlowId()</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+              <from>ora:toCDATA($getCustomerInfo_InputVariable.parameters)</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+            </copy>
+          </assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+              <![CDATA[try {         
+            String weblogicDomainName = "Unknown";         
+            String serverName = "Unknown";         
+            javax.naming.InitialContext ctx = null;         
+            ctx = new javax.naming.InitialContext();         
+            javax.management.MBeanServer beanServer =         
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");         
+            javax.management.ObjectName runtimeService =         
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");         
+            javax.management.ObjectName domainCFG =         
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");         
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");         
+            javax.management.ObjectName serverCFG =         
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");         
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");         
+         
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();         
+            setVariableData("ExecutionID", executionID);         
+            String compositeName = (String) getVariableData("CompositeName");         
+            String sourceAppCode = "CBS";         
+            String sourceExecutionID = "";         
+            String sourceAppUserName = ""  ;      
+            String executionInput = (String) getVariableData("ExecutionInput");         
+            String instanceID = (String) getVariableData("InstanceID");         
+            String bussinessKey = (String) getVariableData("BusinessKey");    
+  
+      
+         
+            com.dimensions.mw.utils.loggerManagement.LoggerManager         
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,         
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);         
+  
+ addAuditTrailEntry("compositeName:"+compositeName);     
+ addAuditTrailEntry("executionID:"+executionID);      
+ addAuditTrailEntry("sourceAppCode:"+sourceAppCode);      
+ addAuditTrailEntry("sourceExecutionID:"+sourceExecutionID);      
+ addAuditTrailEntry("sourceAppUserName:"+sourceAppUserName);      
+ addAuditTrailEntry("executionInput:"+executionInput);      
+ addAuditTrailEntry("instanceID:"+instanceID);      
+addAuditTrailEntry("weblogicDomainName:"+weblogicDomainName);      
+addAuditTrailEntry("serverName:"+serverName);      
+addAuditTrailEntry("bussinessKey:"+bussinessKey);      
+        } catch (Exception exc) {         
+ addAuditTrailEntry(exc);        
+                    exc.printStackTrace();       
+        }]]>
+            </bpelx:exec>
+   </extensionActivity><assign name="Assign_getCustomerInfoInput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:strCustomerNationalNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerInfo_InputVariable.InputParameters/ns10:P_NAT_NO</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:strCustomerNationalNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_dbReference_InputVariable.InputParameters/ns22:P_NAT_NO</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:intCustomerDocumentCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerInfo_InputVariable.InputParameters/ns10:P_DCNT_CODE</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:intCustomerDocumentCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_dbReference_InputVariable.InputParameters/ns22:P_DCNT_CODE</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:StrCustomerDocumentNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_dbReference_InputVariable.InputParameters/ns22:P_DOC_NUM</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:strCustomerPhone</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_dbReference_InputVariable.InputParameters/ns22:P_PADR_B_LINE_4</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:StrCustomerDocumentNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerInfo_InputVariable.InputParameters/ns10:P_DOC_NUM</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:strCustomerPhone</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerInfo_InputVariable.InputParameters/ns10:P_PADR_B_LINE_4</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:lngCustomerNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerInfo_InputVariable.InputParameters/ns10:P_CUST_ID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getCustomerInfo_InputVariable.parameters/ns1:lngCustomerNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_dbReference_InputVariable.InputParameters/ns22:P_CUST_ID</to>
+            </copy>
+          </assign><invoke name="Invoke_getCustomerInfo" bpelx:invokeAsDetail="no" partnerLink="dbReference" portType="ns21:dbReference_ptt"
+                  operation="dbReference" inputVariable="Invoke1_dbReference_InputVariable"
+                  outputVariable="Invoke1_dbReference_OutputVariable"/>
+          <assign name="assignFaultCodes">
+            <copy>
+              <from>$Invoke1_dbReference_OutputVariable.OutputParameters/ns22:P_ERRCODE</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultCode</to>
+            </copy>
+            <copy>
+              <from>$Invoke1_dbReference_OutputVariable.OutputParameters/ns22:P_ERRMSG</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultString</to>
+            </copy>
+          </assign>
+          <assign name="Assign_code_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$FaultCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns16:webServiceResponseCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$FaultString</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns16:webServiceResponseMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$FaultString</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:objDBResult/ns18:strDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$FaultCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:objDBResult/ns18:intCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$FaultCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:objDBResult/ns16:webServiceResponseCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$FaultString</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:objDBResult/ns16:webServiceResponseMessage</to>
+            </copy>
+          </assign>
+          <if name="If1">
+            <condition>$FaultCode ='0'</condition>
+            <sequence name="Sequence1">
+              <assign name="Initiat_vars">
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerPhone</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountName</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:arrCustomerAccount/ns17:strCustomerName</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:arrCustomerAccount/ns17:strCustomerAccountNumber</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountNumber</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:arrCustomerAccount/ns17:strBranchName</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strBranchName</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:intBranchNumber</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:arrCustomerAccount/ns17:intBranchCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerBirthOfDate</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerNationalNumber</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:intCustomerDocumentCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerDocumentDescription</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerDocumentNumber</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerMail</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerNationalityDescription</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" keepSrcElementName="no" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerGenderDescription</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:intCustomerGenderCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>""</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:lngCustomerNumber</to>
+                </copy>
+              </assign>
+              <extensionActivity>
+                <bpelx:exec name="java_Assign">
+                  <![CDATA[try { 
+    org.w3c.dom.Element e = 
+        (org.w3c.dom.Element) getVariableData("Invoke1_dbReference_OutputVariable", "OutputParameters", 
+                                              "//ns22:O_CURSOR"); 
+    org.w3c.dom.NodeList list = e.getChildNodes(); 
+    org.w3c.dom.Node x = list.item(0); 
+    org.w3c.dom.NodeList list2 = x.getChildNodes(); 
+ 
+    for (int i = 0; i < list2.getLength(); i++) { 
+        org.w3c.dom.Element node = (org.w3c.dom.Element) list2.item(i); 
+        String tagName = node.getAttribute("name"); 
+        String tagValue = node.getTextContent(); 
+        org.w3c.dom.Element oe = null; 
+        if (tagName.equals("CUST_NAME")) { 
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerName"); 
+            setVariableData("strCustomerNameVar", tagValue); 
+ 
+        } else if (tagName.equals("CUST_ID"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:lngCustomerNumber"); 
+ 
+         else if (tagName.equals("MOBILE"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerMobile"); 
+ 
+        else if (tagName.equals("PADR_PHONE_1")) { 
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerPhone"); 
+            setVariableData("strCustomerMobileVar", tagValue); 
+ 
+        } else if (tagName.equals("PHPR_SEX"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:intCustomerGenderCode"); 
+ 
+         else if (tagName.equals("PHPR_SEX_DESC"))  
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerGenderDescription"); 
+ 
+         else if (tagName.equals("CTRY_DESC"))  
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerNationalityDescription"); 
+ 
+         else if (tagName.equals("PHPR_BIRTH_DATE"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerBirthOfDate"); 
+ 
+         else if (tagName.equals("PHPR_NATIONAL_NBR"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerNationalNumber"); 
+ 
+         else if (tagName.equals("DCNT_CODE"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:intCustomerDocumentCode"); 
+ 
+         else if (tagName.equals("DCNT_B_DESC"))  
+            oe =(org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerDocumentDescription"); 
+ 
+         else if (tagName.equals("PHPR_ID_DOC_NUM"))  
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerDocumentNumber"); 
+ 
+         else if (tagName.equals("PADR_E_MAIL_1"))  
+            oe =  (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerMail"); 
+ 
+        if (oe != null) 
+            oe.setTextContent(tagValue); 
+    } 
+ 
+    e = (org.w3c.dom.Element) getVariableData("Invoke1_dbReference_OutputVariable", "OutputParameters", 
+                                              "//ns22:O_CURSOR_ACC"); 
+    list = e.getChildNodes(); 
+    x = list.item(0); 
+    list2 = x.getChildNodes(); 
+ 
+    for (int i = 0; i < list2.getLength(); i++) { 
+        org.w3c.dom.Element node = (org.w3c.dom.Element) list2.item(i); 
+        String tagName = node.getAttribute("name"); 
+        String tagValue = node.getTextContent(); 
+        org.w3c.dom.Element oe = null; 
+        if (tagName.equals("BRCH_CODE")) { 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:intBranchNumber"); 
+            oe.setTextContent(tagValue); 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:arrCustomerAccount//ns17:intBranchCode"); 
+            oe.setTextContent(tagValue); 
+ 
+        } else if (tagName.equals("BRCH_B_DESC")) { 
+            setVariableData("strBranchNameVar", tagValue); 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strBranchName"); 
+            oe.setTextContent(tagValue); 
+            oe =  (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:arrCustomerAccount//ns17:strBranchName"); 
+            oe.setTextContent(tagValue); 
+ 
+        } else if (tagName.equals("CACC_NUM")) { 
+            setVariableData("strCustomerAccountNumberVar", tagValue); 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerAccountNumber"); 
+            oe.setTextContent(tagValue); 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:arrCustomerAccount//ns17:strCustomerAccountNumber"); 
+            oe.setTextContent(tagValue); 
+ 
+        } else if (tagName.equals("CACC_B_NAME")) { 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:strCustomerAccountName"); 
+            oe.setTextContent(tagValue); 
+            oe = (org.w3c.dom.Element) getVariableData("getCustomerInfo_OutputVariable", "parameters", 
+                                                      "//ns1:return//ns17:arrCustomerAccount//ns17:strCustomerName"); 
+            oe.setTextContent(tagValue); 
+ 
+        } 
+ 
+    } 
+} catch (Exception exc) { 
+    addAuditTrailEntry("an exception occure"); 
+    addAuditTrailEntry(exc); 
+}]]>
+                </bpelx:exec>
+              </extensionActivity>
+              <assign name="assign_output">
+                <copy ignoreMissingFromData="yes">
+                  <from>$strBranchNameVar</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strBranchName</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$strCustomerMobileVar</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerMobile</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$strCustomerAccountNumberVar</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountNumber</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$strCustomerNameVar</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerName</to>
+                </copy>
+              </assign>
+            </sequence>
+            <else>
+              <assign name="delete_unused_Tags">
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:arrCustomerAccount</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:intBranchNumber</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:intCustomerDocumentCode</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:intCustomerGenderCode</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:lngCustomerNumber</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strBranchName</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountName</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountNumber</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerBirthOfDate</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerDocumentDescription</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerDocumentNumber</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerGenderDescription</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerMail</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerMobile</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerName</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerNationalNumber</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerNationalityDescription</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerPhone</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+              </assign>
+            </else>
+          </if>
+          <scope name="Scope5">
+            <sequence>
+              <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                <copy>
+                  <from>ora:toCDATA($getCustomerInfo_OutputVariable.parameters)</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+                </copy>
+              </assign>
+              <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                  <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]>
+                </bpelx:exec>
+              </extensionActivity>
+            </sequence>
+          </scope>
+          <reply name="replyOutput" partnerLink="MusawamehService" variable="getCustomerInfo_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getCustomerInfo"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="getCustomerAccountInfo_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getCustomerAccountInfo">
+        <sequence name="getCustomerAccountInfo"><assign name="Assign_DefaultVariables"
+                                                        xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-getCustomerAccountInfo'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($getCustomerAccountInfo_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {          
+            String weblogicDomainName = "Unknown";          
+            String serverName = "Unknown";          
+            javax.naming.InitialContext ctx = null;          
+            ctx = new javax.naming.InitialContext();          
+            javax.management.MBeanServer beanServer =          
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");          
+            javax.management.ObjectName runtimeService =          
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");          
+            javax.management.ObjectName domainCFG =          
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");          
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");          
+            javax.management.ObjectName serverCFG =          
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");          
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");          
+          
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();          
+            setVariableData("ExecutionID", executionID);          
+            String compositeName = (String) getVariableData("CompositeName");          
+            String sourceAppCode = "CBS";          
+            String sourceExecutionID = "";          
+            String sourceAppUserName = ""  ;       
+            String executionInput = (String) getVariableData("ExecutionInput");          
+            String instanceID = (String) getVariableData("InstanceID");          
+            String bussinessKey = (String) getVariableData("BusinessKey");     
+   
+       
+          
+            com.dimensions.mw.utils.loggerManagement.LoggerManager          
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,          
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);          
+        
+        } catch (Exception exc) {          
+ addAuditTrailEntry(exc);         
+                    exc.printStackTrace();        
+        }]]></bpelx:exec>
+   </extensionActivity><assign name="Assign_getCustomerAccountInfoInput">
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$getCustomerAccountInfo_InputVariable.parameters/ns1:lngCustomerNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerAccountInfo_InputVariable.InputParameters/ns11:P_CUST_ID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_getCustomerAccountInfo" bpelx:invokeAsDetail="no"
+                  partnerLink="getCustomerAccountInfoReference" portType="ns4:getCustomerAccountInfoReference_ptt"
+                  operation="getCustomerAccountInfoReference"
+                  inputVariable="Invoke_getCustomerAccountInfo_InputVariable"
+                  outputVariable="Invoke_getCustomerAccountInfo_OutputVariable"/><assign name="Assign_getCustomerAccountInfo_Output"
+                                                                                         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_getCustomerAccountInfo_OutputVariable.OutputParameters/ns11:O_CURSOR/ns11:O_CURSOR_Row/ns11:BRCH_CODE</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerAccountInfo_OutputVariable.parameters/ns1:return/ns17:intBranchNumber</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_getCustomerAccountInfo_OutputVariable.OutputParameters/ns11:O_CURSOR/ns11:O_CURSOR_Row/ns11:BRCH_B_DESC</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerAccountInfo_OutputVariable.parameters/ns1:return/ns17:strBranchName</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_getCustomerAccountInfo_OutputVariable.OutputParameters/ns11:O_CURSOR/ns11:O_CURSOR_Row/ns11:CACC_NUM</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerAccountInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountNumber</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_getCustomerAccountInfo_OutputVariable.OutputParameters/ns11:O_CURSOR/ns11:O_CURSOR_Row/ns11:CACC_B_NAME</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getCustomerAccountInfo_OutputVariable.parameters/ns1:return/ns17:strCustomerAccountName</to>
+            </copy>
+          </assign><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($getCustomerAccountInfo_OutputVariable.parameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="getCustomerAccountInfo_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getCustomerAccountInfo"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="saveLoanRequest_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="saveLoanRequest" bpelx:name="saveLoanRequest">
+        <sequence name="saveLoanRequest"><assign name="Assign_DefaultVariables"
+                                                 xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-SaveLoanRequest'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($saveLoanRequest_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {           
+            String weblogicDomainName = "Unknown";           
+            String serverName = "Unknown";           
+            javax.naming.InitialContext ctx = null;           
+            ctx = new javax.naming.InitialContext();           
+            javax.management.MBeanServer beanServer =           
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");           
+            javax.management.ObjectName runtimeService =           
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");           
+            javax.management.ObjectName domainCFG =           
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");           
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");           
+            javax.management.ObjectName serverCFG =           
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");           
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");           
+           
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();           
+            setVariableData("ExecutionID", executionID);           
+            String compositeName = (String) getVariableData("CompositeName");           
+            String sourceAppCode = "CBS";           
+            String sourceExecutionID = "";           
+            String sourceAppUserName = ""  ;        
+            String executionInput = (String) getVariableData("ExecutionInput");           
+            String instanceID = (String) getVariableData("InstanceID");           
+            String bussinessKey = (String) getVariableData("BusinessKey");      
+    
+        
+           
+            com.dimensions.mw.utils.loggerManagement.LoggerManager           
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,           
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);           
+         
+        } catch (Exception exc) {           
+ addAuditTrailEntry(exc);          
+                    exc.printStackTrace();         
+        }]]></bpelx:exec>
+   </extensionActivity><assign name="input_Transformation">
+            <bpelx:annotation>
+              <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from>ora:doXSLTransformForDoc("../Transformations/input_Transformation.xsl", $saveLoanRequest_InputVariable.parameters)</from>
+              <to variable="Invoke_saveLoanRequestReference_InputVariable" part="InputParameters"/>
+            </copy>
+          </assign>
+          <invoke name="Invoke_saveLoanRequest" partnerLink="saveLoanRequestReference"
+                  portType="ns19:saveLoanRequestReference_ptt" operation="saveLoanRequestReference"
+                  inputVariable="Invoke_saveLoanRequestReference_InputVariable"
+                  outputVariable="Invoke_saveLoanRequestReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+          <assign name="Assign_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_saveLoanRequestReference_OutputVariable.OutputParameters/ns20:P_RCPM_APPLY_DATE</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$saveLoanRequest_OutputVariable.parameters/ns1:return/ns18:strApplayDate</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_saveLoanRequestReference_OutputVariable.OutputParameters/ns20:P_RCPM_WEB_REFERENCE</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$saveLoanRequest_OutputVariable.parameters/ns1:return/ns18:lngWebRef</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_saveLoanRequestReference_OutputVariable.OutputParameters/ns20:P_ERRCODE</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$saveLoanRequest_OutputVariable.parameters/ns1:return/ns16:webServiceResponseCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_saveLoanRequestReference_OutputVariable.OutputParameters/ns20:P_ERRMSG</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$saveLoanRequest_OutputVariable.parameters/ns1:return/ns16:webServiceResponseMessage</to>
+            </copy>
+          </assign><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($saveLoanRequest_OutputVariable.parameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {       
+            String executionID = (String) getVariableData("ExecutionID");       
+            String executionStatus = "S";      
+            String sourceExecutionID = "";         
+            String executionOutput = (String) getVariableData("ExecutionOutput");       
+            String compositeName = (String) getVariableData("CompositeName");       
+       
+            com.dimensions.mw.utils.loggerManagement.LoggerManager       
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);       
+        } catch (Exception exc) {       
+            addAuditTrailEntry(exc);      
+                    exc.printStackTrace();     
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="saveLoanRequest_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="saveLoanRequest"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="getAllDocumentsNature_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getAllDocumentsNature">
+        <sequence name="getAllDocumentNature"><assign name="Assign_DefaultVariables"
+                                                      xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-getAllDocumentNature'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($getAllDocumentsNature_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {           
+            String weblogicDomainName = "Unknown";           
+            String serverName = "Unknown";           
+            javax.naming.InitialContext ctx = null;           
+            ctx = new javax.naming.InitialContext();           
+            javax.management.MBeanServer beanServer =           
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");           
+            javax.management.ObjectName runtimeService =           
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");           
+            javax.management.ObjectName domainCFG =           
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");           
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");           
+            javax.management.ObjectName serverCFG =           
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");           
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");           
+           
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();           
+            setVariableData("ExecutionID", executionID);           
+            String compositeName = (String) getVariableData("CompositeName");           
+            String sourceAppCode = "CBS";           
+            String sourceExecutionID = "";           
+            String sourceAppUserName = ""  ;        
+            String executionInput = (String) getVariableData("ExecutionInput");           
+            String instanceID = (String) getVariableData("InstanceID");           
+            String bussinessKey = (String) getVariableData("BusinessKey");      
+    
+        
+           
+            com.dimensions.mw.utils.loggerManagement.LoggerManager           
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,           
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);           
+         
+        } catch (Exception exc) {           
+ addAuditTrailEntry(exc);          
+                    exc.printStackTrace();         
+        }]]></bpelx:exec>
+   </extensionActivity><invoke name="Invoke_getAllDocumentsNature" bpelx:invokeAsDetail="no"
+                  partnerLink="getAllDocumentsNatureReference" portType="ns5:getAllDocumentsNatureReference_ptt"
+                  operation="getAllDocumentsNatureReference"
+                  inputVariable="Invoke_getAllDocumentsNature_InputVariable"
+                  outputVariable="Invoke_getAllDocumentsNature_OutputVariable"/>
+          <forEach parallel="no" counterName="DocumentCounter" name="ForEachDocument">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">ora:countNodes($Invoke_getAllDocumentsNature_OutputVariable.OutputParameters/ns9:O_CURSOR/ns9:O_CURSOR_Row)</finalCounterValue>
+            <scope name="Scope1">
+              <assign name="Assign_getAllDocuments_Output">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getAllDocumentsNature_OutputVariable.OutputParameters/ns9:O_CURSOR/ns9:O_CURSOR_Row[$DocumentCounter]/ns9:DCNT_CODE</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getAllDocumentsNature_OutputVariable.parameters/ns1:return[$DocumentCounter]/ns18:intCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getAllDocumentsNature_OutputVariable.OutputParameters/ns9:O_CURSOR/ns9:O_CURSOR_Row[$DocumentCounter]/ns9:DCNT_B_DESC</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getAllDocumentsNature_OutputVariable.parameters/ns1:return[$DocumentCounter]/ns18:strDescription</to>
+                </copy>
+              </assign>
+            </scope>
+          </forEach><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($getAllDocumentsNature_OutputVariable.parameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="getAllDocumentsNature_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getAllDocumentsNature"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="getAllProviderInfo_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getAllProviderInfo">
+        <sequence name="getAllProviderInfo"><assign name="Assign_DefaultVariables"
+                                                    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-getAllProviderInfo'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($getAllProviderInfo_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {            
+            String weblogicDomainName = "Unknown";            
+            String serverName = "Unknown";            
+            javax.naming.InitialContext ctx = null;            
+            ctx = new javax.naming.InitialContext();            
+            javax.management.MBeanServer beanServer =            
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");            
+            javax.management.ObjectName runtimeService =            
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");            
+            javax.management.ObjectName domainCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");            
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");            
+            javax.management.ObjectName serverCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");            
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");            
+            
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();            
+            setVariableData("ExecutionID", executionID);            
+            String compositeName = (String) getVariableData("CompositeName");            
+            String sourceAppCode = "CBS";            
+            String sourceExecutionID = "";            
+            String sourceAppUserName = ""  ;         
+            String executionInput = (String) getVariableData("ExecutionInput");            
+            String instanceID = (String) getVariableData("InstanceID");            
+            String bussinessKey = (String) getVariableData("BusinessKey");       
+     
+         
+            
+            com.dimensions.mw.utils.loggerManagement.LoggerManager            
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,            
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);            
+          
+        } catch (Exception exc) {            
+ addAuditTrailEntry(exc);           
+                    exc.printStackTrace();          
+        }]]></bpelx:exec>
+   </extensionActivity><assign name="Assign_getAllProviderInfoInput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$getAllProviderInfo_InputVariable.parameters/ns1:strUser</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getAllProviderInfo_InputVariable.InputParameters/ns12:P_USER</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_getAllProviderInfo" bpelx:invokeAsDetail="no" partnerLink="getAllProviderInfoReference"
+                  portType="ns6:getAllProviderInfoReference_ptt" operation="getAllProviderInfoReference"
+                  inputVariable="Invoke_getAllProviderInfo_InputVariable"
+                  outputVariable="Invoke_getAllProviderInfo_OutputVariable"/>
+          <forEach parallel="no" counterName="ProviderCounter" name="ForEachProvider">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue>ora:countNodes($Invoke_getAllProviderInfo_OutputVariable.OutputParameters/ns12:O_CURSOR/ns12:O_CURSOR_Row)</finalCounterValue>
+            <scope name="Scope2">
+              <assign name="Assign_getAllProvidersInfo_Output">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getAllProviderInfo_OutputVariable.OutputParameters/ns12:O_CURSOR/ns12:O_CURSOR_Row[$ProviderCounter]/ns12:COND_SEQUENCE</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getAllProviderInfo_OutputVariable.parameters/ns1:return[$ProviderCounter]/ns18:intCode</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>$Invoke_getAllProviderInfo_OutputVariable.OutputParameters/ns12:O_CURSOR/ns12:O_CURSOR_Row[$ProviderCounter]/ns12:COND_B_DESC</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getAllProviderInfo_OutputVariable.parameters/ns1:return[$ProviderCounter]/ns18:strDescription</to>
+                </copy>
+              </assign>
+            </scope>
+          </forEach><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($getAllProviderInfo_OutputVariable.parameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="getAllProviderInfo_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getAllProviderInfo"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="getAllGoodInfo_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getAllGoodInfo">
+        <sequence name="getAllGoodsInfo"><assign name="Assign_DefaultVariables"
+                                                 xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-getAllGoodInfo'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($getAllGoodInfo_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {            
+            String weblogicDomainName = "Unknown";            
+            String serverName = "Unknown";            
+            javax.naming.InitialContext ctx = null;            
+            ctx = new javax.naming.InitialContext();            
+            javax.management.MBeanServer beanServer =            
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");            
+            javax.management.ObjectName runtimeService =            
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");            
+            javax.management.ObjectName domainCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");            
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");            
+            javax.management.ObjectName serverCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");            
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");            
+            
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();            
+            setVariableData("ExecutionID", executionID);            
+            String compositeName = (String) getVariableData("CompositeName");            
+            String sourceAppCode = "CBS";            
+            String sourceExecutionID = "";            
+            String sourceAppUserName = ""  ;         
+            String executionInput = (String) getVariableData("ExecutionInput");            
+            String instanceID = (String) getVariableData("InstanceID");            
+            String bussinessKey = (String) getVariableData("BusinessKey");       
+     
+         
+            
+            com.dimensions.mw.utils.loggerManagement.LoggerManager            
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,            
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);            
+          
+        } catch (Exception exc) {            
+ addAuditTrailEntry(exc);           
+                    exc.printStackTrace();          
+        }]]></bpelx:exec>
+   </extensionActivity><invoke name="Invoke_getAllGoodsInfo" bpelx:invokeAsDetail="no" partnerLink="getAllGoodInfoReference"
+                  portType="ns7:getAllGoodInfoReference_ptt" operation="getAllGoodInfoReference"
+                  inputVariable="Invoke_getAllGoodsInfo_InputVariable"
+                  outputVariable="Invoke_getAllGoodsInfo_OutputVariable"/>
+          <forEach parallel="no" counterName="GoodsCounter" name="ForEachGoods">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue>ora:countNodes($Invoke_getAllGoodsInfo_OutputVariable.OutputParameters/ns13:O_CURSOR/ns13:O_CURSOR_Row)</finalCounterValue>
+            <scope name="Scope3">
+              <assign name="Assign_getAllGoodsInfo_Output">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getAllGoodsInfo_OutputVariable.OutputParameters/ns13:O_CURSOR/ns13:O_CURSOR_Row[$GoodsCounter]/ns13:GOOD_CODE</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getAllGoodInfo_OutputVariable.parameters/ns1:return[$GoodsCounter]/ns18:intCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getAllGoodsInfo_OutputVariable.OutputParameters/ns13:O_CURSOR/ns13:O_CURSOR_Row[$GoodsCounter]/ns13:GOOD_B_DESC</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getAllGoodInfo_OutputVariable.parameters/ns1:return[$GoodsCounter]/ns18:strDescription</to>
+                </copy>
+              </assign>
+            </scope>
+          </forEach><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($getAllGoodInfo_OutputVariable.parameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="getAllGoodInfo_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getAllGoodInfo"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="getLoanStatus_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getLoanStatus">
+        <sequence name="getLoanStatus"><assign name="Assign_DefaultVariables"
+                                               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-getLoanStatus'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($getLoanStatus_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {            
+            String weblogicDomainName = "Unknown";            
+            String serverName = "Unknown";            
+            javax.naming.InitialContext ctx = null;            
+            ctx = new javax.naming.InitialContext();            
+            javax.management.MBeanServer beanServer =            
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");            
+            javax.management.ObjectName runtimeService =            
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");            
+            javax.management.ObjectName domainCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");            
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");            
+            javax.management.ObjectName serverCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");            
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");            
+            
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();            
+            setVariableData("ExecutionID", executionID);            
+            String compositeName = (String) getVariableData("CompositeName");            
+            String sourceAppCode = "CBS";            
+            String sourceExecutionID = "";            
+            String sourceAppUserName = ""  ;         
+            String executionInput = (String) getVariableData("ExecutionInput");            
+            String instanceID = (String) getVariableData("InstanceID");            
+            String bussinessKey = (String) getVariableData("BusinessKey");       
+     
+         
+            
+            com.dimensions.mw.utils.loggerManagement.LoggerManager            
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,            
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);            
+          
+        } catch (Exception exc) {            
+ addAuditTrailEntry(exc);           
+                    exc.printStackTrace();          
+        }]]></bpelx:exec>
+   </extensionActivity><invoke name="Invoke_getLoanStatus" bpelx:invokeAsDetail="no" partnerLink="getLoanStatusReference"
+                  portType="ns8:getLoanStatusReference_ptt" operation="getLoanStatusReference"
+                  inputVariable="Invoke_getLoanStatus_InputVariable"
+                  outputVariable="Invoke_getLoanStatus_OutputVariable"/>
+          <forEach parallel="no" counterName="LoanCounter" name="ForEachLoan">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue>ora:countNodes($Invoke_getLoanStatus_OutputVariable.OutputParameters/ns14:O_CURSOR/ns14:O_CURSOR_Row)</finalCounterValue>
+            <scope name="Scope4">
+              <assign name="Assign_getLoanStatus_Output">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getLoanStatus_OutputVariable.OutputParameters/ns14:O_CURSOR/ns14:O_CURSOR_Row[$LoanCounter]/ns14:RCPM_STATUS</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getLoanStatus_OutputVariable.parameters/ns1:return[$LoanCounter]/ns18:intCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getLoanStatus_OutputVariable.OutputParameters/ns14:O_CURSOR/ns14:O_CURSOR_Row[$LoanCounter]/ns14:RCPM_STATUS_B_DESC</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getLoanStatus_OutputVariable.parameters/ns1:return[$LoanCounter]/ns18:strDescription</to>
+                </copy>
+              </assign>
+            </scope>
+          </forEach><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($Invoke_getLoanStatus_OutputVariable.OutputParameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="getLoanStatus_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getLoanStatus"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="MusawamehService" variable="getProductAmountLimit_InputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getProductAmountLimit">
+        <sequence name="getProductAmountLimit"><assign name="Assign_DefaultVariables"
+                                                       xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+   <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Musawameh-getProductAmountLimit'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>ora:toCDATA($getProductAmountLimit_InputVariable.parameters)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {            
+            String weblogicDomainName = "Unknown";            
+            String serverName = "Unknown";            
+            javax.naming.InitialContext ctx = null;            
+            ctx = new javax.naming.InitialContext();            
+            javax.management.MBeanServer beanServer =            
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");            
+            javax.management.ObjectName runtimeService =            
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");            
+            javax.management.ObjectName domainCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");            
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");            
+            javax.management.ObjectName serverCFG =            
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");            
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");            
+            
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();            
+            setVariableData("ExecutionID", executionID);            
+            String compositeName = (String) getVariableData("CompositeName");            
+            String sourceAppCode = "CBS";            
+            String sourceExecutionID = "";            
+            String sourceAppUserName = ""  ;         
+            String executionInput = (String) getVariableData("ExecutionInput");            
+            String instanceID = (String) getVariableData("InstanceID");            
+            String bussinessKey = (String) getVariableData("BusinessKey");       
+     
+         
+            
+            com.dimensions.mw.utils.loggerManagement.LoggerManager            
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,            
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);            
+          
+        } catch (Exception exc) {            
+ addAuditTrailEntry(exc);           
+                    exc.printStackTrace();          
+        }]]></bpelx:exec>
+   </extensionActivity><invoke name="Invoke_getProductAmountLimit" bpelx:invokeAsDetail="no"
+                  partnerLink="getProductAmountLimitReference" portType="ns2:getProductAmountLimitReference_ptt"
+                  operation="getProductAmountLimitReference"
+                  inputVariable="Invoke_getProductAmountLimit_InputVariable"
+                  outputVariable="Invoke_getProductAmountLimit_OutputVariable"/>
+          <assign name="Assign_getProductAmountLimit_Output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_getProductAmountLimit_OutputVariable.OutputParameters/ns15:O_CURSOR/ns15:O_CURSOR_Row/ns15:FCL_MIN_LIMIT</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getProductAmountLimit_OutputVariable.parameters/ns1:return/ns18:dblMinAmount</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_getProductAmountLimit_OutputVariable.OutputParameters/ns15:O_CURSOR/ns15:O_CURSOR_Row/ns15:FCL_MAX_LIMIT</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getProductAmountLimit_OutputVariable.parameters/ns1:return/ns18:dblMaxAmount</to>
+            </copy>
+          </assign><sequence xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         
+      <copy>
+            <from>ora:toCDATA($Invoke_getProductAmountLimit_OutputVariable.OutputParameters)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+         </copy></assign>
+      <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+         <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            
+         <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = "S";     
+            String sourceExecutionID = "";        
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]></bpelx:exec>
+      </extensionActivity>
+   </sequence><reply name="replyOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+                 partnerLink="MusawamehService" variable="getProductAmountLimit_OutputVariable"
+                 portType="ns1:MusawamehServicePortType" operation="getProductAmountLimit"/>
+        </sequence>
+      </onMessage>
+    </pick>
+  </sequence>
+</process>

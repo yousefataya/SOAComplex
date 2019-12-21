@@ -1,0 +1,116 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/HCMLocationsRestRef_Operation1_response" targetNamespace="http://TargetNamespace.com/HCMLocationsRestRef_Operation1_response" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="UTF-8">
+   <xsd:element name="Root-Element">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="items">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="LocationId" type="xsd:integer"/>
+                     <xsd:element name="SetId" type="xsd:integer"/>
+                     <xsd:element name="TelephoneNumber1"/>
+                     <xsd:element name="TelephoneNumber2"/>
+                     <xsd:element name="TelephoneNumber3"/>
+                     <xsd:element name="EmailAddress"/>
+                     <xsd:element name="ShipToSiteFlag" type="xsd:string"/>
+                     <xsd:element name="ReceivingSiteFlag" type="xsd:string"/>
+                     <xsd:element name="BillToSiteFlag" type="xsd:string"/>
+                     <xsd:element name="OfficeSiteFlag" type="xsd:string"/>
+                     <xsd:element name="LocationCode" type="xsd:string"/>
+                     <xsd:element name="LocationName" type="xsd:string"/>
+                     <xsd:element name="Description"/>
+                     <xsd:element name="MainAddressId" type="xsd:integer"/>
+                     <xsd:element name="AddressLine1" type="xsd:string"/>
+                     <xsd:element name="AddressLine2"/>
+                     <xsd:element name="AddressLine3"/>
+                     <xsd:element name="AddressLine4"/>
+                     <xsd:element name="Country" type="xsd:string"/>
+                     <xsd:element name="PostalCode"/>
+                     <xsd:element name="Region1"/>
+                     <xsd:element name="Region2" type="xsd:string"/>
+                     <xsd:element name="Region3"/>
+                     <xsd:element name="TownOrCity" type="xsd:string"/>
+                     <xsd:element name="EffectiveStartDate" type="xsd:date"/>
+                     <xsd:element name="EffectiveEndDate" type="xsd:string"/>
+                     <xsd:element name="CreationDate" type="xsd:string"/>
+                     <xsd:element name="LastUpdateDate" type="xsd:string"/>
+                     <xsd:element name="LocationDFF">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="LocationDetailsId" type="xsd:integer"/>
+                              <xsd:element name="EffectiveStartDate" type="xsd:date"/>
+                              <xsd:element name="EffectiveEndDate" type="xsd:string"/>
+                              <xsd:element name="LOCATIONBRANCH" type="xsd:integer"/>
+                              <xsd:element name="LOCATIONBRANCH_Display" type="xsd:string"/>
+                              <xsd:element name="location" type="xsd:string"/>
+                              <xsd:element name="location_Display" type="xsd:string"/>
+                              <xsd:element name="locationvlaue" type="xsd:string"/>
+                              <xsd:element name="locationvlaue_Display" type="xsd:string"/>
+                              <xsd:element name="englishname" type="xsd:string"/>
+                              <xsd:element name="locationdate" type="xsd:date"/>
+                              <xsd:element name="OFFICELOCATION"/>
+                              <xsd:element name="OFFICELOCATION_Display"/>
+                              <xsd:element name="__FLEX_Context"/>
+                              <xsd:element name="__FLEX_Context_DisplayValue"/>
+                              <xsd:element name="links" maxOccurs="unbounded">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="rel" type="xsd:string"/>
+                                       <xsd:element name="href" type="xsd:string"/>
+                                       <xsd:element name="name" type="xsd:string"/>
+                                       <xsd:element name="kind" type="xsd:string"/>
+                                       <xsd:element name="properties" minOccurs="0">
+                                          <xsd:complexType>
+                                             <xsd:sequence>
+                                                <xsd:element name="changeIndicator" type="xsd:string"/>
+                                             </xsd:sequence>
+                                          </xsd:complexType>
+                                       </xsd:element>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="links" maxOccurs="unbounded">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="rel" type="xsd:string"/>
+                              <xsd:element name="href" type="xsd:string"/>
+                              <xsd:element name="name" type="xsd:string"/>
+                              <xsd:element name="kind" type="xsd:string"/>
+                              <xsd:element name="properties" minOccurs="0">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="changeIndicator" type="xsd:string"/>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="count" type="xsd:integer"/>
+            <xsd:element name="hasMore" type="xsd:string"/>
+            <xsd:element name="limit" type="xsd:integer"/>
+            <xsd:element name="offset" type="xsd:integer"/>
+            <xsd:element name="links">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="rel" type="xsd:string"/>
+                     <xsd:element name="href" type="xsd:string"/>
+                     <xsd:element name="name" type="xsd:string"/>
+                     <xsd:element name="kind" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

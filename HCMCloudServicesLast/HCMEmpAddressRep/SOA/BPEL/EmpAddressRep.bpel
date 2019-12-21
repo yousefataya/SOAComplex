@@ -1,0 +1,321 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Oct 04 08:59:16 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="EmpAddressRep"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpAddressRep/EmpAddressRep"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpAddressRep/EmpAddressRep"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpAddressRep/AuditdbReference"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpAddressRep/StagedbReference"
+         xmlns:ns3="http://xmlns.oracle.com/oxp/service/PublicReportService"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/StagedbReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditdbReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpAddressRep/EmpAddressRep" location="../WSDLs/EmpAddressRep.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="empaddressrep_service" partnerLinkType="client:EmpAddressRep" myRole="EmpAddressRepProvider"/>
+    <partnerLink name="AuditdbReference" partnerLinkType="ns1:AuditdbReference_plt"
+                 partnerRole="AuditdbReference_role"/>
+    <partnerLink name="StagedbReference" partnerLinkType="ns2:StagedbReference_plt"
+                 partnerRole="StagedbReference_role"/>
+    <partnerLink name="AddressSOAPRef" partnerLinkType="ns3:AddressSOAPRef" partnerRole="ExternalReportWSSService"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:EmpAddressRepRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:EmpAddressRepResponseMessage"/>
+    <variable name="Invoke_runReport_InputVariable" messageType="ns3:runReportInput"/>
+    <variable name="Invoke_runReport_OutputVariable" messageType="ns3:runReportOutput"/>
+    <variable name="Variable2" element="ns3:runReport" bpelx:sdoCapable="true"/>
+    
+     <variable name="vReportPath" type="xsd:string"/>
+    <variable name="vXMLDecoder" type="xsd:base64Binary"/>
+    <variable name="vDecodedString" type="xsd:string"/>
+	  <variable name="vWSDLLink" type="xsd:string"/>
+    <variable name="vURI" type="xsd:string"/>
+    <variable name="vCUT_OFF_DATE" type="xsd:string"/>
+    <variable name="vLAST_CALL_DATE" type="xsd:string"/>
+    <variable name="vCURRENT_CALL_DATE" type="xsd:string"/>
+    <variable name="InvokeSPDatabase_StagedbReference_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="InvokeSPDatabase_StagedbReference_OutputVariable" messageType="ns2:args_out_msg"/>
+    <variable name="InvokeDone_AuditdbReference_InputVariable" messageType="ns1:args_in_msg"/>
+    <variable name="InvokeFault_AuditdbReference_InputVariable" messageType="ns1:args_in_msg"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+    <sequence>
+     <assign name="AssignFault">
+          <copy>
+            <from>'F'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditdbReference_InputVariable.InputParameters/ns5:PID</to>
+          </copy>
+          <copy>
+            <from>'HCMEmpAddressRep'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditdbReference_InputVariable.InputParameters/ns5:PCOMPOSITE_NAME</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:LAST_CALL_DATE</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditdbReference_InputVariable.InputParameters/ns5:PLSR_DATE</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:batchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditdbReference_InputVariable.InputParameters/ns5:PBATCH_NUM</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:requestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditdbReference_InputVariable.InputParameters/ns5:PREQUEST_TYPE</to>
+          </copy>
+          <copy>
+            <from>'F'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditdbReference_InputVariable.InputParameters/ns5:PRESPONCE_STATUS</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeFault" partnerLink="AuditdbReference"
+                portType="ns1:AuditdbReference_ptt" operation="AuditdbReference"
+                inputVariable="InvokeFault_AuditdbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in EmpAddressRep.wsdl) -->
+    <receive name="receiveInput" partnerLink="empaddressrep_service" portType="client:EmpAddressRep" operation="process" variable="inputVariable" createInstance="yes"/>
+    
+<assign name="AssignRunReportRequest">
+      <copy>
+        <from>'xml'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:attributeFormat</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:CUT_OFF_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCUT_OFF_DATE</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:LAST_CALL_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLAST_CALL_DATE</to>
+      </copy>
+      <copy>
+        <from>xp20:format-dateTime(xp20:current-dateTime(),'[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]')</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCURRENT_CALL_DATE</to>
+      </copy>
+      <copy>
+        <from>'-1'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:sizeOfDataChunkDownload</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:wsdlLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vWSDLLink</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:URI</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI</to>
+      </copy>
+      <copy>
+        <from>'false'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:byPassCache</to>
+      </copy>
+      <copy>
+        <from>'false'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:flattenXML</to>
+      </copy>
+      <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+        <from>$inputVariable.payload/client:ReportPath</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vReportPath</to>
+      </copy>
+      <copy bpelx:insertMissingToData="yes">
+        <from>$vReportPath</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:reportAbsolutePath</to>
+      </copy>
+    </assign>
+    <assign name="AssignCUT_OFF_DATE">
+      <copy>
+        <from>'CUT_OFF_DATE'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item/ns3:name</to>
+      </copy>
+      <copy>
+        <from>$vCUT_OFF_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item/ns3:values/ns3:item</to>
+      </copy>
+      <copy>
+        <from>$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:parameterNameValues/ns3:item</to>
+      </copy>
+    </assign>
+    <assign name="AssignLAST_CALL_DATE">
+      <copy>
+        <from>'LAST_CALL_DATE'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item/ns3:name</to>
+      </copy>
+      <copy>
+        <from>$vLAST_CALL_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item/ns3:values/ns3:item</to>
+      </copy>
+      <extensionAssignOperation>
+        <bpelx:insertAfter>
+          <bpelx:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item</bpelx:from>
+          <bpelx:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:parameterNameValues/ns3:item</bpelx:to>
+        </bpelx:insertAfter>
+      </extensionAssignOperation>
+    </assign>
+    <assign name="AssignCURRENT_CALL_DATE">
+      <copy>
+        <from>'CURRENT_CALL_DATE'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item/ns3:name</to>
+      </copy>
+      <copy>
+        <from>$vCURRENT_CALL_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item/ns3:values/ns3:item</to>
+      </copy>
+      <extensionAssignOperation>
+        <bpelx:insertAfter>
+          <bpelx:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable2/ns3:reportRequest/ns3:parameterNameValues/ns3:item</bpelx:from>
+          <bpelx:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_runReport_InputVariable.parameters/ns3:reportRequest/ns3:parameterNameValues/ns3:item</bpelx:to>
+        </bpelx:insertAfter>
+      </extensionAssignOperation>
+    </assign>
+    <invoke name="Invoke" partnerLink="AddressSOAPRef"
+            portType="ns3:ExternalReportWSSService" operation="runReport"
+            inputVariable="Invoke_runReport_InputVariable" outputVariable="Invoke_runReport_OutputVariable"
+            bpelx:invokeAsDetail="no">
+            
+            	 <bpelx:toProperties>
+        <bpelx:toProperty name="endpointWSDL">$vWSDLLink</bpelx:toProperty>
+        <bpelx:toProperty name="endpointURI">$vURI</bpelx:toProperty>
+      </bpelx:toProperties>
+      
+            </invoke>
+      
+            
+            
+    <assign name="AssignEncodingXML">
+      <copy>
+        <from>$Invoke_runReport_OutputVariable.parameters/ns3:runReportReturn/ns3:reportBytes</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vXMLDecoder</to>
+      </copy>
+    </assign>
+    <extensionActivity>
+      <bpelx:exec name="JavaDecode">
+        <![CDATA[addAuditTrailEntry("decoding started");   
+String base64 = (String) getVariableData("vXMLDecoder");     
+addAuditTrailEntry("decoding==> "+base64);   
+String decoded_Data = new String ("");    
+   
+try {    
+      decoded_Data = oracle.soa.common.util.Base64Decoder.decode(base64);        
+} catch (Exception e) {    
+      decoded_Data = "EXCEPTION OCCURRED: " + e.toString();    
+}    
+   
+addAuditTrailEntry("Result==> "+decoded_Data);   
+setVariableData("vDecodedString", decoded_Data);]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <assign name="AssignSPDatabase">
+      <copy ignoreMissingFromData="yes">
+        <from>$vDecodedString</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeSPDatabase_StagedbReference_InputVariable.InputParameters/ns4:P_XML</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeSPDatabase_StagedbReference_InputVariable.InputParameters/ns4:REQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeSPDatabase_StagedbReference_InputVariable.InputParameters/ns4:BATCH_NUM</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeSPDatabase" partnerLink="StagedbReference"
+            portType="ns2:StagedbReference_ptt" operation="StagedbReference"
+            inputVariable="InvokeSPDatabase_StagedbReference_InputVariable"
+            outputVariable="InvokeSPDatabase_StagedbReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="AssignFinalOut">
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditdbReference_InputVariable.InputParameters/ns5:PID</to>
+      </copy>
+      <copy>
+        <from>'HCMEmpAddressRep'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditdbReference_InputVariable.InputParameters/ns5:PCOMPOSITE_NAME</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:LAST_CALL_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditdbReference_InputVariable.InputParameters/ns5:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditdbReference_InputVariable.InputParameters/ns5:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditdbReference_InputVariable.InputParameters/ns5:PREQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditdbReference_InputVariable.InputParameters/ns5:PRESPONCE_STATUS</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeDone" partnerLink="AuditdbReference"
+            portType="ns1:AuditdbReference_ptt" operation="AuditdbReference"
+            inputVariable="InvokeDone_AuditdbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="empaddressrep_service" portType="client:EmpAddressRep" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

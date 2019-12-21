@@ -1,0 +1,112 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person SDO Version 2</name>
+            <description>A person within the Oracle Fusion application. This person may
+                be an employee, a contingent worker, a contact, or a nonworker.
+                This entity contains static biographical information about a
+                person. For example, the person&apos;s name, date of birth, gender,
+                personal address, and so forth.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System-generated primary key column." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="It defines biographical data of a person. For example, the start date, date of birth, country of birth etc."
+                     name="PersonDetails"/>
+                <oer:attribute description="Citizenship of the person." name="PersonCitizenship"/>
+                <oer:attribute description="Various types of communication methods for a person. For example IM, web address, etc."
+                     name="PersonDeliveryMethod"/>
+                <oer:attribute description="Person&apos;s drivers licence." name="PersonDriversLicence"/>
+                <oer:attribute description="Person&apos;s email address." name="PersonEmail"/>
+                <oer:attribute description="Person&apos;s ethinicity." name="PersonEthnicity"/>
+                <oer:attribute description="It defines the photo of a person." name="PersonImage"/>
+                <oer:attribute description="It defines person data specific to a legislation. For example, legislation code, marital status, and other legislation specific data."
+                     name="PersonLegislativeData"/>
+                <oer:attribute description="Person&apos;s name." name="PersonName"/>
+                <oer:attribute description="Person&apos;s National Identifier." name="PersonNationalIdentifier"/>
+                <oer:attribute description="It defines the passport details for a person. For example, passport number, passport type, issuing authority, issuing country, etc."
+                     name="PersonPassport"/>
+                <oer:attribute description="Phone details for the person." name="PersonPhone"/>
+                <oer:attribute description="Person&apos;s religion." name="PersonReligion"/>
+                <oer:attribute description="It defines the details of a person&apos;s visa or work permit. For example, number, type, status, issuing authority, etc."
+                     name="PersonVisa"/>
+                <oer:attribute description="Person&apos;s Address." name="PersonAddress"/>
+                <oer:attribute description="Person&apos;s External Identifier" name="PersonExternalIdentifier"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:include schemaLocation="PersonDetails.xsd"/>
+    <xsd:include schemaLocation="PersonCitizenship.xsd"/>
+    <xsd:include schemaLocation="PersonDeliveryMethod.xsd"/>
+    <xsd:include schemaLocation="PersonDriversLicence.xsd"/>
+    <xsd:include schemaLocation="PersonEmail.xsd"/>
+    <xsd:include schemaLocation="PersonEthnicity.xsd"/>
+    <xsd:include schemaLocation="PersonImage.xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeData.xsd"/>
+    <xsd:include schemaLocation="PersonName.xsd"/>
+    <xsd:include schemaLocation="PersonNationalIdentifier.xsd"/>
+    <xsd:include schemaLocation="PersonPassport.xsd"/>
+    <xsd:include schemaLocation="PersonPhone.xsd"/>
+    <xsd:include schemaLocation="PersonReligion.xsd"/>
+    <xsd:include schemaLocation="PersonVisa.xsd"/>
+    <xsd:include schemaLocation="PersonAddress.xsd"/>
+    <xsd:include schemaLocation="ExternalIdentifier.xsd"/>
+    <xsd:complexType name="PersonResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="Person"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Person">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonDetails" type="PersonDetails"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonCitizenship" type="PersonCitizenship"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonDeliveryMethod" type="PersonDeliveryMethod"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonDriversLicence" type="PersonDriversLicence"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonEmail" type="PersonEmail"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonEthnicity" type="PersonEthnicity"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonImage" type="PersonImage"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonLegislativeData" type="PersonLegislativeData"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonName" type="PersonName"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonNationalIdentifier" type="PersonNationalIdentifier"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonPassport" type="PersonPassport"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonPhone" type="PersonPhone"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonReligion" type="PersonReligion"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonVisa" type="PersonVisa"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonAddress" type="PersonAddress"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonExternalIdentifier" type="ExternalIdentifier"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="person" type="Person"/>
+    <xsd:element name="personResult" type="PersonResult"/>
+</xsd:schema>

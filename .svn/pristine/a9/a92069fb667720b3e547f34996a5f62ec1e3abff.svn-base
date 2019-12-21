@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:EPI="http://www.fact.com.jo"
+            targetNamespace="http://www.fact.com.jo" elementFormDefault="qualified">
+</xsd:schema>

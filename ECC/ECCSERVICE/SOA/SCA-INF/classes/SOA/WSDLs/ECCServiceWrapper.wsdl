@@ -1,0 +1,15 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+    
+     targetNamespace="urn:ECCService"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:tns="urn:ECCService"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="ECCServiceProcess">
+        <plnk:role name="ECCServicePortType" portType="tns:ECCServicePortType"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="urn:ECCService" location="ECCSERVICE.wsdl"/>
+</wsdl:definitions>

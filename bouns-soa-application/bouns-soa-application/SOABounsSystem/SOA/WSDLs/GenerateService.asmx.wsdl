@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+    
+     targetNamespace="http://tempuri.org/"
+     xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:tns="http://tempuri.org/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:s="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+            <s:element name="Generate">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="P_ACCOUNTNUMBER" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="p_cust_id" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="P_DATEFROM" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="P_DATETO" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="TypeFile" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="GenerateResponse">
+                <s:complexType/>
+            </s:element>
+            <s:element name="GeneratePDF">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="P_ACCOUNTNUMBER" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="p_cust_id" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="ab" type="tns:ACCOUNT_BALANCES"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="ev" type="tns:ArrayOfEstatementValues"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="P_DATEFROM" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="P_DATETO" type="s:int"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="TypeFile" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:complexType name="ACCOUNT_BALANCES">
+                <s:sequence>
+                    <s:element minOccurs="1" maxOccurs="1" name="P_CLEAR_BALANCE" type="s:decimal"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="P_HOLD_BALANCE" type="s:decimal"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="P_SUSP_BALANCE" type="s:decimal"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="P_TOTAL_BALANCE" type="s:decimal"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="ArrayOfEstatementValues">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="unbounded" name="EstatementValues" nillable="true"
+                         type="tns:EstatementValues"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="EstatementValues">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="GOPM_CODE" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRSD_DC" type="s:string"/>
+                    <s:element minOccurs="1" maxOccurs="1" name="TRSH_NUM" type="s:decimal"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRSH_OPERATION_DATE" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRSD_VALUE_DATE" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRANS_D_DESC" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRANS_S_DESC" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRSD_AMOUNT" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRSD_AMOUNT_From" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="TRSD_AMOUNT_To" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="BALANCE" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GeneratePDFResponse">
+                <s:complexType/>
+            </s:element>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="GenerateSoapIn">
+        <wsdl:part name="parameters" element="tns:Generate"/>
+    </wsdl:message>
+    <wsdl:message name="GenerateSoapOut">
+        <wsdl:part name="parameters" element="tns:GenerateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GeneratePDFSoapIn">
+        <wsdl:part name="parameters" element="tns:GeneratePDF"/>
+    </wsdl:message>
+    <wsdl:message name="GeneratePDFSoapOut">
+        <wsdl:part name="parameters" element="tns:GeneratePDFResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GenerateHttpGetIn">
+        <wsdl:part name="P_ACCOUNTNUMBER" type="s:string"/>
+        <wsdl:part name="p_cust_id" type="s:string"/>
+        <wsdl:part name="P_DATEFROM" type="s:string"/>
+        <wsdl:part name="P_DATETO" type="s:string"/>
+        <wsdl:part name="TypeFile" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GenerateHttpGetOut"/>
+    <wsdl:message name="GenerateHttpPostIn">
+        <wsdl:part name="P_ACCOUNTNUMBER" type="s:string"/>
+        <wsdl:part name="p_cust_id" type="s:string"/>
+        <wsdl:part name="P_DATEFROM" type="s:string"/>
+        <wsdl:part name="P_DATETO" type="s:string"/>
+        <wsdl:part name="TypeFile" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="GenerateHttpPostOut"/>
+    <wsdl:portType name="GenerateServiceSoap">
+        <wsdl:operation name="Generate">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate</wsdl:documentation>
+            <wsdl:input message="tns:GenerateSoapIn"/>
+            <wsdl:output message="tns:GenerateSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="GeneratePDF">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate PDF</wsdl:documentation>
+            <wsdl:input message="tns:GeneratePDFSoapIn"/>
+            <wsdl:output message="tns:GeneratePDFSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="GenerateServiceHttpGet">
+        <wsdl:operation name="Generate">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate</wsdl:documentation>
+            <wsdl:input message="tns:GenerateHttpGetIn"/>
+            <wsdl:output message="tns:GenerateHttpGetOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="GenerateServiceHttpPost">
+        <wsdl:operation name="Generate">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generate</wsdl:documentation>
+            <wsdl:input message="tns:GenerateHttpPostIn"/>
+            <wsdl:output message="tns:GenerateHttpPostOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GenerateServiceSoap" type="tns:GenerateServiceSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Generate">
+            <soap:operation style="document" soapAction="http://tempuri.org/Generate"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GeneratePDF">
+            <soap:operation style="document" soapAction="http://tempuri.org/GeneratePDF"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GenerateServiceSoap12" type="tns:GenerateServiceSoap">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Generate">
+            <soap12:operation style="document" soapAction="http://tempuri.org/Generate" soapActionRequired="false"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GeneratePDF">
+            <soap12:operation style="document" soapAction="http://tempuri.org/GeneratePDF" soapActionRequired="false"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GenerateServiceHttpGet" type="tns:GenerateServiceHttpGet">
+        <http:binding verb="GET"/>
+        <wsdl:operation name="Generate">
+            <http:operation location="/Generate"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output/>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GenerateServiceHttpPost" type="tns:GenerateServiceHttpPost">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="Generate">
+            <http:operation location="/Generate"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output/>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="GenerateService">
+        <wsdl:port name="GenerateServiceSoap" binding="tns:GenerateServiceSoap">
+            <soap:address location="http://172.20.5.6:8245/GenerateService.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="GenerateServiceSoap12" binding="tns:GenerateServiceSoap12">
+            <soap12:address location="http://172.20.5.6:8245/GenerateService.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="GenerateServiceHttpGet" binding="tns:GenerateServiceHttpGet">
+            <http:address location="http://172.20.5.6:8245/GenerateService.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="GenerateServiceHttpPost" binding="tns:GenerateServiceHttpPost">
+            <http:address location="http://172.20.5.6:8245/GenerateService.asmx"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,90 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Apr 26 09:47:09 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcessA"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/BPELProcessA"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/BPELProcessA"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/BPELProcessA" location="../WSDLs/BPELProcessA.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocessa_services" partnerLinkType="client:BPELProcessA" myRole="BPELProcessAProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELProcessARequestMessage"/>
+    <variable name="Variable1" type="xsd:string"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcessA.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelprocessa_services" portType="client:BPELProcessA" operation="process" variable="inputVariable" createInstance="yes"/>
+    
+    <assign name="AssignInitialsMaster">
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vRequestType</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vBatchNumber</to>
+      </copy>
+    </assign>
+    <extensionActivity>
+      <bpelx:call name="CallStageTransfer"
+                  xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/TransferProcess"
+                  target="sp1:TransferProcess">
+        <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+        <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+      </bpelx:call>
+    </extensionActivity>
+    <extensionActivity>
+      <bpelx:call name="CallResignation" xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/ResignationProcess"
+                  target="sp1:ResignationProcess">
+        <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+        <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+      </bpelx:call>
+    </extensionActivity>
+  </sequence>
+</process>

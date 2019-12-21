@@ -1,0 +1,53 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:component[@name='SaveAccRetDataProcess']</loc>
+      <line>22</line>
+      <col>57</col>
+      <file>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\SaveaccRetData\SOA\composite.xml</file>
+      <name>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\SaveaccRetData\SOA\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "cbsdbReference":"{cbsdbReference}cbsdbReference_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:component[@name='SaveAccRetDataProcess']</loc>
+      <line>22</line>
+      <col>57</col>
+      <file>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\SaveaccRetData\SOA\composite.xml</file>
+      <name>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\SaveaccRetData\SOA\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "cbsdbReference":"{cbsdbReference}cbsdbReference_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='forEach'][@name='ForEach']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='skipCondition']</loc>
+      <line>82</line>
+      <col/>
+      <file>BPEL/SaveAccRetDataProcess.bpel</file>
+      <name>BPEL/SaveAccRetDataProcess.bpel</name>
+      <fix/>
+      <msg>[js] missing ; before statement</msg>
+   </Fault>
+   <Fault>
+      <severity>error</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='forEach'][@name='ForEach']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='skipCondition']</loc>
+      <line>82</line>
+      <col/>
+      <file>BPEL/SaveAccRetDataProcess.bpel</file>
+      <name>BPEL/SaveAccRetDataProcess.bpel</name>
+      <fix/>
+      <msg>[js] missing ; before statement</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='forEach'][@name='ForEach']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='skipCondition']</loc>
+      <line>87</line>
+      <col/>
+      <file>BPEL/SaveAccRetDataProcess.bpel</file>
+      <name>BPEL/SaveAccRetDataProcess.bpel</name>
+      <fix/>
+      <msg>[js] Extraneous trailing semicolon</msg>
+   </Fault>
+</Faults>

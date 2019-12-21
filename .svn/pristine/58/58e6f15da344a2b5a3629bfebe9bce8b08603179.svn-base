@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='if'][@name='If_validationSuccessfull']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='scope'][@name='Scope1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='Sequence4']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_ECCAccountRequest_output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][7]</loc>
+      <line>425</line>
+      <col/>
+      <file>BPEL/ECCAccountRequestProcess.bpel</file>
+      <name>BPEL/ECCAccountRequestProcess.bpel</name>
+      <fix>Types must be compatible.</fix>
+      <msg>The from-spec of "ns3:RowSet" is not compatible with to-spec of "xsd:string"</msg>
+   </Fault>
+</Faults>

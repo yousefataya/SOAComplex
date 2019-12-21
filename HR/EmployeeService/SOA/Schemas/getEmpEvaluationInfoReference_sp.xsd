@@ -1,0 +1,96 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmpEvaluationInfoReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmpEvaluationInfoReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ACNT_NO" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CUR_INFO" type="db:P_CUR_INFO_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_CUR_INFO_RowSet">
+      <sequence>
+         <element name="P_CUR_INFO_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_ACNT_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_NAME_A" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="ADM_BRN_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="ADM_BRN_DESC" type="db:string80" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_HIRE_DATE" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="ECF_CPF_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CPF_DESC" type="db:string80" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PROFESSION_D" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PROF_DESC" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_BIRTH_DATE" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="GRADE_MAJER" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GRADE_MJR_DESC" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="GRADE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GRADE_DESC" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="LAST_PROMOTION" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="ALW_VALUE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SNC_DEG_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SNC_DEG_DESC" type="db:string40" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="SPC_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SPC_DESC" type="db:string30" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EVAL_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EVAL_DESC" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EVAL_DATE" type="db:string4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="ASS_TYPE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TYPE_DESC" type="db:string262" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string80">
+      <restriction base="string">
+         <maxLength value="80"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="10"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string240">
+      <restriction base="string">
+         <maxLength value="240"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string40">
+      <restriction base="string">
+         <maxLength value="40"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string30">
+      <restriction base="string">
+         <maxLength value="30"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string4">
+      <restriction base="string">
+         <maxLength value="4"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string262">
+      <restriction base="string">
+         <maxLength value="262"/>
+      </restriction>
+   </simpleType>
+</schema>

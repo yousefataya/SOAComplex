@@ -1,0 +1,27 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="j_PersonExtraInformationPerEitprivate.xsd" xml:id="j_PersonExtraInformationPerEitprivate-xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="j_PersonExtraInformation">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CategoryCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="j_PersonExtraInformation" type="j_PersonExtraInformation"/>
+</xsd:schema>

@@ -1,0 +1,36 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CBSReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CBSReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="IO_CURSOR" type="db:IO_CURSOR_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="IO_CURSOR_RowSet">
+      <sequence>
+         <element name="IO_CURSOR_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CARD_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CARD_B_FULL_NAME" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CARD_NATIONAL_NO" type="db:string15" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string15">
+      <restriction base="string">
+         <maxLength value="15"/>
+      </restriction>
+   </simpleType>
+</schema>

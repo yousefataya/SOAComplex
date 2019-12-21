@@ -1,0 +1,13 @@
+<adapter-config name="getOverTimeProjectReference" adapter="db" wsdlLocation="../WSDLs/getOverTimeProjectReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getOverTimeProjectReference_ptt" operation="getOverTimeProjectReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_OVER_TIME"/>
+      <property name="ProcedureName" value="GET_OVR_PROJECT_TYPE"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

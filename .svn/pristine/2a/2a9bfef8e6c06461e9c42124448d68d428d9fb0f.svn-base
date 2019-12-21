@@ -1,0 +1,13 @@
+<adapter-config name="generateXMLReference" adapter="db" wsdlLocation="../WSDLs/generateXMLReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="cbsCon2" location="eis/DB/factFixedAssetsDatabase"/>
+  <endpoint-interaction portType="generateXMLReference_ptt" operation="generateXMLReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ERP10G"/>
+      <property name="PackageName" value="FAS_ASSET_TRANSACTION_PKG"/>
+      <property name="ProcedureName" value="GEN_VOUCHER_XML"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

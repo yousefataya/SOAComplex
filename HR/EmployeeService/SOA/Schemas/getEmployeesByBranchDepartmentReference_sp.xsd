@@ -1,0 +1,48 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmployeesByBranchDepartmentReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmployeesByBranchDepartmentReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_DEPT" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_BRANCH" type="decimal" db:index="2" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="OUT_EMP" type="db:OUT_EMP_RowSet" db:index="3" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="OUT_EMP_RowSet">
+      <sequence>
+         <element name="OUT_EMP_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_NUMBER" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_NAME" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_BRANCH_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EMP_BRANCH_DESC" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_DEPT_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EMP_DEPT_DESC" type="db:string80" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string80">
+      <restriction base="string">
+         <maxLength value="80"/>
+      </restriction>
+   </simpleType>
+</schema>

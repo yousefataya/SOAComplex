@@ -1,0 +1,152 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/HCMDepartmentsRestRef_GetDept_response" targetNamespace="http://TargetNamespace.com/HCMDepartmentsRestRef_GetDept_response" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="UTF-8">
+   <xsd:element name="Root-Element">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="items">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="EffectiveStartDate" type="xsd:date"/>
+                     <xsd:element name="EffectiveEndDate" type="xsd:string"/>
+                     <xsd:element name="OrganizationId" type="xsd:integer"/>
+                     <xsd:element name="Name" type="xsd:string"/>
+                     <xsd:element name="ClassificationCode" type="xsd:string"/>
+                     <xsd:element name="InternalAddressLine"/>
+                     <xsd:element name="LocationId" type="xsd:integer"/>
+                     <xsd:element name="OrganizationCode" type="xsd:string"/>
+                     <xsd:element name="Status" type="xsd:string"/>
+                     <xsd:element name="CreationDate" type="xsd:string"/>
+                     <xsd:element name="LastUpdateDate" type="xsd:string"/>
+                     <xsd:element name="StatusLOV" maxOccurs="unbounded">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="LookupCode" type="xsd:string"/>
+                              <xsd:element name="Meaning" type="xsd:string"/>
+                              <xsd:element name="links" maxOccurs="unbounded">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="rel" type="xsd:string"/>
+                                       <xsd:element name="href" type="xsd:string"/>
+                                       <xsd:element name="name" type="xsd:string"/>
+                                       <xsd:element name="kind" type="xsd:string"/>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="LocationIdLOV" maxOccurs="unbounded">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="LocationId" type="xsd:integer"/>
+                              <xsd:element name="LocationName" type="xsd:string"/>
+                              <xsd:element name="AddressId" type="xsd:integer"/>
+                              <xsd:element name="links" maxOccurs="unbounded">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="rel" type="xsd:string"/>
+                                       <xsd:element name="href" type="xsd:string"/>
+                                       <xsd:element name="name" type="xsd:string"/>
+                                       <xsd:element name="kind" type="xsd:string"/>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="OrganizationDFF">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="OrganizationId" type="xsd:integer"/>
+                              <xsd:element name="EffectiveStartDate" type="xsd:date"/>
+                              <xsd:element name="EffectiveEndDate" type="xsd:string"/>
+                              <xsd:element name="type"/>
+                              <xsd:element name="type_Display"/>
+                              <xsd:element name="englishname" type="xsd:string"/>
+                              <xsd:element name="__FLEX_Context"/>
+                              <xsd:element name="__FLEX_Context_DisplayValue"/>
+                              <xsd:element name="links" maxOccurs="unbounded">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="rel" type="xsd:string"/>
+                                       <xsd:element name="href" type="xsd:string"/>
+                                       <xsd:element name="name" type="xsd:string"/>
+                                       <xsd:element name="kind" type="xsd:string"/>
+                                       <xsd:element name="properties" minOccurs="0">
+                                          <xsd:complexType>
+                                             <xsd:sequence>
+                                                <xsd:element name="changeIndicator" type="xsd:string"/>
+                                             </xsd:sequence>
+                                          </xsd:complexType>
+                                       </xsd:element>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="OrgClassificationVA" maxOccurs="unbounded">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="ClassificationCode" type="xsd:string"/>
+                              <xsd:element name="BusinessGroupId" type="xsd:integer"/>
+                              <xsd:element name="ClassificationName" type="xsd:string"/>
+                              <xsd:element name="ObjectVersionNumber" type="xsd:integer"/>
+                              <xsd:element name="SetEnabledFlag" type="xsd:string"/>
+                              <xsd:element name="EnabledFlag" type="xsd:string"/>
+                              <xsd:element name="AllowInSelectOrgClassYn" type="xsd:string"/>
+                              <xsd:element name="links" maxOccurs="unbounded">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="rel" type="xsd:string"/>
+                                       <xsd:element name="href" type="xsd:string"/>
+                                       <xsd:element name="name" type="xsd:string"/>
+                                       <xsd:element name="kind" type="xsd:string"/>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                     <xsd:element name="links" maxOccurs="unbounded">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="rel" type="xsd:string"/>
+                              <xsd:element name="href" type="xsd:string"/>
+                              <xsd:element name="name" type="xsd:string"/>
+                              <xsd:element name="kind" type="xsd:string"/>
+                              <xsd:element name="properties" minOccurs="0">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="changeIndicator" type="xsd:string"/>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="count" type="xsd:integer"/>
+            <xsd:element name="hasMore" type="xsd:string"/>
+            <xsd:element name="limit" type="xsd:integer"/>
+            <xsd:element name="offset" type="xsd:integer"/>
+            <xsd:element name="links">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="rel" type="xsd:string"/>
+                     <xsd:element name="href" type="xsd:string"/>
+                     <xsd:element name="name" type="xsd:string"/>
+                     <xsd:element name="kind" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

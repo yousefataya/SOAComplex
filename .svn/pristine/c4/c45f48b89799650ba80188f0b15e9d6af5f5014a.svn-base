@@ -1,0 +1,98 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmploymentInfoReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmploymentInfoReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_REQUEST_INFO" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="OUT_EMPLOYMENT_INFO" type="db:OUT_EMPLOYMENT_INFO_RowSet" db:index="3" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_EMPLOYEE_CUSTODY" type="db:OUT_EMPLOYEE_CUSTODY_RowSet" db:index="4" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="OUT_EMPLOYMENT_INFO_RowSet">
+      <sequence>
+         <element name="OUT_EMPLOYMENT_INFO_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_HIRE_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="EMP_APR_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="EMP_DAMAN_NO" type="db:string15" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="TAX_NO" type="db:string20" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_SOC_SEC_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="ADM_BRN_CODE" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_NAME_A" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="INS_DEGREE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="HEPG_SERIAL" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GRADE_MAJER" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GRADE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CONT_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="REGION" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PROFESSION_D" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="ECF_CPF_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="RIGHT_SIGN" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="LAST_PROMOTION" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMAIL" type="db:string25" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="MANAGER_ID" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_EMPLOYEE_CUSTODY_RowSet">
+      <sequence>
+         <element name="OUT_EMPLOYEE_CUSTODY_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CUSTODY_TYPE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CUSTODY_NO" type="db:string250" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="AMOUNT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="RECEIPT_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="BACK_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string15">
+      <restriction base="string">
+         <maxLength value="15"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string20">
+      <restriction base="string">
+         <maxLength value="20"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="10"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string25">
+      <restriction base="string">
+         <maxLength value="25"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string250">
+      <restriction base="string">
+         <maxLength value="250"/>
+      </restriction>
+   </simpleType>
+</schema>

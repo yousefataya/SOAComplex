@@ -1,0 +1,13 @@
+<adapter-config name="samahaReference" adapter="db" wsdlLocation="../WSDLs/samahaReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="samahaConnection" location="eis/DB/factSamahaDatabase"/>
+  <endpoint-interaction portType="samahaReference_ptt" operation="samahaReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="CRE"/>
+      <property name="PackageName" value="FACT_ICBS_FIN"/>
+      <property name="ProcedureName" value="GET_CUS_FIN_ALL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

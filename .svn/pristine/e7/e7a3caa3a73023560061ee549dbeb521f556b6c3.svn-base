@@ -1,0 +1,92 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Feb 06 08:58:59 EET 2018
+  Author:  Mshkeeb
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="RetriveDataProcess"
+               targetNamespace="http://xmlns.oracle.com/SAVEREWARDS/RetriveCalculateData/RetriveDataProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SAVEREWARDS/RetriveCalculateData/RetriveDataProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/RetriveCalculateData/RetriveCalculteDataReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/RetriveCalculteDataReference"
+         xmlns:ns2="http://www.fact.com.jo/SAV">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SAVEREWARDS/RetriveCalculateData/RetriveDataProcess" location="../WSDLs/RetriveDataProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="retrivedataprocess_Service" partnerLinkType="client:RetriveDataProcess" myRole="RetriveDataProcessProvider"/>
+    <partnerLink name="RetriveCalculteDataReference" partnerLinkType="ns1:RetriveCalculteDataReference_plt"
+                 partnerRole="RetriveCalculteDataReference_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:RetriveDataProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:RetriveDataProcessResponseMessage"/>
+    <variable name="Invoke_RetriveCalculteDataReference_InputVariable" messageType="ns1:args_in_msg"/>
+    <variable name="Invoke_RetriveCalculteDataReference_OutputVariable" messageType="ns1:args_out_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in RetriveDataProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="retrivedataprocess_Service" portType="client:RetriveDataProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/ns2:InputInquiryMessageInput/ns2:P_BRCH_CODE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_RetriveCalculteDataReference_InputVariable.InputParameters/ns3:P_BRCH_CODE</to>
+      </copy>
+    </assign>
+    <invoke name="Invoke" partnerLink="RetriveCalculteDataReference"
+            portType="ns1:RetriveCalculteDataReference_ptt" operation="RetriveCalculteDataReference"
+            inputVariable="Invoke_RetriveCalculteDataReference_InputVariable"
+            outputVariable="Invoke_RetriveCalculteDataReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="Transformation1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation1_1.xsl", $Invoke_RetriveCalculteDataReference_OutputVariable.OutputParameters)</from>
+        <to variable="outputVariable" part="payload"/>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="retrivedataprocess_Service" portType="client:RetriveDataProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,13 @@
+<adapter-config name="getEmpEvaluationInfoReference" adapter="db" wsdlLocation="../WSDLs/getEmpEvaluationInfoReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getEmpEvaluationInfoReference_ptt" operation="getEmpEvaluationInfoReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_EVALUATION"/>
+      <property name="ProcedureName" value="RETURN_EMP_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,116 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/" xmlns:ns2="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Detail Version 2</name>
+            <description>This view object contains person information used to update and merge person data.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Identified the blood group of the person." name="BloodType"/>
+                <oer:attribute description="Lookup identifies language to use for this communication."
+                     name="CorrespondenceLanguage"/>
+                <oer:attribute description="Start date of person record on system, always equal to earliest effective_start_date on per_all_people_f."
+                     name="StartDate"/>
+                <oer:attribute description="Date of birth of the person." name="DateOfBirth"/>
+                <oer:attribute description="Date of death of the person." name="DateOfDeath"/>
+                <oer:attribute description="Identifies the country where the person was born." name="CountryOfBirth"/>
+                <oer:attribute description="Region of birth, within the country of birth." name="RegionOfBirth"/>
+                <oer:attribute description="Town of birth, within the region of birth." name="TownOfBirth"/>
+                <oer:attribute description="Unique number for people who are applicants. This is in addition to PERSON_NUMBER. Allows global tracking of applicants."
+                     name="ApplicantNumber"/>
+                <oer:attribute description="This column is not currently used." name="WaiveDataProtectFlag"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Category Code" name="CategoryCode"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="If the person number generation method is manual, this field allows for the person number to be corrected."
+                     name="NewPersonNumber"/>
+                <oer:attribute description="Customer Flexfield for Person." name="PersonDFF"/>
+                <oer:attribute description="The extra information field that may be maintained for a person."
+                     name="j_PersonExtraInformation"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/" schemaLocation="PersonDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+         schemaLocation="j_PersonExtraInformation.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel_1.xsd"/>
+    <xsd:complexType name="PersonDetailsResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonDetails"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PersonDetails">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>PersonId1</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BloodType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CorrespondenceLanguage" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="StartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateOfBirth" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateOfDeath" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="CountryOfBirth" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RegionOfBirth" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TownOfBirth" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ApplicantNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WaiveDataProtectFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="CategoryCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NewPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonDFF" type="ns1:PersonDFF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="j_PersonExtraInformation" type="ns2:j_PersonExtraInformation"
+                 sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personDetailsResult" type="PersonDetailsResult"/>
+    <xsd:element name="personDetails" type="PersonDetails"/>
+</xsd:schema>

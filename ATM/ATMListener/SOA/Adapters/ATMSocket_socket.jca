@@ -1,0 +1,12 @@
+<adapter-config name="ATMSocket" adapter="socket" wsdlLocation="../WSDLs/ATMSocket.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/socket/InboundATMSocketAdapter"/>
+  <endpoint-activation portType="ATMInboundRequestReply_ptt" operation="ATMInboundRequestReply" UITransmissionPrimitive="InboundRequestReply">
+    <activation-spec className="oracle.tip.adapter.socket.SocketActivationSpec">
+      <property name="ReplyXslt" value="../Transformations/atmReply.xsl"/>
+      <property name="Xslt" value="../Transformations/atmRequest.xsl"/>
+      <property name="TransMode" value="XSLT"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

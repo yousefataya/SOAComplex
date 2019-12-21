@@ -1,0 +1,62 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person User Manual Roles SDO Version 2</name>
+            <description>This View Object contains a list of roles to be granted to the user account associated with the Person.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_ROLE-Role</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key. Surrogate key" name="PersonUserManualRolesId"/>
+                <oer:attribute description="Unique Identifier for a person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="System generated primary key for Person User Information."
+                     name="PersonUserInformationId"/>
+                <oer:attribute description="The username of the user the request is for (if not auto generated)"
+                     name="UserName"/>
+                <oer:attribute description="Name of the role." name="RoleName"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:complexType name="PersonUserManualRoles">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonUserManualRolesId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonUserManualRolesId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PersonId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonUserInformationId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="UserName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RoleName" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PersonUserManualRolesResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonUserManualRoles"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personUserManualRolesResult" type="PersonUserManualRolesResult"/>
+    <xsd:element name="personUserManualRoles" type="PersonUserManualRoles"/>
+</xsd:schema>

@@ -1,0 +1,88 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:CBI="http://xmlns.fact.com/ws/CBI"
+            targetNamespace="http://xmlns.fact.com/ws/CBI" elementFormDefault="qualified">
+  <xsd:element name="CardBalanceInquiryMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="CBI:InputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="CBI:InputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="InputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="ApplicationCode" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="ApplicationUserName" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="InquiryInformation" type="CBI:InputInquiryInformationComplex"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputInquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="FromBranchID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ToBranchID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="FromDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ToDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="FromCardID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ToCardID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CardHolderNationalNum" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="OrderBy" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ShowZeroBalance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CardBalanceInquiryMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="CBI:OutputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="CBI:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="StatusInformation" type="CBI:StatusInformationComplex"/>
+      <xsd:element name="ErrorInformation" type="CBI:ErrorInformationComplex" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="InquiryInformation" type="CBI:InquiryInformationComplex" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="StatusInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Status" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Card" type="CBI:CardBalanceComplex" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CardBalanceComplex">
+    <xsd:sequence>
+      <xsd:element name="CardID" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="CardHolderNationalNum" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="CardName" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="BranchName" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="MobileNumber" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="DOB" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+      <xsd:element name="Balance" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+
+

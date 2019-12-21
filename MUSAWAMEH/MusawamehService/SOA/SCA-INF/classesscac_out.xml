@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']</loc>
+      <line>49</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Fix the process to be *either* durable or synchronous.</fix>
+      <msg>Process "MusawamehProcess" is both durable (onMessage,Receive,Wait) and synchronous.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='pick'][@name='Pick1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='onMessage'][2]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='getCustomerAccountInfo']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_getCustomerAccountInfo_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>700</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns11:O_CURSOR_Row" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='pick'][@name='Pick1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='onMessage'][2]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='getCustomerAccountInfo']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_getCustomerAccountInfo_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>704</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns11:O_CURSOR_Row" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='pick'][@name='Pick1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='onMessage'][2]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='getCustomerAccountInfo']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_getCustomerAccountInfo_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>708</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns11:O_CURSOR_Row" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='pick'][@name='Pick1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='onMessage'][2]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='getCustomerAccountInfo']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_getCustomerAccountInfo_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][4]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>712</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns11:O_CURSOR_Row" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='pick'][@name='Pick1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='onMessage'][8]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='getProductAmountLimit']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_getProductAmountLimit_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][1]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>1339</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns15:O_CURSOR_Row" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='pick'][@name='Pick1']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='onMessage'][8]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='getProductAmountLimit']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='Assign_getProductAmountLimit_Output']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][2]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>1343</line>
+      <col/>
+      <file>BPEL/MusawamehProcess.bpel</file>
+      <name>BPEL/MusawamehProcess.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns15:O_CURSOR_Row" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+</Faults>

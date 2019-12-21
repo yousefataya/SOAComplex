@@ -1,0 +1,172 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDFF/"
+     xmlns:ns2="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDDF/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Work Relationship Version 2</name>
+            <description>It is the highest level of the employment model and must exist
+                for every worker residing within a legal employer. This layer
+                holds information regarding the type of relationship that exists
+                between the person and the enterprise.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment :
+                    HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Adjusted Service Date. For example, a rehire that was part of an acquisition, all of his plans might use original hire date if rehired within 90 days of termination except a 401k plan which might use adjusted service date which was originally populated upon acquisition."
+                     name="LegalEmployerSeniorityDate"/>
+                <oer:attribute description="Actual date of termination of employment." name="ActualTerminationDate"/>
+                <oer:attribute description="Represents Legal Entity." name="LegalEntityId"/>
+                <oer:attribute description="This stores a comment associated with termination of work relationship."
+                     name="Comments"/>
+                <oer:attribute description="Original date of hire." name="EnterpriseSeniorityDate"/>
+                <oer:attribute description="Last Date Worked (for terminated workers)." name="LastWorkingDate"/>
+                <oer:attribute description="Start date of the period of employment." name="DateStart"/>
+                <oer:attribute description="Date when the termination of employment was noted." name="NotifiedTerminationDate"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Accepts Yes or No values. If Yes, employee is also on military service."
+                     name="OnMilitaryServiceFlag"/>
+                <oer:attribute description="System generated primary key." name="PeriodOfServiceId"/>
+                <oer:attribute description="Foreign key to PER_PERSONS." name="PersonId"/>
+                <oer:attribute description="Accepts Yes or No values. If Yes, this employment period is considered the primary for the Legal Entity."
+                     name="PrimaryFlag"/>
+                <oer:attribute description="Projected Date of Termination." name="ProjectedTerminationDate"/>
+                <oer:attribute description="PersonId of the person who gave a reason not to rehire a worker at the time of terminating worker relationship."
+                     name="RehireAuthorizerPersonId"/>
+                <oer:attribute description="Number of the person who gave a reason not to rehire a worker at the time of terminating worker relationship."
+                     name="RehireAuthorizor"/>
+                <oer:attribute description="If rehire recommendation is ?yes?, then reason from recommending person is tracked via this field."
+                     name="RehireReason"/>
+                <oer:attribute description="Option to revoke user access when the work relationship is terminated."
+                     name="RevokeUserAccess"/>
+                <oer:attribute description="Worker numbers identify employee and contingent worker work relationships."
+                     name="WorkerNumber"/>
+                <oer:attribute description="This stores a worker comment associated with the Resignation Process."
+                     name="WorkerComments"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Name of the Legal Employer." name="LegalEmployerName"/>
+                <oer:attribute description="Accepts Yes or No values. If Yes, person is recommended for re-hiring."
+                     name="RehireRecommendationFlag"/>
+                <oer:attribute description="Determines whether it is a period of service for an Employee, or Contingent worker: ?E? or ?C?, or ?N?: non-worker."
+                     name="WorkerType"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Specifies the action performed on the particular record. For example: HIRE, ADD PENDING WORKER, MANAGER CHANGE, etc."
+                     name="ActionCode"/>
+                <oer:attribute description="Specifies the reason for the action performed on the record."
+                     name="ReasonCode"/>
+                <oer:attribute description="New start date of the priod of employment." name="NewStartDate"/>
+                <oer:attribute description="Date of death of the person." name="DateOfDeath"/>
+                <oer:attribute description="Hide until date for the terminate work relationship."
+                     name="HideUntilDate"/>
+                <oer:attribute description="Date on which the Primary Flag changes for WorkRelationship."
+                     name="DateForPrimaryFlagChange"/>
+                <oer:attribute description="If the value is set, the work relationship is cancelled."
+                     name="CancelWorkRelationshipFlag"/>
+                <oer:attribute description="If the value is set, the work relationship is terminated based on the actual termination date."
+                     name="TerminateWorkRelationshipFlag"/>
+                <oer:attribute description="If the value is set, the work relationship termination is reversed."
+                     name="ReverseTerminationFlag"/>
+                <oer:attribute description="If the value is set, the terminated work relationship is corrected based on the new actual termination date."
+                     name="CorrectTerminationFlag"/>
+                <oer:attribute description="If the value is set, a global transfer operation is performed on the work relationship start date."
+                     name="GlobalTransferFlag"/>
+                <oer:attribute description="Developer descriptive flexfield of the work relationship."
+                     name="WorkTerms"/>
+                <oer:attribute description="Customer&apos;s flexfield for work relationship." name="WorkRelationshipDFF"/>
+                <oer:attribute description="Identifier of the legal employer used in workrelatiosnhip information."
+                     name="WorkRelationshipDDF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDFF/"
+         schemaLocation="WorkRelationshipDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDDF/"
+         schemaLocation="WorkRelationshipLegDDF.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:include schemaLocation="WorkTerms.xsd"/>
+    <xsd:complexType name="WorkRelationshipResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="WorkRelationship"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="WorkRelationship">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PeriodOfServiceId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="LegalEmployerSeniorityDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ActualTerminationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="LegalEntityId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="Comments" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EnterpriseSeniorityDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="LastWorkingDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateStart" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="NotifiedTerminationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="OnMilitaryServiceFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="PeriodOfServiceId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PrimaryFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ProjectedTerminationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RehireAuthorizerPersonId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="RehireAuthorizor" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RehireReason" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RevokeUserAccess" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WorkerNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WorkerComments" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegalEmployerName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RehireRecommendationFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="WorkerType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ActionCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReasonCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NewStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateOfDeath" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="HideUntilDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateForPrimaryFlagChange" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="CancelWorkRelationshipFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="TerminateWorkRelationshipFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="ReverseTerminationFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="CorrectTerminationFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="GlobalTransferFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkTerms" type="WorkTerms"/>
+            <xsd:element minOccurs="0" name="WorkRelationshipDFF" type="ns1:WorkRelationshipDFF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="WorkRelationshipDDF" type="ns2:WorkRelationshipLegDDF"
+                 sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="workRelationshipResult" type="WorkRelationshipResult"/>
+    <xsd:element name="workRelationship" type="WorkRelationship"/>
+</xsd:schema>

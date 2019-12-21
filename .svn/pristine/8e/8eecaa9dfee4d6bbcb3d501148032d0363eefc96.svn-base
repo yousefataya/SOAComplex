@@ -1,0 +1,637 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Thu May 03 13:03:22 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Subprocess
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<bpelx:subProcess name="TransferPromotionsProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMTransfersPromotions/TransferPromotionsProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMTransfersPromotions/TransferPromotionsProcess"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xsi:type="bpel:tProcess" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMTransfersPromotions/HCMRestRef"
+                  xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMTransfersPromotions/TransferdbReference"
+                  xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMTransfersPromotions/promotionsDbReference"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+                  xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+                  xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+                  xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+                  xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+                  xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                  xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                  xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+                  xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+                  xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+                  xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/TransferdbReference"
+                  xmlns:ns5="http://TargetNamespace.com/HCMEmpsRestRef_HCMEmpsIntgrations_response"
+                  xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMTransfersPromotions/AuditDbReference"
+                  xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditDbReference"
+                  xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/top/promotionsDbReference">
+   <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <partnerLink name="HCMRestRef" partnerLinkType="ns1:HCMRestRef" partnerRole="HCMRestRefProvider"/>
+    <partnerLink name="TransferdbReference" partnerLinkType="ns2:TransferdbReference_plt"
+                 partnerRole="TransferdbReference_role"/>
+    <partnerLink name="promotionsDbReference" partnerLinkType="ns3:promotionsDbReference_plt"
+                 partnerRole="promotionsDbReference_role"/>
+    <partnerLink name="AuditDbReference" partnerLinkType="ns6:AuditDbReference_plt"
+                 partnerRole="AuditDbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Variable1" type="xsd:string"/>
+     <variable name="vCompositeName" type="xsd:string"/>
+    <variable name="vCompositeLink" type="xsd:string"/>
+    <variable name="vCompLink" type="xsd:string"/>
+    <variable name="vLastSRequest" type="xsd:string"/>
+    <variable name="vCSFKey" type="xsd:string"/>
+    <variable name="vCSFMap" type="xsd:string"/>
+    <variable name="status" type="xsd:string"/>
+    <variable name="vOperationType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    <variable name="version" type="xsd:string"/>
+    <variable name="hasMore" type="xsd:boolean"/>
+    <variable name="offset" type="xsd:int"/>
+    <variable name="restConnection" type="xsd:string"/>
+    <variable name="InvokeInsertPromotions_insert_InputVariable" messageType="ns3:HcmEmployeePromotionCollection_msg"/>
+    <variable name="InvokeTransferM_insert_InputVariable" messageType="ns2:HcmEmpTransferMCollection_msg"/>
+    <variable name="InvokeHCMRestRef_GetTransPromo_InputVariable" messageType="ns1:Rest_EmptyMessage"/>
+    <variable name="InvokeHCMRestRef_GetTransPromo_OutputVariable" messageType="ns1:GetTransPromo_outputMessage"/>
+    <variable name="InvokeFault_AuditDbReference_InputVariable" messageType="ns6:args_in_msg"/>
+    <variable name="InvokeDone_AuditDbReference_InputVariable" messageType="ns6:args_in_msg"/>
+    <!--<variable name="Invoke_trace_InputVariable" messageType="ns6:args_in_msg"/>-->
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence3">
+        <assign name="AssignFault">
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns7:PID</to>
+          </copy>
+          <copy>
+            <from>concat($status,'-','F')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns7:PRESPONCE_STATUS</to>
+          </copy>
+          <copy>
+            <from>$vCompositeName</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns7:PCOMPOSITE_NAME</to>
+          </copy>
+          <copy>
+            <from>$vBatchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns7:PBATCH_NUM</to>
+          </copy>
+          <copy>
+            <from>$vRequestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns7:PREQUEST_TYPE</to>
+          </copy>
+          <copy>
+            <from>$vLastSRequest</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns7:PLSR_DATE</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeFault" partnerLink="AuditDbReference"
+                portType="ns6:AuditDbReference_ptt" operation="AuditDbReference"
+                inputVariable="InvokeFault_AuditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+  
+     <assign name="AssignInitials">
+      <copy>
+        <from>true()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+      </copy>
+      <copy>
+        <from>'2'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$version</to>
+      </copy>
+      <copy>
+        <from>$vCompositeLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompLink</to>
+      </copy>
+      <copy>
+        <from>0</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+      </copy>
+      <copy>
+        <from>'close'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$restConnection</to>
+      </copy>
+    </assign>
+    <while name="WhileHasMore">
+      <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</condition>
+      <sequence>
+           <if name="IfOperationIsInsert">
+          <documentation>
+            <![CDATA[Insert]]>
+          </documentation>
+          <condition>$status = '1'</condition>
+          <assign name="AssignInsert">
+            <copy>
+              <from>'assignments.CreationDate%20%3E%20%27'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+            </copy>
+          </assign>
+          <else>
+            <documentation>
+              <![CDATA[Update]]>
+            </documentation>
+            <assign name="AssignUpdate">
+              <copy>
+                <from>'assignments.LastUpdateDate%20%3E%20%27'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+              </copy>
+            </assign>
+          </else>
+        </if>
+           <assign name="AssignInitialValues">
+          <copy>
+            <from>concat($vCompositeLink,'?expand=all&amp;onlyData=true&amp;limit=50&amp;offset=',$offset,'&amp;q=',$vOperationType,$vLastSRequest,'%27%20AND%20assignments.ActionCode%20in%20(%20%27TRANSFER%27%20,%20%27PROMOTION%27%20,%27DLT_PROMOTION%27%20,%27CCL_TRANSFER%27)')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompLink</to>
+          </copy>
+        </assign>
+        <extensionActivity>
+          <bpelx:exec name="Java_Embedding1">
+            <![CDATA[String compositeLinks = (String) getVariableData("vCompLink");   
+ 
+ addAuditTrailEntry("queryLink");     
+ addAuditTrailEntry(compositeLinks);]]>
+          </bpelx:exec>
+        </extensionActivity>
+        <invoke name="InvokeHCMRestRef" partnerLink="HCMRestRef" portType="ns1:HCMRestRef_ptt" operation="GetTransPromo"
+                inputVariable="InvokeHCMRestRef_GetTransPromo_InputVariable"
+                outputVariable="InvokeHCMRestRef_GetTransPromo_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="csf-key">$vCSFKey</bpelx:toProperty>
+            <bpelx:toProperty name="csf.map">$vCSFMap</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.requestURI">$vCompLink</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.Connection">$restConnection</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.REST-Framework-Version">$version</bpelx:toProperty>
+          </bpelx:toProperties>
+        </invoke>
+        <if name="If1">
+          <condition>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:count &lt; 1</condition>
+          <sequence name="Sequence8">
+            <assign name="Assign1">
+              <copy>
+                <from>false()</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+              </copy>
+            </assign>
+            <empty name="Empty6"/>
+          </sequence>
+          <else>
+            <forEach parallel="no" counterName="ForEachAll" name="ForEachAll">
+              <startCounterValue>1</startCounterValue>
+              <finalCounterValue>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:count</finalCounterValue>
+              <scope name="Scope2">
+                <sequence name="Sequence6">
+                  <forEach parallel="no" counterName="ForEachAssigments" name="ForEachAssigments">
+                    <startCounterValue>1</startCounterValue>
+                    <finalCounterValue>count($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments)</finalCounterValue>
+                    <scope name="Scope1">
+                      <if name="ActionCodeCondtions">
+                        <documentation>
+                          <![CDATA[TRANSFER OR CCL_TRANSFER]]>
+                        </documentation>
+                        <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionCode,'TRANSFER') or contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionCode,'CCL_TRANSFER')</condition>
+                        <sequence name="Sequence2">
+                          <assign name="AssignTRANSFERM">
+                            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:PersonNumber</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:empAcntNo</to>
+                            </copy>
+                            <copy>
+                              <from>'0'</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:EffectiveStartDate</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:trpDeportDate</to>
+                            </copy>
+                            <copy>
+                              <from>$vBatchNumber</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:batchNum</to>
+                            </copy>
+                            <copy>
+                              <from>$vRequestType</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:requestType</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:CreationDate</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:dateCreated</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:LastUpdateDate</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:dateModified</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:DepartmentId</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:newEcfCpfCode</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:JobId</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:professionD</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:LocationId</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:branchCodeTo</to>
+                            </copy>
+                          </assign>
+                          <if name="IfInsert">
+                            <documentation>
+                              <![CDATA[Insert]]>
+                            </documentation>
+                            <condition>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:CreationDate &gt;= $vLastSRequest</condition>
+                            <assign name="AssignStatusInsert">
+                              <copy>
+                                <from>'1'</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                              </copy>
+                            </assign>
+                            <elseif>
+                              <documentation>
+                                <![CDATA[Update]]>
+                              </documentation>
+                              <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:LastUpdateDate &gt;= $vLastSRequest</condition>
+                              <assign name="AssignStatusUpdate">
+                                <copy>
+                                  <from>'2'</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                </copy>
+                              </assign>
+                            </elseif>
+                            <else>
+                              <documentation>
+                                <![CDATA[Others]]>
+                              </documentation>
+                              <assign name="AssignStatus0">
+                                <copy>
+                                  <from>'0'</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                </copy>
+                              </assign>
+                            </else>
+                          </if>
+                          <if name="IfActionStatusActive">
+                            <documentation>
+                              <![CDATA[Active]]>
+                            </documentation>
+                            <condition>contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:AssignmentStatus,'ACTIVE')</condition>
+                            <sequence name="Sequence7">
+                              <if name="IfCCL_TRANSFER">
+                                <documentation>
+                                  <![CDATA[CCL_TRANSFER]]>
+                                </documentation>
+                                <condition>contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionCode,'CCL_TRANSFER')</condition>
+                                <assign name="AssignDeleteTransfeer">
+                                  <copy>
+                                    <from>'3'</from>
+                                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                  </copy>
+                                </assign>
+                                <else>
+                                  <empty name="Empty4"/>
+                                </else>
+                              </if>
+                            </sequence>
+                            <else>
+                              <documentation>
+                                <![CDATA[Inactive]]>
+                              </documentation>
+                              <assign name="AssignDelete">
+                                <copy>
+                                  <from>'3'</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                </copy>
+                              </assign>
+                            </else>
+                          </if>
+                          <assign name="LastAssign">
+                            <copy>
+                              <from>$status</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeTransferM_insert_InputVariable.HcmEmpTransferMCollection/ns4:HcmEmpTransferM/ns4:status</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:hasMore</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+                            </copy>
+                            <copy>
+                              <from>$offset + $InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:count</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+                            </copy>
+                            <copy>
+                              <from>''</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompLink</to>
+                            </copy>
+                          </assign>
+                          <if name="IfStatusISZero">
+                            <documentation>
+                              <![CDATA[0]]>
+                            </documentation>
+                            <condition>$status ='0'</condition>
+                            <empty name="Empty5"/>
+                            <else>
+                              <documentation>
+                                <![CDATA[123]]>
+                              </documentation>
+                              <invoke name="InvokeTransferM" partnerLink="TransferdbReference"
+                                      portType="ns2:TransferdbReference_ptt" operation="insert"
+                                      inputVariable="InvokeTransferM_insert_InputVariable" bpelx:invokeAsDetail="no"/>
+                            </else>
+                          </if>
+                          <!--<assign name="AssignInitialForGraeds">
+                  <copy>
+                    <from>xp20:current-date()</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGraedsRef_findByGradeId_InputVariable.parameters/ns11:effectiveDate</to>
+                  </copy>
+                  <copy>
+                    <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns2:items[$ForEachAll]/ns2:assignments[$ForEachAssigments]/ns2:GradeId</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGraedsRef_findByGradeId_InputVariable.parameters/ns11:gradeId</to>
+                  </copy>
+                </assign>02042018 malhaj-->
+                          <!--<assign name="AssignToPraperGradeAPI">
+                  <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                    <from>concat($vGradeLinks,'?q=GradeId=',$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns2:items[$ForEachAll]/ns2:assignments[$ForEachAssigments]/ns2:GradeId,'&amp;expand=GradeCustomerFlex')</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vGradeLinks</to>
+                  </copy>
+                </assign>-->
+                          <!--<assign name="AssignDefaultGradeValues">
+                  <copy>
+                    <from>$vCSFMap</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradeByIdAPI_process_InputVariable.payload/ns9:map</to>
+                  </copy>
+                  <copy>
+                    <from>$vCSFKey</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradeByIdAPI_process_InputVariable.payload/ns9:key</to>
+                  </copy>
+                  <copy>
+                    <from>$vGradeLinks</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradeByIdAPI_process_InputVariable.payload/ns9:vlinkQuery</to>
+                  </copy>
+                </assign>-->
+                          <!--<invoke name="InvokeGradeByIdAPI" bpelx:invokeAsDetail="no" partnerLink="SOAPRef"
+                        portType="ns9:GradeByIDProcess" operation="process"
+                        inputVariable="InvokeGradeByIdAPI_process_InputVariable"
+                        outputVariable="InvokeGradeByIdAPI_process_OutputVariable"/>-->
+                          <!--<assign name="AssignGradesValues">
+                  <copy>
+                    <from>concat($InvokeGradeByIdAPI_process_OutputVariable.payload/ns9:gradeCode1,'-',$InvokeGradeByIdAPI_process_OutputVariable.payload/ns9:gradeCode2,'-',$InvokeGradeByIdAPI_process_OutputVariable.payload/ns9:gradeCode3)</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:alwCode</to>
+                  </copy>
+                  <copy>
+                    <from>concat($InvokeGradeByIdAPI_process_OutputVariable.payload/ns9:gradeValue1,'-',$InvokeGradeByIdAPI_process_OutputVariable.payload/ns9:gradeValue2,'-',$InvokeGradeByIdAPI_process_OutputVariable.payload/ns9:gradeValue3)</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:alwValue</to>
+                  </copy>
+                  <copy>
+                    <from>'1'</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:status</to>
+                  </copy>
+                </assign>-->
+                          <!--<invoke name="InvokeDBTransferD" bpelx:invokeAsDetail="no" partnerLink="TransferDdbReference"
+                        portType="ns5:TransferDdbReference_ptt" operation="insert"
+                        inputVariable="InvokeDBTransferD_insert_InputVariable"/>-->
+                          <!--<assign name="ReAssignLinks">
+                  <copy>
+                    <from>''</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vGradeLinks</to>
+                  </copy>
+                </assign>-->
+                          <!--<invoke name="InvokeGraedsRef" partnerLink="GradesSOAPRef"
+                        portType="ns10:GradeService" operation="findByGradeId"
+                        inputVariable="InvokeGraedsRef_findByGradeId_InputVariable"
+                        outputVariable="InvokeGraedsRef_findByGradeId_OutputVariable" bpelx:invokeAsDetail="no"/>02042018 malhaj-->
+                          <!--<forEach parallel="no" counterName="ForEachFlex" name="ForEachFlex">
+                  <startCounterValue>1</startCounterValue>
+                  <finalCounterValue>count($InvokeGraedsRef_findByGradeId_OutputVariable.parameters/ns11:result/ns10:Value/ns10:GradeCustomerFlex)</finalCounterValue>
+                  <scope name="Scope3">
+                    <sequence name="Sequence3">
+                      <assign name="AssignInsert">
+                        <copy>
+                          <from>concat($InvokeGraedsRef_findByGradeId_OutputVariable.parameters/ns11:result/ns10:Value/ns10:GradeCustomerFlex[$ForEachFlex]/ns12:grade1 ,'-' , $InvokeGraedsRef_findByGradeId_OutputVariable.parameters/ns11:result/ns10:Value/ns10:GradeCustomerFlex[$ForEachFlex]/ns12:grade2 ,'-',$InvokeGraedsRef_findByGradeId_OutputVariable.parameters/ns11:result/ns10:Value/ns10:GradeCustomerFlex[$ForEachFlex]/ns12:grade3)</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:alwValue</to>
+                        </copy>
+                        <copy>
+                          <from>'1'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:status</to>
+                        </copy>
+                        <copy>
+                          <from>concat($InvokeGraedsRef_findByGradeId_OutputVariable.parameters/ns11:result/ns10:Value/ns10:GradeCustomerFlex/ns12:childCode,'-',$InvokeGraedsRef_findByGradeId_OutputVariable.parameters/ns11:result/ns10:Value/ns10:GradeCustomerFlex/ns12:parentCode)</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:trpSupNo</to>
+                        </copy>
+                        <copy>
+                          <from>'3-13-7'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBTransferD_insert_InputVariable.HcmEmpTransferDCollection/ns6:HcmEmpTransferD/ns6:alwCode</to>
+                        </copy>
+                      </assign>
+                      <invoke name="InvokeTransferD" bpelx:invokeAsDetail="no"
+                              inputVariable="InvokeTransferD_insert_InputVariable"/>
+                    </sequence>
+                  </scope>
+                </forEach> malhaj 02042018 -->
+                        </sequence>
+                        <elseif>
+                          <documentation>
+                            <![CDATA[PROMOTION or DLT_PROMOTION]]>
+                          </documentation>
+                          <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionCode,'PROMOTION') or contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionCode,'DLT_PROMOTION')</condition>
+                          <sequence name="Sequence1">
+                            <assign name="AssignPROMOTION">
+                              <copy>
+                                <from>$vBatchNumber</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:batchNum</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:AssignmentId</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:transId</to>
+                              </copy>
+                              <copy>
+                                <from>$vRequestType</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:requestType</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:PersonNumber</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:empAcntNo</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:GradeId</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:gradeMajer</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionReasonCode</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:promType</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:EffectiveStartDate</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:promotionDate</to>
+                              </copy>
+                            </assign>
+                            <if name="IfInsert">
+                              <documentation>
+                                <![CDATA[Insert]]>
+                              </documentation>
+                              <condition>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:CreationDate &gt;= $vLastSRequest</condition>
+                              <assign name="AssignStatusInsert">
+                                <copy>
+                                  <from>'1'</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                </copy>
+                              </assign>
+                              <elseif>
+                                <documentation>
+                                  <![CDATA[Update]]>
+                                </documentation>
+                                <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:LastUpdateDate &gt;= $vLastSRequest</condition>
+                                <assign name="AssignStatusUpdate">
+                                  <copy>
+                                    <from>'2'</from>
+                                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                  </copy>
+                                </assign>
+                              </elseif>
+                              <else>
+                                <documentation>
+                                  <![CDATA[Others]]>
+                                </documentation>
+                                <assign name="AssignStatus0">
+                                  <copy>
+                                    <from>'0'</from>
+                                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                  </copy>
+                                </assign>
+                              </else>
+                            </if>
+                            <if name="IfActionStatusActive">
+                              <documentation>
+                                <![CDATA[Active]]>
+                              </documentation>
+                              <condition>contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:AssignmentStatus,'ACTIVE')</condition>
+                              <sequence name="Sequence4">
+                                <if name="IfDLT_PROMOTION">
+                                  <documentation>
+                                    <![CDATA[DLT_PROMOTION]]>
+                                  </documentation>
+                                  <condition>contains($InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:items[$ForEachAll]/ns5:assignments[$ForEachAssigments]/ns5:ActionCode,'DLT_PROMOTION')</condition>
+                                  <assign name="AssigndeletePromotions">
+                                    <copy>
+                                      <from>'3'</from>
+                                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                    </copy>
+                                  </assign>
+                                  <else>
+                                    <empty name="Empty4"/>
+                                  </else>
+                                </if>
+                              </sequence>
+                              <else>
+                                <sequence name="Sequence5">
+                                  <assign name="AssignDelete">
+                                    <copy>
+                                      <from>'3'</from>
+                                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                                    </copy>
+                                  </assign>
+                                </sequence>
+                              </else>
+                            </if>
+                            <assign name="LastAssign">
+                              <copy bpelx:insertMissingToData="yes">
+                                <from>$status</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertPromotions_insert_InputVariable.HcmEmployeePromotionCollection/ns8:HcmEmployeePromotion/ns8:status</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:hasMore</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+                              </copy>
+                              <copy>
+                                <from>$offset + $InvokeHCMRestRef_GetTransPromo_OutputVariable.reply/ns5:count</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+                              </copy>
+                              <copy>
+                                <from>''</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompLink</to>
+                              </copy>
+                            </assign>
+                            <if name="IfStatusISZero">
+                              <documentation>
+                                <![CDATA[0]]>
+                              </documentation>
+                              <condition>$status ='0'</condition>
+                              <empty name="Empty5"/>
+                              <else>
+                                <documentation>
+                                  <![CDATA[123]]>
+                                </documentation>
+                                <invoke name="InvokeInsertPromotions" partnerLink="promotionsDbReference"
+                                        portType="ns3:promotionsDbReference_ptt" operation="insert"
+                                        inputVariable="InvokeInsertPromotions_insert_InputVariable"
+                                        bpelx:invokeAsDetail="no"/>
+                              </else>
+                            </if>
+                          </sequence>
+                        </elseif>
+                        <else>
+                          <empty name="Empty2"/>
+                        </else>
+                      </if>
+                    </scope>
+                  </forEach>
+                </sequence>
+              </scope>
+            </forEach>
+          </else>
+        </if>
+         
+        <wait name="Wait1">
+          <for>'PT1S'</for>
+        </wait>
+      </sequence>
+    </while>
+    <assign name="AssignDone">
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns7:PID</to>
+      </copy>
+      <copy>
+        <from>$vCompositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns7:PCOMPOSITE_NAME</to>
+      </copy>
+      <copy>
+        <from>$vLastSRequest</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns7:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>$vBatchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns7:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>$vRequestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns7:PREQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>concat($status,'-','S')</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns7:PRESPONCE_STATUS</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeDone" bpelx:invokeAsDetail="no" partnerLink="AuditDbReference"
+            portType="ns6:AuditDbReference_ptt" operation="AuditDbReference"
+            inputVariable="InvokeDone_AuditDbReference_InputVariable"/>
+  </sequence>
+</bpelx:subProcess>

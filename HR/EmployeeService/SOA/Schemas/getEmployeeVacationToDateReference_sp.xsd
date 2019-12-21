@@ -1,0 +1,22 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmployeeVacationToDateReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmployeeVacationToDateReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_VACATION_TYPE" type="decimal" db:index="2" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_CALC_DATE" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_REQUEST_INFO" type="string" db:index="4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="OUT_VAC_TO_DATE" type="decimal" db:index="5" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRCODE" type="string" db:index="6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_ERRMSG" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

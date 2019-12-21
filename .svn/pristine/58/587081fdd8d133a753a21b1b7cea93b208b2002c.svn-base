@@ -1,0 +1,105 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerInfoReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerInfoReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CUST_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_NAT_NO" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_DCNT_CODE" type="decimal" db:index="3" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_DOC_NUM" type="string" db:index="4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_PADR_B_LINE_4" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_ERRCODE" type="decimal" db:index="6" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRMSG" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="O_CURSOR" type="db:O_CURSOR_RowSet" db:index="8" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="O_CURSOR_ACC" type="db:O_CURSOR_ACC_RowSet" db:index="9" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="O_CURSOR_ACC_RowSet">
+      <sequence>
+         <element name="O_CURSOR_ACC_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="BRCH_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="BRCH_B_DESC" type="db:string40" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CACC_NUM" type="db:string16" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CACC_B_NAME" type="db:string75" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="O_CURSOR_RowSet">
+      <sequence>
+         <element name="O_CURSOR_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CUST_NAME" type="db:string118" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CUST_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOBILE" type="db:string32" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PADR_PHONE_1" type="db:string12" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PHPR_SEX" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PHPR_SEX_DESC" type="db:string75" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CTRY_DESC" type="db:string75" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PHPR_BIRTH_DATE" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PHPR_NATIONAL_NBR" type="db:string12" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DCNT_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DCNT_B_DESC" type="db:string40" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PHPR_ID_DOC_NUM" type="db:string15" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PADR_E_MAIL_1" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string118">
+      <restriction base="string">
+         <maxLength value="118"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string32">
+      <restriction base="string">
+         <maxLength value="32"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string12">
+      <restriction base="string">
+         <maxLength value="12"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string75">
+      <restriction base="string">
+         <maxLength value="75"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="10"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string40">
+      <restriction base="string">
+         <maxLength value="40"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string15">
+      <restriction base="string">
+         <maxLength value="15"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string16">
+      <restriction base="string">
+         <maxLength value="16"/>
+      </restriction>
+   </simpleType>
+</schema>

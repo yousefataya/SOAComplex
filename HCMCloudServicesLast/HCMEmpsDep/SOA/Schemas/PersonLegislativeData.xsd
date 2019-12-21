@@ -1,0 +1,114 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfoDFF/"
+     xmlns:ns2="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Legislative Data Version 2</name>
+            <description>The object to capture the legislative information of a Person.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key. Surrogate key." name="PersonLegislativeId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Internal identifier for the person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Legislation code derived from Legal Entity." name="LegislationCode"/>
+                <oer:attribute description="Legislation-specific value that indicates the highest level of education of the person."
+                     name="HighestEducationLevel"/>
+                <oer:attribute description="Marital status, defined from lookup, and valid for the Legislation Code"
+                     name="MaritalStatus"/>
+                <oer:attribute description="Date the Marital Status came into effect." name="MaritalStatusDate"/>
+                <oer:attribute description="Sex, defined from lookup, and valid for the Legislation Code"
+                     name="Sex"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Customer&apos;s flexfield for person legislative info."
+                     name="PersonLegislativeInfoDFF"/>
+                <oer:attribute description="It defines person data specific to a legislation that is not handled by the core legislative fields. For example, the United States tracks the veteran details."
+                     name="PersonLegislativeDDF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfoDFF/"
+         schemaLocation="PersonLegislativeInfoDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+         schemaLocation="PersonLegislative.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:complexType name="PersonLegislativeData">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonLegislativeId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonLegislativeId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislationCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="HighestEducationLevel" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MaritalStatus" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MaritalStatusDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="Sex" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonLegislativeInfoDFF" type="ns1:PersonLegislativeInfoDFF"
+                 sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="PersonLegislativeDDF" type="ns2:PersonLegislative" sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PersonLegislativeDataResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonLegislativeData"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personLegislativeDataResult" type="PersonLegislativeDataResult"/>
+    <xsd:element name="personLegislativeData" type="PersonLegislativeData"/>
+</xsd:schema>

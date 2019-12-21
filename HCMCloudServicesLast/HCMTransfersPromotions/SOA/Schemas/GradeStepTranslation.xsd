@@ -1,0 +1,105 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+     sdoJava:package="oracle.apps.hcm.workStructures.grades.gradeServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Grade Step Translation Version 2</name>
+            <description>The translation object to hold the translations of names given
+                to grade steps.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmWorkTop-Work Structures Grade, Job, and
+                    Position</value>
+                <value>HcmTop-HcmTop : HcmWorkTop-Work Structures Grade, Job, and
+                    Position : HcmWorkGrades-Grades</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_GRADE-Assignment
+                    Grade</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key column." name="GradeStepId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Indicates the code of the language into which the contents of the translatable columns are translated."
+                     name="Language"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="User key attribute that denotes the existing name for the grade step."
+                     name="ExistingGradeStepName"/>
+                <oer:attribute description="Denotes name for the grade step." name="GradeStepName"/>
+                <oer:attribute description="Indicates the code of the language in which the contents of the translatable columns were originally created."
+                     name="SourceLang"/>
+                <oer:attribute description="Foreign Key to PER_GRADES_F table." name="GradeId"/>
+                <oer:attribute description="Numbers or Characters that uniquely defines a short form for Grade for identification purposes."
+                     name="GradeCode"/>
+                <oer:attribute description="Identifies a set of reference data shared across business units and other entities. Also known as Reference Data Sets, they are used to filter reference data in transactional UIs."
+                     name="SetId"/>
+                <oer:attribute description="Grade is set enabled in Fusion. A set is used as a grouping mechanism. Code is a unique identifier for the set"
+                     name="SetCode"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="GradeStepTranslation">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>GradeStepId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>Language</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="GradeStepId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="Language" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="ExistingGradeStepName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeStepName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceLang" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="GradeCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SetId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="SetCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="GradeStepTranslationResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="GradeStepTranslation"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="gradeStepTranslation" type="GradeStepTranslation"/>
+    <xsd:element name="gradeStepTranslationResult" type="GradeStepTranslationResult"/>
+</xsd:schema>

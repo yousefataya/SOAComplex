@@ -1,0 +1,179 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmpPaySlipReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmpPaySlipReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="V_DATE" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_REQUEST_INFO" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="OUT_CUR_EMP_PAYSLIP" type="db:OUT_CUR_EMP_PAYSLIP_RowSet" db:index="4" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_CUR_FAMILY_DETAILS" type="db:OUT_CUR_FAMILY_DETAILS_RowSet" db:index="5" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_CUR_MOVE_DETAILS" type="db:OUT_CUR_MOVE_DETAILS_RowSet" db:index="6" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_CUR_OTHERS_DETAILS" type="db:OUT_CUR_OTHERS_DETAILS_RowSet" db:index="7" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="OUT_CUR_OTHERS_DETAILS_RowSet">
+      <sequence>
+         <element name="OUT_CUR_OTHERS_DETAILS_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="ART_ALLO_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="ART_ALLO" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SOUTH_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SOUTH_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PART_DRIVER_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PART_DRIVER_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FULL_DRIVER_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FULL_DRIVER_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FORKLIFT_DRIV_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FORKLIFT_DRIV_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOTORCYCLE_DRIV_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOTORCYCLE_DRIV_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DIVIDER_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DIVIDER_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CARDS_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CARDS_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SWIFT_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SWIFT_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GEOMETRIC_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GEOMETRIC_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SUPERVISION_BRAN_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SUPERVISION_BRAN_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="HOUSING_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="HOUSING_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SECRETARIAT_COMMITTEES_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SECRETARIAT_COMMITTEES_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OTHER_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OTHER_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="REWARD_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="REWARD_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TREASURER_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TREASURER_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SUPPORT_FUEL_ALLOW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SUPPORT_FUEL_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOV_REAL_ESTATE_OFFI_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOV_REAL_ESTATE_OFFI_ALLOW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_CUR_FAMILY_DETAILS_RowSet">
+      <sequence>
+         <element name="OUT_CUR_FAMILY_DETAILS_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CHILDREN_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CHILDREN_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="WIFE_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="WIFE_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_CUR_EMP_PAYSLIP_RowSet">
+      <sequence>
+         <element name="OUT_CUR_EMP_PAYSLIP_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_ACNT_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EMP_NAME_A" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="GRADE" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="BRCH" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="BASIC_SALARY_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EMP_HIRE_DATE" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="BASIC_SALARY" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SALARY_EXTRA_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="BASIC_SALARY_EXTRA" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FAMILY_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FAMILY_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FAM_ALW_EXT_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FAMILY_ALW_EXTRA" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SPC_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SPC_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MANAGENT_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MANAGENT_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="COMPUTER_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="COMPUTER_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOVE_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOVE_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OVERTIME_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OVERTIME_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TELLER_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TELLER_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OTHERS_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OTHERS_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TOTAL_ALW_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TOTAL_ALW" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TAX_DED_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TAX_DED" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SOCIAL_DED_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SOCIAL_DED" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OTHER_DED_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="OTHER_DED" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TOTAL_DED_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TOTAL_DED" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="NET_SALARY_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="NET_SALARY" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TA_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TA" type="db:string4000" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PAY_DATE" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_CUR_MOVE_DETAILS_RowSet">
+      <sequence>
+         <element name="OUT_CUR_MOVE_DETAILS_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="MOBILITY_ALLOWANCE_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MOBILITY_ALLOWANCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DELEGATES_WALK_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DELEGATES_WALK_ALLOWANCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="REPORTERS_MOBILITY_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="REPORTERS_MOBILITY_ALLOWANCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EXTRA_MOBILITY_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EXTRA_MOBILITY_ALLOWANCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FACILITIES_MOBILITY_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FACILITIES_MOBILITY_ALLOWANCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string240">
+      <restriction base="string">
+         <maxLength value="240"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="10"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string4000">
+      <restriction base="string">
+         <maxLength value="4000"/>
+      </restriction>
+   </simpleType>
+</schema>

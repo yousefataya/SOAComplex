@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<graphics>
+   <diagram optimizeLayout="false" fixedWidthSwimlanes="true" roundedPartnerlinks="true" centerZoom="true" validateOnLoad="true" confirmBeforeDelete="true" selectedPartnerLinkColor="49,105,198" swimlaneBackground="240,240,240" swimlaneDividerBackground="218,218,218" graphBackground="255,255,255" selectedBorderBackground="49,105,198" connectedPartnerLinkColor="204,204,255" connectablePartnerLinkColor="0,0,255" unconnectedPartnerLinkColor="192,192,192"/>
+   <annotationfile/>
+   <iconize/>
+   <partnerlink_locations>
+      <partnerlink name="eccserviceprocess_client" x="0" y="725" side="left"/>
+      <partnerlink name="EccPosting2Reference" x="0" y="269" side="left"/>
+      <partnerlink name="CustomerSignInfoReference" x="0" y="326" side="left"/>
+      <partnerlink name="EccPDCAddPReference" x="0" y="383" side="left"/>
+      <partnerlink name="ECCAutoReplyReference" x="0" y="440" side="left"/>
+      <partnerlink name="ECCExtendSessionRequestReference" x="0" y="497" side="left"/>
+      <partnerlink name="ECCOutwardReplyReference" x="0" y="554" side="left"/>
+      <partnerlink name="ECCPDCUpdateReference" x="0" y="611" side="left"/>
+      <partnerlink name="EccPosting1Ref" x="0" y="668" side="left"/>
+      <partnerlink name="EccPostingReference" x="3148" y="269" side="right"/>
+      <partnerlink name="CustomerOldSignInfoReference" x="3148" y="326" side="right"/>
+      <partnerlink name="EccAccountRequestReference" x="3148" y="383" side="right"/>
+      <partnerlink name="ECCCAAccountRequestReference" x="3148" y="440" side="right"/>
+      <partnerlink name="ECCOutwardPresentmentReference" x="3148" y="497" side="right"/>
+      <partnerlink name="ECCPDCDeleteReference" x="3148" y="554" side="right"/>
+   </partnerlink_locations>
+   <graph_layout viewport="2333,195,1025,449" show_swimlanes="true">
+      <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
+      <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick" type="pick"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[1]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[1]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[2]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[2]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[3]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[3]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[4]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[4]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[5]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[5]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[6]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[6]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[7]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[7]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[8]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[8]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[9]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[9]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[10]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[10]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[11]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[11]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[12]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[12]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[13]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[13]/sequence" type="sequence"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[14]" type="onMessage"/>
+      <layout_item collapsed="false" xpath="/process/sequence/pick/onMessage[14]/sequence" type="sequence"/>
+   </graph_layout>
+   <bookmarks/>
+</graphics>

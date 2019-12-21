@@ -1,0 +1,27 @@
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+  <Reference name="CbsConnection" className="oracle.jdeveloper.db.adapter.DatabaseProvider"
+             credentialStoreKey="CbsConnection" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>172.20.5.223</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="serviceName">
+        <Contents>devticbs</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>mid</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+</References>

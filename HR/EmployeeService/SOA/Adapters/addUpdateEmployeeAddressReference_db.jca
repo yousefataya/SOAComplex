@@ -1,0 +1,13 @@
+<adapter-config name="addUpdateEmployeeAddressReference" adapter="db" wsdlLocation="../WSDLs/addUpdateEmployeeAddressReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="addUpdateEmployeeAddressReference_ptt" operation="addUpdateEmployeeAddressReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_EMPLOYEE"/>
+      <property name="ProcedureName" value="ADD_EMP_ADDRESS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

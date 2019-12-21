@@ -1,0 +1,37 @@
+<wsdl:definitions
+     name="ATMSocket"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:msg_request="http://atm.fact.jo/ATMSocket"
+     xmlns:msg_reply="http://atm.fact.jo/outSocket"
+    >
+  <plt:partnerLinkType name="ATMInboundRequestReply_plt" >
+    <plt:role name="ATMInboundRequestReply_role" >
+      <plt:portType name="tns:ATMInboundRequestReply_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://atm.fact.jo/ATMSocket" schemaLocation="../Schemas/atmRecivedMsg.xsd" />
+      </schema>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://atm.fact.jo/outSocket" schemaLocation="../Schemas/atmRespondMsg.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="inMsg_msg_requsest">
+        <wsdl:part name="inMsg" element="msg_request:inMsg"/>
+    </wsdl:message>
+    <wsdl:message name="Response_msg_reply">
+        <wsdl:part name="Response" element="msg_reply:Response"/>
+    </wsdl:message>
+    <wsdl:portType name="ATMInboundRequestReply_ptt">
+        <wsdl:operation name="ATMInboundRequestReply">
+            <wsdl:input message="tns:inMsg_msg_requsest"/>
+            <wsdl:output message="tns:Response_msg_reply"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

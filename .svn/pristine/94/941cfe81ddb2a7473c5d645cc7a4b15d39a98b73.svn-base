@@ -1,0 +1,109 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Worker Manager Version 2</name>
+            <description>The supervisors associated with a particular assignment. This
+                supports different relationships between a person and a
+                supervisor. For example, a person could have one functional
+                manager (line manager) and a project manager (who controls a
+                project and organizes resources and people).</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment :
+                    HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="ASSIGNMENT_ID" name="AssignmentId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the order of different changes made during a day. The lowest value represents the earliest change in the day."
+                     name="EffectiveSequence"/>
+                <oer:attribute description="Date Effective Entity: &apos;Y&apos; indicates that this row represents the latest change in the day."
+                     name="EffectiveLatestChange"/>
+                <oer:attribute description="Assignment Number. Uniquely identifies an assignment."
+                     name="AssignmentNumber"/>
+                <oer:attribute description="HOURLY_SALARIED_CODE" name="HourlySalariedCode"/>
+                <oer:attribute description="Indicates whether the person is a manager or not." name="ManagerFlag"/>
+                <oer:attribute description="PERSON_ID" name="PersonId"/>
+                <oer:attribute description="System-generated primary key column. Surrogate Key." name="AssignmentSupervisorId"/>
+                <oer:attribute description="Uniquely identifies an assignment. Foreign key to PER_ALL_ASSIGNMENTS_M."
+                     name="ReporteeAssignmentId"/>
+                <oer:attribute description="Identifies the supervisor?s assignment. Foreign Key to PER_ALL_ASSIGNMENTS_M."
+                     name="ManagerAssignmentId"/>
+                <oer:attribute description="Identifies supervisor. Foreign key to PER_PERSONS. This should be derived from the Manager?s assignment record."
+                     name="ManagerId"/>
+                <oer:attribute description="Name of the manager." name="ManagerName"/>
+                <oer:attribute description="Unique Identifier for a person&apos;s name." name="PersonNameId"/>
+                <oer:attribute description="System constructed version of name, used in more formal display purposes"
+                     name="FullName"/>
+                <oer:attribute description="Constructed version of a person&apos;s name, intended for use in an alphabetically-ordered list. The value may naturally differ depending on the Legislation Code.Expect the Last Name as the first component in this format in most cases."
+                     name="ListName"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:complexType name="WorkerManagerResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="WorkerManager"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="WorkerManager">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="AssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveSequence" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="EffectiveLatestChange" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="HourlySalariedCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ManagerFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="AssignmentSupervisorId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ReporteeAssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ManagerAssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ManagerId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ManagerName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonNameId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="FullName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ListName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="workerManagerResult" type="WorkerManagerResult"/>
+    <xsd:element name="workerManager" type="WorkerManager"/>
+</xsd:schema>

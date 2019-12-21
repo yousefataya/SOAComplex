@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SAV="http://www.fact.com.jo/SAV"
+            targetNamespace="http://www.fact.com.jo/SAV" elementFormDefault="qualified">
+ 
+ <xsd:element name="InquiryMessageInput">
+ <xsd:complexType>
+ <xsd:sequence>
+ <xsd:element name ="InputInquiryMessageInput" type="SAV:InputMessageHeaderComplex"/>
+ </xsd:sequence>
+ </xsd:complexType>
+ </xsd:element>
+ 
+ <xsd:complexType name="InputMessageHeaderComplex">
+ <xsd:sequence>
+ <xsd:element name ="P_BRCH_CODE" type="xsd:string"/>
+ </xsd:sequence>
+ </xsd:complexType>
+ 
+
+
+ 
+<xsd:element name="InquiryMessageOutPut" type="SAV:OutInquiryMessage"/>
+<xsd:complexType name="OutInquiryMessage">
+ <xsd:sequence>
+ <xsd:element name ="InquiryInformation" type="SAV:OutInquiryInformationCompelx"/>
+ </xsd:sequence>
+ </xsd:complexType>
+ 
+ 
+
+ 
+<xsd:complexType name="OutInquiryInformationCompelx">
+<xsd:sequence>
+<xsd:element name ="Data" type="SAV:OutComplex" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>  
+ 
+
+ 
+ <xsd:element name="Data" type="SAV:OutComplex"/>
+ <xsd:complexType name="OutComplex">
+ <xsd:sequence>
+<xsd:element name ="brch_code" type="xsd:string"/>
+<xsd:element name ="cacc_num" type="xsd:string"/>
+<xsd:element name ="cacc_name" type="xsd:string"/>
+<xsd:element name ="prof_code" type="xsd:string"/>
+<xsd:element name ="slot_prof_desc" type="xsd:string"/>
+<xsd:element name ="slot_gender" type="xsd:string"/>
+<xsd:element name ="slot_birth_date" type="xsd:string"/>
+<xsd:element name ="slot_age" type="xsd:string"/>
+<xsd:element name ="slot_jud_ind" type="xsd:string"/>
+<xsd:element name ="slot_avail_bal" type="xsd:string"/>
+
+<xsd:element name ="slot_year" type="xsd:string"/>
+<xsd:element name ="jib_emp_flg" type="xsd:string"/>
+<xsd:element name ="brch_b_desc" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth1" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth1" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth1" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth1" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth2" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth2" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth2" type="xsd:string"/>
+
+<xsd:element name ="slot_min_bal_mnth2" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth3" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth3" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth3" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth3" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth4" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth4" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth4" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth4" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth5" type="xsd:string"/>
+
+
+
+
+
+<xsd:element name ="slot_avg_bal_mnth5" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth5" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth5" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth6" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth6" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth6" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth6" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth7" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth7" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth7" type="xsd:string"/>
+
+
+<xsd:element name ="slot_min_bal_mnth7" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth8" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth8" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth8" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth8" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth9" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth9" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth9" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth9" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth10" type="xsd:string"/>
+
+<xsd:element name ="slot_avg_bal_mnth10" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth10" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth10" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth11" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth11" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth11" type="xsd:string"/>
+<xsd:element name ="slot_min_bal_mnth11" type="xsd:string"/>
+<xsd:element name ="slot_bal_mnth12" type="xsd:string"/>
+<xsd:element name ="slot_avg_bal_mnth12" type="xsd:string"/>
+<xsd:element name ="slot_max_bal_mnth12" type="xsd:string"/>
+
+<xsd:element name ="slot_min_bal_mnth12" type="xsd:string"/>
+<xsd:element name ="rec_status" type="xsd:string"/>
+<xsd:element name ="file_date" type="xsd:string"/>
+<xsd:element name ="cust_id" type="xsd:string"/>
+ </xsd:sequence>
+ </xsd:complexType>
+
+</xsd:schema>

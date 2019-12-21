@@ -1,0 +1,148 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmployeInfoDetailReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEmployeInfoDetailReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_REQUEST_INFO" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ID" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="OUT_EMPLOYEE_DOC" type="db:RowSet" db:index="3" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_EMPLOYEE_DEPENDENCIES" type="db:OUT_EMPLOYEE_DEPENDENCIES_RowSet" db:index="4" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_EMPLOYEE_DEPENDENCIES_KIDS" type="db:OUT_EMPLOYEE_DEPENDENCIES_KIDS_RowSet" db:index="5" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_EMP_UPDATE_DEGREE" type="db:OUT_EMP_UPDATE_DEGREE_RowSet" db:index="6" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="OUT_VOCATIONAL_CERTIFICATES" type="db:OUT_VOCATIONAL_CERTIFICATES_RowSet" db:index="7" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="OUT_VOCATIONAL_CERTIFICATES_RowSet">
+      <sequence>
+         <element name="OUT_VOCATIONAL_CERTIFICATES_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_ACNT_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CER_DESC" type="db:string250" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="INSTITUTE" type="db:string250" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DATE_GET_CER" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="FROM_DATE_C" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="TO_DATE_C" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="HOURS_OF_CER" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_EMP_UPDATE_DEGREE_RowSet">
+      <sequence>
+         <element name="OUT_EMP_UPDATE_DEGREE_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_ACNT_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DEGREE_SER" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SNC_DEG_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SPC_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EMP_GRAD_SIDE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DEGREE_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="TAG_TEXT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DIGITAL_BRAND" type="db:string200" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="SCHOOL_NAME" type="db:string250" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_EMPLOYEE_DEPENDENCIES_KIDS_RowSet">
+      <sequence>
+         <element name="OUT_EMPLOYEE_DEPENDENCIES_KIDS_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_ACNT_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DEPENDENT_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="RELATIONSHIP_TYPE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="LNAME" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="IDS_NAT_NO" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DOB_DOMARG" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="GENDER" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MARITAL_STATUS" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="INS_DEGREE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="INS_BEGIN_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="SUSPEND_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="RowSet">
+      <sequence>
+         <element name="Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="Column" maxOccurs="unbounded" nillable="true">
+                     <complexType>
+                        <simpleContent>
+                           <extension base="string">
+                              <attribute name="name" type="string" use="required"/>
+                              <attribute name="sqltype" type="string" use="required"/>
+                           </extension>
+                        </simpleContent>
+                     </complexType>
+                  </element>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <complexType name="OUT_EMPLOYEE_DEPENDENCIES_RowSet">
+      <sequence>
+         <element name="OUT_EMPLOYEE_DEPENDENCIES_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="EMP_ACNT_NO" type="db:string6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DEPENDENT_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="RELATIONSHIP_TYPE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FNAME" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="NATIONALITY" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="IDS_NAT_NO" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="WH_BT" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="DOB_DOMARG" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="INS_BEGIN_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="SUSPEND_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="INS_END_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="INS_DEGREE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="WIFE_WORK_FLG" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string6">
+      <restriction base="string">
+         <maxLength value="6"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string240">
+      <restriction base="string">
+         <maxLength value="240"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="10"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string200">
+      <restriction base="string">
+         <maxLength value="200"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string250">
+      <restriction base="string">
+         <maxLength value="250"/>
+      </restriction>
+   </simpleType>
+</schema>

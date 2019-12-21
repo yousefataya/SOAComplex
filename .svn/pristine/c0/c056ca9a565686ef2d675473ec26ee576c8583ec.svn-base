@@ -1,0 +1,13 @@
+<adapter-config name="submitReverseTransactionReference" adapter="db" wsdlLocation="../WSDLs/submitReverseTransactionReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="samahaConnection" location="eis/DB/factSamahaDatabase"/>
+  <endpoint-interaction portType="submitReverseTransactionReference_ptt" operation="submitReverseTransactionReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="CRE"/>
+      <property name="PackageName" value="FACT_ICBS_FIN"/>
+      <property name="ProcedureName" value="SUBMIT_REVERSE_TRANS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

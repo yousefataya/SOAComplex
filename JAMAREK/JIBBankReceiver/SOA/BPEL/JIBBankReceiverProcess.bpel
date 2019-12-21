@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Sun Dec 24 11:33:59 IST 2017
+  Author:  User
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="JIBBankReceiverProcess"
+               targetNamespace="http://xmlns.oracle.com/JAMAREK/JIBBankReceiver/JIBBankReceiverProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/JAMAREK/JIBBankReceiver/JIBBankReceiverProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns1="http://tempuri.org/"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://tempuri.org/" location="../WSDLs/JIBBankReceiverWrapper.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="JIBBankReceiver" partnerLinkType="ns1:JIBBankReceiver" myRole="IJIBBillingHub"/>
+    <partnerLink name="JamarekReference" partnerLinkType="ns1:JamarekReference" partnerRole="ServiceSoap"/>
+  </partnerLinks>
+  <sequence name="main">
+  </sequence>
+</process>

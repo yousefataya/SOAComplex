@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="GradesProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/GradesProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/GradesProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMGrades!1.0/WSDLs/GradesProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="GradesProcess">
+        <plnk:role name="GradesProcessProvider" portType="client:GradesProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/GradesProcess"
+                 schemaLocation="../Schemas/GradesProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GradesProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="GradesProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="GradesProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:GradesProcessRequestMessage"/>
+            <wsdl:output message="client:GradesProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GradesProcessBinding" type="client:GradesProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="gradesprocess_service_ep">
+        <wsdl:port name="GradesProcess_pt" binding="client:GradesProcessBinding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMGrades/gradesprocess_service_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

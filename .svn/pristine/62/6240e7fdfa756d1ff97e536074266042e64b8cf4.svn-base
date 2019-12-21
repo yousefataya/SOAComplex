@@ -1,0 +1,142 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Mon Feb 05 19:35:01 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="GetAllCustomerFinancialProcess"
+         targetNamespace="http://xmlns.oracle.com/SAMAHA/GetAllCustomerFinancial/GetAllCustomerFinancialProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SAMAHA/GetAllCustomerFinancial/GetAllCustomerFinancialProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SAMAHA/GetAllCustomerFinancial/getAllCustomerFinReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllCustomerFinReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" queryLanguage="javascript"
+         expressionLanguage="javascript" suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+  <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SAMAHA/GetAllCustomerFinancial/getAllCustomerFinReference"
+          location="../WSDLs/getAllCustomerFinReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="GetAllCustomerFinancial" bpelx:wadl="yes"/>
+    <partnerLink name="getAllCustomerFinReference" partnerLinkType="ns2:getAllCustomerFinReference_plt"
+                 partnerRole="getAllCustomerFinReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="inputVar" bpelx:json="object"/>
+    <variable name="outputVar" bpelx:json="object"/>
+    <variable name="Invoke_getAllCustomerFinReference_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="Invoke_getAllCustomerFinReference_OutputVariable" messageType="ns2:args_out_msg"/>
+    <variable name="index" type="xsd:int"/>
+    <variable name="cusIDNum" type="xsd:string"/>
+    <variable name="cusName" type="xsd:string"/>
+    <variable name="totalAmount" type="xsd:string"/>
+    <variable name="date" type="xsd:string"/>
+    <variable name="Array" bpelx:json="array"/>
+    <variable name="object" bpelx:json="object"/>
+  </variables>
+  <sequence name="main">
+    <receive name="receiveInput" partnerLink="GetAllCustomerFinancial" variable="inputVar"
+             bpelx:method="GetAllCustomerFinancial" createInstance="yes"/>
+    <invoke name="Invoke" bpelx:invokeAsDetail="no" partnerLink="getAllCustomerFinReference"
+            portType="ns2:getAllCustomerFinReference_ptt" operation="getAllCustomerFinReference"
+            inputVariable="Invoke_getAllCustomerFinReference_InputVariable"
+            outputVariable="Invoke_getAllCustomerFinReference_OutputVariable"/>
+    <extensionActivity>
+      <bpelx:js name="Javascript_defineArray">
+        <![CDATA[var arrayJson = [];]]>
+      </bpelx:js>
+    </extensionActivity>
+    <forEach parallel="no" counterName="ForEachCounter" name="ForEachCustomer">
+      <startCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">1</startCounterValue>
+      <finalCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">ora:countNodes($Invoke_getAllCustomerFinReference_OutputVariable.OutputParameters/ns3:P_RECORD/ns3:P_RECORD_Row)</finalCounterValue>
+      <scope name="Scope1">
+        <sequence>
+          <assign name="Assign_Counter">
+            <copy>
+              <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ForEachCounter</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$index</to>
+            </copy>
+          </assign>
+          <assign name="Assign_output_FromInvoke_toVariables">
+            <copy ignoreMissingFromData="yes">
+              <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getAllCustomerFinReference_OutputVariable.OutputParameters/ns3:P_RECORD/ns3:P_RECORD_Row[$ForEachCounter]/ns3:CUS_ID_NO</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$cusIDNum</to>
+            </copy>
+            <copy ignoreMissingFromData="yes">
+              <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getAllCustomerFinReference_OutputVariable.OutputParameters/ns3:P_RECORD/ns3:P_RECORD_Row[$ForEachCounter]/ns3:CUS_LNAME</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$cusName</to>
+            </copy>
+            <copy ignoreMissingFromData="yes">
+              <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getAllCustomerFinReference_OutputVariable.OutputParameters/ns3:P_RECORD/ns3:P_RECORD_Row[$ForEachCounter]/ns3:REM_TOTAL_FAMOUNT</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$totalAmount</to>
+            </copy>
+            <copy ignoreMissingFromData="yes">
+              <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getAllCustomerFinReference_OutputVariable.OutputParameters/ns3:P_RECORD/ns3:P_RECORD_Row[$ForEachCounter]/ns3:DUE_DATE</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$date</to>
+            </copy>
+          </assign>
+          <assign name="Assign_output_To_object">
+            <copy>
+              <from expressionLanguage="javascript">process.cusIDNum</from>
+              <to expressionLanguage="javascript">process.object.CusIdNumber</to>
+            </copy>
+            <copy>
+              <from expressionLanguage="javascript">process.cusName</from>
+              <to expressionLanguage="javascript">process.object.CusName</to>
+            </copy>
+            <copy>
+              <from expressionLanguage="javascript">process.totalAmount</from>
+              <to expressionLanguage="javascript">process.object.TotalAmount</to>
+            </copy>
+            <copy>
+              <from expressionLanguage="javascript">process.date</from>
+              <to expressionLanguage="javascript">process.object.Date</to>
+            </copy>
+          </assign>
+          <extensionActivity>
+            <bpelx:js name="Javascript_assignObject_array">
+              <![CDATA[var newObject = new Object(); 
+newObject.CusIdNumber = process.object.CusIdNumber; 
+newObject.CusName = process.object.CusName; 
+newObject.TotalAmount = process.object.TotalAmount; 
+newObject.Date = process.object.Date; 
+arrayJson[(process.index)-1] = newObject]]>
+            </bpelx:js>
+          </extensionActivity>
+        </sequence>
+      </scope>
+    </forEach>
+    <assign name="Assign_FinalOutput">
+      <copy>
+        <from expressionLanguage="javascript">arrayJson</from>
+        <to expressionLanguage="javascript">process.outputVar.result</to>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="GetAllCustomerFinancial" variable="outputVar"
+           bpelx:method="GetAllCustomerFinancial"/>
+  </sequence>
+</process>

@@ -1,0 +1,14 @@
+<adapter-config name="DdbReference" adapter="db" wsdlLocation="../WSDLs/DdbReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hcmHr" location="eis/DB/hrHCM"/>
+  <endpoint-interaction portType="DdbReference_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="DdbReference.HcmGradeD"/>
+      <property name="DmlType" value="insert"/>
+      <property name="MappingsMetaDataURL" value="DdbReference-or-mappings.xml"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="DetectOmissions" value="true"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

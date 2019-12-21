@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    
+     targetNamespace="http://services.fact"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ax29="http://loan.bean.fact/xsd"
+     xmlns:ns="http://services.fact"
+     xmlns:ax25="http://customer.bean.fact/xsd"
+     xmlns:ax21="http://General.bean.fact/xsd"
+     xmlns:ax22="http://common.bean.fact/xsd"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:ns1="http://org.apache.axis2/xsd"
+     xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+    >
+    <wsdl:documentation>Please Type your service description here</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax27="http://General.bean.fact/xsd" xmlns:ax26="http://common.bean.fact/xsd"
+             attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://customer.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:import namespace="http://General.bean.fact/xsd"/>
+            <xs:complexType name="CustomerInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax26:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="arrCustomerAccount" nillable="true"
+                                 type="ax25:CustomerAccount"/>
+                            <xs:element minOccurs="0" name="intBranchNumber" type="xs:int"/>
+                            <xs:element minOccurs="0" name="intCustomerDocumentCode" type="xs:int"/>
+                            <xs:element minOccurs="0" name="intCustomerGenderCode" type="xs:int"/>
+                            <xs:element minOccurs="0" name="lngCustomerNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="objDBResult" nillable="true" type="ax27:DBResult"/>
+                            <xs:element minOccurs="0" name="strBranchName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerAccountName" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerAccountNumber" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerBirthOfDate" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerDocumentDescription" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerDocumentNumber" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerGenderDescription" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerMail" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerMobile" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerNationalNumber" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerNationalityDescription" nillable="true"
+                                 type="xs:string"/>
+                            <xs:element minOccurs="0" name="strCustomerPhone" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="CustomerAccount">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="intBranchCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strBranchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strCustomerAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strCustomerName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TraderInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax26:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="lngDemandRefNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lngFromDemandNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lngFromTraderNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lngProviderCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lngToDemandNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lngToTraderNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lngTraderNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="strDemandApproveDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strDemandDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strDemandStatus" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strFromDemandDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strFromDemandStatus" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strToDemandDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strToDemandStatus" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strTraderName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://common.bean.fact/xsd">
+            <xs:complexType name="ResponseStatus">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="webServiceResponseCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="webServiceResponseMessage" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax210="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://loan.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="LoanInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax210:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="dblCurrencyCode" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblFirstBatch" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblFirstPaymentRate" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblGoodsAmount" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblGracePeriod" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblNumberOfInstallments" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblTotalValueOfFinancing" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblValueOfMonthlyInstallment" type="xs:double"/>
+                            <xs:element minOccurs="0" name="strLoanDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strSupplierSeq" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="GoodInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="dblGoodAmount" type="xs:double"/>
+                    <xs:element minOccurs="0" name="intGoodCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strGoodDescription" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LoanRequestInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="dblDownPayment" type="xs:double"/>
+                    <xs:element minOccurs="0" name="dblFirstBatchRatio" type="xs:double"/>
+                    <xs:element minOccurs="0" name="dblGoodAmount" type="xs:double"/>
+                    <xs:element minOccurs="0" name="dblGracePeriod" type="xs:double"/>
+                    <xs:element minOccurs="0" name="dblTotalValueOfFinancing" type="xs:double"/>
+                    <xs:element minOccurs="0" name="dblValueOfTheMonthlyInstallment" type="xs:double"/>
+                    <xs:element minOccurs="0" name="intBranchCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intCurrencyCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intDocumentCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intGenderCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intNumberOfInstallments" type="xs:int"/>
+                    <xs:element minOccurs="0" name="lngCustomerId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lngReferenceNumber" type="xs:long"/>
+                    <xs:element minOccurs="0" name="strAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strBirthDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strCustomerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strDateStamp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strDemandApplayDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strDocumentNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strNationalNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strSupplierNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strWebUserId" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax23="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://General.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="DBResult">
+                <xs:complexContent>
+                    <xs:extension base="ax23:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="intCode" type="xs:int"/>
+                            <xs:element minOccurs="0" name="strDescription" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="SaveResponse">
+                <xs:complexContent>
+                    <xs:extension base="ax23:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="intCode" type="xs:int"/>
+                            <xs:element minOccurs="0" name="lngWebRef" type="xs:long"/>
+                            <xs:element minOccurs="0" name="strApplayDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strDescription" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ProductAmountLimt">
+                <xs:complexContent>
+                    <xs:extension base="ax23:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="dblMaxAmount" type="xs:double"/>
+                            <xs:element minOccurs="0" name="dblMinAmount" type="xs:double"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax28="http://customer.bean.fact/xsd" xmlns:ax211="http://loan.bean.fact/xsd"
+             xmlns:ax24="http://General.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://services.fact">
+            <xs:import namespace="http://General.bean.fact/xsd"/>
+            <xs:import namespace="http://customer.bean.fact/xsd"/>
+            <xs:import namespace="http://loan.bean.fact/xsd"/>
+            <xs:element name="main">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="args" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLoanStatus">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLoanStatusResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax24:DBResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setArrayTest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="things" nillable="true" type="ax24:DBResult"/>
+                        <xs:element minOccurs="0" name="objDBResultInput" nillable="true" type="ax24:DBResult"/>
+                        <xs:element minOccurs="0" name="strFirst" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="intSecond" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setArrayTestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCustomerAccountInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="lngCustomerNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCustomerAccountInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:CustomerInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDemandReportInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="lngFromDemandNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="lngToDemandNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="strFromDemandDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="strToDemandDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="strFromDemandStatus" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="strToDemandStatus" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lngFromTraderNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="lngToTraderNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="lngProviderCode" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDemandReportInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:TraderInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLoanReportInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strLoanDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="strSupplierSeq" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="dblCurrencyCode" type="xs:double"/>
+                        <xs:element minOccurs="0" name="dblGoodsAmount" type="xs:double"/>
+                        <xs:element minOccurs="0" name="dblFirstBatch" type="xs:double"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getLoanReportInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax29:LoanInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveLoanRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="goodsInfo" nillable="true"
+                             type="ax29:GoodInfo"/>
+                        <xs:element minOccurs="0" name="objLoanRequestInfo" nillable="true" type="ax29:LoanRequestInfo"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveLoanRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:SaveResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getProductAmountLimit">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getProductAmountLimitResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:ProductAmountLimt"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllDocumentsNature">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllDocumentsNatureResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax24:DBResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllProviderInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strUser" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllProviderInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax24:DBResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllGoodInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllGoodInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax24:DBResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCustomerInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="lngCustomerNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="strCustomerNationalNumber" nillable="true"
+                             type="xs:string"/>
+                        <xs:element minOccurs="0" name="intCustomerDocumentCode" type="xs:int"/>
+                        <xs:element minOccurs="0" name="StrCustomerDocumentNumber" nillable="true"
+                             type="xs:string"/>
+                        <xs:element minOccurs="0" name="strCustomerPhone" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCustomerInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:CustomerInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="setArrayTestRequest">
+        <wsdl:part name="parameters" element="ns:setArrayTest"/>
+    </wsdl:message>
+    <wsdl:message name="setArrayTestResponse">
+        <wsdl:part name="parameters" element="ns:setArrayTestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="mainRequest">
+        <wsdl:part name="parameters" element="ns:main"/>
+    </wsdl:message>
+    <wsdl:message name="getProductAmountLimitRequest">
+        <wsdl:part name="parameters" element="ns:getProductAmountLimit"/>
+    </wsdl:message>
+    <wsdl:message name="getProductAmountLimitResponse">
+        <wsdl:part name="parameters" element="ns:getProductAmountLimitResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getDemandReportInfoRequest">
+        <wsdl:part name="parameters" element="ns:getDemandReportInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getDemandReportInfoResponse">
+        <wsdl:part name="parameters" element="ns:getDemandReportInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllGoodInfoRequest">
+        <wsdl:part name="parameters" element="ns:getAllGoodInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getAllGoodInfoResponse">
+        <wsdl:part name="parameters" element="ns:getAllGoodInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllProviderInfoRequest">
+        <wsdl:part name="parameters" element="ns:getAllProviderInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getAllProviderInfoResponse">
+        <wsdl:part name="parameters" element="ns:getAllProviderInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="saveLoanRequestRequest">
+        <wsdl:part name="parameters" element="ns:saveLoanRequest"/>
+    </wsdl:message>
+    <wsdl:message name="saveLoanRequestResponse">
+        <wsdl:part name="parameters" element="ns:saveLoanRequestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getCustomerInfoRequest">
+        <wsdl:part name="parameters" element="ns:getCustomerInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getCustomerInfoResponse">
+        <wsdl:part name="parameters" element="ns:getCustomerInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getCustomerAccountInfoRequest">
+        <wsdl:part name="parameters" element="ns:getCustomerAccountInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getCustomerAccountInfoResponse">
+        <wsdl:part name="parameters" element="ns:getCustomerAccountInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getLoanStatusRequest">
+        <wsdl:part name="parameters" element="ns:getLoanStatus"/>
+    </wsdl:message>
+    <wsdl:message name="getLoanStatusResponse">
+        <wsdl:part name="parameters" element="ns:getLoanStatusResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllDocumentsNatureRequest">
+        <wsdl:part name="parameters" element="ns:getAllDocumentsNature"/>
+    </wsdl:message>
+    <wsdl:message name="getAllDocumentsNatureResponse">
+        <wsdl:part name="parameters" element="ns:getAllDocumentsNatureResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getLoanReportInfoRequest">
+        <wsdl:part name="parameters" element="ns:getLoanReportInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getLoanReportInfoResponse">
+        <wsdl:part name="parameters" element="ns:getLoanReportInfoResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="MusawamehServicePortType">
+        <wsdl:operation name="setArrayTest">
+            <wsdl:input message="ns:setArrayTestRequest" wsaw:Action="urn:setArrayTest"/>
+            <wsdl:output message="ns:setArrayTestResponse" wsaw:Action="urn:setArrayTestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="main">
+            <wsdl:input message="ns:mainRequest" wsaw:Action="urn:main"/>
+        </wsdl:operation>
+        <wsdl:operation name="getProductAmountLimit">
+            <wsdl:input message="ns:getProductAmountLimitRequest" wsaw:Action="urn:getProductAmountLimit"/>
+            <wsdl:output message="ns:getProductAmountLimitResponse" wsaw:Action="urn:getProductAmountLimitResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDemandReportInfo">
+            <wsdl:input message="ns:getDemandReportInfoRequest" wsaw:Action="urn:getDemandReportInfo"/>
+            <wsdl:output message="ns:getDemandReportInfoResponse" wsaw:Action="urn:getDemandReportInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllGoodInfo">
+            <wsdl:input message="ns:getAllGoodInfoRequest" wsaw:Action="urn:getAllGoodInfo"/>
+            <wsdl:output message="ns:getAllGoodInfoResponse" wsaw:Action="urn:getAllGoodInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllProviderInfo">
+            <wsdl:input message="ns:getAllProviderInfoRequest" wsaw:Action="urn:getAllProviderInfo"/>
+            <wsdl:output message="ns:getAllProviderInfoResponse" wsaw:Action="urn:getAllProviderInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="saveLoanRequest">
+            <wsdl:input message="ns:saveLoanRequestRequest" wsaw:Action="urn:saveLoanRequest"/>
+            <wsdl:output message="ns:saveLoanRequestResponse" wsaw:Action="urn:saveLoanRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCustomerInfo">
+            <wsdl:input message="ns:getCustomerInfoRequest" wsaw:Action="urn:getCustomerInfo"/>
+            <wsdl:output message="ns:getCustomerInfoResponse" wsaw:Action="urn:getCustomerInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCustomerAccountInfo">
+            <wsdl:input message="ns:getCustomerAccountInfoRequest" wsaw:Action="urn:getCustomerAccountInfo"/>
+            <wsdl:output message="ns:getCustomerAccountInfoResponse" wsaw:Action="urn:getCustomerAccountInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getLoanStatus">
+            <wsdl:input message="ns:getLoanStatusRequest" wsaw:Action="urn:getLoanStatus"/>
+            <wsdl:output message="ns:getLoanStatusResponse" wsaw:Action="urn:getLoanStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllDocumentsNature">
+            <wsdl:input message="ns:getAllDocumentsNatureRequest" wsaw:Action="urn:getAllDocumentsNature"/>
+            <wsdl:output message="ns:getAllDocumentsNatureResponse" wsaw:Action="urn:getAllDocumentsNatureResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getLoanReportInfo">
+            <wsdl:input message="ns:getLoanReportInfoRequest" wsaw:Action="urn:getLoanReportInfo"/>
+            <wsdl:output message="ns:getLoanReportInfoResponse" wsaw:Action="urn:getLoanReportInfoResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

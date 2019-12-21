@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="empquaskillsrepprocess_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="215" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="208" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="empquaskillsrepprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMEmpQuaSkillsRep/EmpQuaSkillsRepProcess#wsdl.interface(EmpQuaSkillsRepProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="EmpQualSkillsRep">
+        <dgm:body borderWidth="2" arcRad="20" X="622" Y="26" width="136" height="168">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="612" Y="19" width="156" height="182">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EmpQualSkillsRep" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/oxp/service/PublicReportService#wsdl.interface(ExternalReportWSSService)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:policyIcon URI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/locked_12x12.png" X="118" Y="8" width="12" height="12"/>
+        <dgm:operations>
+            <dgm:item>getSecurityModel</dgm:item>
+            <dgm:item>getBIPHTTPSessionInterval</dgm:item>
+            <dgm:item>runReport</dgm:item>
+            <dgm:item>getReportDefinition</dgm:item>
+            <dgm:item>getTemplate</dgm:item>
+            <dgm:item>getReportSampleData</dgm:item>
+            <dgm:item>getXDOSchema</dgm:item>
+            <dgm:item>getReportParameters</dgm:item>
+            <dgm:item>getTemplateParameters</dgm:item>
+            <dgm:item>getFolderContents</dgm:item>
+            <dgm:item>getDeliveryServiceDefinition</dgm:item>
+            <dgm:item>deliveryService</dgm:item>
+            <dgm:item>validateLogin</dgm:item>
+            <dgm:item>hasReportAccess</dgm:item>
+            <dgm:item>isReportExist</dgm:item>
+            <dgm:item>isFolderExist</dgm:item>
+            <dgm:item>createReport</dgm:item>
+            <dgm:item>updateReportDefinition</dgm:item>
+            <dgm:item>createReportFolder</dgm:item>
+            <dgm:item>uploadTemplateForReport</dgm:item>
+            <dgm:item>updateTemplateForReport</dgm:item>
+            <dgm:item>removeTemplateForReport</dgm:item>
+            <dgm:item>uploadReportDataChunk</dgm:item>
+            <dgm:item>downloadReportDataChunk</dgm:item>
+            <dgm:item>uploadReportObject</dgm:item>
+            <dgm:item>deleteReport</dgm:item>
+            <dgm:item>deleteFolder</dgm:item>
+            <dgm:item>downloadReportObject</dgm:item>
+            <dgm:item>submitReport</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="AuditDbReference">
+        <dgm:body borderWidth="2" arcRad="20" X="622" Y="228" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="612" Y="221" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="AuditDbReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpQuaSkillsRep/AuditDbReference#wsdl.interface(AuditDbReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>AuditDbReference</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="StagesdbReference">
+        <dgm:body borderWidth="2" arcRad="20" X="622" Y="346" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="612" Y="339" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="StagesdbReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpQuaSkillsRep/StagesdbReference#wsdl.interface(StagesdbReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>StagesdbReference</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gComponent name="EmpQuaSkillsRepProcess">
+        <dgm:body borderWidth="2" arcRad="20" X="325" Y="200" width="130" height="111">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="315" Y="193" width="150" height="127">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="empquaskillsrepprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMEmpQuaSkillsRep/EmpQuaSkillsRepProcess#wsdl.interface(EmpQuaSkillsRepProcess)"/>
+        <dgm:outputPort name="EmpQualSkillsRep" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/oxp/service/PublicReportService#wsdl.interface(ExternalReportWSSService)"/>
+        <dgm:outputPort name="AuditDbReference" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpQuaSkillsRep/AuditDbReference#wsdl.interface(AuditDbReference_ptt)"/>
+        <dgm:outputPort name="StagesdbReference" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpQuaSkillsRep/StagesdbReference#wsdl.interface(StagesdbReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="empquaskillsrepprocess_client_ep" target="EmpQuaSkillsRepProcess/empquaskillsrepprocess_client" width="2">
+        <dgm:gSegment X1="168" Y1="225" X2="315" Y2="225"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="EmpQuaSkillsRepProcess/EmpQualSkillsRep" target="EmpQualSkillsRep" width="2">
+        <dgm:gSegment X1="465" Y1="225" X2="489" Y2="225"/>
+        <dgm:gSegment X1="489" Y1="225" X2="489" Y2="36"/>
+        <dgm:gSegment X1="489" Y1="36" X2="612" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="EmpQuaSkillsRepProcess/AuditDbReference" target="AuditDbReference" width="2">
+        <dgm:gSegment X1="465" Y1="250" X2="504" Y2="250"/>
+        <dgm:gSegment X1="504" Y1="250" X2="504" Y2="238"/>
+        <dgm:gSegment X1="504" Y1="238" X2="612" Y2="238"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="EmpQuaSkillsRepProcess/StagesdbReference" target="StagesdbReference" width="2">
+        <dgm:gSegment X1="465" Y1="275" X2="489" Y2="275"/>
+        <dgm:gSegment X1="489" Y1="275" X2="489" Y2="356"/>
+        <dgm:gSegment X1="489" Y1="356" X2="612" Y2="356"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

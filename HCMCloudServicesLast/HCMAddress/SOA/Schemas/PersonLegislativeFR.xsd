@@ -1,0 +1,28 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="PersonLegislative.xsd"/>
+    <xsd:complexType name="PersonLegislativeFR">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonLegislativeId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonLegislative">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_PERSON_CPAM" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PERSON_CPAM_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_DATE_FIRST_ENTRY_FRANCE" nillable="true" type="ns0:date-Date"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personLegislativeFR" type="PersonLegislativeFR"/>
+</xsd:schema>

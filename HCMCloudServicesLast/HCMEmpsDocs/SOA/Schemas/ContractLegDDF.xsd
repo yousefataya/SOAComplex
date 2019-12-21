@@ -1,0 +1,35 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="ContractLegDDFORA_5FHRX_5FBE.xsd" xml:id="ContractLegDDFORA_5FHRX_5FBE-xsd"/>
+    <xsd:include schemaLocation="ContractLegDDFSA.xsd" xml:id="ContractLegDDFSA-xsd"/>
+    <xsd:include schemaLocation="ContractLegDDFCN.xsd" xml:id="ContractLegDDFCN-xsd"/>
+    <xsd:include schemaLocation="ContractLegDDFKW.xsd" xml:id="ContractLegDDFKW-xsd"/>
+    <xsd:include schemaLocation="ContractLegDDFAE.xsd" xml:id="ContractLegDDFAE-xsd"/>
+    <xsd:include schemaLocation="ContractLegDDFFR.xsd" xml:id="ContractLegDDFFR-xsd"/>
+    <xsd:include schemaLocation="ContractLegDDFCH.xsd" xml:id="ContractLegDDFCH-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="ContractLegDDF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContractId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ContractId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="contractLegDDF" type="ContractLegDDF"/>
+</xsd:schema>

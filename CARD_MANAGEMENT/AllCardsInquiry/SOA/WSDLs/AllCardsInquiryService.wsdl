@@ -1,0 +1,40 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="AllCardsInquiry"
+     targetNamespace="http://xmlns.oracle.com/CARD_MANAGEMENT/AllCardsInquiry/AllCardsInquiry"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/CARD_MANAGEMENT/AllCardsInquiry/AllCardsInquiry"
+     xmlns:ns1="http://xmlns.fact.com/ws/ACI"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CBSReference"
+    >
+    <plnk:partnerLinkType name="AllCardsInquiry">
+        <plnk:role name="AllCardsInquiryProvider" portType="client:AllCardsInquiry_ptt"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/CARD_MANAGEMENT/AllCardsInquiry/AllCardsInquiry"
+             xmlns:ns1="http://xmlns.fact.com/ws/ACI" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+             xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CBSReference">
+            <import namespace="http://xmlns.fact.com/ws/ACI" schemaLocation="../Schemas/AllCardsInquiry.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/CARD_MANAGEMENT/AllCardsInquiry/AllCardsInquiry"
+             xmlns:ns1="http://xmlns.fact.com/ws/ACI" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+             xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CBSReference">
+            <xsd:import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CBSReference" schemaLocation="../Schemas/CBSReference_sp.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="AllCardsInquiryRequestMessage">
+        <wsdl:part name="payload" element="ns1:AllCardsInquiryMessageInput"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="ns2:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="AllCardsInquiry_ptt">
+        <wsdl:operation name="AllCardsInquiry">
+            <wsdl:input message="client:AllCardsInquiryRequestMessage"/>
+            <wsdl:output message="client:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

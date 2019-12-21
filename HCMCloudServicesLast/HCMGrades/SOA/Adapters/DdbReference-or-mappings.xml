@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.3.v20160526-8f41838">
+   <name>DdbReference-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>DdbReference.HcmGradeD</class>
+         <alias>HCM_GRADE_D</alias>
+         <primary-key>
+            <field table="HCM_GRADE_D" name="GRADE_CODE" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="DdbReferenceSelect" xsi:type="read-all-query">
+                  <reference-class>DdbReference.HcmGradeD</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>gradeCode</attribute-name>
+               <field table="HCM_GRADE_D" name="GRADE_CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwCode</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwValue</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_VALUE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwStatus</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>overtimeFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="OVERTIME_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwMonthOfY</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_MONTH_OF_Y" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwType</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>percentFlg</attribute-name>
+               <field table="HCM_GRADE_D" name="PERCENT_FLG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>value</attribute-name>
+               <field table="HCM_GRADE_D" name="VALUE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dedFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="DED_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwPayment</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_PAYMENT" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateType</attribute-name>
+               <field table="HCM_GRADE_D" name="DATE_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>discountFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="DISCOUNT_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>tempFlg</attribute-name>
+               <field table="HCM_GRADE_D" name="TEMP_FLG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>arapFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="ARAP_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>compValue</attribute-name>
+               <field table="HCM_GRADE_D" name="COMP_VALUE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>healthFlg</attribute-name>
+               <field table="HCM_GRADE_D" name="HEALTH_FLG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>salFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="SAL_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>clsFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="CLS_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dedSal</attribute-name>
+               <field table="HCM_GRADE_D" name="DED_SAL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>extraMonthNo</attribute-name>
+               <field table="HCM_GRADE_D" name="EXTRA_MONTH_NO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>permissionPeriod</attribute-name>
+               <field table="HCM_GRADE_D" name="PERMISSION_PERIOD" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>punFlag</attribute-name>
+               <field table="HCM_GRADE_D" name="PUN_FLAG" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwDedIndicator</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_DED_INDICATOR" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwDedStatus</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_DED_STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>alwIndicator</attribute-name>
+               <field table="HCM_GRADE_D" name="ALW_INDICATOR" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dedIndicator</attribute-name>
+               <field table="HCM_GRADE_D" name="DED_INDICATOR" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>maxAmnt</attribute-name>
+               <field table="HCM_GRADE_D" name="MAX_AMNT" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>caccNum</attribute-name>
+               <field table="HCM_GRADE_D" name="CACC_NUM" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>minAmount</attribute-name>
+               <field table="HCM_GRADE_D" name="MIN_AMOUNT" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>depYear</attribute-name>
+               <field table="HCM_GRADE_D" name="DEP_YEAR" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>status</attribute-name>
+               <field table="HCM_GRADE_D" name="STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createdBy</attribute-name>
+               <field table="HCM_GRADE_D" name="CREATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateCreated</attribute-name>
+               <field table="HCM_GRADE_D" name="DATE_CREATED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>modifiedBy</attribute-name>
+               <field table="HCM_GRADE_D" name="MODIFIED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateModified</attribute-name>
+               <field table="HCM_GRADE_D" name="DATE_MODIFIED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>stageObject</attribute-name>
+               <field table="HCM_GRADE_D" name="STAGE_OBJECT" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>stageObjectId</attribute-name>
+               <field table="HCM_GRADE_D" name="STAGE_OBJECT_ID" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>id</attribute-name>
+               <field table="HCM_GRADE_D" name="ID" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>requestType</attribute-name>
+               <field table="HCM_GRADE_D" name="REQUEST_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>batchNum</attribute-name>
+               <field table="HCM_GRADE_D" name="BATCH_NUM" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="HCM_GRADE_D"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

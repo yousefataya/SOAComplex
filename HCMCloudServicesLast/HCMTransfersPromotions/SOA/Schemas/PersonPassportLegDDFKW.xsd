@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonPassportLegDDF.xsd"/>
+    <xsd:complexType name="PersonPassportLegDDFKW">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PassportId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonPassportLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_ACCOMPANY_PERSON" nillable="true" type="xsd:decimal"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personPassportLegDDFKW" type="PersonPassportLegDDFKW"/>
+</xsd:schema>

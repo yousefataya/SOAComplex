@@ -1,0 +1,182 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon May 28 12:07:19 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="InvokeProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMInvokeAll/InvokeProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMInvokeAll/InvokeProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMInvokeAll/StageIniDBReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/StageIniDBReference"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns4="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/BPELProcessA">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMInvokeAll/InvokeProcess" location="../WSDLs/InvokeProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="invokeprocess_client" partnerLinkType="client:InvokeProcess" myRole="InvokeProcessProvider"/>
+    <partnerLink name="SOAPHCMServiceRef" partnerLinkType="ns1:BPELProcess1" partnerRole="BPELProcess1Provider"/>
+    <partnerLink name="StageIniDBReference" partnerLinkType="ns2:StageIniDBReference_plt"
+                 partnerRole="StageIniDBReference_role"/>
+    <partnerLink name="SOAPHCMServiceARef" partnerLinkType="ns4:BPELProcessA" partnerRole="BPELProcessAProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:InvokeProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:InvokeProcessResponseMessage"/>
+    <variable name="InvokeHCMCloudServices_process_InputVariable" messageType="ns1:BPELProcess1RequestMessage"/>
+    <variable name="InvokeInitials0_StageIniDBReference_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="InvokeInitials0_StageIniDBReference_OutputVariable" messageType="ns2:args_out_msg"/>
+    
+    
+    <variable name="vWSDLLink99" type="xsd:string"/>
+    <variable name="vURI99" type="xsd:string"/>
+    
+    
+    <variable name="vWSDLLink100" type="xsd:string"/>
+    <variable name="vURI100" type="xsd:string"/>
+    <variable name="InvokeInitial100_StageIniDBReference_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="InvokeInitial100_StageIniDBReference_OutputVariable" messageType="ns2:args_out_msg"/>
+    <variable name="InvokeHCMCloudServicesA_process_InputVariable" messageType="ns4:BPELProcessARequestMessage"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in InvokeProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="invokeprocess_client" portType="client:InvokeProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <flow name="Flow1">
+      <sequence name="Sequence">
+        <assign name="AssignInitial99">
+          <copy>
+            <from>99</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInitials0_StageIniDBReference_InputVariable.InputParameters/ns3:PLINK_ID</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeInitials99" partnerLink="StageIniDBReference" portType="ns2:StageIniDBReference_ptt"
+                operation="StageIniDBReference" inputVariable="InvokeInitials0_StageIniDBReference_InputVariable"
+                outputVariable="InvokeInitials0_StageIniDBReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+        <assign name="AssignDefault99">
+          <copy>
+            <from>$InvokeInitials0_StageIniDBReference_OutputVariable.OutputParameters/ns3:PSTAGE_LINK</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vWSDLLink99</to>
+          </copy>
+          <copy>
+            <from>$InvokeInitials0_StageIniDBReference_OutputVariable.OutputParameters/ns3:PSTAGE_SOA_LINK_URI</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI99</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:requestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeHCMCloudServices_process_InputVariable.payload/ns1:requestType</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:batchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeHCMCloudServices_process_InputVariable.payload/ns1:batchNumber</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeHCMCloudServices" partnerLink="SOAPHCMServiceRef" portType="ns1:BPELProcess1"
+                operation="process" inputVariable="InvokeHCMCloudServices_process_InputVariable"
+                bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="endpointWSDL">$vWSDLLink99</bpelx:toProperty>
+            <bpelx:toProperty name="endpointURI">$vURI99</bpelx:toProperty>
+          </bpelx:toProperties>
+        </invoke>
+      </sequence>
+      <sequence name="Sequence1">
+        <assign name="AssignInitial100">
+          <copy>
+            <from>100</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInitial100_StageIniDBReference_InputVariable.InputParameters/ns3:PLINK_ID</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeInitial100" partnerLink="StageIniDBReference"
+                portType="ns2:StageIniDBReference_ptt" operation="StageIniDBReference"
+                inputVariable="InvokeInitial100_StageIniDBReference_InputVariable"
+                outputVariable="InvokeInitial100_StageIniDBReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+        <assign name="AssignDefault100">
+          <copy>
+            <from>$InvokeInitial100_StageIniDBReference_OutputVariable.OutputParameters/ns3:PSTAGE_LINK</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vWSDLLink100</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:requestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeHCMCloudServicesA_process_InputVariable.payload/ns4:requestType</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:batchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeHCMCloudServicesA_process_InputVariable.payload/ns4:batchNumber</to>
+          </copy>
+          <copy>
+            <from>$InvokeInitial100_StageIniDBReference_OutputVariable.OutputParameters/ns3:PSTAGE_SOA_LINK_URI</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI100</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeHCMCloudServicesA" partnerLink="SOAPHCMServiceARef"
+                portType="ns4:BPELProcessA" operation="process"
+                inputVariable="InvokeHCMCloudServicesA_process_InputVariable" bpelx:invokeAsDetail="no">
+                 <bpelx:toProperties>
+            <bpelx:toProperty name="endpointWSDL">$vWSDLLink100</bpelx:toProperty>
+            <bpelx:toProperty name="endpointURI">$vURI100</bpelx:toProperty>
+          </bpelx:toProperties>
+                </invoke>
+      </sequence>
+    </flow>
+    <assign name="FinalAssign">
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="invokeprocess_client" portType="client:InvokeProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

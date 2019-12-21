@@ -1,0 +1,12 @@
+<adapter-config name="UpdateProfitDbAdapter" adapter="db" wsdlLocation="../WSDLs/UpdateProfitDbAdapter.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="SH" location="eis/DB/factSHDatabase"/>
+  <endpoint-interaction portType="UpdateProfitDbAdapter_ptt" operation="UpdateProfitDbAdapter">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="CRE"/>
+      <property name="ProcedureName" value="UPD_PROFIT_TRX"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

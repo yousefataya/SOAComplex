@@ -1,0 +1,12 @@
+<adapter-config name="getShareProfitInfoReference" adapter="db" wsdlLocation="../WSDLs/getShareProfitInfoReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="factCBSDatabase" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="getShareProfitInfoReference_ptt" operation="getShareProfitInfoReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="GET_SHARE_PROFIT_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

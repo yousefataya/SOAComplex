@@ -1,0 +1,441 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Thu May 03 09:29:40 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Subprocess
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<bpelx:subProcess name="ResignationProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/ResignationProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/ResignationProcess"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xsi:type="bpel:tProcess" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ns1="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+                  xmlns:ns2="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/ResignationRestRef"
+                  xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMResignationActionOneWay/dbReference"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+                  xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+                  xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+                  xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+                  xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+                  xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                  xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                  xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+                  xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+                  xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+                  xmlns:ns4="http://TargetNamespace.com/ResignationRestRef_getAllEmps_response"
+                  xmlns:ns5="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/types/"
+                  xmlns:ns6="http://xmlns.oracle.com/adf/svc/types/"
+                  xmlns:ns20="http://xmlns.oracle.com/apps/hcm/people/core/flex/personAddressUsageDFF/"
+                  xmlns:ns24="http://xmlns.oracle.com/apps/hcm/people/core/flex/driversLicenseTypeDFF/"
+                  xmlns:ns16="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentWorkMeasureDFF/"
+                  xmlns:ns31="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/"
+                  xmlns:ns11="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+                  xmlns:ns32="http://xmlns.oracle.com/apps/hcm/people/core/flex/phoneDFF/"
+                  xmlns:ns30="http://xmlns.oracle.com/apps/hcm/people/core/flex/nationalIdentifierDFF/"
+                  xmlns:ns36="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/"
+                  xmlns:ns27="http://xmlns.oracle.com/apps/hcm/people/core/flex/imageDFF/"
+                  xmlns:ns12="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentExtraInfoEFF/Category/"
+                  xmlns:ns28="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfoDFF/"
+                  xmlns:ns10="http://xmlns.oracle.com/apps/financials/generalLedger/accounts/codeCombinations/publicFlex/Account/"
+                  xmlns:ns22="http://xmlns.oracle.com/apps/hcm/people/core/flex/deliveryMethodDFF/"
+                  xmlns:ns37="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+                  xmlns:ns23="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDriversLicenseLegDDF/"
+                  xmlns:ns15="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentSupervisorDFF/"
+                  xmlns:ns9="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+                  xmlns:ns7="http://xmlns.oracle.com/adf/svc/errors/"
+                  xmlns:ns8="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDFF/"
+                  xmlns:ns34="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+                  xmlns:ns35="http://xmlns.oracle.com/apps/hcm/people/core/flex/visaPermitDFF/"
+                  xmlns:ns21="http://xmlns.oracle.com/apps/hcm/people/core/flex/citizenshipsDFF/"
+                  xmlns:ns25="http://xmlns.oracle.com/apps/hcm/people/core/flex/emailAddressDFF/"
+                  xmlns:ns19="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDDF/"
+                  xmlns:ns18="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDFF/"
+                  xmlns:ns17="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignGradeStepsDDF/"
+                  xmlns:ns29="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+                  xmlns:ns14="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+                  xmlns:ns26="http://xmlns.oracle.com/apps/hcm/people/core/flex/ethnicityDFF/"
+                  xmlns:ns13="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDFF/"
+                  xmlns:ns33="http://xmlns.oracle.com/apps/hcm/people/core/flex/religionDFF/"
+                  xmlns:ns38="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference"
+                  xmlns:ns39="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMResignationActionOneWay/AuditDbReference"
+                  xmlns:ns40="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditDbReference">
+  <?audit suppress oracle.ide.xml.validation-error?>
+  <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <partnerLink name="WorkerSOAPReference" partnerLinkType="ns1:WorkerService" partnerRole="WorkerServiceProvider"
+                 myRole="WorkerServiceRequestor"/>
+    <partnerLink name="ResignationRestRef" partnerLinkType="ns2:ResignationRestRef"
+                 partnerRole="ResignationRestRefProvider"/>
+    <partnerLink name="dbReference" partnerLinkType="ns3:dbReference_plt" partnerRole="dbReference_role"/>
+    <partnerLink name="AuditDbReference" partnerLinkType="ns39:AuditDbReference_plt"
+                 partnerRole="AuditDbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Variable1" type="xsd:string"/>
+    <variable name="Vstatus" type="xsd:string"/> 
+<variable name="VlsrDate" type="xsd:string"/>
+<variable name="Vkey" type="xsd:string"/>
+<variable name="Vmap" type="xsd:string"/> 
+<variable name="VcompositeLink" type="xsd:string"/>
+<variable name="vCompLink" type="xsd:string"/>
+<variable name="VcompositeName" type="xsd:string"/>
+<variable name="VrequestType" type="xsd:string"/>
+<variable name="VbatchNumber" type="xsd:string"/>
+<variable name="VwsdlLink" type="xsd:string"/>
+<variable name="VURI" type="xsd:string"/>
+<variable name="VvSTAGEWSDL" type="xsd:string"/>
+<variable name="VvSTAGEURI" type="xsd:string"/>
+<variable name="vOperationType" type="xsd:string"/>
+<variable name="hasMore" type="xsd:boolean"/>
+    <variable name="offset" type="xsd:int"/>
+    <variable name="restConnection" type="xsd:string"/>
+
+    <variable name="InvokeAllEmpsProfile_getAllEmps_InputVariable" messageType="ns2:Rest_EmptyMessage"/>
+    <variable name="InvokeAllEmpsProfile_getAllEmps_OutputVariable" messageType="ns2:getAllEmps_outputMessage"/>
+    <variable name="InvokeFindWorker_findWorker_InputVariable" messageType="ns1:WorkerService_findWorker"/>
+    <variable name="InvokeFindWorker_findWorker_OutputVariable" messageType="ns1:WorkerService_findWorkerResponse"/>
+    <variable name="InvokeInsertDB_insert_InputVariable" messageType="ns3:HcmEmployeeProfResCollection_msg"/>
+    <variable name="InvokeAuditDone_AuditDbReference_InputVariable" messageType="ns39:args_in_msg"/>
+    <variable name="InvokeFault_AuditDbReference_InputVariable" messageType="ns39:args_in_msg"/>
+    <variable name="version" type="xsd:string"/>
+    
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence3">
+        <assign name="AssignFault">
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PID</to>
+          </copy>
+          <copy>
+            <from>$VcompositeName</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PCOMPOSITE_NAME</to>
+          </copy>
+          <copy>
+            <from>$VbatchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PBATCH_NUM</to>
+          </copy>
+          <copy>
+            <from>$VrequestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PREQUEST_TYPE</to>
+          </copy>
+          <copy>
+            <from>$VlsrDate</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PLSR_DATE</to>
+          </copy>
+          <copy>
+            <from>concat($Vstatus,'-','F')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PRESPONCE_STATUS</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeFault" bpelx:invokeAsDetail="no" partnerLink="AuditDbReference"
+                portType="ns39:AuditDbReference_ptt" operation="AuditDbReference"
+                inputVariable="InvokeFault_AuditDbReference_InputVariable"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <sequence name="main">
+    <assign name="AssignDefault">
+      <copy>
+        <from>true()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+      </copy>
+      <copy>
+        <from>'2'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$version</to>
+      </copy>
+      <copy>
+        <from>0</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+      </copy>
+      <copy>
+        <from>'close'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$restConnection</to>
+      </copy>
+    </assign>
+    <while name="WhileHasMore">
+      <condition>$hasMore</condition>
+      <sequence name="Sequence1">
+        <if name="IfOperationIsInsert">
+          <documentation>
+            <![CDATA[Insert]]>
+          </documentation>
+          <condition>$Vstatus = '1'</condition>
+          <assign name="AssignInsert">
+            <copy>
+              <from>'assignments.CreationDate%20%3E%20%27'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+            </copy>
+          </assign>
+          <else>
+            <documentation>
+              <![CDATA[Update]]>
+            </documentation>
+            <assign name="AssignUpdate">
+              <copy>
+                <from>'assignments.LastUpdateDate%20%3E%20%27'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+              </copy>
+            </assign>
+          </else>
+        </if>
+        <assign name="AssignInitialValues">
+          <copy>
+            <from>concat($VcompositeLink,'?expand=all&amp;onlyData=true&amp;limit=200&amp;offset=',$offset,'&amp;q=',$vOperationType,$VlsrDate,'%27%20AND%20assignments.ActionCode%20in%20(%20%27EARLY_RETIERMENT%27%20,%20%27DISEASE%27%20,%20%27DEATH%27%20,%20%27TERMINATION%27%20,%20%27RETIREMENT%27%20,%20%27RESIGNATION%27%20,%20%27PROMOTION%27%20)')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompLink</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeAllEmpsProfile" partnerLink="ResignationRestRef" portType="ns2:ResignationRestRef_ptt"
+                operation="getAllEmps" inputVariable="InvokeAllEmpsProfile_getAllEmps_InputVariable"
+                outputVariable="InvokeAllEmpsProfile_getAllEmps_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="rest.binding.http.Connection">$restConnection</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.requestURI">$vCompLink</bpelx:toProperty>
+            <bpelx:toProperty name="csf-key">$Vkey</bpelx:toProperty>
+            <bpelx:toProperty name="csf.map">$Vmap</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.REST-Framework-Version">$version</bpelx:toProperty>
+          </bpelx:toProperties>
+        </invoke>
+        <forEach parallel="no" counterName="ForEachEmpProfile" name="ForEachEmpProfile">
+          <startCounterValue>1</startCounterValue>
+          <finalCounterValue>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:count</finalCounterValue>
+          <scope name="Scope1">
+            <forEach parallel="no" counterName="ForEachAllowResignation" name="ForEachAllowResignation">
+              <startCounterValue>1</startCounterValue>
+              <finalCounterValue>count($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments)</finalCounterValue>
+              <scope name="Scope2">
+                <sequence>
+                  <if name="IfResignationCode">
+                    <documentation>
+                      <![CDATA[ResignationAction]]>
+                    </documentation>
+                    <condition>contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode,'RESIGNATION') or contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode,'RETIREMENT') or contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode, 'TERMINATION') or contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode,'DEATH') or contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode,'DISEASE') or contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode, 'EARLY_RETIERMENT') or contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode, 'PROMOTION')</condition>
+                    <sequence name="Sequence2">
+                      <assign name="AssignCritiria">
+                        <copy>
+                          <from>'0'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:fetchStart</to>
+                        </copy>
+                        <copy>
+                          <from>'-1'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:fetchSize</to>
+                        </copy>
+                        <copy>
+                          <from>'And'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:conjunction</to>
+                        </copy>
+                        <copy>
+                          <from>'And'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:conjunction</to>
+                        </copy>
+                        <copy>
+                          <from>'false'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:upperCaseCompare</to>
+                        </copy>
+                        <copy>
+                          <from>'And'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:item/ns6:conjunction</to>
+                        </copy>
+                        <copy>
+                          <from>'false'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:item/ns6:upperCaseCompare</to>
+                        </copy>
+                        <copy>
+                          <from>'PersonNumber'</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:item/ns6:attribute</to>
+                        </copy>
+                        <copy>
+                          <from>'='</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:item/ns6:operator</to>
+                        </copy>
+                        <copy>
+                          <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:PersonNumber</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFindWorker_findWorker_InputVariable.parameters/ns5:findCriteria/ns6:filter/ns6:group/ns6:item/ns6:value</to>
+                        </copy>
+                      </assign>
+                      <invoke name="InvokeFindWorker" partnerLink="WorkerSOAPReference" portType="ns1:WorkerService"
+                              operation="findWorker" inputVariable="InvokeFindWorker_findWorker_InputVariable"
+                              outputVariable="InvokeFindWorker_findWorker_OutputVariable" bpelx:invokeAsDetail="no">
+                              <bpelx:toProperties>
+                  <bpelx:toProperty name="endpointWSDL">$VwsdlLink</bpelx:toProperty>
+                  <bpelx:toProperty name="endpointURI">$VURI</bpelx:toProperty>
+                </bpelx:toProperties>  
+                              </invoke>
+                      <if name="IfNotNull">
+                        <condition>contains($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode, 'PROMOTION') and string-length($InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActualTerminationDate) &gt; 0</condition>
+                        <assign name="AssignInsertnew">
+                          <copy>
+                            <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:PersonId</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:empAcntNo</to>
+                          </copy>
+                          <copy>
+                            <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:empLeftReason</to>
+                          </copy>
+                          <copy>
+                            <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActualTerminationDate</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:resignationDate</to>
+                          </copy>
+                          <copy>
+                            <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActualTerminationDate</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:lastDayDate</to>
+                          </copy>
+                        </assign>
+                        <else>
+                          <assign name="AssignInsert">
+                            <copy>
+                              <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:PersonId</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:empAcntNo</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActionCode</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:empLeftReason</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActualTerminationDate</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:resignationDate</to>
+                            </copy>
+                            <copy>
+                              <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:items[$ForEachEmpProfile]/ns4:assignments[$ForEachAllowResignation]/ns4:ActualTerminationDate</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:lastDayDate</to>
+                            </copy>
+                          </assign>
+                        </else>
+                      </if>
+                      <forEach parallel="no" counterName="ForEachWorkRelationShip" name="ForEachWorkRelationShip">
+                        <startCounterValue>1</startCounterValue>
+                        <finalCounterValue>count($InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship)</finalCounterValue>
+                        <scope name="Scope3">
+                          <sequence>
+                            <assign name="AssignInsertWorker">
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:WorkRelationshipDFF/ns18:date2</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:empLeftDate</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:ActualTerminationDate</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:lastWorkDay</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:WorkRelationshipDFF/ns18:date1</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:lastDayDate</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:NotifiedTerminationDate</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:resignationDate</to>
+                              </copy>
+                              <copy>
+                                <from>$VrequestType</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:requestType</to>
+                              </copy>
+                              <copy>
+                                <from>$VbatchNumber</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:batchNum</to>
+                              </copy>
+                              <copy>
+                                <from>$Vstatus</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:status</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:ObjectVersionNumber</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:stageObject</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:WorkRelationshipDFF/ns18:stopsalaryflag</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:calcSal</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:WorkRelationshipDFF/ns18:resignationtime</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:resignationTime</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:WorkRelationshipDFF/ns18:noticeperiod</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:monLastFlag</to>
+                              </copy>
+                              <copy>
+                                <from>$InvokeFindWorker_findWorker_OutputVariable.parameters/ns5:result/ns1:Value/ns1:WorkRelationship[$ForEachWorkRelationShip]/ns1:WorkRelationshipDFF/ns18:requiredPeriod</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertDB_insert_InputVariable.HcmEmployeeProfResCollection/ns38:HcmEmployeeProfRes/ns38:salEmpFlag</to>
+                              </copy>
+                            </assign>
+                            <invoke name="InvokeInsertDB" partnerLink="dbReference" portType="ns3:dbReference_ptt"
+                                    operation="insert" inputVariable="InvokeInsertDB_insert_InputVariable"
+                                    bpelx:invokeAsDetail="no"/>
+                          </sequence>
+                        </scope>
+                      </forEach>
+                    </sequence>
+                    <else>
+                      <documentation>
+                        <![CDATA[false]]>
+                      </documentation>
+                      <empty name="Empty1"/>
+                    </else>
+                  </if>
+                </sequence>
+              </scope>
+            </forEach>
+          </scope>
+        </forEach>
+        <assign name="AssignOffset">
+          <copy>
+            <from>$InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:hasMore</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+          </copy>
+          <copy>
+            <from>''</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompLink</to>
+          </copy>
+          <copy>
+            <from>$offset+ $InvokeAllEmpsProfile_getAllEmps_OutputVariable.reply/ns4:count</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <assign name="AssignDone">
+      <copy>
+        <from>$VcompositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PCOMPOSITE_NAME</to>
+      </copy>
+      <copy>
+        <from>$VbatchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>concat($Vstatus,'-','S')</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PRESPONCE_STATUS</to>
+      </copy>
+      <copy>
+        <from>$VlsrDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>$VrequestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PREQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PID</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeAuditDone" bpelx:invokeAsDetail="no" partnerLink="AuditDbReference"
+            portType="ns39:AuditDbReference_ptt" operation="AuditDbReference"
+            inputVariable="InvokeAuditDone_AuditDbReference_InputVariable"/>
+  </sequence>
+</bpelx:subProcess>

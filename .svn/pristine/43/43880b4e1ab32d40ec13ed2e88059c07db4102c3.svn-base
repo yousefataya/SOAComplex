@@ -1,0 +1,76 @@
+<Root-Element xmlns="http://TargetNamespace.com/GrRestRef_GetGrades_response">
+   <items>
+      <GradeId>226</GradeId>
+      <EffectiveStartDate>EffectiveStartDate227</EffectiveStartDate>
+      <EffectiveEndDate>EffectiveEndDate228</EffectiveEndDate>
+      
+      <SetId>229</SetId>
+      <GradeName>GradeName230</GradeName>
+      <GradeCode>231</GradeCode>
+      <ActiveStatus>ActiveStatus232</ActiveStatus>
+      <CreationDate>CreationDate233</CreationDate>
+      <LastUpdateDate>LastUpdateDate234</LastUpdateDate>
+      <GradeCustomerFlex>
+         <GradeId>235</GradeId>
+         <EffectiveStartDate>EffectiveStartDate236</EffectiveStartDate>
+         <EffectiveEndDate>EffectiveEndDate237</EffectiveEndDate>
+         <insuranceDegree>insuranceDegree238</insuranceDegree>
+         <insuranceDegree_Display>insuranceDegree_Display239</insuranceDegree_Display>
+         <grade1>grade1240</grade1>
+         <grade2>grade2241</grade2>
+         <grade3>grade3242</grade3>
+         <childCode>243</childCode>
+         <parentCode>244</parentCode>
+         <englishname>englishname245</englishname>
+         <numberofdays>numberofdays246</numberofdays>
+         <__FLEX_Context>
+            <any_0 xmlns="##any">
+               <any_01>any content</any_01>
+            </any_0>
+         </__FLEX_Context>
+         <__FLEX_Context_DisplayValue>
+            <any_0 xmlns="##any">
+               <any_01>any content</any_01>
+            </any_0>
+         </__FLEX_Context_DisplayValue>
+         <links>
+            <rel>rel247</rel>
+            <href>href248</href>
+            <name>name249</name>
+            <kind>kind250</kind>
+            <properties>
+               <changeIndicator>changeIndicator251</changeIndicator>
+            </properties>
+         </links>
+      </GradeCustomerFlex>
+      <ActiveStatusLOV>
+         <LookupCode>LookupCode252</LookupCode>
+         <Meaning>Meaning253</Meaning>
+         <links>
+            <rel>rel254</rel>
+            <href>href255</href>
+            <name>name256</name>
+            <kind>kind257</kind>
+         </links>
+      </ActiveStatusLOV>
+      <links>
+         <rel>rel258</rel>
+         <href>href259</href>
+         <name>name260</name>
+         <kind>kind261</kind>
+         <properties>
+            <changeIndicator>changeIndicator262</changeIndicator>
+         </properties>
+      </links>
+   </items>
+   <count>263</count>
+   <hasMore>hasMore264</hasMore>
+   <limit>265</limit>
+   <offset>266</offset>
+   <links>
+      <rel>rel267</rel>
+      <href>href268</href>
+      <name>name269</name>
+      <kind>kind270</kind>
+   </links>
+</Root-Element>

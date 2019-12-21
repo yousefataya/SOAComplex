@@ -1,0 +1,106 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Jan 10 14:54:54 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TransactionInquiryProcess"
+         targetNamespace="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiryJson/TransactionInquiryProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiryJson/TransactionInquiryProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/TRANSACTION_MANAGEMENT/TransactionInquiryJson/getTransactionsReference"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer" xmlns:ns3="http://xmlns.fact.com/ws/TI"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getTransactionsReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" expressionLanguage="javascript"
+         suppressJoinFailure="no" exitOnStandardFault="no">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.fact.com/ws/TI" location="../Schemas/Transactions.xsd"
+            importType="http://www.w3.org/2001/XMLSchema"/>
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/TRANSACTION_MANAGEMENT/TransactionInquiryJson/getTransactionsReference"
+            location="../WSDLs/getTransactionsReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="TransactionService" bpelx:wadl="yes"/>
+        <partnerLink name="getTransactionsReference" partnerLinkType="ns2:getTransactionsReference_plt"
+                     partnerRole="getTransactionsReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke_getTransactions_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="Invoke_getTransactions_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="outputVariable" element="ns3:TransactionsInquiryMessageOutput"/>
+    </variables>
+    <sequence name="main">
+        <receive name="receiveInput" partnerLink="TransactionService" variable="inputVar" bpelx:method="getTransactions"
+                 createInstance="yes"/>
+        <assign name="Assign_getTransaction_input">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.FromBranchID</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_BRANCH_FROM_ID</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.ToBranchID</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_BRANCH_TO_ID</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.FromDate</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_DATE_FROM</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.ToDate</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_DATE_TO</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.FromCardID</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_CARD_FROM_ID</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.ToCardID</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_CARD_TO_ID</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.FromCardHolderNationalNum</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getTransactions_InputVariable.InputParameters/ns4:P_NATIONAL_NUMBER</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke_getTransactions" bpelx:invokeAsDetail="no" partnerLink="getTransactionsReference"
+                portType="ns2:getTransactionsReference_ptt" operation="getTransactionsReference"
+                inputVariable="Invoke_getTransactions_InputVariable"
+                outputVariable="Invoke_getTransactions_OutputVariable"/>
+        <assign name="Assign_finalOutput">
+            <copy>
+                <from expressionLanguage="javascript">process.Invoke_getTransactions_OutputVariable.OutputParameters</from>
+                <to expressionLanguage="javascript">process.outputVar</to>
+            </copy>
+        </assign>
+        <reply name="replyOutput" partnerLink="TransactionService" variable="outputVar" bpelx:method="getTransactions"/>
+    </sequence>
+</process>

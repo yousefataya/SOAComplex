@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ECCPostingBEPL"
+     targetNamespace="http://xmlns.oracle.com/ECC/ECCPosting/ECCPostingBEPL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/ECC/ECCPosting/ECCPostingBEPL"
+     xmlns:ns1="http://xmlns.fact.com/ws/ECCP"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://172.20.5.204:7003/soa-infra/services/ECC/ECCPosting!1.0/WSDLs/ECCPostingBEPL.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="ECCPostingBEPL">
+        <plnk:role name="ECCPostingBEPLProvider" portType="client:ECCPostingBEPL"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.fact.com/ws/ECCP" schemaLocation="../Schemas/ECCPostingWS.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ECCPostingBEPLRequestMessage">
+        <wsdl:part name="payload" element="ns1:ECCPostingMessageInput"/>
+    </wsdl:message>
+    <wsdl:message name="ECCPostingBEPLResponseMessage">
+        <wsdl:part name="payload" element="ns1:ECCPostingMessageOutput"/>
+    </wsdl:message>
+    <wsdl:portType name="ECCPostingBEPL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ECCPostingBEPLRequestMessage"/>
+            <wsdl:output message="client:ECCPostingBEPLResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ECCPostingBEPLBinding" type="client:ECCPostingBEPL">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="eccpostingbepl_client_ep">
+        <wsdl:port name="ECCPostingBEPL_pt" binding="client:ECCPostingBEPLBinding">
+            <soap:address location="http://172.20.5.204:7003/soa-infra/services/ECC/ECCPosting/eccpostingbepl_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

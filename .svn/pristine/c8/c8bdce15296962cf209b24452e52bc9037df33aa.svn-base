@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org"
+            targetNamespace="http://www.example.org" elementFormDefault="qualified">
+            
+        <xsd:element name="PrintChequeBooksTransactionMessageInput">
+	      <xsd:complexType>	              
+			<xsd:sequence>
+				<xsd:element name="MessageHeader" type="MessageHeaderInput"/>
+                                <xsd:element name="MessageBody" type="MessageBodyInput"/>
+			</xsd:sequence>
+		</xsd:complexType>
+        </xsd:element>
+        
+        <xsd:element name="PrintChequeBooksTransactionMessageOutput">
+	      <xsd:complexType>	              
+			<xsd:sequence>
+				<xsd:element name="MessageHeader" type="MessageHeaderOutPut"/>
+                                <xsd:element name="MessageBody" type="MessageBodyOutPut"/>
+			</xsd:sequence>
+		</xsd:complexType>   
+        </xsd:element>
+        
+        <xsd:complexType name  = "MessageHeaderInput">	              
+			<xsd:sequence>
+				<xsd:element name="TransactionID" type="xsd:string"/>
+                                <xsd:element name="ApplicationCode" type="xsd:string"/>
+                                <xsd:element name="ApplicationUserName" type="xsd:string"/>
+			</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType  name = "MessageHeaderOutPut">
+      
+         <xsd:sequence>
+		<xsd:element name="TransactionID" type="xsd:string"/>  
+         </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TransactionInformation">	              
+			<xsd:sequence>
+				<xsd:element name="SequenceNumber" type="xsd:string"/>        
+			</xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name  = "MessageBodyInput">	              
+			<xsd:sequence>
+				<xsd:element name="TransactionInformation" type="TransactionInformation"/>
+			</xsd:sequence>
+      </xsd:complexType>  
+        
+    <xsd:complexType name = "MessageBodyOutPut">
+      
+         <xsd:sequence>
+		<xsd:element name="StatusInformation" type="StatusInformationComplex"/>
+                <xsd:element name="ErrorInformation" type="ErrorInformationComplex"/>
+                <xsd:element name="TransactionInformation" type="TransactionInformationComplexOutPut"/>
+         
+         </xsd:sequence>
+      
+      </xsd:complexType>
+      
+      
+      <xsd:complexType name = "StatusInformationComplex">
+      
+         <xsd:sequence>
+		<xsd:element name="Status" type="xsd:string"/>
+         </xsd:sequence>
+      
+      </xsd:complexType>
+      
+     
+      <xsd:complexType name = "ErrorInformationComplex">
+         <xsd:sequence>
+		<xsd:element name="ErrorBusCode" type="xsd:string"/>
+                <xsd:element name="ErrorBusMessage" type="xsd:string"/>
+                <xsd:element name="ErrorTechCode" type="xsd:string"/>
+                <xsd:element name="ErrorTechMessage" type="xsd:string"/>
+                <xsd:element name="ErrorTechlDetails" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType> 
+      
+      
+      <xsd:complexType name = "TransactionInformationComplexOutPut">
+         <xsd:sequence>
+		<xsd:element name="ResponseCode" type="xsd:string"/>
+                <xsd:element name="Cheuqe" type="CheuqeComplex"/>
+         </xsd:sequence>
+      </xsd:complexType>      
+      
+      <xsd:complexType name = "CheuqeComplex">
+         <xsd:sequence>
+		<xsd:element name="BankCode" type="xsd:string"/>
+                <xsd:element name="CBK_BRCH" type="xsd:string"/>
+                <xsd:element name="CACC_NUM" type="xsd:string"/>
+                <xsd:element name="CBK_BRCH" type="xsd:string"/>
+                <xsd:element name="CACC_CD_NUM" type="xsd:string"/>
+                <xsd:element name="CheckBookSerial" type="xsd:string"/>
+                <xsd:element name="FirstNumber" type="xsd:string"/>
+                <xsd:element name="LastNumber" type="xsd:string"/>
+                <xsd:element name="CheckNumber" type="xsd:string"/>
+                <xsd:element name="CBPT_CODE" type="xsd:string"/>
+                <xsd:element name="PrintCustomerName1" type="xsd:string"/>
+                <xsd:element name="PrintCustomerName2" type="xsd:string"/>
+                <xsd:element name="BEN_NAME" type="xsd:string"/>
+                <xsd:element name="Amount" type="xsd:string"/>
+                <xsd:element name="V_TAFQET" type="xsd:string"/>
+                
+                
+                <xsd:element name="TodayDate" type="xsd:string"/>
+                <xsd:element name="COMP" type="xsd:string"/>
+                <xsd:element name="Note" type="xsd:string"/>
+                <xsd:element name="HoldNumber" type="xsd:string"/>
+                <xsd:element name="Address1" type="xsd:string"/>
+                <xsd:element name="Address2" type="xsd:string"/>
+                
+                <xsd:element name="Address3" type="xsd:string"/>
+                <xsd:element name="EndTitle" type="xsd:string"/>
+                <xsd:element name="Note2" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>  
+      
+</xsd:schema>

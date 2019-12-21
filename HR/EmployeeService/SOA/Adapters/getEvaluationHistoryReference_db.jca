@@ -1,0 +1,13 @@
+<adapter-config name="getEvaluationHistoryReference" adapter="db" wsdlLocation="../WSDLs/getEvaluationHistoryReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getEvaluationHistoryReference_ptt" operation="getEvaluationHistoryReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_EVALUATION"/>
+      <property name="ProcedureName" value="GET_LAST_EVAL_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:include schemaLocation="WorkRelationshipLegDDF.xsd"/>
+    <xsd:complexType name="WorkRelationshipLegDDFFR">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PeriodOfServiceId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="WorkRelationshipLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_PSE_COVERED" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PSE_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PSE_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PSE_START_DT" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_PSE_END_DT" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_PSE_AGREEMENT_DATE" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_PRIORITY_FOR_REHIRE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_NOTICE_PERIOD_START_DATE" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_NOTICE_PERIOD_END_DATE" nillable="true" type="ns0:date-Date"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="workRelationshipLegDDFFR" type="WorkRelationshipLegDDFFR"/>
+</xsd:schema>

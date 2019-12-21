@@ -1,0 +1,12 @@
+<adapter-config name="deleteProfitDbReference" adapter="db" wsdlLocation="../WSDLs/deleteProfitDbReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="127.0.01" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="deleteProfitDbReference_ptt" operation="deleteProfitDbReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="DELETE_PROFIT_SHARES"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

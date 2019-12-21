@@ -1,0 +1,491 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Mon Feb 12 11:58:21 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="KioskCustomerDetailsInquiryProcess"
+         targetNamespace="http://xmlns.oracle.com/KIOSK/KioskCustomerDetailsInquiry/KioskCustomerDetailsInquiryProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/KIOSK/KioskCustomerDetailsInquiry/KioskCustomerDetailsInquiryProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://oracle.com/sca/soapservice/KIOSK/KioskCustomerDetailsInquiry/KioskCustomerDetailsInquiryService"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/KIOSK/KioskCustomerDetailsInquiry/getCustomerDetailsReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="http://xmlns.fact.com/ws/KCDI"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerDetailsReference"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://oracle.com/sca/soapservice/KIOSK/KioskCustomerDetailsInquiry/KioskCustomerDetailsInquiryService"
+          location="../WSDLs/KioskCustomerDetailsInquiryServiceWrapper.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="KioskCustomerDetailsInquiryService" partnerLinkType="ns1:KioskCustomerDetailsInquiryService"
+                 myRole="KioskCustomerDetailsInquiry_ptt"/>
+    <partnerLink name="getCustomerDetailsReference" partnerLinkType="ns2:getCustomerDetailsReference_plt"
+                 partnerRole="getCustomerDetailsReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="inputVariable" messageType="ns1:requestMessage"/>
+    <variable name="outputVariable" messageType="ns1:replyMessage"/>
+    <variable name="CompositeName" type="xsd:string"/>
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="SourceExecutionID" type="xsd:string"/>
+    <variable name="SourceAppUserName" type="xsd:string"/>
+    <variable name="ExecutionInput" type="xsd:string"/>
+    <variable name="ExecutionStatus" type="xsd:string"/>
+    <variable name="SourceAppCode" type="xsd:string"/>
+    <variable name="FaultStr" type="xsd:string"/>
+    <variable name="FaultCode" type="xsd:string"/>
+    <variable name="ExecutionOutput" type="xsd:string"/>
+    <variable name="ErrorBusCode" type="xsd:string"/>
+    <variable name="ErrorBusMessage" type="xsd:string"/>
+    <variable name="ErrorTechCode" type="xsd:string"/>
+    <variable name="ErrorTechMessage" type="xsd:string"/>
+    <variable name="ErrorTechDetails" type="xsd:string"/>
+    <variable name="BusinessKey" type="xsd:string"/>
+    <variable name="TechSystemOperation" type="xsd:string"/>
+    <variable name="TechSystem" type="xsd:string"/>
+    <variable name="ClientIPAddress" type="xsd:string"/>
+    <variable name="ExecutionID" type="xsd:string"/>
+    <variable name="Invoke_getCustomerDetails_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="Invoke_getCustomerDetails_OutputVariable" messageType="ns2:args_out_msg"/>
+  </variables>
+  <sequence name="main">
+    <receive name="receiveInput" partnerLink="KioskCustomerDetailsInquiryService"
+             portType="ns1:KioskCustomerDetailsInquiry_ptt" operation="KioskCustomerDetailsInquiry"
+             variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign_DefualtVariables" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+        <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageHeader/ns3:TransactionID</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceExecutionID</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageHeader/ns3:TransactionID</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageHeader/ns3:TransactionID</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageHeader/ns3:ApplicationUserName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppUserName</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageHeader/ns3:ApplicationCode</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppCode</to>
+      </copy>
+      <copy>
+        <from>'KioskCustomerDetailsInquiry'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy>
+      <copy>
+        <from>ora:toCDATA($inputVariable.KioskCustomerDetailsInquiryMessageInput)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy>
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy>
+      <copy>
+        <from>'Success'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:StatusInformation/ns3:Status</to>
+      </copy>
+    </assign>
+    <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_validation" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+        <![CDATA[try { 
+            java.net.InetAddress ipAddress = java.net 
+                                                 .InetAddress 
+                                                 .getLocalHost(); 
+            String clientIp = (ipAddress.getHostAddress()).trim(); 
+ 
+            String compositeName = (String) getVariableData("CompositeName"); 
+            String transactionID = 
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "KioskCustomerDetailsInquiryMessageInput", 
+                                                       "//ns3:TransactionID")).getTextContent(); 
+            String customerID; 
+            String cardNumber; 
+            String phoneNumber; 
+            String applicationCode = 
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "KioskCustomerDetailsInquiryMessageInput", 
+                                                       "//ns3:ApplicationCode")).getTextContent(); 
+            String applicationUserName = 
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "KioskCustomerDetailsInquiryMessageInput", 
+                                                       "//ns3:ApplicationUserName")).getTextContent(); 
+            try { 
+                customerID = 
+                    ((org.w3c.dom.Element) getVariableData("inputVariable", "KioskCustomerDetailsInquiryMessageInput", 
+                                                           "//ns3:CustomerID")).getTextContent(); 
+            } catch (Exception e) { 
+                customerID = ""; 
+            } 
+            try { 
+                cardNumber = 
+                    ((org.w3c.dom.Element) getVariableData("inputVariable", "KioskCustomerDetailsInquiryMessageInput", 
+                                                           "//ns3:CardNumber")).getTextContent(); 
+            } catch (Exception e) { 
+                cardNumber = ""; 
+            } 
+            try { 
+                phoneNumber = 
+                    ((org.w3c.dom.Element) getVariableData("inputVariable", "KioskCustomerDetailsInquiryMessageInput", 
+                                                           "//ns3:PhoneNumber")).getTextContent(); 
+            } catch (Exception e) { 
+                phoneNumber = ""; 
+            } 
+ 
+ 
+            String MandatoryField = null; 
+ 
+            if (transactionID.equals("")) { 
+                MandatoryField = "TransactionID"; 
+            } else if (applicationCode.equals("")) { 
+                MandatoryField = "ApplicationCode"; 
+            } else if (applicationUserName.equals("")) { 
+                MandatoryField = "ApplicationUserName"; 
+            } else if (customerID.equals("") && phoneNumber.equals("") && cardNumber.equals("")) { 
+                MandatoryField = "CustomerID or PhoneNumber or CardNumber"; 
+            } 
+ 
+            if (MandatoryField != null) { 
+                setVariableData("ExecutionStatus", "F"); 
+                setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:Status", "Failed"); 
+                setVariableData("ErrorBusCode", "VF0001"); 
+                if (MandatoryField.equals("CustomerID or PhoneNumber or CardNumber")) { 
+                    setVariableData("ErrorBusMessage", 
+                                    "Validation Fault : Unable to FulFill Transaction, Entry [ " + MandatoryField + 
+                                    " ] are Mandatory."); 
+                    setVariableData("ErrorTechMessage", "Entry [ " + MandatoryField + " ] are Mandatory."); 
+                } else { 
+                    setVariableData("ErrorBusMessage", 
+                                    "Validation Fault : Unable to FulFill Transaction, Entry [ " + MandatoryField + 
+                                    " ] is Mandatory."); 
+                    setVariableData("ErrorTechMessage", "Entry [ " + MandatoryField + " ] is Mandatory."); 
+                } 
+                setVariableData("ErrorTechCode", "OFM-VAL-0001"); 
+ 
+            } else { 
+                com.dimensions.mw.utils.validationManagement.ValidationManager validationManager = 
+                    new com.dimensions.mw.utils.validationManagement.ValidationManager(); 
+                String validationCheck = 
+                    validationManager.ApplyValidation(applicationCode, compositeName, "isAllowedSource", 
+                                                      compositeName + "###" + applicationCode + "###" + clientIp + 
+                                                      "###" + "token" + "###" + applicationUserName); 
+ 
+ 
+                if (validationCheck == null) { 
+                    // String attributesCheck = validationManager.ApplyValidation(applicationCode, compositeName, "validateAttributes", 
+                    //     "EmployeeNumber:Number" + ":" + employeeNumber); 
+                    //if(attributesCheck != null){ 
+                    //} 
+ 
+ 
+                } else { 
+                    setVariableData("ExecutionStatus", "F"); 
+                    setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:Status", 
+                                    "Failed"); 
+                    setVariableData("ErrorBusCode", validationCheck.split("#")[0]); 
+                    setVariableData("ErrorBusMessage", validationCheck.split("#")[1].split("##")[0]); 
+                    setVariableData("ErrorTechCode", validationCheck.split("##")[1].split("###")[0]); 
+                    setVariableData("ErrorTechMessage", validationCheck.split("###")[1].split("###-")[0]); 
+                    setVariableData("ErrorTechDetails", validationCheck.split("###-")[1].split("#####")[0]); 
+                } 
+            } 
+ 
+        } catch (Exception exc) { 
+            setVariableData("ExecutionStatus", "F"); 
+            addAuditTrailEntry(exc); 
+            exc.printStackTrace(); 
+        }]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <if name="If_validationSuccessfull">
+      <documentation>
+        <![CDATA[Yes]]>
+      </documentation>
+      <condition>$ExecutionStatus = 'S'</condition>
+      <sequence name="Sequence2">
+        <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+          <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <![CDATA[try {           
+                  String weblogicDomainName = "Unknown";           
+                  String serverName = "Unknown";           
+                  javax.naming.InitialContext ctx = null;           
+                  ctx = new javax.naming.InitialContext();           
+                  javax.management.MBeanServer beanServer =           
+                      (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");           
+                  javax.management.ObjectName runtimeService =           
+                      new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");           
+                  javax.management.ObjectName domainCFG =           
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");           
+                  weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");           
+                  javax.management.ObjectName serverCFG =           
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");           
+                  serverName = (String) beanServer.getAttribute(serverCFG, "Name");           
+                 
+                  String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();           
+                  setVariableData("ExecutionID", executionID);           
+                  String compositeName = (String) getVariableData("CompositeName");       
+                  String sourceAppCode = (String) getVariableData("SourceAppCode");           
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");           
+                  String sourceAppUserName = (String) getVariableData("SourceAppUserName");           
+                  String executionInput = (String) getVariableData("ExecutionInput");           
+                  String instanceID = (String) getVariableData("InstanceID");           
+                  String bussinessKey = (String) getVariableData("BusinessKey");           
+                 
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager           
+                     .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,           
+                                            executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);           
+              } catch (Exception exc) {           
+         addAuditTrailEntry(exc);        
+              }]]>
+          </bpelx:exec>
+        </extensionActivity>
+        <scope name="Scope1">
+          <variables>
+            <variable name="VCUST_PROFILE" type="xsd:string"/>
+            <variable name="xmltags" type="xsd:string"/>
+          </variables>
+          <faultHandlers>
+            <catchAll>
+              <sequence name="Sequence3">
+                <assign name="Assign_Fault" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                  <copy>
+                    <from>ora:getFaultAsString()</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultStr</to>
+                  </copy>
+                  <extensionAssignOperation>
+                    <bpelx:remove xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                      <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:InquiryInformation</bpelx:target>
+                    </bpelx:remove>
+                  </extensionAssignOperation>
+                  <copy>
+                    <from>ora:getFaultName()</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultCode</to>
+                  </copy>
+                  <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                    <from>'Failed'</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:StatusInformation/ns3:Status</to>
+                  </copy>
+                  <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                        ignoreMissingFromData="yes">
+                    <from>''</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorBusCode</to>
+                  </copy>
+                  <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                        ignoreMissingFromData="yes">
+                    <from>''</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorBusMessage</to>
+                  </copy>
+                  <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                        ignoreMissingFromData="yes">
+                    <from>''</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorTechCode</to>
+                  </copy>
+                  <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                        ignoreMissingFromData="yes">
+                    <from>''</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorTechMessage</to>
+                  </copy>
+                  <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+                        ignoreMissingFromData="yes">
+                    <from>''</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorTechDetails</to>
+                  </copy>
+                  <copy ignoreMissingFromData="yes">
+                    <from>'F'</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+                  </copy>
+                </assign>
+                <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                  <bpelx:exec name="Java_ManageError" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                    <![CDATA[try {                               
+    String faultStr = (String)getVariableData("FaultStr");                               
+    String faultCode = (String)getVariableData("FaultCode");                               
+    String techSystemOperation = (String)getVariableData("TechSystemOperation");                               
+    String techSystem = (String)getVariableData("TechSystem");                       
+    String compositeName = (String)getVariableData("CompositeName");            
+    
+                                   
+    com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean errorDefinitionBean =                               
+            new com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean();                               
+                                   
+    com.dimensions.mw.utils.errorManagement.ErrorManager errorManager = new com.dimensions.mw.utils.errorManagement.ErrorManager();                               
+                                   
+    errorDefinitionBean = errorManager.getErrorInformation(faultCode+" "+faultStr,techSystem,techSystemOperation,compositeName);                                
+                   
+    setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:ErrorBusCode",errorDefinitionBean.getErrorBussinessCode() );                        
+    setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:ErrorBusMessage", errorDefinitionBean.getErrorBussinessMessage());                        
+    setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:ErrorTechCode",errorDefinitionBean.getErrorTechCode());                        
+    setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:ErrorTechMessage",errorDefinitionBean.getErrorTechMessage());                    
+    setVariableData("outputVariable", "KioskCustomerDetailsInquiryMessageOutput", "//ns3:ErrorTechDetails",techSystem+" | "+techSystemOperation+" | "+ errorDefinitionBean.getErrorTechDetails());              
+          
+} catch (Exception exc) {          
+}]]>
+                  </bpelx:exec>
+                </extensionActivity>
+              </sequence>
+            </catchAll>
+          </faultHandlers>
+          <sequence name="Sequence4">
+            <sequence>
+              <assign name="Assign_input">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageBody/ns3:InquiryInformation/ns3:CustomerID</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerDetails_InputVariable.InputParameters/ns4:P_CUST_ID</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageBody/ns3:InquiryInformation/ns3:PhoneNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerDetails_InputVariable.InputParameters/ns4:P_PHONE_NUMBER</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageBody/ns3:InquiryInformation/ns3:CardNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerDetails_InputVariable.InputParameters/ns4:P_CARD_NUMBER</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$inputVariable.KioskCustomerDetailsInquiryMessageInput/ns3:MessageBody/ns3:InquiryInformation/ns3:Channel</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_getCustomerDetails_InputVariable.InputParameters/ns4:P_CHANNEL</to>
+                </copy>
+              </assign>
+              <invoke name="Invoke_getCustomerDetails"
+                      partnerLink="getCustomerDetailsReference" portType="ns2:getCustomerDetailsReference_ptt"
+                      operation="getCustomerDetailsReference" inputVariable="Invoke_getCustomerDetails_InputVariable"
+                      outputVariable="Invoke_getCustomerDetails_OutputVariable" bpelx:invokeAsDetail="no"/>
+              <assign name="Assign_output">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getCustomerDetails_OutputVariable.OutputParameters/ns4:P_CUST_PROFILE</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$VCUST_PROFILE</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$Invoke_getCustomerDetails_OutputVariable.OutputParameters/ns4:P_RESPCODE</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:InquiryInformation/ns3:ResponseCode</to>
+                </copy>
+                <extensionAssignOperation>
+                  <bpelx:remove>
+                    <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation</bpelx:target>
+                  </bpelx:remove>
+                </extensionAssignOperation>
+              </assign>
+              <extensionActivity>
+                <bpelx:exec name="Java_gerateXML">
+                  <![CDATA[String messageValues = (String) getVariableData("VCUST_PROFILE");    
+                 
+             String messageLabels ="V_CUST_S_NAME|V_CUST_S_FATHR_NAME |V_CUST_S_FAMILY|V_CUST_B_NAME|V_CUST_B_FATHR_NMAE|V_CUST_B_FAMILY|V_BIRTH_DATE|V_GENDER|V_LANGUAGE|V_NATIONALITY|V_CUST_BRCH|V_EMAIL|V_CTRY_PHONE_2|V_IND_PHONE_2|V_PHONE2|V_CTRY_PHONE_1|V_CELL_PHONE|V_IND_PHONE_1|V_CADR_CTRY_FAX|V_IND_FAX|V_FAX|V_ADDRESS_LINE1|V_ADDRESS_LINE2|V_MARITL_STATUS|V_OCCUPATION|NATINUMBER|CARDSTATUS|DOCNUMBER|DOCDATE|ISEMP|CLASSIFICATION_FLG|QLTU_CODE|CUST_ID";    
+             int valueOldPosn=0,valuePosn=0;    
+             int labelOldPosn=0,labelPosn=0;    
+             String xmltags="";    
+                   
+             while (labelPosn>=0)    
+                {    
+                valuePosn = messageValues.indexOf('|',valueOldPosn);    
+                labelPosn = messageLabels.indexOf('|',labelOldPosn);    
+                     
+                String next_value = (valuePosn>0) ?    
+                      messageValues.substring(valueOldPosn,valuePosn):    
+                      messageValues.substring(valueOldPosn);    
+                     
+                String next_label = (labelPosn>0) ?    
+                          messageLabels.substring(labelOldPosn,labelPosn):    
+                          messageLabels.substring(labelOldPosn);    
+                    
+        xmltags=xmltags.concat("<"+next_label+">"+ next_value +"</"+next_label+">");    
+                 
+                valueOldPosn = valuePosn + 1;    
+                labelOldPosn = labelPosn + 1;    
+                }    
+    
+ setVariableData("xmltags", "<xml>"+xmltags+"</xml>");]]>
+                </bpelx:exec>
+              </extensionActivity>
+              <assign name="AssignXML">
+                <copy>
+                  <from>$xmltags</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:InquiryInformation/ns3:CustomerProfile</to>
+                </copy>
+              </assign>
+            </sequence>
+          </sequence>
+        </scope>
+        <assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+          <copy>
+            <from>ora:toCDATA($outputVariable.KioskCustomerDetailsInquiryMessageOutput)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+          </copy>
+        </assign>
+        <extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+          <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <![CDATA[try {      
+                  String executionID = (String) getVariableData("ExecutionID");      
+                  String executionStatus = (String) getVariableData("ExecutionStatus");      
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");      
+                  String executionOutput = (String) getVariableData("ExecutionOutput");      
+                  String compositeName = (String) getVariableData("CompositeName");      
+            
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager      
+                     .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+              } catch (Exception exc) {      
+         addAuditTrailEntry(exc);   
+              }]]>
+          </bpelx:exec>
+        </extensionActivity>
+      </sequence>
+      <else>
+        <documentation>
+          <![CDATA[No]]>
+        </documentation>
+        <assign name="Assign_validationError" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorBusCode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorBusCode</to>
+          </copy>
+          <extensionAssignOperation>
+            <bpelx:remove xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+              <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:InquiryInformation</bpelx:target>
+            </bpelx:remove>
+          </extensionAssignOperation>
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorBusMessage</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorBusMessage</to>
+          </copy>
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorTechCode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorTechCode</to>
+          </copy>
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorTechMessage</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorTechMessage</to>
+          </copy>
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorTechDetails</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.KioskCustomerDetailsInquiryMessageOutput/ns3:MessageBody/ns3:ErrorInformation/ns3:ErrorTechDetails</to>
+          </copy>
+        </assign>
+      </else>
+    </if>
+    <reply name="replyOutput" partnerLink="KioskCustomerDetailsInquiryService" variable="outputVariable"
+           portType="ns1:KioskCustomerDetailsInquiry_ptt" operation="KioskCustomerDetailsInquiry"/>
+  </sequence>
+</process>

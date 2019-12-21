@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:ECCService" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="urn:ECCService"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xfcwe="http://xmlns.fact.com/ws/EALL">
+  <message name="ECCPDCAddMessageInput">
+    <part name="part" element="xfcwe:ECCPDCAddMessageInput"/>
+  </message>
+  <message name="ECCPDCAddMessageOutput">
+    <part name="part" element="xfcwe:ECCPDCAddMessageOutput"/>
+  </message>
+  <message name="ECCPosting2MessageInput">
+    <part name="part" element="xfcwe:ECCPosting2MessageInput"/>
+  </message>
+  <message name="ECCPosting2MessageOutput">
+    <part name="part" element="xfcwe:ECCPosting2MessageOutput"/>
+  </message>
+  <message name="ECCPosting1MessageInput">
+    <part name="part" element="xfcwe:ECCPosting1MessageInput"/>
+  </message>
+  <message name="ECCPosting1MessageOutput">
+    <part name="part" element="xfcwe:ECCPosting1MessageOutput"/>
+  </message>
+  <message name="CustomerOldSignInfoMessageInput">
+    <part name="part" element="xfcwe:CustomerOldSignInfoMessageInput"/>
+  </message>
+  <message name="CustomerOldSignInfoMessageOutput">
+    <part name="part" element="xfcwe:CustomerOldSignInfoMessageOutput"/>
+  </message>
+  <message name="CustomerSignInfoMessageInput">
+    <part name="part" element="xfcwe:CustomerSignInfoMessageInput"/>
+  </message>
+  <message name="CustomerSignInfoMessageOutput">
+    <part name="part" element="xfcwe:CustomerSignInfoMessageOutput"/>
+  </message>
+  <message name="ECCAccountRequestMessageInput">
+    <part name="part" element="xfcwe:ECCAccountRequestMessageInput"/>
+  </message>
+  <message name="ECCAccountRequestMessageOutput">
+    <part name="part" element="xfcwe:ECCAccountRequestMessageOutput"/>
+  </message>
+  <message name="ECCAutoReplyMessageInput">
+    <part name="part" element="xfcwe:ECCAutoReplyMessageInput"/>
+  </message>
+  <message name="ECCAutoReplyMessageOutput">
+    <part name="part" element="xfcwe:ECCAutoReplyMessageOutput"/>
+  </message>
+  <message name="ECCCAAccountRequestMessageInput">
+    <part name="part" element="xfcwe:ECCCAAccountRequestMessageInput"/>
+  </message>
+  <message name="ECCCAAccountRequestMessageOutput">
+    <part name="part" element="xfcwe:ECCCAAccountRequestMessageOutput"/>
+  </message>
+  <message name="CECCExtendSessionRequestMessageInput">
+    <part name="part" element="xfcwe:CECCExtendSessionRequestMessageInput"/>
+  </message>
+  <message name="CECCExtendSessionRequestMessageOutput">
+    <part name="part" element="xfcwe:CECCExtendSessionRequestMessageOutput"/>
+  </message>
+  <message name="ECCOutwardPresentmentMessageInput">
+    <part name="part" element="xfcwe:ECCOutwardPresentmentMessageInput"/>
+  </message>
+  <message name="ECCOutwardPresentmentMessageOutput">
+    <part name="part" element="xfcwe:ECCOutwardPresentmentMessageOutput"/>
+  </message>
+  <message name="ECCOutwardReplyMessageInput">
+    <part name="part" element="xfcwe:ECCOutwardReplyMessageInput"/>
+  </message>
+  <message name="ECCOutwardReplyMessageOutput">
+    <part name="part" element="xfcwe:ECCOutwardReplyMessageOutput"/>
+  </message>
+  <message name="ECCPCDDeleteMessageInput">
+    <part name="part" element="xfcwe:ECCPCDDeleteMessageInput"/>
+  </message>
+  <message name="ECCPCDDeleteMessageOutput">
+    <part name="part" element="xfcwe:ECCPCDDeleteMessageOutput"/>
+  </message>
+  <message name="ECCPCDUpdateMessageInput">
+    <part name="part" element="xfcwe:ECCPCDUpdateMessageInput"/>
+  </message>
+  <message name="ECCPCDUpdateMessageOutput">
+    <part name="part" element="xfcwe:ECCPCDUpdateMessageOutput"/>
+  </message>
+  <message name="ECCPostingMessageInput">
+    <part name="part" element="xfcwe:ECCPostingMessageInput"/>
+  </message>
+  <message name="ECCPostingMessageOutput">
+    <part name="part" element="xfcwe:ECCPostingMessageOutput"/>
+  </message>
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="../Schemas/ECCServiceWS.xsd" namespace="http://xmlns.fact.com/ws/EALL"/>
+    </xsd:schema>
+  </types>
+  <portType name="ECCServicePortType">
+    <operation name="ECCPDCADD">
+      <input message="tns:ECCPDCAddMessageInput"/>
+      <output message="tns:ECCPDCAddMessageOutput"/>
+    </operation>
+    <operation name="ECCPosting2">
+      <input message="tns:ECCPosting2MessageInput"/>
+      <output message="tns:ECCPosting2MessageOutput"/>
+    </operation>
+    <operation name="ECCPosting1">
+      <input message="tns:ECCPosting1MessageInput"/>
+      <output message="tns:ECCPosting1MessageOutput"/>
+    </operation>
+    <operation name="CustomerOldSignInfo">
+      <input message="tns:CustomerOldSignInfoMessageInput"/>
+      <output message="tns:CustomerOldSignInfoMessageOutput"/>
+    </operation>
+    <operation name="CustomerSignInfo">
+      <input message="tns:CustomerSignInfoMessageInput"/>
+      <output message="tns:CustomerSignInfoMessageOutput"/>
+    </operation>
+    <operation name="ECCAccountRequest">
+      <input message="tns:ECCAccountRequestMessageInput"/>
+      <output message="tns:ECCAccountRequestMessageOutput"/>
+    </operation>
+    <operation name="ECCAutoReply">
+      <input message="tns:ECCAutoReplyMessageInput"/>
+      <output message="tns:ECCAutoReplyMessageOutput"/>
+    </operation>
+    <operation name="ECCCAAccountRequest">
+      <input message="tns:ECCCAAccountRequestMessageInput"/>
+      <output message="tns:ECCCAAccountRequestMessageOutput"/>
+    </operation>
+    <operation name="ECCExtendSessionRequest">
+      <input message="tns:CECCExtendSessionRequestMessageInput"/>
+      <output message="tns:CECCExtendSessionRequestMessageOutput"/>
+    </operation>
+    <operation name="ECCOutwardPresentment">
+      <input message="tns:ECCOutwardPresentmentMessageInput"/>
+      <output message="tns:ECCOutwardPresentmentMessageOutput"/>
+    </operation>
+    <operation name="ECCOutwardReply">
+      <input message="tns:ECCOutwardReplyMessageInput"/>
+      <output message="tns:ECCOutwardReplyMessageOutput"/>
+    </operation>
+    <operation name="ECCPDCDelete">
+      <input message="tns:ECCPCDDeleteMessageInput"/>
+      <output message="tns:ECCPCDDeleteMessageOutput"/>
+    </operation>
+    <operation name="ECCPDCUpdate">
+      <input message="tns:ECCPCDUpdateMessageInput"/>
+      <output message="tns:ECCPCDUpdateMessageOutput"/>
+    </operation>
+    <operation name="ECCPosting">
+      <input message="tns:ECCPostingMessageInput"/>
+      <output message="tns:ECCPostingMessageOutput"/>
+    </operation>
+  </portType>
+</definitions>

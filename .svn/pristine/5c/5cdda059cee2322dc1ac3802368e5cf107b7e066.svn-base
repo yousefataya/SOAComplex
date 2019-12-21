@@ -1,0 +1,33 @@
+<wsdl:definitions
+     name="getCustomerInfoReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getCustomerInfoReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/MUSAWAMEH/MusawamehService/getCustomerInfoReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerInfoReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="getCustomerInfoReference_plt" >
+    <plt:role name="getCustomerInfoReference_role" >
+      <plt:portType name="tns:getCustomerInfoReference_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+     <schema xmlns="http://www.w3.org/2001/XMLSchema">
+       <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getCustomerInfoReference"
+               schemaLocation="../Schemas/getCustomerInfoReference_sp.xsd" />
+     </schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="db:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="getCustomerInfoReference_ptt">
+        <wsdl:operation name="getCustomerInfoReference">
+            <wsdl:input message="tns:args_in_msg"/>
+            <wsdl:output message="tns:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

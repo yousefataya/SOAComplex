@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.3.v20160526-8f41838">
+   <name>BranchesDbReference-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>BranchesDbReference.HcmAdmBranches</class>
+         <alias>HCM_ADM_BRANCHES</alias>
+         <primary-key>
+            <field table="HCM_ADM_BRANCHES" name="CODE" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="BranchesDbReferenceSelect" xsi:type="read-all-query">
+                  <reference-class>BranchesDbReference.HcmAdmBranches</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>code</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>aDesc</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="A_DESC" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>eDesc</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="E_DESC" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>brchType</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="BRCH_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>sothCode</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="SOTH_CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>status</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="STATUS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createdBy</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="CREATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateCreated</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="DATE_CREATED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>modifiedBy</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="MODIFIED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateModified</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="DATE_MODIFIED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>stageObject</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="STAGE_OBJECT" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>stageObjectId</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="STAGE_OBJECT_ID" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>openingDate</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="OPENING_DATE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateUpd</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="DATE_UPD" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>requestType</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="REQUEST_TYPE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>batchNum</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="BATCH_NUM" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>branchSizeDesc</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="BRANCH_SIZE_DESC" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>brchLocCode</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="BRCH_LOC_CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>brchLocDesc</attribute-name>
+               <field table="HCM_ADM_BRANCHES" name="BRCH_LOC_DESC" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="HCM_ADM_BRANCHES"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

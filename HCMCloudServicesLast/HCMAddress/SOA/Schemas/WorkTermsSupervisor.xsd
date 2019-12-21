@@ -1,0 +1,128 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentSupervisorDFF/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Work Terms Supervisor Version 2</name>
+            <description>This stores the supervisors associated to a particular work
+                terms record. This supports different relationships established
+                between a person and a particular supervisor. One person could
+                have one functional manager (line manager who has absolute
+                control over the person) and a project manager (project leader
+                who controls a project and organizes resources and people).</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment :
+                    HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Uniquely identifies an assignment. Foreign key to PER_ALL_ASSIGNMENTS_M."
+                     name="AssignmentId"/>
+                <oer:attribute description="System-generated primary key column. Surrogate Key." name="AssignmentSupervisorId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the order of different changes made during a day. The lowest value represents the earliest change in the day."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Identifies the supervisor?s assignment. Foreign Key to PER_ALL_ASSIGNMENTS_M."
+                     name="ManagerAssignmentId"/>
+                <oer:attribute description="Identifies supervisor. Foreign key to PER_PERSONS. This should be derived from the Manager?s assignment record."
+                     name="ManagerId"/>
+                <oer:attribute description="Identifies the role this supervisor has with regards to the overall organization structure: functional, project leader, etc."
+                     name="ManagerType"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Identifies the worker that has supervisors registered in this table. This is derived from the ASSIGNMEMT_ID record."
+                     name="PersonId"/>
+                <oer:attribute description="Accepts Yes or No values. If yes, then row represent main supervisor."
+                     name="PrimaryFlag"/>
+                <oer:attribute description="Assignment Number. Uniquely identifies an assignment."
+                     name="AssignmentNumber"/>
+                <oer:attribute description="Assignment Number of the Manager." name="ManagerAssignmentNumber"/>
+                <oer:attribute description="Person Number of the Manager." name="ManagerPersonNumber"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Use this attribute to change the existing manager type to a new manager type."
+                     name="NewManagerType"/>
+                <oer:attribute description="Assignment Number of the new manager." name="NewManagerAssignmentNumber"/>
+                <oer:attribute description="Person Number of the new manager." name="NewManagerPersonNumber"/>
+                <oer:attribute description="Specifies the action performed on the particular record. For example: HIRE, ADD PENDING WORKER, MANAGER CHANGE, etc."
+                     name="ActionCode"/>
+                <oer:attribute description="Specifies the reason for the action performed on the record."
+                     name="ReasonCode"/>
+                <oer:attribute description="Customer Flexfield for Assignment Supervisor." name="AsgSupervisorDFF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentSupervisorDFF/"
+         schemaLocation="AsgSupervisorDFF.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:complexType name="WorkTermsSupervisorResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="WorkTermsSupervisor"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="WorkTermsSupervisor">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentSupervisorId</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="AssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="AssignmentSupervisorId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ManagerAssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ManagerId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ManagerType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PrimaryFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="AssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ManagerAssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ManagerPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NewManagerType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NewManagerAssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NewManagerPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ActionCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReasonCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AsgSupervisorDFF" type="ns1:AsgSupervisorDFF" sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="workTermsSupervisorResult" type="WorkTermsSupervisorResult"/>
+    <xsd:element name="workTermsSupervisor" type="WorkTermsSupervisor"/>
+</xsd:schema>

@@ -1,0 +1,43 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+     xmlns:ns0="http://xmlns.oracle.com/apps/hcm/people/core/flex/personExtraInfoEFF/" xmlns:ns1="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate.xsd"
+         xml:id="PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personExtraInfoEFF/"
+         schemaLocation="PersonExtraInformationContext.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:complexType name="PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonExtraInfoId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ns0:PersonExtraInformationContext">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="PeiAttributeCategory" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PARTY_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PARTY_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_STATUS" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_STATUS_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_INTRODUCER1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_INTRODUCER2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_JOIN_PLACE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_JOIN_UNIT" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_JOIN_DATE" nillable="true" type="ns1:date-Date"/>
+                    <xsd:element minOccurs="0" name="_MEMBER_FROM_DATE" nillable="true" type="ns1:date-Date"/>
+                    <xsd:element minOccurs="0" name="_EXCEPTION_DATE" nillable="true" type="ns1:date-Date"/>
+                    <xsd:element minOccurs="0" name="_EXCEPTION_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_EXCEPTION_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_EXCEPTION_REASON" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate" type="PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate"/>
+</xsd:schema>

@@ -1,0 +1,129 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <description>Defines the working hour pattern for a particular object
+                identifier.</description>
+            <oer:attributes>
+                <oer:attribute description="System-generated primary key column." name="WorkingHourPatternId"/>
+                <oer:attribute description="Indicates the date at the beginning of the date range in which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Indicates the date at the end of the date range in which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="The module that is integrated with the Working Hour Patterns functionality."
+                     name="Object"/>
+                <oer:attribute description="Foreign key of the module that is integrated with the Working Hour Patterns functionality."
+                     name="ObjectId"/>
+                <oer:attribute description="Assignment Number that uniquely identifies an assignment."
+                     name="AssignmentNumber"/>
+                <oer:attribute description="Identifies the person owning the Working Hour Patterns."
+                     name="PersonId"/>
+                <oer:attribute description="The type of Working Hours, such as None, Frequency, and Work Week."
+                     name="WorkingHoursType"/>
+                <oer:attribute description="Default start day for a week." name="DefaultStartDay"/>
+                <oer:attribute description="Monday start time in 24 hours format (HH:mm)." name="MonStartTime"/>
+                <oer:attribute description="Monday end time in 24 hours format (HH:mm)." name="MonEndTime"/>
+                <oer:attribute description="Total working hours on Monday." name="MonHours"/>
+                <oer:attribute description="Tuesday start time in 24 hours format (HH:mm)." name="TueStartTime"/>
+                <oer:attribute description="Tuesday end time in 24 hours format (HH:mm)." name="TueEndTime"/>
+                <oer:attribute description="Total working hours on Tuesday." name="TueHours"/>
+                <oer:attribute description="Wednesday start time in 24 hours format (HH:mm)." name="WedStartTime"/>
+                <oer:attribute description="Wednesday end time in 24 hours format (HH:mm)." name="WedEndTime"/>
+                <oer:attribute description="Total working hours on Wednesday." name="WedHours"/>
+                <oer:attribute description="Thursday start time in 24 hours format (HH:mm)." name="ThuStartTime"/>
+                <oer:attribute description="Thursday end time in 24 hours format (HH:mm)." name="ThuEndTime"/>
+                <oer:attribute description="Total working hours on Thursday." name="ThuHours"/>
+                <oer:attribute description="Friday start time in 24 hours format (HH:mm)." name="FriStartTime"/>
+                <oer:attribute description="Friday end time in 24 hours format (HH:mm)." name="FriEndTime"/>
+                <oer:attribute description="Total working hours on Friday." name="FriHours"/>
+                <oer:attribute description="Saturday start time in 24 hours format (HH:mm)." name="SatStartTime"/>
+                <oer:attribute description="Saturday end time in 24 hours format (HH:mm)." name="SatEndTime"/>
+                <oer:attribute description="Total working hours on Saturday." name="SatHours"/>
+                <oer:attribute description="Sunday start time in 24 hours format (HH:mm)." name="SunStartTime"/>
+                <oer:attribute description="Sunday end time in 24 hours format (HH:mm)." name="SunEndTime"/>
+                <oer:attribute description="Total working hours on Sunday." name="SunHours"/>
+                <oer:attribute description="Total hours worked in a week, month or year." name="TotalHours"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. This value must not be changed. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="Specify a value to identify the source system, for example, PSFT-UK. If you have more than one instance of a source system, you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="The globally unique identifier (GUID) generated in Fusion by the system and used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Effective start date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Effective end date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="Controls certain date effective behaviour for the update or deletion of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="WorkingHourPatternResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="WorkingHourPattern"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="WorkingHourPattern">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>WorkingHourPatternId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="WorkingHourPatternId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="Object" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="AssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="WorkingHoursType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DefaultStartDay" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MonStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MonEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MonHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="TueStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TueEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TueHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="WedStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WedEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WedHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ThuStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ThuEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ThuHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="FriStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FriEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FriHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="SatStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SatEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SatHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="SunStartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SunEndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SunHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="TotalHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="workingHourPattern" type="WorkingHourPattern"/>
+    <xsd:element name="workingHourPatternResult" type="WorkingHourPatternResult"/>
+</xsd:schema>

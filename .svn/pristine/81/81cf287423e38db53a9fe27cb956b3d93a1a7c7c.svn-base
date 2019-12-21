@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="AccrualBalProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMAccrualBalances/AccrualBalProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMAccrualBalances/AccrualBalProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMAccrualBalances!1.2/WSDLs/AccrualBalProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="AccrualBalProcess">
+        <plnk:role name="AccrualBalProcessProvider" portType="client:AccrualBalProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="accrualbalprocess_services_ep_WSDL_ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMAccrualBalances/AccrualBalProcess"
+                 schemaLocation="../Schemas/AccrualBalProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="AccrualBalProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="AccrualBalProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="AccrualBalProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:AccrualBalProcessRequestMessage"/>
+            <wsdl:output message="client:AccrualBalProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="AccrualBalProcessBinding" type="client:AccrualBalProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="accrualbalprocess_services_ep">
+        <wsdl:port name="AccrualBalProcess_pt" binding="client:AccrualBalProcessBinding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMAccrualBalances/accrualbalprocess_services_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

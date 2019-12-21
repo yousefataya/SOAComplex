@@ -1,0 +1,17 @@
+2018-12-10 07:39:21.498/1.765 Oracle Coherence 12.2.1.3.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence.xml"
+2018-12-10 07:39:21.531/1.798 Oracle Coherence 12.2.1.3.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/C:/Oracle/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
+2018-12-10 07:39:21.532/1.800 Oracle Coherence 12.2.1.3.0 <D5> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
+2018-12-10 07:39:21.535/1.803 Oracle Coherence 12.2.1.3.0 <D5> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
+2018-12-10 07:39:21.536/1.803 Oracle Coherence 12.2.1.3.0 <D5> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
+2018-12-10 07:39:21.537/1.804 Oracle Coherence 12.2.1.3.0 <D5> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
+
+Oracle Coherence Version 12.2.1.3.0 Build 68243
+ Grid Edition: Development mode
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+2018-12-10 07:39:21.982/2.249 Oracle Coherence GE 12.2.1.3.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.ExtensibleConfigurableCacheFactory
+2018-12-10 07:39:22.085/2.353 Oracle Coherence GE 12.2.1.3.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "Amour's cluster" has been automatically generated
+Dec 10, 2018 7:39:22 AM oracle.soa.scac.ValidateComposite loadWSDLs
+WARNING: Validating WSDLs from WSDLManager....  with option UseSoaInfraMds:false
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=32m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0

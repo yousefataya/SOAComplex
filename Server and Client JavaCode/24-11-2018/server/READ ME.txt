@@ -1,0 +1,8 @@
+1. please place "config.properties" within the same directory you place "ATMServer.jar" , since all configuration is Dependant on it
+2. please edit "config.properties" contents using notepad and change "CORE properties " values as needed
+3. Also you can change the input to be sent for Core .
+4. Server port is also configurable .
+
+//
+5. need to add the path of "ojdbc5.jar" to your enviroment vars , check captured Image 
+	so Java runtime can see oracle.jdbc.driver.OracleDriver at runtime of the jar

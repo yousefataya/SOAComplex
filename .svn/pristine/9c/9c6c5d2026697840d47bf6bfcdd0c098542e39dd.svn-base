@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="DdbReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMGrades/DdbReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMGrades/DdbReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/DdbReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="DdbReference_plt" >
+    <plt:role name="DdbReference_role" >
+      <plt:portType name="tns:DdbReference_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DdbReference" schemaLocation="../Schemas/DdbReference_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="HcmGradeDCollection_msg">
+        <wsdl:part name="HcmGradeDCollection" element="top:HcmGradeDCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="DdbReference_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:HcmGradeDCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

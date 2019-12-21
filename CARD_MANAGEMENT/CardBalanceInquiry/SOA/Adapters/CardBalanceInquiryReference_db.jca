@@ -1,0 +1,13 @@
+<adapter-config name="CardBalanceInquiryReference" adapter="db" wsdlLocation="../WSDLs/CardBalanceInquiryReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="CardBalanceInquiry" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CardBalanceInquiryReference_ptt" operation="CardBalanceInquiryReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BFSK_W_PKG"/>
+      <property name="ProcedureName" value="CARDBALANCESEARCH"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,69 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:CDI="http://xmlns.fact.com/ws/CDI"
+            targetNamespace="http://xmlns.fact.com/ws/CDI" elementFormDefault="qualified">
+  <xsd:element name="CustomerDetailsInquiryMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="CDI:InputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="CDI:InputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerDetailsInquiryMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="CDI:OutputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="CDI:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="InputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="InquiryInformation" type="CDI:InputInquiryInformationComplex"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputInquiryInformationComplex">
+    <xsd:sequence>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="StatusInformation" type="CDI:StatusInformationComplex"/>
+      <xsd:element name="ErrorInformation" type="CDI:ErrorInformaitonComplex" minOccurs="0"/>
+      <xsd:element name="InquiryInformation" type="CDI:InquiryInformationComplex" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="StatusInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformaitonComplex">
+    <xsd:sequence>
+      <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="CustomerIdNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CustomerName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="TotalAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Date" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

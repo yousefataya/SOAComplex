@@ -1,0 +1,48 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="ContractLegDDF.xsd"/>
+    <xsd:complexType name="ContractLegDDFFR">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContractId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ContractLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_CTR_DURATION_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_DURATION_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_SUB_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_SUB_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CONTRACT_SUB_TYPE_START_DATE" nillable="true"
+                         type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_CTR_SUB_TYPE_END_DATE" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_CTR_PERSON_REPLACED" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_PENSION_CATEGORY" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_PENSION_CATEGORY_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_CATEG_AGIRC_ARRCO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CTR_CATEG_AGIRC_ARRCO_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_COMPETITIVE_CLAUSE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_COMPETITIVE_CLAUSE_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_MOBILITY_CLAUSE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_MOBILITY_CLAUSE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_EXCLUSIVITY_CLAUSE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_EXCLUSIVITY_CLAUSE_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_OTHER_CLAUSE" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="contractLegDDFFR" type="ContractLegDDFFR"/>
+</xsd:schema>

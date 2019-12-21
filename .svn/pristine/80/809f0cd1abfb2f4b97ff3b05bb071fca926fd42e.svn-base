@@ -1,0 +1,39 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDFGB.xsd" xml:id="BaseWorkerAsgLegDDFGB-xsd"/>
+    <xsd:include schemaLocation="US.xsd" xml:id="US-xsd"/>
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDFORA_5FHRX_5FZA.xsd" xml:id="BaseWorkerAsgLegDDFORA_5FHRX_5FZA-xsd"/>
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDFDE.xsd" xml:id="BaseWorkerAsgLegDDFDE-xsd"/>
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDFFR.xsd" xml:id="BaseWorkerAsgLegDDFFR-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="BaseWorkerAsgLegDDF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="AssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveSequence" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="EffectiveLatestChange" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="baseWorkerAsgLegDDF" type="BaseWorkerAsgLegDDF"/>
+</xsd:schema>

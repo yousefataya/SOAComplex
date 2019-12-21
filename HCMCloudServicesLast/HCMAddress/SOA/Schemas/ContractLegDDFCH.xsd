@@ -1,0 +1,25 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="ContractLegDDF.xsd"/>
+    <xsd:complexType name="ContractLegDDFCH">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContractId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ContractLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_MAIN_CONTRACT" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_MAIN_CONTRACT_Display" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="contractLegDDFCH" type="ContractLegDDFCH"/>
+</xsd:schema>

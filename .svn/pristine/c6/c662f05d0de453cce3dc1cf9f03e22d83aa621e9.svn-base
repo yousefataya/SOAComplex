@@ -1,0 +1,25 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getProductAmountLimitReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getProductAmountLimitReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="O_CURSOR" type="db:O_CURSOR_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="O_CURSOR_RowSet">
+      <sequence>
+         <element name="O_CURSOR_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="FCL_MIN_LIMIT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FCL_MAX_LIMIT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+</schema>

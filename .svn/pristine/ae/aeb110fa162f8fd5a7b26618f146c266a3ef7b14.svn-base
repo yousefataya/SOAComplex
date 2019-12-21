@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="hcmdepartmentsprocess_service_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="145" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="138" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="hcmdepartmentsprocess_service_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMDepartments/HCMDepartmentsProcess#wsdl.interface(HCMDepartmentsProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="HCMDepartmentsRestRef">
+        <dgm:body borderWidth="2" arcRad="20" X="546" Y="26" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="536" Y="19" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="HCMDepartmentsRestRef" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMDepartments/HCMDepartmentsRestRef#wsdl.interface(HCMDepartmentsRestRef_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>GetDept</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="DepartmentsDbReference">
+        <dgm:body borderWidth="2" arcRad="20" X="546" Y="144" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="536" Y="137" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="DepartmentsDbReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMDepartments/DepartmentsDbReference#wsdl.interface(DepartmentsDbReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>insert</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="AuditDBReference">
+        <dgm:body borderWidth="2" arcRad="20" X="546" Y="262" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="536" Y="255" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="AuditDBReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMDepartments/AuditDBReference#wsdl.interface(AuditDBReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>AuditDBReference</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gComponent name="HCMDepartmentsProcess">
+        <dgm:body borderWidth="2" arcRad="20" X="287" Y="130" width="130" height="111">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="277" Y="123" width="150" height="127">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="hcmdepartmentsprocess_service" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMDepartments/HCMDepartmentsProcess#wsdl.interface(HCMDepartmentsProcess)"/>
+        <dgm:outputPort name="HCMDepartmentsRestRef" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMDepartments/HCMDepartmentsRestRef#wsdl.interface(HCMDepartmentsRestRef_ptt)"/>
+        <dgm:outputPort name="DepartmentsDbReference" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMDepartments/DepartmentsDbReference#wsdl.interface(DepartmentsDbReference_ptt)"/>
+        <dgm:outputPort name="AuditDBReference" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMDepartments/AuditDBReference#wsdl.interface(AuditDBReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="hcmdepartmentsprocess_service_ep" target="HCMDepartmentsProcess/hcmdepartmentsprocess_service" width="2">
+        <dgm:gSegment X1="168" Y1="155" X2="277" Y2="155"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="HCMDepartmentsProcess/HCMDepartmentsRestRef" target="HCMDepartmentsRestRef" width="2">
+        <dgm:gSegment X1="427" Y1="155" X2="451" Y2="155"/>
+        <dgm:gSegment X1="451" Y1="155" X2="451" Y2="36"/>
+        <dgm:gSegment X1="451" Y1="36" X2="536" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="HCMDepartmentsProcess/DepartmentsDbReference" target="DepartmentsDbReference" width="2">
+        <dgm:gSegment X1="427" Y1="180" X2="466" Y2="180"/>
+        <dgm:gSegment X1="466" Y1="180" X2="466" Y2="154"/>
+        <dgm:gSegment X1="466" Y1="154" X2="536" Y2="154"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="HCMDepartmentsProcess/AuditDBReference" target="AuditDBReference" width="2">
+        <dgm:gSegment X1="427" Y1="205" X2="451" Y2="205"/>
+        <dgm:gSegment X1="451" Y1="205" X2="451" Y2="272"/>
+        <dgm:gSegment X1="451" Y1="272" X2="536" Y2="272"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

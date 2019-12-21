@@ -1,0 +1,23 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentExtraInfoEFF/Category/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentExtraInfoEFF/Category/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="j_AssignmentEitCategory.xsd"/>
+    <xsd:complexType name="j_CategoryPerAsgEitprivate">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>AssignmentId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="j_AssignmentEitCategory"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="j_CategoryPerAsgEitprivate" type="j_CategoryPerAsgEitprivate"/>
+</xsd:schema>

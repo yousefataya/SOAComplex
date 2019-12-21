@@ -1,0 +1,125 @@
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+  <Reference name="127.0.01" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="127.0.01"
+             xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>localhost</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>ICBS</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="sid">
+        <Contents>XE</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="devConnection" className="oracle.jdeveloper.db.adapter.DatabaseProvider"
+             credentialStoreKey="devConnection" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>172.20.5.223</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="serviceName">
+        <Contents>devticbs</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>icbs</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="factCBSDatabase" className="oracle.jdeveloper.db.adapter.DatabaseProvider"
+             credentialStoreKey="factCBSDatabase" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>172.20.5.223</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="serviceName">
+        <Contents>devticbs</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>icbs</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="CRE" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="CRE" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>172.20.5.60</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="serviceName">
+        <Contents>GENDEV</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>CRE</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+  <Reference name="SH" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="SH" xmlns="">
+    <Factory className="oracle.jdevimpl.db.adapter.DatabaseProviderFactory1212"/>
+    <RefAddresses>
+      <StringRefAddr addrType="oraDriverType">
+        <Contents>thin</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="hostname">
+        <Contents>172.20.5.60</Contents>
+      </StringRefAddr>
+      <SecureRefAddr addrType="password"/>
+      <StringRefAddr addrType="subtype">
+        <Contents>oraJDBC</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="port">
+        <Contents>1521</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="serviceName">
+        <Contents>GENDEV</Contents>
+      </StringRefAddr>
+      <StringRefAddr addrType="user">
+        <Contents>CRE</Contents>
+      </StringRefAddr>
+    </RefAddresses>
+  </Reference>
+</References>

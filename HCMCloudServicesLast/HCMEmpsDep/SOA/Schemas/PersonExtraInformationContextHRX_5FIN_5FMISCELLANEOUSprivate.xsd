@@ -1,0 +1,37 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+     xmlns:ns0="http://xmlns.oracle.com/apps/hcm/people/core/flex/personExtraInfoEFF/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate.xsd" xml:id="PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personExtraInfoEFF/"
+         schemaLocation="PersonExtraInformationContext.xsd"/>
+    <xsd:complexType name="PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonExtraInfoId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ns0:PersonExtraInformationContext">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="PeiAttributeCategory" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_COMMUNITY" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_COMMUNITY_DisplayValue" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CASTE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HEIGHT" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_WEIGHT" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="_EX_SERVICE_PERSON" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_RESIDENTIAL_STATUS" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_RESIDENTIAL_STATUS_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PAN_APPLIED" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PAN_REFERENCE_NUMBER" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate" type="PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate"/>
+</xsd:schema>

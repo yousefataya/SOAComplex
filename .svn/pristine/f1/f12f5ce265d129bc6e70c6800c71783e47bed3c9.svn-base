@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="GeneralLeaveBPEL"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMGenLeaveReport/GeneralLeaveBPEL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMGenLeaveReport/GeneralLeaveBPEL"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="GeneralLeaveBPEL">
+        <plnk:role name="GeneralLeaveBPELProvider" portType="client:GeneralLeaveBPEL"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMGenLeaveReport/GeneralLeaveBPEL"
+                 schemaLocation="../Schemas/GeneralLeaveBPEL.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GeneralLeaveBPELRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="GeneralLeaveBPELResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="GeneralLeaveBPEL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:GeneralLeaveBPELRequestMessage"/>
+            <wsdl:output message="client:GeneralLeaveBPELResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

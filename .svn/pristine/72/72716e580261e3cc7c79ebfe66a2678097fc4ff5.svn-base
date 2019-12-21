@@ -1,0 +1,94 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Sun Feb 04 15:40:36 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="InsertAllAssetsProcess"
+         targetNamespace="http://xmlns.oracle.com/FIXED_ASSETS/InsertAllAssets/InsertAllAssetsProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/FIXED_ASSETS/InsertAllAssets/InsertAllAssetsProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/InsertAllAssets/insertAllAssetsReference"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/InsertAllAssets/generateXMLReference"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/sp/insertAllAssetsReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/generateXMLReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/InsertAllAssets/insertAllAssetsReference"
+            location="../WSDLs/insertAllAssetsReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="InsertAllAssets" bpelx:wadl="yes"/>
+        <partnerLink name="insertAllAssetsReference" partnerLinkType="ns2:insertAllAssetsReference_plt"
+                     partnerRole="insertAllAssetsReference_role"/>
+        <partnerLink name="generateXMLReference" partnerLinkType="ns3:generateXMLReference_plt"
+                     partnerRole="generateXMLReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object" />
+        <variable name="outputVar" bpelx:json="object" />
+        <variable name="Invoke_generateXMLReference_InputVariable" messageType="ns3:args_in_msg"/>
+        <variable name="Invoke_generateXMLReference_OutputVariable" messageType="ns3:args_out_msg"/>
+        <variable name="Invoke_insertAllAssetsReference_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="Invoke_insertAllAssetsReference_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="response" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="receiveInput" partnerLink="InsertAllAssets" variable="inputVar" bpelx:method="insertAllAssets"
+                 createInstance="yes"/>
+        <invoke name="Invoke_generateXML" bpelx:invokeAsDetail="no" partnerLink="generateXMLReference"
+                portType="ns3:generateXMLReference_ptt" operation="generateXMLReference"
+                inputVariable="Invoke_generateXMLReference_InputVariable"
+                outputVariable="Invoke_generateXMLReference_OutputVariable"/>
+        <assign name="AssignInput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                <from>$Invoke_generateXMLReference_OutputVariable.OutputParameters/ns4:P_XMLTYPE</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_insertAllAssetsReference_InputVariable.InputParameters/ns5:P_STMT</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke_insertAllAssets" bpelx:invokeAsDetail="no" partnerLink="insertAllAssetsReference"
+                portType="ns2:insertAllAssetsReference_ptt" operation="insertAllAssetsReference"
+                inputVariable="Invoke_insertAllAssetsReference_InputVariable"
+                outputVariable="Invoke_insertAllAssetsReference_OutputVariable"/>
+        <assign name="Assign_SemiOutput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                <from>substring-after(normalize-space($Invoke_insertAllAssetsReference_OutputVariable.OutputParameters/ns5:P_RESPONCE_XML),'?&gt; ')</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$response</to>
+            </copy>
+        </assign>
+        <assign name="Assign_finalOutput">
+            <copy>
+                <from>$response</from>
+                <to expressionLanguage="javascript">process.outputVar</to>
+            </copy>
+        </assign>
+        <reply name="replyOutput" partnerLink="InsertAllAssets" variable="outputVar" bpelx:method="insertAllAssets"/>
+    </sequence>
+</process>

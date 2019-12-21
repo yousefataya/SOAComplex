@@ -1,0 +1,13 @@
+<adapter-config name="getManagerInfoByBranchIdReference" adapter="db" wsdlLocation="../WSDLs/getManagerInfoByBranchIdReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getManagerInfoByBranchIdReference_ptt" operation="getManagerInfoByBranchIdReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_EVALUATION"/>
+      <property name="ProcedureName" value="GET_BRCH_MNGR"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

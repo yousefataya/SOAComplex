@@ -1,0 +1,406 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Sep 13 09:45:53 EEST 2018
+  Author:  user
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="UpdateProfitBPELProcess"
+               targetNamespace="http://xmlns.oracle.com/CRE/UpdateProfitInfo/UpdateProfitBPELProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/CRE/UpdateProfitInfo/UpdateProfitBPELProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/CRE/UpdateProfitInfo/UpdateProfitDbAdapter"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns2="http://xmlns.fact.com/ws/BI" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/UpdateProfitDbAdapter"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/CRE/UpdateProfitInfo/UpdateProfitBPELProcess" location="../WSDLs/UpdateProfitBPELProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="updateprofitbpelprocess_client" partnerLinkType="client:UpdateProfitBPELProcess" myRole="UpdateProfitBPELProcessProvider"/>
+    <partnerLink name="UpdateProfitDbAdapter" partnerLinkType="ns1:UpdateProfitDbAdapter_plt"
+                 partnerRole="UpdateProfitDbAdapter_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:UpdateProfitBPELProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:UpdateProfitBPELProcessResponseMessage"/>
+    <variable name="BusinessKey" type="xsd:string"/>
+    <variable name="CompositeName" type="xsd:string"/>
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="SourceExecutionID" type="xsd:string"/>
+    <variable name="SourceAppUserName" type="xsd:string"/>
+    <variable name="ExecutionInput" type="xsd:string"/>
+    <variable name="ExecutionStatus" type="xsd:string"/>
+    <variable name="SourceAppCode" type="xsd:string"/>
+    <variable name="FaultStr" type="xsd:string"/>
+    <variable name="FaultCode" type="xsd:string"/>
+    <variable name="ExecutionOutput" type="xsd:string"/>
+    <variable name="ErrorBusCode" type="xsd:string"/>
+    <variable name="ErrorBusMessage" type="xsd:string"/>
+    <variable name="ErrorTechCode" type="xsd:string"/>
+    <variable name="ErrorTechMessage" type="xsd:string"/>
+    <variable name="ErrorTechDetails" type="xsd:string"/>
+    <variable name="TechSystemOperation" type="xsd:string"/>
+    <variable name="TechSystem" type="xsd:string"/>
+    <variable name="ClientIPAddress" type="xsd:string"/>
+    <variable name="ExecutionID" type="xsd:string"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in UpdateProfitBPELProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="updateprofitbpelprocess_client" portType="client:UpdateProfitBPELProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign_DefaultValues">
+      <copy bpelx:insertMissingToData="yes">
+        <from>$inputVariable.payload/ns2:MessageHeader/ns2:TransactionID</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceExecutionID</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns2:MessageHeader/ns2:ApplicationCode</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppCode</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns2:MessageHeader/ns2:ApplicationUserName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppUserName</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns2:MessageHeader/ns2:TransactionID</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageHeader/ns2:TransactionID</to>
+      </copy>
+      <copy>
+        <from>'UpdateProfitInfo'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy>
+      <copy>
+        <from>ora:toCDATA($inputVariable.payload)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy>
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy>
+      <copy>
+        <from>'Success'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:StatusInformation/ns2:Status</to>
+      </copy>
+    </assign>
+    <extensionActivity>
+      <bpelx:exec name="Java_Validation">
+        <![CDATA[try {     
+                     java.net.InetAddress ipAddress = java.net     
+                                                          .InetAddress     
+                                                          .getLocalHost();     
+                     String clientIp = (ipAddress.getHostAddress()).trim();     
+              
+                     String compositeName = (String) getVariableData("CompositeName");     
+                     String transactionID =     
+                         ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns2:TransactionID"))     
+                         .getTextContent();     
+                     String applicationCode =     
+                         ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns2:ApplicationCode"))     
+                         .getTextContent();     
+                     String applicationUserName =     
+                         ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns2:ApplicationUserName"))     
+                         .getTextContent();     
+                     String cardID =     
+                         ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns2:P_CARD_ID"))     
+                         .getTextContent();     
+                     String pFlgUpd =     
+                         ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns2:P_FLG_UPD"))     
+                         .getTextContent();     
+                          
+                     String MandatoryField = null;     
+              
+                     if (transactionID.equals("")) {     
+                         MandatoryField = "TransactionID";     
+                     } else if (applicationCode.equals("")) {     
+                         MandatoryField = "ApplicationCode";     
+                     } else if (applicationUserName.equals("")) {     
+                         MandatoryField = "ApplicationUserName";     
+                     } else if (cardID.equals("")) {     
+                         MandatoryField = "P_CARD_ID";     
+                     } else if (pFlgUpd.equals("")) {     
+                         MandatoryField = "P_FLG_UPD";     
+                     }     
+              
+                     if (MandatoryField != null) {     
+                         setVariableData("ExecutionStatus", "F");     
+                         setVariableData("outputVariable", "payload", "//ns1:Status", "Failed");     
+                         setVariableData("ErrorBusCode", "VF0001");     
+                         setVariableData("ErrorBusMessage",     
+                                         "Validation Fault : Unable to FulFill Transaction, Entry [ " + MandatoryField +     
+                                         " ] is Mandatory.");     
+                         setVariableData("ErrorTechCode", "OFM-VAL-0001");     
+                         setVariableData("ErrorTechMessage", "Entry [ " + MandatoryField + " ] is Mandatory.");     
+                     } else {     
+                         com.dimensions.mw.utils.validationManagement.ValidationManager validationManager =     
+                             new com.dimensions.mw.utils.validationManagement.ValidationManager();     
+                         String validationCheck =     
+                             validationManager.ApplyValidation(applicationCode, compositeName, "isAllowedSource",     
+                                                               compositeName + "###" + applicationCode + "###" + clientIp +     
+                                                               "###" + "token" + "###" + applicationUserName);     
+                      if (validationCheck == null) {                  
+                    /* String attributesCheck = validationManager.ApplyValidation(applicationCode, compositeName, "validateAttributes",     
+                                                                                         "P_CARD_ID:String" + ":" + cardID + "###" +     
+                                                                                          "P_FLG_UPD:String"+":"+ pFlgUpd );     
+                         
+                              if(attributesCheck != null){                  
+                              setVariableData("ExecutionStatus", "F");                  
+                              setVariableData("outputVariable", "payload", "//ns2:Status","Failed");                  
+                              setVariableData("ErrorBusCode",attributesCheck.split("#")[0]);                  
+                              setVariableData("ErrorBusMessage",attributesCheck.split("#")[1].split("##")[0]);                  
+                              setVariableData("ErrorTechCode",attributesCheck.split("##")[1].split("###")[0]);                  
+                              setVariableData("ErrorTechMessage",attributesCheck.split("###")[1].split("###-")[0]);                  
+                              setVariableData("ErrorTechDetails", attributesCheck.split("###-")[1].split("#####")[0]);                  
+                              }   */ 
+                                                           } else {     
+                                                               setVariableData("ExecutionStatus", "F");     
+                                                               setVariableData("outputVariable", "payload", "//ns2:Status", "Failed");     
+                                                               setVariableData("ErrorBusCode", validationCheck.split("#")[0]);     
+                                                               setVariableData("ErrorBusMessage", validationCheck.split("#")[1].split("##")[0]);     
+                                                               setVariableData("ErrorTechCode", validationCheck.split("##")[1].split("###")[0]);     
+                                                               setVariableData("ErrorTechMessage", validationCheck.split("###")[1].split("###-")[0]);     
+                                                               setVariableData("ErrorTechDetails", validationCheck.split("###-")[1].split("#####")[0]);     
+                                                           }     
+                                                       }     
+                                                        
+              
+                 } catch (Exception exc) {     
+                     addAuditTrailEntry(exc);     
+                     exc.printStackTrace();     
+                 }]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <if name="IfValidInput">
+      <documentation>
+        <![CDATA[Yes]]>
+      </documentation>
+      <condition>$ExecutionStatus = 'S'</condition>
+      <sequence>
+        <scope name="Scope1">
+          <variables>
+            <variable name="InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable"
+                      messageType="ns1:args_in_msg"/>
+            <variable name="InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_OutputVariable"
+                      messageType="ns1:args_out_msg"/>
+          </variables>
+          <faultHandlers>
+            <catchAll><sequence name="Sequence1"><assign name="Assign_Fault"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   <copy>
+         <from>ora:getFaultAsString()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultStr</to>
+      </copy><copy>
+         <from>ora:getFaultName()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultCode</to>
+      </copy><copy>
+         <from>'F'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy><copy>
+         <from>'Failed'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:StatusInformation/ns2:Status</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusCode</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusMessage</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechCode</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechMessage</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechDetails</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_ManageError" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {                          
+                      String faultStr = (String)getVariableData("FaultStr");                          
+                      String faultCode = (String)getVariableData("FaultCode");                          
+                      String techSystemOperation = (String)getVariableData("TechSystemOperation");                          
+                      String techSystem = (String)getVariableData("TechSystem");                  
+                      String compositeName = (String)getVariableData("CompositeName");              
+                                    
+                      com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean errorDefinitionBean =                          
+                          new com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean();                          
+                                    
+                      com.dimensions.mw.utils.errorManagement.ErrorManager errorManager = new com.dimensions.mw.utils.errorManagement.ErrorManager();                          
+                                    
+                      errorDefinitionBean = errorManager.getErrorInformation(faultCode+" "+faultStr,techSystem,techSystemOperation,compositeName);                           
+                            
+                      setVariableData("outputVariable", "payload", "//ns2:ErrorBusCode",errorDefinitionBean.getErrorBussinessCode() );                   
+                      setVariableData("outputVariable", "payload", "//ns2:ErrorBusMessage", errorDefinitionBean.getErrorBussinessMessage());                   
+                      setVariableData("outputVariable", "payload", "//ns2:ErrorTechCode",errorDefinitionBean.getErrorTechCode());                   
+                      setVariableData("outputVariable", "payload", "//ns2:ErrorTechMessage",errorDefinitionBean.getErrorTechMessage());               
+                      setVariableData("outputVariable", "payload", "//ns2:ErrorTechDetails",techSystem+" | "+techSystemOperation+" | "+ errorDefinitionBean.getErrorTechDetails());         
+                       
+                                   
+              } catch (Exception exc) {      
+                    addAuditTrailEntry(exc);    
+                    exc.printStackTrace();   
+              }]]></bpelx:exec>
+   </extensionActivity></sequence></catchAll>
+          </faultHandlers><sequence name="Sequence2"><assign name="Assign_RemoveEmptyTag"
+                                                        xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+   <extensionAssignOperation>
+                <bpelx:remove xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation</bpelx:target>
+         </bpelx:remove>
+              </extensionAssignOperation></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <![CDATA[try {       
+            String weblogicDomainName = "Unknown";       
+            String serverName = "Unknown";       
+            javax.naming.InitialContext ctx = null;       
+            ctx = new javax.naming.InitialContext();       
+            javax.management.MBeanServer beanServer =       
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");       
+            javax.management.ObjectName runtimeService =       
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");       
+            javax.management.ObjectName domainCFG =       
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");       
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");       
+            javax.management.ObjectName serverCFG =       
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");       
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");       
+       
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();       
+            setVariableData("ExecutionID", executionID);       
+            String compositeName = (String) getVariableData("CompositeName");       
+            String sourceAppCode = (String) getVariableData("SourceAppCode");       
+            String sourceExecutionID = (String) getVariableData("SourceExecutionID");       
+            String sourceAppUserName = (String) getVariableData("SourceAppUserName");       
+            String executionInput = (String) getVariableData("ExecutionInput");       
+            String instanceID = (String) getVariableData("InstanceID");       
+            String bussinessKey = (String) getVariableData("BusinessKey");       
+       
+            com.dimensions.mw.utils.loggerManagement.LoggerManager       
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,       
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);       
+        } catch (Exception exc) {       
+ addAuditTrailEntry(exc);      
+                    exc.printStackTrace();     
+        }]]>
+      </bpelx:exec>
+   </extensionActivity><sequence><assign name="AssignUpdateAdapter_Input"><copy><from>number($inputVariable.payload/ns2:MessageBody/ns2:InfoInformation/ns2:P_CARD_ID)</from><to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable.InputParameters/ns3:P_CARD_ID</to></copy><copy><from>$inputVariable.payload/ns2:MessageBody/ns2:InfoInformation/ns2:P_DATE</from><to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable.InputParameters/ns3:P_DATE</to></copy><copy><from>$inputVariable.payload/ns2:MessageBody/ns2:InfoInformation/ns2:P_NOTE</from><to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable.InputParameters/ns3:P_NOTE</to></copy><copy><from>number($inputVariable.payload/ns2:MessageBody/ns2:InfoInformation/ns2:P_SETUP_YEAR)</from><to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable.InputParameters/ns3:P_SETUP_YEAR</to></copy><copy><from>number($inputVariable.payload/ns2:MessageBody/ns2:InfoInformation/ns2:P_FLG_UPD)</from><to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable.InputParameters/ns3:P_FLG_UPD</to></copy></assign><invoke name="InvokeUpdateProfitDbAdapter"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   partnerLink="UpdateProfitDbAdapter"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   portType="ns1:UpdateProfitDbAdapter_ptt"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   operation="UpdateProfitDbAdapter"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   inputVariable="InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_InputVariable"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   outputVariable="InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_OutputVariable"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   bpelx:invokeAsDetail="no"/><assign name="AssignUpdateProfitOutput"><copy><from>$InvokeUpdateProfitDbAdapter_UpdateProfitDbAdapter_OutputVariable.OutputParameters/ns3:P_RETEN</from><to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:TransactionInformation/ns2:P_RETEN</to></copy></assign></sequence></sequence></scope><assign name="Assign_FinalOutput" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+   <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+         <from>ora:toCDATA($outputVariable.payload)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+      </copy></assign><extensionActivity>
+          <bpelx:exec name="Java_FinalBlog">
+            <![CDATA[try {      
+            String executionID = (String) getVariableData("ExecutionID");      
+            String executionStatus = (String) getVariableData("ExecutionStatus");      
+            String sourceExecutionID = (String) getVariableData("SourceExecutionID");      
+            String executionOutput = (String) getVariableData("ExecutionOutput");      
+            String compositeName = (String) getVariableData("CompositeName");      
+      
+            com.dimensions.mw.utils.loggerManagement.LoggerManager      
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+        } catch (Exception exc) {      
+            addAuditTrailEntry(exc);     
+                    exc.printStackTrace();    
+        }]]>
+          </bpelx:exec>
+        </extensionActivity>
+      </sequence>
+      <else>
+        <documentation>
+          <![CDATA[No]]>
+        </documentation>
+        <assign name="Assign_validationFaild">
+          <copy>
+            <from>$ErrorBusCode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusCode</to>
+          </copy>
+          <copy>
+            <from>$ErrorBusMessage</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusMessage</to>
+          </copy>
+          <copy>
+            <from>$ErrorTechCode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechCode</to>
+          </copy>
+          <copy>
+            <from>$ErrorTechMessage</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechMessage</to>
+          </copy>
+          <copy>
+            <from>$ErrorTechDetails</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechDetails</to>
+          </copy>
+        </assign>
+      </else>
+    </if>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="updateprofitbpelprocess_client" portType="client:UpdateProfitBPELProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

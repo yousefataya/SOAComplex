@@ -1,0 +1,704 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Mar 25 08:39:07 EET 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="HCMEmpsProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsProfile/HCMEmpsProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsProfile/HCMEmpsProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsProfile/HCMEmpsRestRef"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://TargetNamespace.com/HCMEmpsRestRef_GetEmpsProfile_response"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpsProfile/dbReference"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns5="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+         xmlns:ns7="http://xmlns.oracle.com/adf/svc/types/"
+         xmlns:ns6="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/types/"
+         xmlns:ns21="http://xmlns.oracle.com/apps/hcm/people/core/flex/personAddressUsageDFF/"
+         xmlns:ns25="http://xmlns.oracle.com/apps/hcm/people/core/flex/driversLicenseTypeDFF/"
+         xmlns:ns17="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentWorkMeasureDFF/"
+         xmlns:ns32="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/"
+         xmlns:ns12="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+         xmlns:ns33="http://xmlns.oracle.com/apps/hcm/people/core/flex/phoneDFF/"
+         xmlns:ns31="http://xmlns.oracle.com/apps/hcm/people/core/flex/nationalIdentifierDFF/"
+         xmlns:ns37="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/"
+         xmlns:ns28="http://xmlns.oracle.com/apps/hcm/people/core/flex/imageDFF/"
+         xmlns:ns13="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentExtraInfoEFF/Category/"
+         xmlns:ns29="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfoDFF/"
+         xmlns:ns11="http://xmlns.oracle.com/apps/financials/generalLedger/accounts/codeCombinations/publicFlex/Account/"
+         xmlns:ns23="http://xmlns.oracle.com/apps/hcm/people/core/flex/deliveryMethodDFF/"
+         xmlns:ns38="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+         xmlns:ns24="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDriversLicenseLegDDF/"
+         xmlns:ns16="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentSupervisorDFF/"
+         xmlns:ns10="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+         xmlns:ns8="http://xmlns.oracle.com/adf/svc/errors/"
+         xmlns:ns9="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDFF/"
+         xmlns:ns35="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+         xmlns:ns36="http://xmlns.oracle.com/apps/hcm/people/core/flex/visaPermitDFF/"
+         xmlns:ns22="http://xmlns.oracle.com/apps/hcm/people/core/flex/citizenshipsDFF/"
+         xmlns:ns26="http://xmlns.oracle.com/apps/hcm/people/core/flex/emailAddressDFF/"
+         xmlns:ns20="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDDF/"
+         xmlns:ns19="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDFF/"
+         xmlns:ns18="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignGradeStepsDDF/"
+         xmlns:ns30="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+         xmlns:ns15="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+         xmlns:ns27="http://xmlns.oracle.com/apps/hcm/people/core/flex/ethnicityDFF/"
+         xmlns:ns14="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDFF/"
+         xmlns:ns34="http://xmlns.oracle.com/apps/hcm/people/core/flex/religionDFF/">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsProfile/HCMEmpsProcess" location="../WSDLs/HCMEmpsProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="hcmempsprocess_services" partnerLinkType="client:HCMEmpsProcess" myRole="HCMEmpsProcessProvider"/>
+    <partnerLink name="HCMEmpsRestRef" partnerLinkType="ns1:HCMEmpsRestRef" partnerRole="HCMEmpsRestRefProvider"/>
+    <partnerLink name="dbReference" partnerLinkType="ns3:dbReference_plt" partnerRole="dbReference_role"/>
+    <partnerLink name="HCMSOAPRef" partnerLinkType="ns5:WorkerService" partnerRole="WorkerServiceProvider"
+                 myRole="WorkerServiceRequestor"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:HCMEmpsProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:HCMEmpsProcessResponseMessage"/>
+    <variable name="InvokeHCMRef_GetEmpsProfile_InputVariable" messageType="ns1:Rest_EmptyMessage"/>
+    <variable name="InvokeHCMRef_GetEmpsProfile_OutputVariable" messageType="ns1:GetEmpsProfile_outputMessage"/>
+    <variable name="Variable1" type="xsd:string"/>
+    
+        <variable name="vLFirstName" type="xsd:string"/>
+    <variable name="vLSecoundName" type="xsd:string"/>
+    <variable name="vLthirdName" type="xsd:string"/>
+    <variable name="vLFamilyName" type="xsd:string"/>
+    
+    <variable name="vFFirstName" type="xsd:string"/>
+    <variable name="vFSecoundName" type="xsd:string"/>
+    <variable name="vFthirdName" type="xsd:string"/>
+    <variable name="vFFamilyName" type="xsd:string"/>
+    
+    
+   <variable name="vCompositeName" type="xsd:string"/>
+    <variable name="vCompositeLink" type="xsd:string"/>
+    <variable name="vLastSRequest" type="xsd:string"/>
+    <variable name="vCSFKey" type="xsd:string"/>
+    <variable name="vCSFMap" type="xsd:string"/>
+    <variable name="status" type="xsd:string"/>
+    <variable name="vOperationType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    <variable name="vWSDLLink" type="xsd:string"/>
+    <variable name="vURI" type="xsd:string"/>
+    <variable name="version" type="xsd:string"/>
+    <!--<variable name="InvokeInsertEmpProfile_insert_InputVariable" messageType="ns3:HcmEmployeeProfileCollection_msg"/>-->
+    <variable name="InvokeInsertEmpProfile_insert" messageType="ns3:HcmEmployeeProfileCollection_msg"/>
+   <!-- <variable name="InvokeInsertEmpProfile_findWorker_InputVariable" messageType="ns5:WorkerService_findWorker"/>
+    <variable name="InvokeInsertEmpProfile_findWorker_OutputVariable"
+              messageType="ns5:WorkerService_findWorkerResponse"/>
+    <variable name="InvokeSOAP_findPersonContactRelationship_InputVariable"
+              messageType="ns5:WorkerService_findPersonContactRelationship"/>
+    <variable name="InvokeSOAP_findWorker_InputVariable" messageType="ns5:WorkerService_findWorker"/>
+    <variable name="InvokeSOAP_findWorker_OutputVariable" messageType="ns5:WorkerService_findWorkerResponse"/>
+    <variable name="InvokeSOAP_findWorker_InputVariable_1" messageType="ns5:WorkerService_findWorker"/>
+    <variable name="InvokeSOAP_findWorker_OutputVariable_1" messageType="ns5:WorkerService_findWorkerResponse"/>
+    <variable name="InvokePersonSOAP_findWorker_InputVariable" messageType="ns5:WorkerService_findWorker"/>
+    <variable name="InvokePersonSOAP_findWorker_OutputVariable" messageType="ns5:WorkerService_findWorkerResponse"/>-->
+    <!--<variable name="findWorker_InputVariable" messageType="ns5:WorkerService_findWorker"/>
+    <variable name="findWorker_OutputVariable" messageType="ns5:WorkerService_findWorkerResponse"/>-->
+    
+    <variable name="hasMore" type="xsd:boolean"/>
+    <variable name="offset" type="xsd:int"/>
+    <variable name="restConnection" type="xsd:string"/>
+    <variable name="findWorker_InputVariable" messageType="ns5:WorkerService_findWorker"/>
+    <variable name="findWorker_OutputVariable" messageType="ns5:WorkerService_findWorkerResponse"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <assign name="AssignFault">
+        <copy>
+          <from>'F'</from>
+          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:RequestResult</to>
+        </copy>
+      </assign>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in HCMEmpsProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="hcmempsprocess_services" portType="client:HCMEmpsProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignInitials">
+      <copy>
+        <from>$inputVariable.payload/client:status</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+      </copy>
+      <copy>
+        <from>'2'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$version</to>
+      </copy>
+      <copy ignoreMissingFromData="yes">
+        <from>$inputVariable.payload/client:wsdlLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vWSDLLink</to>
+      </copy>
+      <copy ignoreMissingFromData="yes">
+        <from>$inputVariable.payload/client:URI</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI</to>
+      </copy>
+      <copy>
+        <from>0</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+      </copy>
+      <copy>
+        <from>'close'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$restConnection</to>
+      </copy>
+      <copy>
+        <from>true()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vRequestType</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vBatchNumber</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:lsrDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLastSRequest</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:key</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFKey</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:map</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFMap</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeName</to>
+      </copy>
+    </assign>
+    <while name="WhileHasMore">
+      <condition>$hasMore</condition>
+      <sequence name="Sequence5">
+        <if name="IfOperationIsInsert">
+          <documentation>
+            <![CDATA[Insert]]>
+          </documentation>
+          <condition>$inputVariable.payload/client:status = '1'</condition>
+          <sequence>
+          <assign name="AssignInsert">
+            <copy>
+              <from>'assignments.CreationDate%20%3E%20%27'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+            </copy>
+            <copy>
+              <from>'1'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+            </copy>
+          </assign>
+          
+          <assign name="AssignInitialIVal">
+          <copy>
+            <from>concat($inputVariable.payload/client:compositeLink,'?expand=all&amp;onlyData=true&amp;limit=50&amp;offset=',$offset,'&amp;q=',$vOperationType,$vLastSRequest,'%27%20AND%20assignments.ActionCode%20in(%27HIRE%27,%27PROBATION%27)')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+          </copy>
+        </assign>
+          
+          </sequence>
+          <else>
+            <documentation>
+              <![CDATA[Update]]>
+            </documentation>
+            <sequence>
+              <assign name="AssignUpdate">
+                <copy>
+                  <from>'assignments.LastUpdateDate%20%3E%20%27'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+                </copy>
+                <copy>
+                  <from>'2'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                </copy>
+              </assign>
+               <assign name="AssignInitialUpdtVal">
+                <copy>
+                  <from>concat($inputVariable.payload/client:compositeLink,'?expand=all&amp;onlyData=true&amp;limit=50&amp;offset=',$offset,'&amp;q=(',$vOperationType,$vLastSRequest,'%27%20or%20LastUpdateDate%20%3E%20%27',$vLastSRequest,'%27%20)%20AND%20assignments.ActionCode%20in(%27HIRE%27,%27PROBATION%27)')</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+                </copy>
+              </assign>
+            </sequence>
+          </else>
+        </if>
+        <invoke name="InvokeHCMRef" partnerLink="HCMEmpsRestRef" portType="ns1:HCMEmpsRestRef_ptt"
+                operation="GetEmpsProfile" inputVariable="InvokeHCMRef_GetEmpsProfile_InputVariable"
+                outputVariable="InvokeHCMRef_GetEmpsProfile_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="rest.binding.requestURI">$vCompositeLink</bpelx:toProperty>
+            <bpelx:toProperty name="csf-key">$vCSFKey</bpelx:toProperty>
+            <bpelx:toProperty name="csf.map">$vCSFMap</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.Connection">$restConnection</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.REST-Framework-Version">$version</bpelx:toProperty>
+          </bpelx:toProperties>
+        </invoke>
+        <forEach parallel="no" counterName="HCMRerEachCounter" name="ForEachEmpsProfile">
+          <startCounterValue>1</startCounterValue>
+          <finalCounterValue>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:count</finalCounterValue>
+          <scope name="Scope1">
+            <sequence name="Sequence1">
+              <assign name="AssignRefValues">
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:PersonNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empAcntNo</to>
+                </copy>
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:CitizenshipLegislationCode</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:nationality</to>
+                </copy>
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:PersonId</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:perId</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:DateOfBirth</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empBirthDate</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:CreationDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:dateCreated</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:LastUpdateDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:dateModified</to>
+                </copy>
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:HireDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empHireDate</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:NationalId</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:nationalNo</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:MaritalStatus</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:famStatus</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:Salutation</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:titCode</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:Gender</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empGender</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:Religion</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empRelegion</to>
+                </copy>
+              </assign>
+              <forEach parallel="no" counterName="ForEachAssignments" name="ForEachAssignments">
+                <startCounterValue>1</startCounterValue>
+                <finalCounterValue>count($InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments)</finalCounterValue>
+                <scope name="Scope2">
+                  <sequence name="Sequence2">
+                    <assign name="AssignAssignments">
+                      <copy ignoreMissingFromData="no">
+                        <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments[$ForEachAssignments]/ns2:JobId</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:professionD</to>
+                      </copy>
+                      <copy>
+                        <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments[$ForEachAssignments]/ns2:LocationId</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:admBrnCode</to>
+                      </copy>
+                      <copy ignoreMissingFromData="no">
+                        <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments[$ForEachAssignments]/ns2:GradeId</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:gradeMajer</to>
+                      </copy>
+                      <copy>
+                        <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments[$ForEachAssignments]/ns2:ProbationPeriodEndDate</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empAprDate</to>
+                      </copy>
+                    </assign>
+                    <if name="IfActionCode">
+                      <documentation>
+                        <![CDATA[ActionCode  = HIRE]]>
+                      </documentation>
+                      <condition>contains($InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items/ns2:assignments/ns2:ActionCode,'HIRE')</condition>
+                      <if name="IfEffectiveStartDateIsNull">
+                        <documentation>
+                          <![CDATA[EffectiveStartDate is null]]>
+                        </documentation>
+                        <condition>string-length($InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items/ns2:assignments/ns2:EffectiveStartDate) &gt; 0</condition>
+                        <assign name="AssignHireDate">
+                          <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:HireDate</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empHireDate</to>
+                          </copy>
+                        </assign>
+                        <else>
+                          <documentation>
+                            <![CDATA[EffectiveStartDate is not null]]>
+                          </documentation>
+                          <assign name="AssignEffectiveStartDate">
+                            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                              <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments[$ForEachAssignments]/ns2:EffectiveStartDate</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empHireDate</to>
+                            </copy>
+                          </assign>
+                        </else>
+                      </if>
+                      <elseif>
+                        <documentation>
+                          <![CDATA[ActionCode = PROBATION]]>
+                        </documentation>
+                        <condition>contains($InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items/ns2:assignments/ns2:ActionCode,'PROBATION')</condition>
+                        <assign name="AssignProbationPeriodEndDate">
+                          <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:assignments[$ForEachAssignments]/ns2:EffectiveStartDate</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empAprDate</to>
+                          </copy>
+                        </assign>
+                      </elseif>
+                      <else>
+                        <documentation>
+                          <![CDATA[Others]]>
+                        </documentation>
+                        <empty name="NullToDo"/>
+                      </else>
+                    </if>
+                  </sequence>
+                </scope>
+              </forEach>
+              <assign name="AssignDFF">
+                <!--<copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF[$ForEachDFF]/ns2:jibLocation</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:admBrnCode</to>
+                </copy>-->
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF/ns2:bloodType</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empBloodDesc</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF/ns2:signature</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:rightSign</to>
+                </copy>
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF/ns2:jibSsNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empDamanNo</to>
+                </copy>
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF/ns2:jibSsDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:empSocSecDate</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF/ns2:tax</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:taxNo</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF/ns2:department</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:ecfCpfCode</to>
+                </copy>
+              </assign>
+              <!--<forEach parallel="no" counterName="ForEachDFF" name="ForEachDFF">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue>count($InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:personDFF)</finalCounterValue>
+            <scope name="Scope3">
+            </scope>
+          </forEach>-->
+              <assign name="AssignFindSOAPWorker">
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>'0'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:fetchStart</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>'PersonNumber'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:attribute</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:items[$HCMRerEachCounter]/ns2:PersonNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:value</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>'-1'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:fetchSize</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>'And'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:conjunction</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>'And'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:conjunction</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>'false'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:upperCaseCompare</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>'And'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:conjunction</to>
+                </copy>
+                <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+                  <from>'false'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:upperCaseCompare</to>
+                </copy>
+                <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                  <from>'='</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findWorker_InputVariable.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:operator</to>
+                </copy>
+              </assign>
+              <invoke name="InvokeHCMWorker" partnerLink="HCMSOAPRef"
+                      portType="ns5:WorkerService" operation="findWorker" inputVariable="findWorker_InputVariable"
+                      outputVariable="findWorker_OutputVariable" bpelx:invokeAsDetail="no">
+               <bpelx:toProperties>
+                  <bpelx:toProperty name="endpointWSDL">$vWSDLLink</bpelx:toProperty>
+                  <bpelx:toProperty name="endpointURI">$vURI</bpelx:toProperty>
+                </bpelx:toProperties>        
+              </invoke>
+              <assign name="RestNames">
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFirstName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLSecoundName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLthirdName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFamilyName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFirstName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFSecoundName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFthirdName</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFamilyName</to>
+                </copy>
+              </assign>
+              <forEach parallel="no" counterName="ForEachEmpsName" name="ForEachEmpsName">
+                <startCounterValue>1</startCounterValue>
+                <finalCounterValue>count($findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName)</finalCounterValue>
+                <scope name="Scope4">
+                  <sequence name="Sequence3">
+                    <if name="IfCharAREN">
+                      <documentation>
+                        <![CDATA[Arabic]]>
+                      </documentation>
+                      <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:CharSetContext,'AR')</condition>
+                      <assign name="AssignLocalName">
+                        <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                          <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:FirstName</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFirstName</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                          <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:LastName</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFamilyName</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                          <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:NameInformation1</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFSecoundName</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                          <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:NameInformation2</from>
+                          <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFthirdName</to>
+                        </copy>
+                      </assign>
+                      <elseif>
+                        <documentation>
+                          <![CDATA[English]]>
+                        </documentation>
+                        <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:CharSetContext,'US') or contains($findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:CharSetContext,'UK') or contains($findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:CharSetContext,'EN')</condition>
+                        <assign name="AssignForignName">
+                          <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:FirstName</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFirstName</to>
+                          </copy>
+                          <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:LastName</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFamilyName</to>
+                          </copy>
+                          <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:NameInformation1</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLSecoundName</to>
+                          </copy>
+                          <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                            <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkerName[$ForEachEmpsName]/ns5:NameInformation2</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLthirdName</to>
+                          </copy>
+                        </assign>
+                      </elseif>
+                      <else>
+                        <documentation>
+                          <![CDATA[Others]]>
+                        </documentation>
+                        <empty name="NotSupportedLang"/>
+                      </else>
+                    </if>
+                  </sequence>
+                </scope>
+              </forEach>
+              <assign name="AssignHCMSOAPOutputValues">
+                <copy>
+                  <from>$vLFirstName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:firstNameL</to>
+                </copy>
+                <copy>
+                  <from>$vLSecoundName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:seconedNameL</to>
+                </copy>
+                <copy>
+                  <from>$vLthirdName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:thirdNameL</to>
+                </copy>
+                <copy>
+                  <from>$vLFamilyName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:lastNameL</to>
+                </copy>
+                <copy>
+                  <from>$vFFirstName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:firstName</to>
+                </copy>
+                <copy>
+                  <from>$vFSecoundName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:seconedName</to>
+                </copy>
+                <copy>
+                  <from>$vFthirdName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:thirdName</to>
+                </copy>
+                <copy>
+                  <from>$vFFamilyName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:lastName</to>
+                </copy>
+              </assign>
+              <forEach parallel="no" counterName="ForEachWorkRelationShip" name="ForEachWorkRelationShip">
+                <startCounterValue>1</startCounterValue>
+                <finalCounterValue>count($findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkRelationship)</finalCounterValue>
+                <scope name="Scope5">
+                  <sequence name="Sequence4">
+                    <forEach parallel="no" counterName="ForEachCountractType" name="ForEachCountractType">
+                      <startCounterValue>1</startCounterValue>
+                      <finalCounterValue>count($findWorker_OutputVariable.parameters/ns6:result/ns5:Value[$ForEachWorkRelationShip]/ns5:WorkRelationship/ns5:WorkTerms)</finalCounterValue>
+                      <scope name="Scope6">
+                        <assign name="AssignContractType">
+                          <copy ignoreMissingFromData="yes">
+                            <from>$findWorker_OutputVariable.parameters/ns6:result/ns5:Value/ns5:WorkRelationship[$ForEachWorkRelationShip]/ns5:WorkTerms[$ForEachCountractType]/ns5:Contract/ns5:ContractType</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:hepgSerial</to>
+                          </copy>
+                        </assign>
+                      </scope>
+                    </forEach>
+                  </sequence>
+                </scope>
+              </forEach>
+              <assign name="FinalAssign">
+                <copy>
+                  <from>$status</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:status</to>
+                </copy>
+                <copy>
+                  <from>$vBatchNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:batchNum</to>
+                </copy>
+                <copy>
+                  <from>$vRequestType</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpProfile_insert.HcmEmployeeProfileCollection/ns4:HcmEmployeeProfile/ns4:requestType</to>
+                </copy>
+                <copy>
+                  <from>$InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:hasMore</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+                </copy>
+                <copy>
+                  <from>$offset + $InvokeHCMRef_GetEmpsProfile_OutputVariable.reply/ns2:count</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+                </copy>
+              </assign>
+              <invoke name="InvokeInsertEmpProfile" inputVariable="InvokeInsertEmpProfile_insert"
+                      partnerLink="dbReference" portType="ns3:dbReference_ptt" operation="insert"
+                      bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </scope>
+        </forEach>
+      </sequence>
+    </while>
+    <wait name="Wait1">
+      <for>'PT1S'</for>
+    </wait>
+    <assign name="AssignDone">
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:RequestResult</to>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="hcmempsprocess_services" portType="client:HCMEmpsProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

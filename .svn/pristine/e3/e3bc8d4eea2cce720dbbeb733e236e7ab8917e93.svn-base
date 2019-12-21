@@ -1,0 +1,12 @@
+<adapter-config name="CBSReference" adapter="db" wsdlLocation="../WSDLs/CBSReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="TransactionInquiry" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CBSReference_ptt" operation="CBSReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="SP_GETCHEQUEBOOKREQUESTS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

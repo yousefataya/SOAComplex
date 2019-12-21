@@ -1,0 +1,111 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Jan 31 11:08:28 EET 2018
+  Author:  ahamad
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="JamarekServiceProcess"
+               targetNamespace="http://xmlns.oracle.com/Jamarek/JamarekService/JamarekServiceProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/Jamarek/JamarekService/JamarekServiceProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://oracle.com/sca/soapservice/Jamarek/JamarekService/JamarekService"
+         xmlns:ns2="http://tempuri.org/" xmlns:ns3="http://www.fact.com.jo"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+  <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="http://oracle.com/sca/soapservice/Jamarek/JamarekService/JamarekService"
+          location="../WSDLs/JamarekServiceWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+          ui:processWSDL="true"/>
+  <partnerLinks>
+    <partnerLink name="JamarekService" partnerLinkType="ns1:JamarekService" myRole="JamarekService_ptt"/>
+    <partnerLink name="JamarekWeb" partnerLinkType="ns2:JamarekWeb" partnerRole="ServiceSoap"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Invoke1_push_InputVariable" messageType="ns2:pushSoapIn"/>
+    <variable name="Invoke1_push_OutputVariable" messageType="ns2:pushSoapOut"/>
+    <variable name="Receive1_JamarekService_InputVariable" messageType="ns1:requestMessage"/>
+    <variable name="Reply1_JamarekService_OutputVariable" messageType="ns1:replyMessage"/>
+  </variables>
+  <sequence name="main">
+    <receive name="receiveInput" createInstance="yes" partnerLink="JamarekService" portType="ns1:JamarekService_ptt"
+             operation="JamarekService" variable="Receive1_JamarekService_InputVariable"/>
+    <assign name="Assign_input">
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:BANK_USER</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:bank_user</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:PASSWORD</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:password</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:GUARANTY_NO</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:guaranty_no</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:BRANCH_NO</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:branch_no</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:ACTION</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:action</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:STAMPS</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:stamps</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:NEW_VALUE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:new_value</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:NEW_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:new_date</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:GUARANTEED_NAME</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:guaranteed_name</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:PURPOSE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:purpose</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:GUARANTY_VALUE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:guaranty_value</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:ISSUE_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:issue_date</to>
+      </copy>
+      <copy>
+        <from>$Receive1_JamarekService_InputVariable.InputMessages/ns3:DUE_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_push_InputVariable.parameters/ns2:due_date</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeJamarek" bpelx:invokeAsDetail="no" partnerLink="JamarekWeb" portType="ns2:ServiceSoap"
+            operation="push" inputVariable="Invoke1_push_InputVariable" outputVariable="Invoke1_push_OutputVariable"/>
+    <assign name="Assign_output">
+      <copy>
+        <from>$Invoke1_push_OutputVariable.parameters/ns2:pushResult</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_JamarekService_OutputVariable.OutputMessage/ns3:Desc</to>
+      </copy>
+    </assign>
+    <reply name="replyOutput" partnerLink="JamarekService" variable="Reply1_JamarekService_OutputVariable"
+           portType="ns1:JamarekService_ptt" operation="JamarekService"/>
+  </sequence>
+</process>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ECCPDCUpdateProcess"
+     targetNamespace="http://xmlns.oracle.com/ECC/ECCPDCUpdate/ECCPDCUpdateProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/ECC/ECCPDCUpdate/ECCPDCUpdateProcess"
+     xmlns:ns1="http://xmlns.fact.com/ws/EPDU"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://172.20.5.204:7003/soa-infra/services/ECC/ECCPDCUpdate!1.0/WSDLs/ECCPDCUpdateProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="ECCPDCUpdateProcess">
+        <plnk:role name="ECCPDCUpdateProcessProvider" portType="client:ECCPDCUpdateProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.fact.com/ws/EPDU" schemaLocation="../Schemas/ECCPDCUpdateWS.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ECCPDCUpdateProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:ECCPCDUpdateMessageInput"/>
+    </wsdl:message>
+    <wsdl:message name="ECCPDCUpdateProcessResponseMessage">
+        <wsdl:part name="payload" element="ns1:ECCPCDUpdateMessageOutput"/>
+    </wsdl:message>
+    <wsdl:portType name="ECCPDCUpdateProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ECCPDCUpdateProcessRequestMessage"/>
+            <wsdl:output message="client:ECCPDCUpdateProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ECCPDCUpdateProcessBinding" type="client:ECCPDCUpdateProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="eccpdcupdateprocess_client_ep">
+        <wsdl:port name="ECCPDCUpdateProcess_pt" binding="client:ECCPDCUpdateProcessBinding">
+            <soap:address location="http://172.20.5.204:7003/soa-infra/services/ECC/ECCPDCUpdate/eccpdcupdateprocess_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

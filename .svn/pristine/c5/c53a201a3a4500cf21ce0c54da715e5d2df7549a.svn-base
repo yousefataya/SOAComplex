@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="GetCompanyName"
+             targetNamespace="http://xmlns.oracle.com/SalaryBulk/GetCompanyName/GetCompanyName"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/SalaryBulk/GetCompanyName/GetCompanyName"
+             xmlns:ns1="http://www.fact.com.jo"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://www.fact.com.jo" schemaLocation="../Schemas/DesignGetCompanyName.xsd" />
+		</schema>
+	</wsdl:types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<wsdl:message name="GetCompanyNameRequestMessage">
+		<wsdl:part name="payload" element="ns1:Input" />
+	</wsdl:message>
+	<wsdl:message name="GetCompanyNameResponseMessage">
+		<wsdl:part name="payload" element="ns1:Output" />
+	</wsdl:message>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the GetCompanyName BPEL process -->
+	<wsdl:portType name="GetCompanyName">
+		<wsdl:operation name="process">
+			<wsdl:input  message="client:GetCompanyNameRequestMessage" />
+			<wsdl:output message="client:GetCompanyNameResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="GetCompanyName">
+		<plnk:role name="GetCompanyNameProvider" portType="client:GetCompanyName"/>
+	</plnk:partnerLinkType>
+</wsdl:definitions>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="WorkerProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMResignationActionOneWay!1.0/WSDLs/WorkerProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="WorkerProcess">
+        <plnk:role name="WorkerProcessProvider" portType="client:WorkerProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess"
+                 schemaLocation="../Schemas/WorkerProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="WorkerProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="WorkerProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:WorkerProcessRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="WorkerProcessBinding" type="client:WorkerProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="workerprocess_client_ep">
+        <wsdl:port name="WorkerProcess_pt" binding="client:WorkerProcessBinding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMResignationActionOneWay/workerprocess_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

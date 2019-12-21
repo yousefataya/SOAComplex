@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:EPI="http://www.fact.com.jo"
+            targetNamespace="http://www.fact.com.jo" elementFormDefault="qualified">
+
+
+<xsd:element name="Output" type="EPI:DataOut"/>
+<xsd:element name="Input" type="EPI:InputCompanyId"/>
+
+
+<xsd:complexType name ="InputCompanyId">
+<xsd:sequence>
+<xsd:element name="PCompany" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="DataOut">
+<xsd:sequence>
+<xsd:element name="GetData" type="EPI:PRecord" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="PRecord">
+<xsd:sequence>
+<xsd:element name="CMPN_CODE" type="xsd:string"/>
+<xsd:element name="CFVR_CODE" type="xsd:string"/>
+<xsd:element name="CFDT_LINE_TYPE" type="xsd:string"/>
+<xsd:element name="CFDT_POS" type="xsd:string"/>
+<xsd:element name="CFDT_LEN" type="xsd:string"/>
+<xsd:element name="CFDT_VAL" type="xsd:string"/>
+<xsd:element name="NODE_ID" type="xsd:string"/>
+<xsd:element name="PROGRAM_ID" type="xsd:string"/>
+<xsd:element name="USER_ID" type="xsd:string"/>
+<xsd:element name="TIME_STAMP" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+</xsd:schema>

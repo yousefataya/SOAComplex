@@ -1,0 +1,46 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="PersonLegislative.xsd"/>
+    <xsd:complexType name="PersonLegislativeGB">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonLegislativeId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonLegislative">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_NINO_VERIFIED" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_NINO_VERIFIED_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_VERIFIED_DATE" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_REPONSE_STATUS_RETURNED" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_REPONSE_STATUS_RETURNED_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_VERIFICATION_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_VERIFICATION_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_CORRELATION_ID" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_LAST_UPDATE_PROCESS_SEQUENCE" nillable="true"
+                         type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="_PARTNER_FIRST_FORENAME" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PARTNER_SECOND_FORENAMES" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PARTNER_SURNAME" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_PARTNER_NATIONAL_INSURANCE_NUM" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_SEXUAL_ORIENTATION" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_SEXUAL_ORIENTATION_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_GENDER_IDENTITY" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_GENDER_IDENTITY_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_UNQ_TAXPAYER_REF" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personLegislativeGB" type="PersonLegislativeGB"/>
+</xsd:schema>

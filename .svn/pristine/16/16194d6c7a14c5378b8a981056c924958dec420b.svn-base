@@ -1,0 +1,46 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDF.xsd"/>
+    <xsd:complexType name="US">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BaseWorkerAsgLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="acaEligibility" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="acaEligibility_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ACAFullTime" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ACAFullTime_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="limitedNonassessmentPeriod" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="limitedNonassessmentPeriod_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="measurementPeriodBeginDate" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="measurementPeriodEndDate" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="administrationPeriodBeginDate" nillable="true"
+                         type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="administrationPeriodEndDate" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="stabilityPeriodBeginDate" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="stabilityPeriodEndDate" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="safeHarborOverride" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="safeHarborOverride_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="initialFlag" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="initialFlag_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="processingPriority" nillable="true" type="xsd:decimal"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="uS" type="US"/>
+</xsd:schema>

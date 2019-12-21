@@ -1,0 +1,31 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PeopleGroupKFFPeople__Group__Flexfield.xsd" xml:id="PeopleGroupKFFPeople__Group__Flexfield-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:complexType name="PeopleGroupKFF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>_PEOPLE_GROUP_ID</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="_FLEX_StructureInstanceCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_StructureInstanceId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="StartDateActive" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EndDateActive" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EnabledFlag" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_PEOPLE_GROUP_ID" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="_ID_FLEX_NUM" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="FND_ACFF_ConcatenatedStorage" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FND_ACFF_Delimiter" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="peopleGroupKFF" type="PeopleGroupKFF"/>
+</xsd:schema>

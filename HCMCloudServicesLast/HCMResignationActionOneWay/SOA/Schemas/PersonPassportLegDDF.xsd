@@ -1,0 +1,26 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonPassportLegDDFKW.xsd" xml:id="PersonPassportLegDDFKW-xsd"/>
+    <xsd:include schemaLocation="PersonPassportLegDDFIN.xsd" xml:id="PersonPassportLegDDFIN-xsd"/>
+    <xsd:include schemaLocation="PersonPassportLegDDFAE.xsd" xml:id="PersonPassportLegDDFAE-xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="PersonPassportLegDDF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PassportId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PassportId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personPassportLegDDF" type="PersonPassportLegDDF"/>
+</xsd:schema>

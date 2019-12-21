@@ -1,0 +1,30 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getBranchesReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getBranchesReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="OUT_CUR_BRANCHES" type="db:OUT_CUR_BRANCHES_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="OUT_CUR_BRANCHES_RowSet">
+      <sequence>
+         <element name="OUT_CUR_BRANCHES_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="LNAME" type="db:string60" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string60">
+      <restriction base="string">
+         <maxLength value="60"/>
+      </restriction>
+   </simpleType>
+</schema>

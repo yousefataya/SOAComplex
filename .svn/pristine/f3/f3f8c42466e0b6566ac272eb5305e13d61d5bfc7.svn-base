@@ -1,0 +1,27 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+     xmlns:ns0="http://xmlns.oracle.com/apps/hcm/people/core/flex/personExtraInfoEFF/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="Mohammed.xsd" xml:id="Mohammed-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personExtraInfoEFF/"
+         schemaLocation="PersonExtraInformationContext.xsd"/>
+    <xsd:complexType name="Mohammed">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonExtraInfoId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ns0:PersonExtraInformationContext">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="PeiAttributeCategory" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="mohammed" type="Mohammed"/>
+</xsd:schema>

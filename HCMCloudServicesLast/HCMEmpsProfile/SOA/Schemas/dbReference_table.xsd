@@ -1,0 +1,72 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbReference" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="HcmEmployeeProfileCollection" type="HcmEmployeeProfileCollection"/>
+   <xs:complexType name="HcmEmployeeProfileCollection">
+      <xs:sequence>
+         <xs:element name="HcmEmployeeProfile" type="HcmEmployeeProfile" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="HcmEmployeeProfile">
+      <xs:sequence>
+         <xs:element name="empAcntNo" type="string2000" nillable="true"/>
+         <xs:element name="firstName" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="seconedName" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="thirdName" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="lastName" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="firstNameL" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="seconedNameL" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="thirdNameL" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="lastNameL" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="empHireDate" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empAprDate" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="nationalNo" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empBirthDate" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empRelegion" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="titCode" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="sncDegCode" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="gradDate" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="degreeMark" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="famStatus" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empGender" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empBloodDesc" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="nationality" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empDamanNo" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="taxNo" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="empSocSecDate" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="insDegree" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="admBrnCode" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="professionD" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="gradeMajer" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="ecfCpfCode" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="holidayGroup" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="rightSign" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="hepgSerial" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="createdBy" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="dateCreated" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="modifiedBy" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="dateModified" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="status" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="stageObject" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="stageObjectId" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="shiftCode" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="requestType" type="string2000" minOccurs="0" nillable="true"/>
+         <xs:element name="batchNum" type="string3000" minOccurs="0" nillable="true"/>
+         <xs:element name="perId" type="string2000" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="string2000">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="2000"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string250">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="250"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string3000">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="3000"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

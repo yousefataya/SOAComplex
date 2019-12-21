@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>error</severity>
+      <loc/>
+      <line>32</line>
+      <col/>
+      <file>BPEL/JIBBankReceiverProcess.bpel</file>
+      <name>BPEL/JIBBankReceiverProcess.bpel</name>
+      <fix/>
+      <msg>Element not completed: 'sequence'</msg>
+   </Fault>
+</Faults>

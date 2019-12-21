@@ -1,0 +1,22 @@
+2018-05-13 13:11:04.926/1.498 Oracle Coherence 12.2.1.0.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/C:/Oracle-soa/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence.xml"
+2018-05-13 13:11:04.977/1.549 Oracle Coherence 12.2.1.0.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/C:/Oracle-soa/Middleware/Oracle_Home/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
+2018-05-13 13:11:04.978/1.551 Oracle Coherence 12.2.1.0.0 <D5> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
+2018-05-13 13:11:04.981/1.554 Oracle Coherence 12.2.1.0.0 <D5> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
+2018-05-13 13:11:04.982/1.555 Oracle Coherence 12.2.1.0.0 <D5> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
+2018-05-13 13:11:04.983/1.556 Oracle Coherence 12.2.1.0.0 <D5> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
+
+Oracle Coherence Version 12.2.1.0.0 Build 60603
+ Grid Edition: Development mode
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+2018-05-13 13:11:05.097/1.670 Oracle Coherence GE 12.2.1.0.0 <Info> (thread=main, member=n/a): Loaded FMW commons version: 12.2.1-0-0-SNAPSHOT b60603
+2018-05-13 13:11:05.102/1.674 Oracle Coherence GE 12.2.1.0.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.DefaultConfigurableCacheFactory
+2018-05-13 13:11:05.414/1.987 Oracle Coherence GE 12.2.1.0.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "oalquasmi's cluster" has been automatically generated
+‰Ê«— 13, 2018 1:11:05 „ oracle.soa.scac.ValidateComposite loadWSDLs
+WARNING: Validating WSDLs from WSDLManager....  with option UseSoaInfraMds:false
+‰Ê«— 13, 2018 1:11:05 „ oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+INFO: XMLSchema incremental build enabled.
+‰Ê«— 13, 2018 1:11:06 „ oracle.integration.platform.blocks.PlatformConfigurationProvider getPlatformConfigurationProvider
+WARNING: JRF is unable to determine the current application server platform.
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=32m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0

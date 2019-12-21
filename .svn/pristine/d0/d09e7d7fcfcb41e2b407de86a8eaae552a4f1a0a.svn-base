@@ -1,0 +1,217 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Mar 22 08:41:29 EET 2018
+  Author:  ahamad
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="GetCompanyDenmoinator"
+               targetNamespace="http://xmlns.oracle.com/SalaryBulk/GetCompanyDenominator/GetCompanyDenmoinator"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/SalaryBulk/GetCompanyDenominator/GetCompanyDenmoinator"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/SalaryBulk/GetCompanyDenominator/dbQueryGetCompanyDenominator"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns2="http://www.fact.com.jo"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbQueryGetCompanyDenominator"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/SalaryBulk/GetCompanyDenominator/GetCompanyDenmoinator" location="../WSDLs/GetCompanyDenmoinator.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="getcompanydenmoinator_service" partnerLinkType="client:GetCompanyDenmoinator" myRole="GetCompanyDenmoinatorProvider"/>
+    <partnerLink name="dbQueryGetCompanyDenominator" partnerLinkType="ns1:dbQueryGetCompanyDenominator_plt"
+                 partnerRole="dbQueryGetCompanyDenominator_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:GetCompanyDenmoinatorRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:GetCompanyDenmoinatorResponseMessage"/>
+    <variable name="invokeGetCompanyDenominator_OutputVariable" messageType="ns1:args_out_msg"/>
+    <variable name="invokeGetCompanyDenominator_InputVariable" messageType="ns1:args_in_msg"/>
+  
+    <variable name="CompositeName" type="xsd:string"/>
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="SourceExecutionID" type="xsd:string"/>
+    <variable name="SourceAppUserName" type="xsd:string"/>
+    <variable name="ExecutionInput" type="xsd:string"/>
+    <variable name="ExecutionStatus" type="xsd:string"/>
+    <variable name="SourceAppCode" type="xsd:string"/>
+    <variable name="FaultStr" type="xsd:string"/>
+    <variable name="FaultCode" type="xsd:string"/>
+    <variable name="ExecutionOutput" type="xsd:string"/>
+    <variable name="ErrorBusCode" type="xsd:string"/>
+    <variable name="ErrorBusMessage" type="xsd:string"/>
+    <variable name="ErrorTechCode" type="xsd:string"/>
+    <variable name="ErrorTechMessage" type="xsd:string"/>
+    <variable name="ErrorTechDetails" type="xsd:string"/>
+    <variable name="BusinessKey" type="xsd:string"/>
+    <variable name="TechSystemOperation" type="xsd:string"/>
+    <variable name="TechSystem" type="xsd:string"/>
+    <variable name="ClientIPAddress" type="xsd:string"/>
+    <variable name="ExecutionID" type="xsd:string"/>
+        
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in GetCompanyDenmoinator.wsdl) -->
+    <receive name="receiveInput" partnerLink="getcompanydenmoinator_service" portType="client:GetCompanyDenmoinator" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign1">
+      <copy>
+        <from>$inputVariable.payload/ns2:PCompany</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$invokeGetCompanyDenominator_InputVariable.InputParameters/ns3:P_CMPN_CODE</to>
+      </copy>
+    </assign>
+    <invoke name="invokeGetCompanyDenominator" bpelx:invokeAsDetail="no" partnerLink="dbQueryGetCompanyDenominator"
+            portType="ns1:dbQueryGetCompanyDenominator_ptt" operation="dbQueryGetCompanyDenominator"
+            inputVariable="invokeGetCompanyDenominator_InputVariable"
+            outputVariable="invokeGetCompanyDenominator_OutputVariable"/>
+    <assign name="Transformation1">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation1_2.xsl", $invokeGetCompanyDenominator_OutputVariable.OutputParameters)</from>
+        <to variable="outputVariable" part="payload"/>
+      </copy>
+    </assign>
+    <assign name="Assign2">
+      <copy>
+        <from>1</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionID</to>
+      </copy>
+      <copy>
+        <from>'GetCompanyDenmoinator'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy>
+      <copy>
+        <from>ora:toCDATA($invokeGetCompanyDenominator_InputVariable.InputParameters)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy>
+      <copy>
+        <from>'SalaryBulk'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppUserName</to>
+      </copy>
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy>
+      <copy>
+        <from>'SalaryBulk'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppCode</to>
+      </copy>
+      <copy>
+        <from>ora:toCDATA($invokeGetCompanyDenominator_OutputVariable.OutputParameters)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy>
+    </assign>
+    <extensionActivity>
+      <bpelx:exec name="Java_InsertDBLog">
+        <![CDATA[try {                    
+                  String weblogicDomainName = "Unknown";                    
+                  String serverName = "Unknown";                    
+                  javax.naming.InitialContext ctx = null;                    
+                  ctx = new javax.naming.InitialContext();                    
+                  javax.management.MBeanServer beanServer =                    
+                      (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");                    
+                  javax.management.ObjectName runtimeService =                    
+                      new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");                    
+                  javax.management.ObjectName domainCFG =                    
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");                    
+                  weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");                    
+                  javax.management.ObjectName serverCFG =                    
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");                    
+                  serverName = (String) beanServer.getAttribute(serverCFG, "Name");                    
+                          
+                  String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();                    
+                  setVariableData("ExecutionID", executionID);                    
+                  String compositeName = (String) getVariableData("CompositeName");                
+                  String sourceAppCode = (String) getVariableData("SourceAppCode");                    
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");                    
+                  String sourceAppUserName = (String) getVariableData("SourceAppUserName");                    
+                  String executionInput = (String) getVariableData("ExecutionInput");                    
+                  String instanceID = (String) getVariableData("InstanceID");                    
+                  String bussinessKey = (String) getVariableData("BusinessKey");                    
+                         String executionOutput = (String) getVariableData("ExecutionOutput");        
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager                    
+                     .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,                
+                                            executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);                    
+       
+               
+               
+  addAuditTrailEntry("compositeName : "+compositeName +" / executionID : "+executionID +" / sourceAppCode : "+sourceAppCode+" / sourceExecutionID : "+sourceExecutionID+   
+   " / sourceAppUserName : "+sourceAppUserName+" / executionInput : "+executionInput+" / instanceID : "+instanceID+   
+" / weblogicDomainName : "+weblogicDomainName+" / serverName : "+serverName+" / bussinessKey : "+bussinessKey+" / executionOutput : "+executionOutput );   
+             
+              } catch (Exception exc) {                    
+         addAuditTrailEntry(exc);                 
+              }]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <extensionActivity>
+      <bpelx:exec name="Java_UpdateDBLog">
+        <![CDATA[try {          
+                  String executionID = (String) getVariableData("ExecutionID");          
+                  String executionStatus = (String) getVariableData("ExecutionStatus");          
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");          
+                  String executionOutput = (String) getVariableData("ExecutionOutput");          
+                  String compositeName = (String) getVariableData("CompositeName");          
+                
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager          
+                     .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);          
+              } catch (Exception exc) {          
+                    addAuditTrailEntry(exc);        
+              }]]>
+      </bpelx:exec>
+    </extensionActivity>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="getcompanydenmoinator_service" portType="client:GetCompanyDenmoinator" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

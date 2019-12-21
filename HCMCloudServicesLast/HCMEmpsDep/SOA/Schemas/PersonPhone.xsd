@@ -1,0 +1,103 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/people/core/flex/phoneDFF/" xmlns:sdo="commonj.sdo"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Phone Version 2</name>
+            <description>The phone number of a particular type for a person. For example,
+                Home Phone 011189240043, Office 020 7050 0000, or Home Fax
+                11189240000.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key. Surrogate key." name="PhoneId"/>
+                <oer:attribute description="Indicates the phone type for which the details are stored."
+                     name="PhoneType"/>
+                <oer:attribute description="Date the phone number becomes effective" name="DateFrom"/>
+                <oer:attribute description="Date the phone number stops being effective" name="DateTo"/>
+                <oer:attribute description="Internal identifier for the person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Country code of the Phone Number" name="CountryCodeNumber"/>
+                <oer:attribute description="Area Code of the Phone Number" name="AreaCode"/>
+                <oer:attribute description="Telephone number. Not marked as mandatory in order to always allow creation of a first phone row for every person even when phone number is not provided."
+                     name="PhoneNumber"/>
+                <oer:attribute description="Extension number" name="Extension"/>
+                <oer:attribute description="Legislation code derived from Legal Entity." name="LegislationCode"/>
+                <oer:attribute description="Speed Dial Number." name="SpeedDialNumber"/>
+                <oer:attribute description="Valid times that this phone number can be used" name="Validity"/>
+                <oer:attribute description="Identifies which phone for a person is primary." name="PrimaryFlag"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Customer&apos;s flexfield to store phone details." name="PhoneDFF"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/phoneDFF/" schemaLocation="PhoneDFF.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:complexType name="PersonPhoneResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonPhone"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PersonPhone">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PhoneId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PhoneId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PhoneType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DateFrom" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="DateTo" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CountryCodeNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AreaCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Extension" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislationCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SpeedDialNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Validity" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PrimaryFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PhoneDFF" type="ns1:PhoneDFF" sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personPhone" type="PersonPhone"/>
+    <xsd:element name="personPhoneResult" type="PersonPhoneResult"/>
+</xsd:schema>

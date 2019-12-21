@@ -1,0 +1,80 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:BTI="http://xmlns.fact.com/ws/BTI"
+            targetNamespace="http://xmlns.fact.com/ws/BTI" elementFormDefault="qualified">
+  <xsd:element name="BranchTransactionsInquiryMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="BTI:InputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="BTI:InputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="BranchTransactionsInquiryMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="BTI:OutputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="BTI:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="InputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="InquiryInformation" type="BTI:InputInquiryInformationComplex"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputInquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="FromBranchID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ToBranchID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="FromDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ToDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="StatusInformation" type="BTI:StatusInformationComplex"/>
+      <xsd:element name="ErrorInformation" type="BTI:ErrorInformaitonComplex" minOccurs="0"/>
+      <xsd:element name="InquiryInformation" type="BTI:InquiryInformationComplex" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="StatusInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformaitonComplex">
+    <xsd:sequence>
+      <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Transaction" type="BTI:TransactionComplex" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TransactionComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="BranchName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="DebitTotal" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CreditTotal" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="GrandTotal" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="BranchId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

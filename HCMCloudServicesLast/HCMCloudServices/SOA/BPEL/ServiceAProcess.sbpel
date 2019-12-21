@@ -1,0 +1,93 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Tue May 15 08:26:01 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Subprocess
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<bpelx:subProcess name="ServiceAProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/ServiceAProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/ServiceAProcess"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xsi:type="bpel:tProcess" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/BPELProcessA"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMCloudServices/StagedbReference"
+                  xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+                  xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+                  xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+                  xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+                  xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+                  xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                  xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                  xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+                  xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+                  xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+                  xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/StagedbReference">
+   <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <partnerLink name="ServicesASOAPRef" partnerLinkType="ns1:BPELProcessA" partnerRole="BPELProcessAProvider"/>
+    <partnerLink name="StagedbReference" partnerLinkType="ns2:StagedbReference_plt"
+                 partnerRole="StagedbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Variable1" type="xsd:string"/>
+    <variable name="InvokeServiceA_process_InputVariable" messageType="ns1:BPELProcessARequestMessage"/>
+    <variable name="batchNumber" type="xsd:string"/>
+    <variable name="requestType" type="xsd:string"/>
+    <variable name="InvokeDBGetDefValue_StagedbReference_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="InvokeDBGetDefValue_StagedbReference_OutputVariable" messageType="ns2:args_out_msg"/>
+    <variable name="vWSDLLink" type="xsd:string"/>
+    <variable name="vURI" type="xsd:string"/>
+  </variables>
+  <sequence name="main">
+    <assign name="AssignLinkId">
+      <copy>
+        <from>100</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBGetDefValue_StagedbReference_InputVariable.InputParameters/ns3:PLINK_ID</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeDBGetDefValue" partnerLink="StagedbReference"
+            portType="ns2:StagedbReference_ptt" operation="StagedbReference"
+            inputVariable="InvokeDBGetDefValue_StagedbReference_InputVariable"
+            outputVariable="InvokeDBGetDefValue_StagedbReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="InitialStageAssign">
+      <copy>
+        <from>$requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeServiceA_process_InputVariable.payload/ns1:requestType</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PSTAGE_LINK</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vWSDLLink</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PSTAGE_SOA_LINK_URI</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI</to>
+      </copy>
+      <copy>
+        <from>$batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeServiceA_process_InputVariable.payload/ns1:batchNumber</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeServiceA" partnerLink="ServicesASOAPRef" portType="ns1:BPELProcessA"
+            operation="process" inputVariable="InvokeServiceA_process_InputVariable" bpelx:invokeAsDetail="no">
+             <bpelx:toProperties>
+                  <bpelx:toProperty name="endpointWSDL">$vWSDLLink</bpelx:toProperty>
+                  <bpelx:toProperty name="endpointURI">$vURI</bpelx:toProperty>
+                </bpelx:toProperties>
+            </invoke>
+  </sequence>
+</bpelx:subProcess>

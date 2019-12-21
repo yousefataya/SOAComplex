@@ -1,0 +1,890 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+     sdoJava:package="oracle.apps.hcm.workStructures.grades.gradeServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Grade Flattened Version 2</name>
+            <description>New flattened object to capture grade information. A grade is an
+                object that defines the level of the worker&apos;s occupation that
+                can be used in the employment to control the value of the salary
+                and compensation elements.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmWorkTop-Work Structures Grade, Job, and
+                    Position</value>
+                <value>HcmTop-HcmTop : HcmWorkTop-Work Structures Grade, Job, and
+                    Position : HcmWorkGrades-Grades</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_GRADE-Assignment
+                    Grade</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Effective Start Date of logical record." name="StartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="EndDate"/>
+                <oer:attribute description="Grade is set enabled in Fusion. A set is used as a grouping mechanism. Code is a unique identifier for the set"
+                     name="SetCode"/>
+                <oer:attribute description="Denotes the name for grade." name="GradeName"/>
+                <oer:attribute description="Indicates the code of the language into which the contents of the translatable columns are translated."
+                     name="LanguageCodeOne"/>
+                <oer:attribute description="Name of the grade in the language specified." name="GradeNameOne"/>
+                <oer:attribute description="Indicates the code of the language into which the contents of the translatable columns are translated."
+                     name="LanguageCodeTwo"/>
+                <oer:attribute description="Name of the grade in the language specified." name="GradeNameTwo"/>
+                <oer:attribute description="Indicates the code of the language into which the contents of the translatable columns are translated."
+                     name="LanguageCodeThree"/>
+                <oer:attribute description="Name of the grade in the language specified." name="GradeNameThree"/>
+                <oer:attribute description="Indicates the code of the language into which the contents of the translatable columns are translated."
+                     name="LanguageCodeFour"/>
+                <oer:attribute description="Name of the grade in the language specified." name="GradeNameFour"/>
+                <oer:attribute description="Numbers or Characters that uniquely defines a short form for Grade for identification purposes."
+                     name="GradeCode"/>
+                <oer:attribute description="Represents active or inactive status of a grade." name="GradeStatus"/>
+                <oer:attribute description="The user defined Code for the Action Reason" name="ActionReasonCode"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupOne"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameOne"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountOne"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountOne"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountOne"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountOne"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwo"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwo"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwo"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwo"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwo"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwo"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThree"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThree"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThree"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThree"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThree"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThree"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFour"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFour"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFour"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFour"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFour"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFour"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFive"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFive"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFive"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFive"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFive"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFive"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupSix"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameSix"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountSix"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountSix"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountSix"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountSix"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupSeven"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameSeven"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountSeven"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountSeven"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountSeven"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountSeven"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupEight"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameEight"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountEight"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountEight"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountEight"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountEight"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupNine"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameNine"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountNine"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountNine"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountNine"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountNine"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupEleven"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameEleven"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountEleven"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountEleven"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountEleven"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountEleven"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwelve"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwelve"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwelve"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwelve"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwelve"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwelve"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirteen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirteen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirteen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirteen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirteen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirteen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFourteen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFourteen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFourteen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFourteen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFourteen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFourteen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFifteen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFifteen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFifteen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFifteen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFifteen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFifteen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupSixteen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameSixteen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountSixteen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountSixteen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountSixteen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountSixteen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupSeventeen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameSeventeen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountSeventeen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountSeventeen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountSeventeen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountSeventeen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupEighteen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameEighteen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountEighteen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountEighteen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountEighteen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountEighteen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupNineteen"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameNineteen"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountNineteen"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountNineteen"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountNineteen"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountNineteen"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwenty"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwenty"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwenty"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwenty"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwenty"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwenty"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyOne"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyOne"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyOne"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyOne"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyOne"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyOne"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyTwo"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyTwo"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyTwo"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyTwo"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyTwo"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyTwo"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyThree"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyThree"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyThree"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyThree"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyThree"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyThree"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyFour"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyFour"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyFour"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyFour"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyFour"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyFour"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyFive"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyFive"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyFive"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyFive"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyFive"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyFive"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentySix"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentySix"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentySix"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentySix"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentySix"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentySix"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentySeven"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentySeven"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentySeven"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentySeven"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentySeven"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentySeven"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyEight"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyEight"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyEight"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyEight"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyEight"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyEight"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupTwentyNine"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameTwentyNine"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountTwentyNine"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountTwentyNine"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountTwentyNine"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountTwentyNine"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirty"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirty"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirty"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirty"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirty"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirty"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyOne"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyOne"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyOne"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyOne"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyOne"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyOne"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyTwo"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyTwo"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyTwo"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyTwo"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyTwo"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyTwo"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyThree"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyThree"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyThree"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyThree"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyThree"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyThree"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyFour"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyFour"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyFour"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyFour"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyFour"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyFour"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyFive"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyFive"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyFive"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyFive"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyFive"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyFive"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtySix"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtySix"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtySix"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtySix"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtySix"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtySix"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtySeven"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtySeven"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtySeven"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtySeven"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtySeven"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtySeven"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyEight"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyEight"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyEight"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyEight"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyEight"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyEight"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupThirtyNine"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameThirtyNine"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountThirtyNine"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountThirtyNine"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountThirtyNine"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountThirtyNine"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupForty"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameForty"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountForty"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountForty"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountForty"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountForty"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyOne"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyOne"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyOne"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyOne"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyOne"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyOne"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyTwo"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyTwo"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyTwo"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyTwo"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyTwo"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyTwo"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyThree"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyThree"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyThree"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyThree"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyThree"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyThree"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyFour"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyFour"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyFour"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyFour"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyFour"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyFour"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyFive"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyFive"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyFive"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyFive"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyFive"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyFive"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortySix"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortySix"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortySix"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortySix"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortySix"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortySix"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortySeven"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortySeven"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortySeven"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortySeven"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortySeven"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortySeven"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyEight"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyEight"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyEight"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyEight"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyEight"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyEight"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFortyNine"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFortyNine"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFortyNine"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFortyNine"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFortyNine"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFortyNine"/>
+                <oer:attribute description="Name of the legislative data group" name="LegislativeDataGroupFifty"/>
+                <oer:attribute description="Name of the grade rate." name="GradeRateNameFifty"/>
+                <oer:attribute description="Represents the minimum currency value of a grade in a grade rate."
+                     name="MinimumAmountFifty"/>
+                <oer:attribute description="Represents the maximum currency value of a grade in a grade rate."
+                     name="MaximumAmountFifty"/>
+                <oer:attribute description="Represents the average of minimum rate and maximum rate values of grade."
+                     name="MidValueAmountFifty"/>
+                <oer:attribute description="Numeric that represents value of grade in a grade rate"
+                     name="ValueAmountFifty"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:complexType name="GradeFlattened">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>GradeCode</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="StartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="SetCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LanguageCodeOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeNameOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LanguageCodeTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeNameTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LanguageCodeThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeNameThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LanguageCodeFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeNameFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeStatus" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ActionReasonCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupSix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameSix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountSix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountSix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountSix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountSix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupSeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameSeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountSeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountSeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountSeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountSeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupEleven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameEleven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountEleven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountEleven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountEleven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountEleven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwelve" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwelve" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwelve" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwelve" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwelve" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwelve" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFourteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFourteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFourteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFourteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFourteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFourteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFifteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFifteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFifteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFifteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFifteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFifteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupSixteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameSixteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountSixteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountSixteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountSixteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountSixteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupSeventeen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameSeventeen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountSeventeen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountSeventeen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountSeventeen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountSeventeen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupEighteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameEighteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountEighteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountEighteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountEighteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountEighteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupNineteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameNineteen" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountNineteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountNineteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountNineteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountNineteen" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwenty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwenty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwenty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwenty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwenty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwenty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentySix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentySix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentySeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentySeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupTwentyNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameTwentyNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountTwentyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountTwentyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountTwentyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountTwentyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtySix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtySix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtySeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtySeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupThirtyNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameThirtyNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountThirtyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountThirtyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountThirtyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountThirtyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupForty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameForty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountForty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountForty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountForty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountForty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyOne" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyOne" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyTwo" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyTwo" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyThree" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyThree" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyFour" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyFour" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyFive" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyFive" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortySix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortySix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortySix" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortySeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortySeven" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortySeven" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyEight" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyEight" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFortyNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFortyNine" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFortyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFortyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFortyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFortyNine" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="LegislativeDataGroupFifty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeRateNameFifty" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MinimumAmountFifty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MaximumAmountFifty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="MidValueAmountFifty" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ValueAmountFifty" nillable="true" type="xsd:decimal"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="GradeFlattenedResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="GradeFlattened"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="gradeFlattened" type="GradeFlattened"/>
+    <xsd:element name="gradeFlattenedResult" type="GradeFlattenedResult"/>
+</xsd:schema>

@@ -1,0 +1,92 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Sun Feb 04 14:32:04 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CheckAccountProcess"
+         targetNamespace="http://xmlns.oracle.com/FIXED_ASSETS/CheckAccount/CheckAccountProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/FIXED_ASSETS/CheckAccount/CheckAccountProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/CheckAccount/checkAccountReference"
+         queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         suppressJoinFailure="no" exitOnStandardFault="no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/checkAccountReference"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/CheckAccount/checkAccountReference"
+            location="../WSDLs/checkAccountReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="CheckAccountService" bpelx:wadl="yes"/>
+        <partnerLink name="checkAccountReference" partnerLinkType="ns2:checkAccountReference_plt"
+                     partnerRole="checkAccountReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke_checkAccountReference_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="Invoke_checkAccountReference_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="accountName" type="xsd:string"/>
+        <variable name="responseCode" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="receiveInput" partnerLink="CheckAccountService" variable="inputVar" bpelx:method="checkACcount"
+                 createInstance="yes"/>
+        <assign name="Assign_input">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.branchCode</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_checkAccountReference_InputVariable.InputParameters/ns3:P_BRCH_CODE</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.accountNumber</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_checkAccountReference_InputVariable.InputParameters/ns3:P_CACC_NUM</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.currencyCode</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_checkAccountReference_InputVariable.InputParameters/ns3:P_CURR_CODE</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke" bpelx:invokeAsDetail="no" partnerLink="checkAccountReference"
+                portType="ns2:checkAccountReference_ptt" operation="checkAccountReference"
+                inputVariable="Invoke_checkAccountReference_InputVariable"
+                outputVariable="Invoke_checkAccountReference_OutputVariable"/>
+        <assign name="Assign_semiOutput">
+            <copy>
+                <from>$Invoke_checkAccountReference_OutputVariable.OutputParameters/ns3:P_CACC_B_NAME</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$accountName</to>
+            </copy>
+            <copy>
+                <from>$Invoke_checkAccountReference_OutputVariable.OutputParameters/ns3:P_RESPCODE</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$responseCode</to>
+            </copy>
+        </assign>
+        <assign name="Assign_finalOutput">
+            <copy>
+                <from>$accountName</from>
+                <to expressionLanguage="javascript">process.outputVar.accountName</to>
+            </copy>
+            <copy>
+                <from>$responseCode</from>
+                <to expressionLanguage="javascript">process.outputVar.responseCode</to>
+            </copy>
+        </assign>
+        <reply name="replyOutput" partnerLink="CheckAccountService" variable="outputVar" bpelx:method="checkACcount"/>
+    </sequence>
+</process>

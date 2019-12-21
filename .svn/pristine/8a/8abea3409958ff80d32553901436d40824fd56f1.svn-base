@@ -1,0 +1,13 @@
+<adapter-config name="saveLoanRequestReference" adapter="db" wsdlLocation="../WSDLs/saveLoanRequestReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="devticbs" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="saveLoanRequestReference_ptt" operation="saveLoanRequestReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="BF_SAVE_WEB_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="PackageName" value="BF_WEB_FCILITY"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

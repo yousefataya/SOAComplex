@@ -1,0 +1,25 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonVisaLegDDF.xsd"/>
+    <xsd:complexType name="PersonVisaLegDDFSA">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>VisaPermitId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonVisaLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_HIJRAH_ISSUE_DATE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HIJRAH_EXP_DATE" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personVisaLegDDFSA" type="PersonVisaLegDDFSA"/>
+</xsd:schema>

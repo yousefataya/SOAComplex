@@ -1,0 +1,12 @@
+<adapter-config name="AuditDbReference" adapter="db" wsdlLocation="../WSDLs/AuditDbReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hcmHr" location="eis/DB/hrHCM"/>
+  <endpoint-interaction portType="AuditDbReference_ptt" operation="AuditDbReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HCM_STAGE"/>
+      <property name="ProcedureName" value="SET_SOA_REQUESTS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

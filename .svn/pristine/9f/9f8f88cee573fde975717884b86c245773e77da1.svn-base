@@ -1,0 +1,1585 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:EALL="http://xmlns.fact.com/ws/EALL"
+            targetNamespace="http://xmlns.fact.com/ws/EALL" elementFormDefault="qualified">
+  <xsd:element name="ECCPDCAddMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionInformation">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PostingDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCPDCAddMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="StatusInformation">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ErrorInformation" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="TransactionInformation" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Transaction" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+   <xsd:element name="ECCPosting2MessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                      
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PaymentMethod" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BeneficiaryBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+   
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCPosting2MessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+   
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                     
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                       
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                     
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+ <xsd:element name="ECCPosting1MessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ECCPosting1MessageBody">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="ECCPosting1TransactionInformation">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PaymentMethod" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="BenBech" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCPosting1MessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ECCPosting1MessageHeaderO">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="ECCPosting1MessageBodyO">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="ECCPosting1StatusInformation">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ECCPosting1ErrorInformation" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ECCPosting1TransactionInformationO" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Transaction" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="Action" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+<xsd:element name="CustomerOldSignInfoMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+              <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionInformation">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="UserId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="CustomerNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="MemberId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="CheckNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerOldSignInfoMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="StatusInformation">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="ErrorInformation" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                    <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="TransactionInformation" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Transaction" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    <xsd:element name="SignImageInfo" minOccurs="0" maxOccurs="unbounded">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="SequenceOfOldSignature" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ExpiryDateOfOldSignature" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="ImageOfOldSignature" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          <xsd:element name="NotesOfOldSignature" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerSignInfoMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+         
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="UserId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CheckNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CustomerSignInfoMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                             
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="CustomerName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountNotes" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ecc_ref" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                            <xsd:element name="SignInfo" minOccurs="0" maxOccurs="unbounded">
+                              <xsd:complexType>
+                             
+                                    <xsd:sequence>
+                                      <xsd:element name="CustomerId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="CustomerSignMemberId" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="CustomerSignSequence" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="CustomerSignSequenceInternal" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="ImageOfSignature" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="NameOfAuthorizedSignatory" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="NotesOfSignature" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="OldSignatureIndicator" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+              
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCAccountRequestMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+        
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+         
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+               
+                          <xsd:sequence>
+                            <xsd:element name="IntReference" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="Direction" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BeneficiaryBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ModificationFlag" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CycleNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BtchRef" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BtchAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCAccountRequestMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                   
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                              
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="AccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ProceedFlag" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountAddress" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                 
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCAutoReplyMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="IntReference" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ExpectedReplyDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCAutoReplyMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                               
+                                    <xsd:sequence>
+                                      <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                    </xsd:sequence>
+                                 
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                     
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCCAAccountRequestMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="IntReference" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="Direction" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ModificationFlag" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CycleNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChqRef" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChqAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCCAAccountRequestMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                  
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                        
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                               
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="AccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ProceedFlag" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountAddress" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AvailableBalance" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="NonClearBalance" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="ReservedBalance" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="TotalBalance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="AccountDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="CECCExtendSessionRequestMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="OldValueDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="NewValueDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="Currency" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="CECCExtendSessionRequestMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                               
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                 
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                        
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCOutwardPresentmentMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PaymentType" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="Urgency" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ExpectedReplyDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="WasPDC" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BeneficiaryBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PaymentMethod" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCOutwardPresentmentMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                      
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                               
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                     
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCOutwardReplyMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BeneficiaryBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PaymentMethod" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                        
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCOutwardReplyMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                      
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                               
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCPCDDeleteMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+              
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+         
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                      
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PostingDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCPCDDeleteMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                        
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                        
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                                
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                 
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCPCDUpdateMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PostingDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCPCDUpdateMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                  
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                              
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCPostingMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+           
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                  <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+           
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="TransactionInformation">
+                    <xsd:complexType>
+                   
+                          <xsd:sequence>
+                            <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ChequeAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CurrencyCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="CycleNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ModificationFlag" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="PaymentMethod" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="BeneficiaryBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+            
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="ECCPostingMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader">
+          <xsd:complexType>
+          
+                <xsd:sequence>
+                  <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="MessageBody">
+          <xsd:complexType>
+        
+                <xsd:sequence>
+                  <xsd:element name="StatusInformation">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                      
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="ErrorInformation" minOccurs="0">
+                    <xsd:complexType>
+                     
+                          <xsd:sequence>
+                            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                          </xsd:sequence>
+                       
+                    </xsd:complexType>
+                  </xsd:element>
+                  <xsd:element name="TransactionInformation" minOccurs="0">
+                    <xsd:complexType>
+                    
+                          <xsd:sequence>
+                            <xsd:element name="Transaction" minOccurs="0"
+                                         maxOccurs="unbounded">
+                              <xsd:complexType>
+                             
+                                    <xsd:sequence>
+                                      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="BranchCategory" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="OverdraftAmount" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                                      <xsd:element name="OverdraftAmount" type="xsd:string" minOccurs="1"
+                                                   maxOccurs="1"/>
+                                      <xsd:element name="P_REASONS">
+                                        <xsd:complexType>
+                                        
+                                              <xsd:sequence>
+                                                <xsd:element name="WARN_DESC" type="xsd:string" minOccurs="0"
+                                                             maxOccurs="unbounded"/>
+                                              </xsd:sequence>
+                                          
+                                        </xsd:complexType>
+                                      </xsd:element>
+                                    </xsd:sequence>
+                                
+                              </xsd:complexType>
+                            </xsd:element>
+                          </xsd:sequence>
+                        
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+             
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  
+</xsd:schema>

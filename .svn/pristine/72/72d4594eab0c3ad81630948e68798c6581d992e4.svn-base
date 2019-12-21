@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="BPELProcess1"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMCloudServices!1.1/WSDLs/BPELProcess1.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="BPELProcess1">
+        <plnk:role name="BPELProcess1Provider" portType="client:BPELProcess1"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1"
+                 schemaLocation="../Schemas/BPELProcess1.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="BPELProcess1RequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="BPELProcess1">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:BPELProcess1RequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BPELProcess1Binding" type="client:BPELProcess1">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="bpelprocess1_client_ep">
+        <wsdl:port name="BPELProcess1_pt" binding="client:BPELProcess1Binding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMCloudServices/bpelprocess1_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

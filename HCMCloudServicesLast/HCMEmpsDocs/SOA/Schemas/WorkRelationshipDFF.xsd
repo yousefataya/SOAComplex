@@ -1,0 +1,31 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDFF/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/periodOfServiceDFF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="WorkRelationshipDFF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PeriodOfServiceId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PeriodOfServiceId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="stopsalaryflag" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="stopsalaryflag_Display" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="requiredPeriod" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="requiredPeriod_Display" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="noticeperiod" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="noticeperiod_Display" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="resignationtime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="resignationtime_Display" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="workRelationshipDFF" type="WorkRelationshipDFF"/>
+</xsd:schema>

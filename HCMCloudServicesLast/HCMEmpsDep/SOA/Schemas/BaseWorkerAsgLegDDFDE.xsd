@@ -1,0 +1,42 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDF.xsd"/>
+    <xsd:complexType name="BaseWorkerAsgLegDDFDE">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BaseWorkerAsgLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DIS_EXEMPT_1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DIS_EXEMPT_1_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DIS_EXEMPT_2" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DIS_EXEMPT_2_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DIS_EXEMPT_3" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DIS_EXEMPT_3_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeAnnVacDaysEe" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeWorkDaysEe" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeIrrWorkDaysEe" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeWaitPerStartEe" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeWaitPerLengEe" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeWaitPerUomEe" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeWaitPerUomEe_DisplayValue" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxDeProRataTempEe" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="baseWorkerAsgLegDDFDE" type="BaseWorkerAsgLegDDFDE"/>
+</xsd:schema>

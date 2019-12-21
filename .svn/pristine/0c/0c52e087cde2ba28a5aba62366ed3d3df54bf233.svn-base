@@ -1,0 +1,9 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/deleteProfitSharesReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/deleteProfitSharesReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="PCARD_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

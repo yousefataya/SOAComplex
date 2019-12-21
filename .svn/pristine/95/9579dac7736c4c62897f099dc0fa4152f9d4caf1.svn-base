@@ -1,0 +1,28 @@
+<wsdl:definitions
+     name="DepartmentsDbReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMDepartments/DepartmentsDbReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMDepartments/DepartmentsDbReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/DepartmentsDbReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="DepartmentsDbReference_plt" >
+    <plt:role name="DepartmentsDbReference_role" >
+      <plt:portType name="tns:DepartmentsDbReference_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/DepartmentsDbReference" schemaLocation="../Schemas/DepartmentsDbReference_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="HcmDepartmentCollection_msg">
+        <wsdl:part name="HcmDepartmentCollection" element="top:HcmDepartmentCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="DepartmentsDbReference_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:HcmDepartmentCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

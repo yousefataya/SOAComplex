@@ -1,0 +1,20 @@
+<TransactionsInquiryMessageOutput xmlns="http://xmlns.fact.com/ws/GBT">
+   <MessageHeader>
+      <TransactionID>TransactionID25</TransactionID>
+   </MessageHeader>
+   <MessageBody>
+      <StatusInformation>
+         <Status>Status26</Status>
+      </StatusInformation>
+      <ErrorInformation>
+         <ErrorBusCode>ErrorBusCode27</ErrorBusCode>
+         <ErrorBusMessage>ErrorBusMessage28</ErrorBusMessage>
+         <ErrorTechCode>ErrorTechCode29</ErrorTechCode>
+         <ErrorTechMessage>ErrorTechMessage30</ErrorTechMessage>
+         <ErrorTechDetails>ErrorTechDetails31</ErrorTechDetails>
+      </ErrorInformation>
+      <TransactionInformation>
+         <ResponseCode>ResponseCode32</ResponseCode>
+      </TransactionInformation>
+   </MessageBody>
+</TransactionsInquiryMessageOutput>

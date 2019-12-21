@@ -1,0 +1,422 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Mar 07 10:03:10 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+  Purpose: Empty BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="GenerateBarcodeTransactionProcess"
+         targetNamespace="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/GenerateBarcodeTransaction/GenerateBarcodeTransactionProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/GenerateBarcodeTransaction/GenerateBarcodeTransactionProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://oracle.com/sca/soapservice/TRANSACTION_MANAGEMENT/GenerateBarcodeTransaction/GenerateBarcodeTransactionService"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns2="http://xmlns.fact.com/ws/GBT"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/TRANSACTION_MANAGEMENT/GenerateBarcodeTransaction/saveBarcodeReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/saveBarcodeReference"
+         xmlns:ns5="http://xmlns.oracle.com/OdaiJob/GenerateBarcodeTransaction/GenerateBarcodeTransaction">
+    <!--
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC
+     Set of activities coordinating the flow of messages across the
+     services integrated within this business process
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/TRANSACTION_MANAGEMENT/GenerateBarcodeTransaction/saveBarcodeReference"
+            location="../WSDLs/saveBarcodeReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="saveBarcodeReference" partnerLinkType="ns3:saveBarcodeReference_plt"
+                     partnerRole="saveBarcodeReference_role"/>
+        <partnerLink name="GenerateBarcodeTransaction" partnerLinkType="ns5:GenerateBarcodeTransaction"
+                     myRole="GenerateBarcodeTransactionProvider"/>
+    </partnerLinks>
+    <variables>
+        <variable name="CompositeName" type="xsd:string"/>
+        <variable name="ClientIPAddress" type="xsd:string"/>
+        <variable name="ExecutionInput" type="xsd:string"/>
+        <variable name="ExecutionID" type="xsd:string"/>
+        <variable name="ExecutionStatus" type="xsd:string"/>
+        <variable name="ExecutionOutput" type="xsd:string"/>
+        <variable name="ErrorBusCode" type="xsd:string"/>
+        <variable name="ErrorBusMessage" type="xsd:string"/>
+        <variable name="ErrorTechCode" type="xsd:string"/>
+        <variable name="ErrorTechMessage" type="xsd:string"/>
+        <variable name="ErrorTechDetails" type="xsd:string"/>
+        <variable name="FaultStr" type="xsd:string"/>
+        <variable name="FaultCode" type="xsd:string"/>
+        <variable name="InstanceID" type="xsd:string"/>
+        <variable name="SourceAppCode" type="xsd:string"/>
+        <variable name="SourceExecutionID" type="xsd:string"/>
+        <variable name="SourceAppUserName" type="xsd:string"/>
+        <variable name="TechSystemOperation" type="xsd:string"/>
+        <variable name="TechSystem" type="xsd:string"/>
+        <variable name="Invoke_saveBarcodeReference_InputVariable" messageType="ns3:args_in_msg"/>
+        <variable name="Invoke_saveBarcodeReference_OutputVariable" messageType="ns3:args_out_msg"/>
+        <variable name="Image" type="xsd:base64Binary"/>
+        <variable name="inputVariable" messageType="ns5:GenerateBarcodeTransaction_inputMessage"/>
+        <variable name="outputVariable" messageType="ns5:GenerateBarcodeTransaction_outputMessage"/>
+    </variables>
+    <sequence name="main">
+        <receive name="receiveInput" partnerLink="GenerateBarcodeTransaction"
+                 portType="ns5:GenerateBarcodeTransaction_ptt" operation="GenerateBarcodeTransaction"
+                 variable="inputVariable" createInstance="yes"/>
+        <assign name="Assign_DefaultVariables">
+            <copy>
+                <from>'GenerateBarcodeTransaction'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+            </copy>
+            <copy>
+                <from>$inputVariable.request/ns2:MessageHeader/ns2:TransactionID</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageHeader/ns2:TransactionID</to>
+            </copy>
+            <copy>
+                <from>ora:getFlowId()</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+            </copy>
+            <copy>
+                <from>'S'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+            </copy>
+            <copy>
+                <from>ora:toCDATA($inputVariable.request)</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+                <from>$inputVariable.request/ns2:MessageHeader/ns2:TransactionID</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceExecutionID</to>
+            </copy>
+            <copy>
+                <from>$inputVariable.request/ns2:MessageHeader/ns2:ApplicationCode</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppCode</to>
+            </copy>
+            <copy>
+                <from>$inputVariable.request/ns2:MessageHeader/ns2:ApplicationUserName</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+                <from>'Success'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:StatusInformation/ns2:Status</to>
+            </copy>
+        </assign>
+        <extensionActivity>
+            <bpelx:exec name="Java_validation">
+                <![CDATA[try {  
+            java.net.InetAddress ipAddress = java.net  
+                                                 .InetAddress  
+                                                 .getLocalHost();  
+            String clientIp = (ipAddress.getHostAddress()).trim();  
+  
+            String compositeName = (String) getVariableData("CompositeName");  
+            String transactionID =  
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "request", "//ns2:TransactionID"))  
+                .getTextContent();  
+            String applicationCode =  
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "request", "//ns2:ApplicationCode"))  
+                .getTextContent();  
+            String applicationUserName =  
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "request", "//ns2:ApplicationUserName"))  
+                .getTextContent();  
+            String barCodeValue =  
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "request", "//ns2:BarcodeType"))  
+                .getTextContent();  
+            String barCodeString =  
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "request", "//ns2:BarcodeString"))  
+                .getTextContent();  
+  
+            String MandatoryField = null;  
+  
+            if (transactionID.equals("")) {  
+                MandatoryField = "TransactionID";  
+            } else if (applicationCode.equals("")) {  
+                MandatoryField = "ApplicationCode";  
+            } else if (applicationUserName.equals("")) {  
+                MandatoryField = "ApplicationUserName";  
+            } else if (barCodeValue.equals("")) {  
+                MandatoryField = "BarcodeType";  
+            } else if (barCodeString.equals("")) {  
+                MandatoryField = "BarcodeString";  
+            }  
+  
+            if (MandatoryField != null) {  
+                setVariableData("ExecutionStatus", "F");  
+                setVariableData("outputVariable", "reply", "//ns2:Status", "Failed");  
+                setVariableData("ErrorBusCode", "VF0001");  
+                setVariableData("ErrorBusMessage",  
+                                "Validation Fault : Unable to FulFill Transaction, Entry [ " + MandatoryField +  
+                                " ] is Mandatory.");  
+                setVariableData("ErrorTechCode", "OFM-VAL-0001");  
+                setVariableData("ErrorTechMessage", "Entry [ " + MandatoryField + " ] is Mandatory.");  
+            } else {  
+                if (!barCodeValue.equals("CODE128") && !barCodeValue.equals("code39")) {  
+                    setVariableData("ExecutionStatus", "F");  
+                    setVariableData("outputVariable", "reply", "//ns2:Status", "Failed");  
+                    setVariableData("ErrorBusCode", "VF0001");  
+                    setVariableData("ErrorBusMessage",  
+                                    "Validation Fault : Unable to FulFill Transaction, Entry [ BarcodeType ] has invalid values. valid values are code39 or CODE128");  
+                    setVariableData("ErrorTechCode", "OFM-VAL-0001");  
+                    setVariableData("ErrorTechMessage",  
+                                    "Entry [ BarcodeType ] has invalid values. valid values are code39 or CODE128");  
+                } else {  
+                    com.dimensions.mw.utils.validationManagement.ValidationManager validationManager =  
+                        new com.dimensions.mw.utils.validationManagement.ValidationManager();  
+                    String validationCheck =  
+                        validationManager.ApplyValidation(applicationCode, compositeName, "isAllowedSource",  
+                                                          compositeName + "###" + applicationCode + "###" + clientIp +  
+                                                          "###" + "token" + "###" + applicationUserName);  
+  
+                    if (validationCheck == null) {  
+  
+                    } else {  
+                        setVariableData("ExecutionStatus", "F");  
+                        setVariableData("outputVariable", "MessageOutput", "//ns2:Status", "Failed");  
+                        setVariableData("ErrorBusCode", validationCheck.split("#")[0]);  
+                        setVariableData("ErrorBusMessage", validationCheck.split("#")[1].split("##")[0]);  
+                        setVariableData("ErrorTechCode", validationCheck.split("##")[1].split("###")[0]);  
+                        setVariableData("ErrorTechMessage", validationCheck.split("###")[1].split("###-")[0]);  
+                        setVariableData("ErrorTechDetails", validationCheck.split("###-")[1].split("#####")[0]);  
+                    }  
+                }  
+  
+  
+            }  
+  
+        } catch (Exception exc) {  
+            addAuditTrailEntry(exc);  
+        }]]>
+            </bpelx:exec>
+        </extensionActivity>
+        <if name="If_validationSuccessfull">
+            <documentation>
+                <![CDATA[Yes]]>
+            </documentation>
+            <condition>$ExecutionStatus = 'S'</condition>
+            <sequence name="Sequence1">
+                <assign name="Assign_RemoveEmptyTag" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+                    <extensionAssignOperation>
+                        <bpelx:remove xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                            <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation</bpelx:target>
+                        </bpelx:remove>
+                    </extensionAssignOperation>
+                </assign>
+                <extensionActivity>
+                    <bpelx:exec name="Java_DBLog">
+                        <![CDATA[try {         
+                  String weblogicDomainName = "Unknown";         
+                  String serverName = "Unknown";         
+                  javax.naming.InitialContext ctx = null;         
+                  ctx = new javax.naming.InitialContext();         
+                  javax.management.MBeanServer beanServer =         
+                      (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");         
+                  javax.management.ObjectName runtimeService =         
+                      new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");         
+                  javax.management.ObjectName domainCFG =         
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");         
+                  weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");         
+                  javax.management.ObjectName serverCFG =         
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");         
+                  serverName = (String) beanServer.getAttribute(serverCFG, "Name");         
+               
+                  String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();         
+                  setVariableData("ExecutionID", executionID);         
+                  String compositeName = (String) getVariableData("CompositeName");         
+                  String sourceAppCode = (String) getVariableData("SourceAppCode");         
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");         
+                  String sourceAppUserName = (String) getVariableData("SourceAppUserName");         
+                  String executionInput = (String) getVariableData("ExecutionInput");         
+                  String instanceID = (String) getVariableData("InstanceID");            
+               
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager         
+                     .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,         
+                                            executionInput, instanceID, weblogicDomainName, serverName, null);         
+              } catch (Exception exc) {         
+        addAuditTrailEntry(exc);       
+              }]]>
+                    </bpelx:exec>
+                </extensionActivity>
+                <scope name="Scope1">
+                    <variables>
+                        <variable name="Invoke_SearchBranchTransaction_OutputVariable" messageType="ns3:args_out_msg"/>
+                        <variable name="Invoke_SearchBranchTransaction_InputVariable" messageType="ns3:args_in_msg"/>
+                    </variables>
+                    <faultHandlers>
+                        <catchAll>
+                            <sequence name="Sequence2">
+                                <assign name="Assign_Fault">
+                                    <copy>
+                                        <from>ora:getFaultAsString()</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultStr</to>
+                                    </copy>
+                                    <copy>
+                                        <from>ora:getFaultName()</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultCode</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>''</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusCode</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>''</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusMessage</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>''</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechCode</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>''</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechMessage</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>''</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechDetails</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>'F'</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+                                    </copy>
+                                    <copy bpelx:insertMissingToData="yes">
+                                        <from>'Failed'</from>
+                                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:StatusInformation/ns2:Status</to>
+                                    </copy>
+                                </assign>
+                                <extensionActivity>
+                                    <bpelx:exec name="Java_manageError">
+                                        <![CDATA[try {                            
+                            String faultStr = (String)getVariableData("FaultStr");                            
+                            String faultCode = (String)getVariableData("FaultCode");                            
+                            String techSystemOperation = (String)getVariableData("TechSystemOperation");                            
+                            String techSystem = (String)getVariableData("TechSystem");                    
+                            String compositeName = (String)getVariableData("CompositeName");                
+                                            
+                            com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean errorDefinitionBean =                            
+                                new com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean();                            
+                                            
+                            com.dimensions.mw.utils.errorManagement.ErrorManager errorManager = new com.dimensions.mw.utils.errorManagement.ErrorManager();                            
+                                            
+                            errorDefinitionBean = errorManager.getErrorInformation(faultCode+" "+faultStr,techSystem,techSystemOperation,compositeName);                             
+                                    
+                            setVariableData("outputVariable", "reply", "//ns2:ErrorBusCode",errorDefinitionBean.getErrorBussinessCode() );                     
+                            setVariableData("outputVariable", "reply", "//ns2:ErrorBusMessage", errorDefinitionBean.getErrorBussinessMessage());                     
+                            setVariableData("outputVariable", "reply", "//ns2:ErrorTechCode",errorDefinitionBean.getErrorTechCode());                     
+                            setVariableData("outputVariable", "reply", "//ns2:ErrorTechMessage",errorDefinitionBean.getErrorTechMessage());                 
+                            setVariableData("outputVariable", "reply", "//ns2:ErrorTechDetails",techSystem+" | "+techSystemOperation+" | "+ errorDefinitionBean.getErrorTechDetails());           
+                               
+                                           
+                    } catch (Exception exc) {       
+                        addAuditTrailEntry(exc);     
+                    }]]>
+                                    </bpelx:exec>
+                                </extensionActivity>
+                            </sequence>
+                        </catchAll>
+                    </faultHandlers>
+                    <sequence name="Sequence3">
+                        <extensionActivity>
+                            <bpelx:exec name="Java_generateBarcode">
+                                <![CDATA[generatebarcodetransaction.GenerateBarcodeClass generateBarcode = new generatebarcodetransaction.GenerateBarcodeClass();   
+   
+String barcodeType = ((org.w3c.dom.Element) getVariableData("inputVariable","request","//ns2:BarcodeType")).getTextContent();  
+String barcodeString = ((org.w3c.dom.Element) getVariableData("inputVariable","request","//ns2:BarcodeString")).getTextContent();  
+String image =java.util.Base64.getEncoder().encodeToString(generateBarcode.getBarcodeByType(barcodeType,barcodeString));   
+setVariableData("Image",image);]]>
+                            </bpelx:exec>
+                        </extensionActivity>
+                        <assign name="Assign_input">
+                            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                                <from>$inputVariable.request/ns2:MessageBody/ns2:TransactionInformation/ns2:BarcodeString</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_saveBarcodeReference_InputVariable.InputParameters/ns4:P_CODE</to>
+                            </copy>
+                            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                                <from>$Image</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_saveBarcodeReference_InputVariable.InputParameters/ns4:P_IMAGE</to>
+                            </copy>
+                        </assign>
+                        <invoke name="Invoke_saveBarcode" bpelx:invokeAsDetail="no" partnerLink="saveBarcodeReference"
+                                portType="ns3:saveBarcodeReference_ptt" operation="saveBarcodeReference"
+                                inputVariable="Invoke_saveBarcodeReference_InputVariable"
+                                outputVariable="Invoke_saveBarcodeReference_OutputVariable"/>
+                        <assign name="Assign_output">
+                            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                                <from>$Invoke_saveBarcodeReference_OutputVariable.OutputParameters/ns4:OUT_NUMBER</from>
+                                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:TransactionInformation/ns2:ResponseCode</to>
+                            </copy>
+                        </assign>
+                    </sequence>
+                </scope>
+                <assign name="Assign_FinalOutput">
+                    <copy>
+                        <from>ora:toCDATA($outputVariable.reply)</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+                    </copy>
+                </assign>
+                <extensionActivity>
+                    <bpelx:exec name="Java_FinalDBLog">
+                        <![CDATA[try {     
+                  String executionID = (String) getVariableData("ExecutionID");     
+                  String executionStatus = (String) getVariableData("ExecutionStatus");     
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");     
+                  String executionOutput = (String) getVariableData("ExecutionOutput");     
+                  String compositeName = (String) getVariableData("CompositeName");     
+           
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager     
+                     .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);     
+              } catch (Exception exc) {     
+                    addAuditTrailEntry(exc);   
+              }]]>
+                    </bpelx:exec>
+                </extensionActivity>
+            </sequence>
+            <else>
+                <documentation>
+                    <![CDATA[No]]>
+                </documentation>
+                <assign name="Assign_errorDetails">
+                    <copy bpelx:insertMissingToData="yes">
+                        <from>$ErrorBusCode</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusCode</to>
+                    </copy>
+                    <extensionAssignOperation>
+                        <bpelx:remove>
+                            <bpelx:target expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:TransactionInformation</bpelx:target>
+                        </bpelx:remove>
+                    </extensionAssignOperation>
+                    <copy bpelx:insertMissingToData="yes">
+                        <from>$ErrorBusMessage</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorBusMessage</to>
+                    </copy>
+                    <copy bpelx:insertMissingToData="yes">
+                        <from>$ErrorTechCode</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechCode</to>
+                    </copy>
+                    <copy bpelx:insertMissingToData="yes">
+                        <from>$ErrorTechMessage</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechMessage</to>
+                    </copy>
+                    <copy bpelx:insertMissingToData="yes">
+                        <from>$ErrorTechDetails</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.reply/ns2:MessageBody/ns2:ErrorInformation/ns2:ErrorTechDetails</to>
+                    </copy>
+                </assign>
+            </else>
+        </if>
+        <reply name="replyOutput" partnerLink="GenerateBarcodeTransaction" variable="outputVariable"
+               portType="ns5:GenerateBarcodeTransaction_ptt" operation="GenerateBarcodeTransaction"/>
+    </sequence>
+</process>

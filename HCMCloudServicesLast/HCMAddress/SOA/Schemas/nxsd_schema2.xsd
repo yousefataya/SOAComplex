@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://TargetNamespace.com/EmpsRestRef_getAddres_response" targetNamespace="http://TargetNamespace.com/EmpsRestRef_getAddres_response" elementFormDefault="qualified" xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd" nxsd:version="JSON" nxsd:encoding="UTF-8">
+   <xsd:element name="Root-Element">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="items" maxOccurs="unbounded">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="PersonNumber" type="xsd:integer"/>
+                     <xsd:element name="PersonId" type="xsd:integer"/>
+                     <xsd:element name="links" maxOccurs="unbounded">
+                        <xsd:complexType>
+                           <xsd:sequence>
+                              <xsd:element name="rel" type="xsd:string"/>
+                              <xsd:element name="href" type="xsd:string"/>
+                              <xsd:element name="name" type="xsd:string"/>
+                              <xsd:element name="kind" type="xsd:string"/>
+                              <xsd:element name="properties" minOccurs="0">
+                                 <xsd:complexType>
+                                    <xsd:sequence>
+                                       <xsd:element name="changeIndicator" type="xsd:string"/>
+                                    </xsd:sequence>
+                                 </xsd:complexType>
+                              </xsd:element>
+                           </xsd:sequence>
+                        </xsd:complexType>
+                     </xsd:element>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="count" type="xsd:integer"/>
+            <xsd:element name="hasMore" type="xsd:string"/>
+            <xsd:element name="limit" type="xsd:integer"/>
+            <xsd:element name="offset" type="xsd:integer"/>
+            <xsd:element name="links">
+               <xsd:complexType>
+                  <xsd:sequence>
+                     <xsd:element name="rel" type="xsd:string"/>
+                     <xsd:element name="href" type="xsd:string"/>
+                     <xsd:element name="name" type="xsd:string"/>
+                     <xsd:element name="kind" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:complexType>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+<xsd:annotation xmlns="">
+      <xsd:appinfo>NXSDSAMPLE=</xsd:appinfo>
+      <xsd:appinfo>USEHEADER=false</xsd:appinfo>
+   </xsd:annotation>
+</xsd:schema>

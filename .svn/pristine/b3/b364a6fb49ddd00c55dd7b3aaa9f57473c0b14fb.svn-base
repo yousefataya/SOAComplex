@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:EPI="http://www.fact.com.jo"
+            targetNamespace="http://www.fact.com.jo" elementFormDefault="qualified">
+
+
+<xsd:element name="Output" type="EPI:DataOut"/>
+<xsd:element name="Input" type="EPI:InputCompanyId"/>
+
+
+<xsd:complexType name ="InputCompanyId">
+<xsd:sequence>
+<xsd:element name="PSequenceNo" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="DataOut">
+<xsd:sequence>
+<xsd:element name="GetData" type="EPI:PRecord" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="PRecord">
+<xsd:sequence>
+  <xsd:element name="SEQUENCE_NO" type="xsd:string"/>
+  <xsd:element name="FILE_CODE" type="xsd:string"/>
+  <xsd:element name="FILE_NAME" type="xsd:string"/>
+  <xsd:element name="STATUS" type="xsd:string"/>
+  <xsd:element name="DATE_OF_PAYMENT" type="xsd:string"/>
+  <xsd:element name="NO_OF_SALARIES" type="xsd:string"/>
+  <xsd:element name="SALARY_AMOUNT" type="xsd:string"/>
+  <xsd:element name="UPLOAD_DATE" type="xsd:string"/>
+  <xsd:element name="UPLOAD_TIME" type="xsd:string"/>
+  <xsd:element name="LAST_MODIFICATION_DATE" type="xsd:string"/>
+  <xsd:element name="LAST_MODIFICATION_TIME" type="xsd:string"/>  
+  <xsd:element name="PERVIOUS_SEQ" type="xsd:string"/>            
+  <xsd:element name="COMPANY_ID" type="xsd:string"/>              
+  <xsd:element name="UPLOADER_ID" type="xsd:string"/>             
+  <xsd:element name="COVER_FILE_NAME" type="xsd:string"/>         
+  <xsd:element name="SALARY_FILE_TYPE" type="xsd:string"/>        
+  <xsd:element name="FILE_FULL_PATH" type="xsd:string"/>          
+  <xsd:element name="BRCH_CODE" type="xsd:string"/>               
+  <xsd:element name="CACC_NUM" type="xsd:string"/>                
+  <xsd:element name="FILE_SOURCE" type="xsd:string"/>             
+  <xsd:element name="MONTH_NUM" type="xsd:string"/>   
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+</xsd:schema>

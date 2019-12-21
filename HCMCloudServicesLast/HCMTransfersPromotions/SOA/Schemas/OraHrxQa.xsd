@@ -1,0 +1,34 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonVisaLegDDF.xsd"/>
+    <xsd:complexType name="OraHrxQa">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>VisaPermitId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonVisaLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorType_DisplayValue" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorName" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorNum" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorRltn" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorRltn_DisplayValue" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorNtnlty" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="oraHrxQaSponsorNtnlty_Display" nillable="true"
+                         type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="oraHrxQa" type="OraHrxQa"/>
+</xsd:schema>

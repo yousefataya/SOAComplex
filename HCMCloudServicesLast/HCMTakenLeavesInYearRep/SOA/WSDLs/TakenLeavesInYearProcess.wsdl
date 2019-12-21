@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="TakenLeavesInYearProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMTakenLeavesInYearRep/TakenLeavesInYearProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMTakenLeavesInYearRep/TakenLeavesInYearProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="TakenLeavesInYearProcess">
+        <plnk:role name="TakenLeavesInYearProcessProvider" portType="client:TakenLeavesInYearProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMTakenLeavesInYearRep/TakenLeavesInYearProcess"
+                 schemaLocation="../Schemas/TakenLeavesInYearProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="TakenLeavesInYearProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="TakenLeavesInYearProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="TakenLeavesInYearProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:TakenLeavesInYearProcessRequestMessage"/>
+            <wsdl:output message="client:TakenLeavesInYearProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

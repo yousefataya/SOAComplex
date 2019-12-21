@@ -1,0 +1,13 @@
+<adapter-config name="closeBranchReference" adapter="db" wsdlLocation="../WSDLs/closeBranchReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="cbsConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="closeBranchReference_ptt" operation="closeBranchReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BF_FIX_ASSEST_BANK"/>
+      <property name="ProcedureName" value="BF_TEST_CLOSE_BRCH"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

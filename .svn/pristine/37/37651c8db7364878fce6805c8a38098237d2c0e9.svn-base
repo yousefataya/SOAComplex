@@ -1,0 +1,46 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbQueryGetFileStructure" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbQueryGetFileStructure" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CMPN_CODE" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RECORD" type="db:P_RECORD_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_RECORD_RowSet">
+      <sequence>
+         <element name="P_RECORD_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CMPN_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CFVR_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CFDT_LINE_TYPE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CFDT_POS" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CFDT_LEN" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CFDT_VAL" type="db:string40" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="NODE_ID" type="db:string8" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="PROGRAM_ID" type="db:string8" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="USER_ID" type="db:string8" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="TIME_STAMP" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string40">
+      <restriction base="string">
+         <maxLength value="40"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string8">
+      <restriction base="string">
+         <maxLength value="8"/>
+      </restriction>
+   </simpleType>
+</schema>

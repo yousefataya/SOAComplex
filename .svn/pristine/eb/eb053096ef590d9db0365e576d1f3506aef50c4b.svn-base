@@ -1,0 +1,39 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDriversLicenseLegDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDriversLicenseLegDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:include schemaLocation="PersonDriversLicenseLegDDF.xsd"/>
+    <xsd:complexType name="PersonDriversLicenseLegDDFDE">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>DriversLicenseId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonDriversLicenseLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_HRX_DE_LIC_LAST_VALID_DT" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_A1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_A" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_B" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_C1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_C" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_D1" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_D" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_BE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_C1E" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_CE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_D1E" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_DE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_M" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_L" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_HRX_DE_TS" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personDriversLicenseLegDDFDE" type="PersonDriversLicenseLegDDFDE"/>
+</xsd:schema>

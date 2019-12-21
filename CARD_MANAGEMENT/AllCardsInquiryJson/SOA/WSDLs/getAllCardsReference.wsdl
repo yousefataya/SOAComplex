@@ -1,0 +1,42 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="getAllCardsReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/CARD_MANAGEMENT/AllCardsInquiryJson/getAllCardsReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/CARD_MANAGEMENT/AllCardsInquiryJson/getAllCardsReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllCardsReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns1="http://xmlns.fact.com/ws/ACI"
+     xmlns:ns2="http://www.example.org"
+    >
+    <plt:partnerLinkType name="getAllCardsReference_plt">
+        <plt:role name="getAllCardsReference_role">
+            <plt:portType name="tns:getAllCardsReference_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllCardsReference"
+                 schemaLocation="../Schemas/getAllCardsReference_sp.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.fact.com/ws/ACI" schemaLocation="../Schemas/AllCards.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.example.org" schemaLocation="../Schemas/untitled1.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="db:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="getAllCardsReference_ptt">
+        <wsdl:operation name="getAllCardsReference">
+            <wsdl:input message="tns:args_in_msg"/>
+            <wsdl:output message="tns:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

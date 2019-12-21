@@ -1,0 +1,14 @@
+<adapter-config name="cbsReference" adapter="db" wsdlLocation="../WSDLs/cbsReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="cbsConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="cbsReference_ptt" operation="cbsReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BF_SAVEACC_PRZ_PRP"/>
+      <property name="ProcedureName" value="BF_SAVE_PRIZES_PRP"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="QueryTimeout" value="100000"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

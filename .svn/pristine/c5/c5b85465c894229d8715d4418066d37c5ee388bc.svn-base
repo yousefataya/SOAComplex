@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ERI="http://www.fact.com.jo/ERI"
+            targetNamespace="http://www.fact.com.jo/ERI" elementFormDefault="qualified">
+
+
+
+
+
+<xsd:element name="ExchangeRateInquiryMessage" type="ERI:ExchangeRateInquiryMessageInput"/>
+<xsd:complexType name="ExchangeRateInquiryMessageInput">
+<xsd:sequence>
+<xsd:element name="MessageHeader" type="ERI:MessageHeaderComplexInput"/>
+<xsd:element name="MessageBody" type="ERI:MessageBodyComplexInput"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+
+<xsd:complexType name="MessageHeaderComplexInput">
+<xsd:sequence>
+<xsd:element name="TransactionID" type="xsd:string"/>
+<xsd:element name="ApplicationCode" type="xsd:string"/>
+<xsd:element name="ApplicationUserName" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="MessageBodyComplexInput">
+<xsd:sequence>
+<xsd:element name="InquiryInformation" type="ERI:InquiryInformationComplexInput"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+<xsd:complexType name="InquiryInformationComplexInput">
+<xsd:sequence>
+<xsd:element name="AgainstCurrency" type="xsd:string"/>
+<xsd:element name="Currency" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+
+<xsd:element name="ExchangeRateInquiryMessageOutput" type="ERI:ExchangeRateInquiryMessageOutputComplex"/>
+
+<xsd:complexType name="ExchangeRateInquiryMessageOutputComplex">
+<xsd:sequence>
+<xsd:element name="MessageHeader" type="ERI:MessageHeaderComplex"/>
+<xsd:element name="MessageBody" type="ERI:MessageBodyComplex"/>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="MessageHeaderComplex">
+<xsd:sequence>
+<xsd:element name="TransactionID" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+<xsd:complexType name="MessageBodyComplex">
+<xsd:sequence>
+<xsd:element name="StatusInformation" type="ERI:StatusInformationComplex"/>
+<xsd:element name="ErrorInformation" type="ERI:ErrorInformationComplex"/>
+<xsd:element name="InquiryInformation" type="ERI:InquiryInformationComplex"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+<xsd:complexType name ="StatusInformationComplex">
+<xsd:sequence>
+<xsd:element name ="Status" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+
+
+<xsd:complexType name="ErrorInformationComplex">
+<xsd:sequence>
+<xsd:element name="ErrorBusCode" type="xsd:string"/>
+<xsd:element name="ErrorBusMessage" type="xsd:string"/>
+<xsd:element name="ErrorTechCode" type="xsd:string"/>
+<xsd:element name="ErrorTechMessage" type="xsd:string"/>
+<xsd:element name="ErrorTechlDetails" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+
+<xsd:complexType name ="InquiryInformationComplex">
+<xsd:sequence>
+<xsd:element name="ListRates" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+
+
+</xsd:schema>

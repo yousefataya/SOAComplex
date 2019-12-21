@@ -1,0 +1,12 @@
+<adapter-config name="PersonTrackerDBRef" adapter="db" wsdlLocation="../WSDLs/PersonTrackerDBRef.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hcmHr" location="eis/DB/hrHCM"/>
+  <endpoint-interaction portType="PersonTrackerDBRef_ptt" operation="PersonTrackerDBRef">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HCM_STAGE"/>
+      <property name="ProcedureName" value="GETPERSONTRACKERBYBATCHNUM"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

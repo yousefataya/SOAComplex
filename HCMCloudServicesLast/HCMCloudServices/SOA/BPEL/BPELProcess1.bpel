@@ -1,0 +1,279 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Apr 23 09:53:31 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess1"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMCloudServices/auditDbReference"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/auditDbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/UnpaidLeaveProcess">
+
+  <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/BPELProcess1" location="../WSDLs/BPELProcess1.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocess1_client" partnerLinkType="client:BPELProcess1" myRole="BPELProcess1Provider"/>
+    <partnerLink name="auditDbReference" partnerLinkType="ns1:auditDbReference_plt"
+                 partnerRole="auditDbReference_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELProcess1RequestMessage"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+    <variable name="Variable1" type="xsd:string"/>
+    <variable name="requestDate" type="xsd:string"/>
+    <variable name="InvokeDoneAllServices_auditDbReference_InputVariable" messageType="ns1:args_in_msg"/>
+    <variable name="cloudServicesStatus" type="xsd:string"/>
+    <variable name="InvokeFaultAllServices_auditDbReference_InputVariable" messageType="ns1:args_in_msg"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence5">
+        <assign name="AssignFault">
+          <copy>
+            <from>'F'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$cloudServicesStatus</to>
+          </copy>
+          <copy>
+            <from>'HCMCloudServices'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PCOMPOSITE_NAME</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PID</to>
+          </copy>
+          <copy>
+            <from>$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PLSR_DATE</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PLSR_DATE</to>
+          </copy>
+          <copy>
+            <from>'F'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PRESPONCE_STATUS</to>
+          </copy>
+          <copy>
+            <from>$vBatchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PBATCH_NUM</to>
+          </copy>
+          <copy>
+            <from>$vRequestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFaultAllServices_auditDbReference_InputVariable.InputParameters/ns2:PREQUEST_TYPE</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeFaultAllServices" partnerLink="auditDbReference"
+                portType="ns1:auditDbReference_ptt" operation="auditDbReference"
+                inputVariable="InvokeFaultAllServices_auditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcess1.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelprocess1_client" portType="client:BPELProcess1" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignInitialsMaster">
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vRequestType</to>
+      </copy>
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$cloudServicesStatus</to>
+      </copy>
+      <copy>
+        <from>xp20:current-dateTime()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$requestDate</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vBatchNumber</to>
+      </copy>
+    </assign>
+    <!--<extensionActivity>
+     <bpelx:call name="CallServiceA" xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/ServiceAProcess"
+                  target="sp1:ServiceAProcess">
+        <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+        <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+      </bpelx:call>
+    </extensionActivity>-->
+ <!--   <extensionActivity>
+      <bpelx:call name="CallStageEmpsProfile"
+                  xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/EmpsProfileProcess"
+                  target="sp1:EmpsProfileProcess">
+        <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+        <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+      </bpelx:call>
+    </extensionActivity>-->
+    <flow name="Flow1">
+      <sequence name="Sequence2">
+        <extensionActivity>
+          <bpelx:call name="CallStageGrades"
+                      xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/GradesProcess"
+                      target="sp1:GradesProcess">
+            <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+            <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+          </bpelx:call>
+        </extensionActivity>
+      </sequence>
+      <sequence name="Sequence">
+        <extensionActivity>
+          <bpelx:call name="CallStageJob"
+                      xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/JobProcess"
+                      target="sp1:JobProcess">
+            <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+            <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+          </bpelx:call>
+        </extensionActivity>
+      </sequence>
+      <sequence name="Sequence1">
+        <extensionActivity>
+          <bpelx:call name="CallDepratment"
+                      xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/DeparmentsProcess"
+                      target="sp1:DeparmentsProcess">
+            <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+            <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+          </bpelx:call>
+        </extensionActivity>
+      </sequence>
+    </flow>
+    <wait name="Wait1">
+      <for>'PT1S'</for>
+    </wait>
+    <flow name="Flow2">
+      <sequence name="Sequence4">
+        <extensionActivity>
+          <bpelx:call name="CallUnpaidLeave"
+                      xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/UnpaidLeaveProcess"
+                      target="sp1:UnpaidLeaveProcess">
+            <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+            <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+            <bpelx:param name="reqDATE" copyByValue="yes" variable="requestDate"/>
+          </bpelx:call>
+        </extensionActivity>
+      </sequence>
+      <sequence name="Sequence">
+        <extensionActivity>
+          <bpelx:call name="CallStageLocations"
+                      xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/LocationsProcess"
+                      target="sp1:LocationsProcess">
+            <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+            <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+          </bpelx:call>
+        </extensionActivity>
+      </sequence>
+      <sequence name="Sequence3">
+        <extensionActivity>
+          <bpelx:call name="CallStageAccrualBal"
+                      xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/AccrualBalProcess"
+                      target="sp1:AccrualBalProcess">
+            <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+            <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+            <bpelx:param name="reqDATE" copyByValue="yes" variable="requestDate"/>
+          </bpelx:call>
+        </extensionActivity>
+      </sequence>
+    </flow>
+    <!--<wait name="Wait3">
+      <for>'PT1S'</for>
+    </wait>
+   <extensionActivity>
+      <bpelx:call name="CallEmpsDepen"
+                  xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/EmployeeDependentsProcess"
+                  target="sp1:EmployeeDependentsProcess">
+        <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+        <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+      </bpelx:call>
+    </extensionActivity>-->
+    <wait name="Wait2">
+      <for>'PT2S'</for>
+    </wait>
+    <!--<extensionActivity>
+     <bpelx:call name="CallStageEmpsDocs"
+                  xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/EmpsDocsProcess"
+                  target="sp1:EmpsDocsProcess">
+        <bpelx:param name="batchNumber" copyByValue="yes" variable="vBatchNumber"/>
+        <bpelx:param name="requestType" copyByValue="yes" variable="vRequestType"/>
+      </bpelx:call>
+    </extensionActivity>-->
+    <assign name="AssignAllServices">
+      <copy>
+        <from>$vRequestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:PREQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:PID</to>
+      </copy>
+      <copy>
+        <from>$cloudServicesStatus</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:PRESPONCE_STATUS</to>
+      </copy>
+      <copy>
+        <from>$vBatchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>$requestDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:POLD_LSR_DATE</to>
+      </copy>
+      <copy>
+        <from>xp20:current-dateTime()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>'HCMCloudServices'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDoneAllServices_auditDbReference_InputVariable.InputParameters/ns2:PCOMPOSITE_NAME</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeDoneAllServices" bpelx:invokeAsDetail="no" partnerLink="auditDbReference"
+            portType="ns1:auditDbReference_ptt" operation="auditDbReference"
+            inputVariable="InvokeDoneAllServices_auditDbReference_InputVariable"/>
+  </sequence>
+</process>

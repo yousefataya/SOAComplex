@@ -1,0 +1,132 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Jan 31 14:30:20 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SubmitTransactionProcess"
+         targetNamespace="http://xmlns.oracle.com/SAMAHA/SubmitTransaction/SubmitTransactionProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SAMAHA/SubmitTransaction/SubmitTransactionProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SAMAHA/SubmitTransaction/samahaReference"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer" queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/samahaReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/SAMAHA/SubmitTransaction/submitTransactionReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/sp/submitTransactionReference"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SAMAHA/SubmitTransaction/submitTransactionReference"
+            location="../WSDLs/submitTransactionReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="submitTransaction" bpelx:wadl="yes"/>
+        <partnerLink name="submitTransactionReference" partnerLinkType="ns4:submitTransactionReference_plt"
+                     partnerRole="submitTransactionReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke_submitTransaction_InputVariable" messageType="ns4:args_in_msg"/>
+        <variable name="Invoke_submitTransaction_OutputVariable" messageType="ns4:args_out_msg"/>
+        <variable name="p_voucher_text" type="xsd:string"/>
+        <variable name="errorCode" type="xsd:string"/>
+        <variable name="errorText" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="receiveInput" partnerLink="submitTransaction" variable="inputVar" bpelx:method="submitTransaction"
+                 createInstance="yes"/>
+        <assign name="Assign_input">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.sourceRegCode</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_SOURCE_REG_CODE</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.sourceBankCode</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_SOURCE_BNK_CODE</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.sourceBranchCode</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_SOURCE_BRN_CODE</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.sourceDate</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_SOURCE_DATE</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.sourceRefText</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_SOURCE_REF_TEXT</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.cusIdNumber</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_CUS_ID_NO</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.transactionAmount</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_TRANS_FAMOUNT</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.paymentRefText</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_submitTransaction_InputVariable.InputParameters/ns5:P_PAYMENT_REF_TEXT</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke_submitTransaction" bpelx:invokeAsDetail="no" partnerLink="submitTransactionReference"
+                portType="ns4:submitTransactionReference_ptt" operation="submitTransactionReference"
+                inputVariable="Invoke_submitTransaction_InputVariable"
+                outputVariable="Invoke_submitTransaction_OutputVariable"/>
+        <assign name="Assign_output_toVariables">
+            <copy>
+                <from>$Invoke_submitTransaction_OutputVariable.OutputParameters/ns5:P_VOUCHER_PK_TEXT</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$p_voucher_text</to>
+            </copy>
+            <copy>
+                <from>$Invoke_submitTransaction_OutputVariable.OutputParameters/ns5:P_ERROR_CODE</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$errorCode</to>
+            </copy>
+            <copy>
+                <from>$Invoke_submitTransaction_OutputVariable.OutputParameters/ns5:P_ERROR_TEXT</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$errorText</to>
+            </copy>
+        </assign>
+        <assign name="Assign_finalOuput">
+            <copy>
+                <from>$p_voucher_text</from>
+                <to expressionLanguage="javascript">process.outputVar.VoucherText</to>
+            </copy>
+            <copy>
+                <from>$errorCode</from>
+                <to expressionLanguage="javascript">process.outputVar.ErrorCode</to>
+            </copy>
+            <copy>
+                <from>$errorText</from>
+                <to expressionLanguage="javascript">process.outputVar.ErrorText</to>
+            </copy>
+        </assign>
+        <reply name="replyOutput" partnerLink="submitTransaction" variable="outputVar" bpelx:method="submitTransaction"/>
+    </sequence>
+</process>

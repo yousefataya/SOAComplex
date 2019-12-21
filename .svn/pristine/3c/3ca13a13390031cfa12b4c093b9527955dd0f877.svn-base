@@ -1,0 +1,13 @@
+<adapter-config name="getDecisionMakerInfoReference" adapter="db" wsdlLocation="../WSDLs/getDecisionMakerInfoReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getDecisionMakerInfoReference_ptt" operation="getDecisionMakerInfoReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_WORKFLOW_STRUCTURE"/>
+      <property name="ProcedureName" value="GET_DECISION_MAKER_BY_LEVEL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

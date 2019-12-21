@@ -1,0 +1,13 @@
+<adapter-config name="getEmployeeByWorkFlowThirdLevelReference" adapter="db" wsdlLocation="../WSDLs/getEmployeeByWorkFlowThirdLevelReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getEmployeeByWorkFlowThirdLevelReference_ptt" operation="getEmployeeByWorkFlowThirdLevelReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_WORKFLOW_STRUCTURE"/>
+      <property name="ProcedureName" value="GET_WORKFLOW_THIRD_LEVEL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,38 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonLegislativeCN.xsd" xml:id="PersonLegislativeCN-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeUS.xsd" xml:id="PersonLegislativeUS-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeIE.xsd" xml:id="PersonLegislativeIE-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeGB.xsd" xml:id="PersonLegislativeGB-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeSA.xsd" xml:id="PersonLegislativeSA-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeAE.xsd" xml:id="PersonLegislativeAE-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeCH.xsd" xml:id="PersonLegislativeCH-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeKW.xsd" xml:id="PersonLegislativeKW-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeFR.xsd" xml:id="PersonLegislativeFR-xsd"/>
+    <xsd:include schemaLocation="PersonLegislativeORA_5FHRX_5FZA.xsd" xml:id="PersonLegislativeORA_5FHRX_5FZA-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:complexType name="PersonLegislative">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonLegislativeId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonLegislativeId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personLegislative" type="PersonLegislative"/>
+</xsd:schema>

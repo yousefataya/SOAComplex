@@ -1,0 +1,290 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Sep 10 11:55:33 IDT 2014
+  Author:  Zero
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="RefreshAllProcess"
+         targetNamespace="http://xmlns.oracle.com/OFMInMemoryUtilities/RefreshAllDataservice/RefreshAllProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/OFMInMemoryUtilities/RefreshAllDataservice/RefreshAllProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns1="http://xmlns.oracle.com/bpel/RADS" xmlns:ui="http://xmlns.oracle.com/soa/designer">
+  <import namespace="http://xmlns.oracle.com/OFMInMemoryUtilities/RefreshAllDataservice/RefreshAllProcess"
+          location="RefreshAllProcess.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="refreshallprocess_client"
+                 partnerLinkType="client:RefreshAllProcess"
+                 myRole="RefreshAllProcessProvider"/>
+  </partnerLinks>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable"
+              messageType="client:RefreshAllProcessRequestMessage"/>
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable"
+              messageType="client:RefreshAllProcessResponseMessage"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+    <!-- Receive input from requestor. (Note: This maps to operation defined in RefreshAllProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="refreshallprocess_client"
+             portType="client:RefreshAllProcess" operation="process"
+             variable="inputVariable" createInstance="yes"/>
+    <assign name="ValidationTransformation">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"/>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("xsl/ValidationTransformation.xsl", $inputVariable.payload)</from>
+        <to variable="outputVariable" part="payload"/>
+      </copy>
+    </assign>
+    <if name="If_Success">
+      <documentation>Yes</documentation>
+      <condition>not($outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorBusMessage)</condition>
+      <sequence>
+        <assign name="Assign_InitStatus">
+          <copy bpelx:insertMissingToData="yes">
+            <from>''</from>
+            <to>$outputVariable.payload/ns1:MessageBody/ns1:StatusInformation/ns1:Status</to>
+          </copy>
+        </assign>
+        <extensionActivity>
+          <bpelx:exec name="Java_RefreshLogic" language="java">
+            <![CDATA[String input = ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns1:input")).getTextContent(); 
+ 
+        if (input.equals("COMPOSITE_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.compositeManagement.CompositeManager compositeManager = 
+                    new com.dimensions.mw.utils.compositeManagement.CompositeManager(); 
+                compositeManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+        } 
+ 
+        else if (input.equals("ERROR_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.errorManagement.ErrorManager manager = 
+                    new com.dimensions.mw.utils.errorManagement.ErrorManager(); 
+                manager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+        } 
+ 
+ 
+        else if (input.equals("PARAMETER_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.parameterManagement.ParameterManager parameterManager = 
+                    new com.dimensions.mw.utils.parameterManagement.ParameterManager(); 
+                parameterManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+        } 
+ 
+ 
+        else if (input.equals("VALIDATION_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.validationManagement.ValidationManager validationManager = 
+                    new com.dimensions.mw.utils.validationManagement.ValidationManager(); 
+                validationManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+        } 
+ 
+ 
+        else if (input.equals("MAPPING_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.mappingManagement.MappingManager mappingManager = 
+                    new com.dimensions.mw.utils.mappingManagement.MappingManager(); 
+                mappingManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+        } 
+ 
+ 
+        else if (input.equals("ATTRIBUTEVALIDATION_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.attributeManagement.AttributeManager attributeManager = 
+                    new com.dimensions.mw.utils.attributeManagement.AttributeManager(); 
+                attributeManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+        } else if (input.equals("QUERIES_DATA")) { 
+            try { 
+                com.dimensions.mw.utils.sqlManagement.QueriesManager queriesManager = 
+                    new com.dimensions.mw.utils.sqlManagement.QueriesManager(); 
+                queriesManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+            } catch (Exception e) { 
+            } 
+        } else { 
+            try { 
+                com.dimensions.mw.utils.compositeManagement.CompositeManager compositeManager = 
+                    new com.dimensions.mw.utils.compositeManagement.CompositeManager(); 
+                compositeManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+            try { 
+                com.dimensions.mw.utils.errorManagement.ErrorManager manager = 
+                    new com.dimensions.mw.utils.errorManagement.ErrorManager(); 
+                manager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+ 
+            try { 
+                com.dimensions.mw.utils.parameterManagement.ParameterManager parameterManager = 
+                    new com.dimensions.mw.utils.parameterManagement.ParameterManager(); 
+                parameterManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+ 
+            try { 
+                com.dimensions.mw.utils.validationManagement.ValidationManager validationManager = 
+                    new com.dimensions.mw.utils.validationManagement.ValidationManager(); 
+                validationManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+ 
+            try { 
+                com.dimensions.mw.utils.mappingManagement.MappingManager mappingManager = 
+                    new com.dimensions.mw.utils.mappingManagement.MappingManager(); 
+                mappingManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+ 
+            try { 
+                com.dimensions.mw.utils.attributeManagement.AttributeManager attributeManager = 
+                    new com.dimensions.mw.utils.attributeManagement.AttributeManager(); 
+                attributeManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+ 
+            } catch (Exception e) { 
+ 
+            } 
+ 
+ 
+            try { 
+                com.dimensions.mw.utils.sqlManagement.QueriesManager queriesManager = 
+                    new com.dimensions.mw.utils.sqlManagement.QueriesManager(); 
+                queriesManager.destroyInstance(); 
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Success"); 
+            } catch (Exception e) { 
+            } 
+ 
+ 
+        }]]>
+          </bpelx:exec>
+        </extensionActivity><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_RemoveOutputErrorTag" language="java"
+                  xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <![CDATA[try {           
+    org.w3c.dom.Element ErrorInformationElement = (org.w3c.dom.Element)getVariableData("outputVariable", "payload", "//ns1:ErrorInformation");           
+    ErrorInformationElement.getParentNode().removeChild(ErrorInformationElement);           
+} catch (Exception e) {           
+}]]>
+      </bpelx:exec>
+   </extensionActivity></sequence>
+      <else>
+        <documentation>No</documentation>
+        <assign name="Assign_Status"
+                    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <copy bpelx:insertMissingToData="yes"
+            xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Failed'</from>
+         <to>$outputVariable.payload/ns1:MessageBody/ns1:StatusInformation/ns1:Status</to>
+      </copy>
+   </assign></else>
+    </if>
+   
+   
+   
+   
+   
+   
+   
+   
+   <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="refreshallprocess_client"
+           portType="client:RefreshAllProcess" operation="process"
+           variable="outputVariable"/>
+  </sequence>
+</process>

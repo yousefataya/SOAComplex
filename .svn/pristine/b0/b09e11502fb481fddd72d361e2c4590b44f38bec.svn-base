@@ -1,0 +1,76 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+     xmlns:ns0="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FCN_5FOTHER_5FEMPLOYEE_5FINFOprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FCN_5FPERSONAL_5FFILE_5FINFOprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FCN_5FPERSONALITY_5FINFOprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FCN_5FMILITARY_5FINFOprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="OraHrxCaDesignatedGroups.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="Penalties.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="OraGvPerDtls.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="PersonExtraInformationContextHRX_5FIN_5FNOMINATIONprivate.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/context/"
+         schemaLocation="jobempdebt.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel.xsd"/>
+    <xsd:include schemaLocation="j_PersonExtraInformation.xsd"/>
+    <xsd:complexType name="j_PersonExtraInformationPerEitprivate">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="j_PersonExtraInformation">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextHRX_5FCN_5FOTHER_5FEMPLOYEE_5FINFOprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FCN_5FOTHER_5FEMPLOYEE_5FINFOprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FIN_5FMISCELLANEOUSprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextHRX_5FCN_5FPERSONAL_5FFILE_5FINFOprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FCN_5FPERSONAL_5FFILE_5FINFOprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextHRX_5FCN_5FPERSONALITY_5FINFOprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FCN_5FPERSONALITY_5FINFOprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FCN_5FPOLITICAL_5FINFOprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextHRX_5FCN_5FMILITARY_5FINFOprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FCN_5FMILITARY_5FINFOprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextORA_5FHRX_5FCA_5FDESIGNATED_5FGROUPSprivateVO"
+                         type="ns0:OraHrxCaDesignatedGroups" sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonExtraInformationContext_D8_A7_D9_84_D8_B9_D9_82_D9_88_D8_A8_D8_A7_D8_AAprivateVO"
+                         type="ns0:Penalties" sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element minOccurs="0" name="PersonExtraInformationContextORA_5FGPY_5FPER_5FDTLSprivateVO"
+                         type="ns0:OraGvPerDtls" sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonExtraInformationContextHRX_5FIN_5FNOMINATIONprivateVO"
+                         type="ns0:PersonExtraInformationContextHRX_5FIN_5FNOMINATIONprivate"
+                         sdoXML:dataType="sdo:DataObject"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonExtraInformationContext_D8_B9_D9_87_D8_AF___D8_A7_D9_84_D9_85_D9_88_D8_B8_D9_81_D9_8A_D9_86privateVO"
+                         type="ns0:jobempdebt" sdoXML:dataType="sdo:DataObject"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="j_PersonExtraInformationPerEitprivate" type="j_PersonExtraInformationPerEitprivate"/>
+</xsd:schema>

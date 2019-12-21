@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HCMLocationsProcess"
+             targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype">
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	TYPE DEFINITION - List of services participating in this BPEL process
+	The default output of the BPEL designer uses strings as input and 
+	output to the BPEL Process. But you can define or import any XML 
+	Schema type and use them as part of the message types.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->   
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess" schemaLocation="../Schemas/HCMLocationsProcess.xsd" />
+		</schema>
+	</wsdl:types>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	MESSAGE TYPE DEFINITION - Definition of the message types used as 
+	part of the port type defintions
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->      
+	<wsdl:message name="HCMLocationsProcessRequestMessage">
+		<wsdl:part name="payload" element="client:process"/>
+	</wsdl:message>
+	<wsdl:message name="HCMLocationsProcessResponseMessage">
+		<wsdl:part name="payload" element="client:processResponse"/>
+	</wsdl:message>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PORT TYPE DEFINITION - A port type groups a set of operations into
+	a logical service unit.
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+	<!-- portType implemented by the HCMLocationsProcess BPEL process -->
+	<wsdl:portType name="HCMLocationsProcess">
+		<wsdl:operation name="process">
+			<wsdl:input  message="client:HCMLocationsProcessRequestMessage" />
+			<wsdl:output message="client:HCMLocationsProcessResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	PARTNER LINK TYPE DEFINITION
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --> 
+	<plnk:partnerLinkType name="HCMLocationsProcess">
+		<plnk:role name="HCMLocationsProcessProvider" portType="client:HCMLocationsProcess"/>
+	</plnk:partnerLinkType>
+</wsdl:definitions>

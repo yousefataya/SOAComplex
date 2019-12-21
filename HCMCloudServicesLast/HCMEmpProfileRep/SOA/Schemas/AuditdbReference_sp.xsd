@@ -1,0 +1,15 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditdbReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditdbReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="PID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="PCOMPOSITE_NAME" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PBATCH_NUM" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PRESPONCE_STATUS" type="string" db:index="4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PLSR_DATE" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="PREQUEST_TYPE" type="string" db:index="6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="POLD_LSR_DATE" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

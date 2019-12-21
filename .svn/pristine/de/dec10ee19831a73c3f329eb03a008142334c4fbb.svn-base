@@ -1,0 +1,15 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+    
+     targetNamespace="http://employee.fact"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns="http://employee.fact"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="EmployeeService">
+        <plnk:role name="EmployeeServicePortType" portType="ns:EmployeeServicePortType"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://employee.fact" location="EmployeeService.wsdl"/>
+</wsdl:definitions>

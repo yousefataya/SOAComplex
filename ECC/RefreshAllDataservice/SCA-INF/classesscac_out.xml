@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line/>
+      <col/>
+      <file>Transformation.mplan</file>
+      <name>Transformation.mplan</name>
+      <fix/>
+      <msg>Assigning property/constant "'ALL'" to element "$out.payload/ns1:input". Please make sure target is single leaf node, otherwise non-leaf node will contain only string value which may generate non-valid xml as per the xsd.</msg>
+   </Fault>
+</Faults>

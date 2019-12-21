@@ -1,0 +1,13 @@
+<adapter-config name="updateMaritalStatusReference" adapter="db" wsdlLocation="../WSDLs/updateMaritalStatusReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="updateMaritalStatusReference_ptt" operation="updateMaritalStatusReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_EMPLOYEE"/>
+      <property name="ProcedureName" value="UPDATE_MARITAL_STATUS"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

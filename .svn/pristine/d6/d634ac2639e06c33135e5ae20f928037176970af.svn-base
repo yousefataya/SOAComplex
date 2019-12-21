@@ -1,0 +1,33 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/BF_sharesInfoReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/BF_sharesInfoReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RECORDSET" type="db:P_RECORDSET_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_RECORDSET_RowSet">
+      <sequence>
+         <element name="P_RECORDSET_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CARD_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CENTER_CODE" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CARD_FULL_NAME" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="NATIONAL_NO" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CARD_NATIONALITY" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -1,0 +1,14 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://shrikworld.blogspot.in/response"
+     targetNamespace="http://shrikworld.blogspot.in/response" elementFormDefault="qualified">
+    <xsd:element name="Response">
+        <xsd:annotation>
+            <xsd:documentation>A sample element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Code" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

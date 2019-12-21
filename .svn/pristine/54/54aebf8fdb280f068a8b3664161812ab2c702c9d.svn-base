@@ -1,0 +1,12 @@
+<adapter-config name="CBS_getSharesInfoReference" adapter="db" wsdlLocation="../WSDLs/CBS_getSharesInfoReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="factCBSDatabase" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CBS_getSharesInfoReference_ptt" operation="CBS_getSharesInfoReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="GET_SHARE_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

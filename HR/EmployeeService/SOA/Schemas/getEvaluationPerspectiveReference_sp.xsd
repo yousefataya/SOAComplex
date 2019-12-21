@@ -1,0 +1,52 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEvaluationPerspectiveReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getEvaluationPerspectiveReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_EMP_ACNT_NO" type="string" db:index="1" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CUR_INFO" type="db:P_CUR_INFO_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_CUR_INFO_RowSet">
+      <sequence>
+         <element name="P_CUR_INFO_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="C_DESC" type="db:string2500" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="Q_ORDER" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CODE_DESC" type="db:string2500" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="MAX_RATE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GRP_EVL" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="GRP_EVL_DESC" type="db:string240" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="YEAR_EVL" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EVAL_FLAG" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="EVAL_FLAG_DESC" type="db:string262" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="EVAL_DEGREE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string2500">
+      <restriction base="string">
+         <maxLength value="2500"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string240">
+      <restriction base="string">
+         <maxLength value="240"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string262">
+      <restriction base="string">
+         <maxLength value="262"/>
+      </restriction>
+   </simpleType>
+</schema>

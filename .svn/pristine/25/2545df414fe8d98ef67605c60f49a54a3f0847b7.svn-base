@@ -1,0 +1,51 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ReadProfitInfoDb" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/ReadProfitInfoDb" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="PCARD_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RECORDSET" type="db:P_RECORDSET_RowSet" db:index="2" db:type="RowSet" minOccurs="0" nillable="true"/>
+            <element name="PGET" type="decimal" db:index="3" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_RECORDSET_RowSet">
+      <sequence>
+         <element name="P_RECORDSET_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CARD_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CENTER_CODE" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="SETUP_YEAR" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SERIAL_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CASH_COMM_PROFIT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DIST_DATE" type="db:string10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DIST_CASH_PERCENT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="ACCOUNT_SHARE" type="db:string20" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="COMPANY_SHARES" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string10">
+      <restriction base="string">
+         <maxLength value="10"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string20">
+      <restriction base="string">
+         <maxLength value="20"/>
+      </restriction>
+   </simpleType>
+</schema>

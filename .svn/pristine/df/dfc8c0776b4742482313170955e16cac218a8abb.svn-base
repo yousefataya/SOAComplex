@@ -1,0 +1,13 @@
+<adapter-config name="HRDBReference" adapter="db" wsdlLocation="../WSDLs/HRDBReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="HRDBConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="HRDBReference_ptt" operation="HRDBReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_ICBS_HOUSING"/>
+      <property name="ProcedureName" value="GET_EMPLOYEE_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

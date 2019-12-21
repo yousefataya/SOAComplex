@@ -1,0 +1,292 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Aug 28 18:21:40 IDT 2017
+  Author:  User
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="TransactionInquiry"
+               targetNamespace="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://xmlns.fact.com/ws/TI"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiryReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/TransactionInquiryReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry" location="../WSDLs/TransactionInquiryService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="TransactionInquiry" partnerLinkType="client:TransactionInquiry" myRole="TransactionInquiryProvider"/>
+      <partnerLink name="TransactionInquiryReference" partnerLinkType="ns2:TransactionInquiryReference_plt"
+                   partnerRole="TransactionInquiryReference_role"/>
+   </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:TransactionInquiryRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:args_out_msg"/>
+    <variable name="CompositeName" type="xsd:string"/>
+    <variable name="InstanceID" type="xsd:string"/>
+    <variable name="SourceExecutionID" type="xsd:string"/>
+    <variable name="SourceAppUserName" type="xsd:string"/>
+    <variable name="ExecutionInput" type="xsd:string"/>
+    <variable name="ExecutionStatus" type="xsd:string"/>
+    <variable name="SourceAppCode" type="xsd:string"/>
+    <variable name="FaultStr" type="xsd:string"/>
+    <variable name="FaultCode" type="xsd:string"/>
+    <variable name="ExecutionOutput" type="xsd:string"/>
+    <variable name="ErrorBusCode" type="xsd:string"/>
+    <variable name="ErrorBusMessage" type="xsd:string"/>
+    <variable name="ErrorTechCode" type="xsd:string"/>
+    <variable name="ErrorTechMessage" type="xsd:string"/>
+    <variable name="ErrorTechDetails" type="xsd:string"/>
+    <variable name="BusinessKey" type="xsd:string"/>
+    <variable name="TechSystemOperation" type="xsd:string"/>
+    <variable name="TechSystem" type="xsd:string"/>
+    <variable name="ClientIPAddress" type="xsd:string"/>
+      <variable name="ExecutionID" type="xsd:string"/>
+      <variable name="Invoke_TransactionInquiry_InputVariable" messageType="ns2:args_in_msg"/>
+      <variable name="Invoke_TransactionInquiry_OutputVariable" messageType="ns2:args_out_msg"/>
+   </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in TransactionInquiry.wsdl) --><receive name="receiveInput" partnerLink="TransactionInquiry"
+                                                                                                                     portType="client:TransactionInquiry_ptt"
+                                                                                                                     operation="TransactionInquiry" variable="inputVariable" createInstance="yes"/><assign name="Assign_DefaultVariables"
+                                                                                                                                                                                                           xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+      
+      
+      
+      
+   <copy>
+         <from>'TransactionInquiry'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy><copy>
+         <from>ora:getFlowId()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy><copy>
+         <from>$inputVariable.payload/ns1:MessageHeader/ns1:TransactionID</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceExecutionID</to>
+      </copy><copy>
+         <from>$inputVariable.payload/ns1:MessageHeader/ns1:ApplicationUserName</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppUserName</to>
+      </copy><copy>
+         <from>$inputVariable.payload/ns1:MessageHeader/ns1:ApplicationCode</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppCode</to>
+      </copy><copy>
+         <from>'S'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy><copy>
+         <from>ora:toCDATA($inputVariable.payload)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy></assign><if name="If_validationSuccessfull"
+                           xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <documentation>
+            <![CDATA[Yes]]>
+         </documentation>
+      <condition>$ExecutionStatus = "S"</condition>
+      <sequence name="Sequence1">
+            <extensionActivity>
+            <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                  <![CDATA[try {    
+            String weblogicDomainName = "Unknown";    
+            String serverName = "Unknown";    
+            javax.naming.InitialContext ctx = null;    
+            ctx = new javax.naming.InitialContext();    
+            javax.management.MBeanServer beanServer =    
+                (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");    
+            javax.management.ObjectName runtimeService =    
+                new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");    
+            javax.management.ObjectName domainCFG =    
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");    
+            weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");    
+            javax.management.ObjectName serverCFG =    
+                (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");    
+            serverName = (String) beanServer.getAttribute(serverCFG, "Name");    
+    
+            String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();    
+            setVariableData("ExecutionID", executionID);    
+            String compositeName = (String) getVariableData("CompositeName");    
+            String sourceAppCode = (String) getVariableData("SourceAppCode");    
+            String sourceExecutionID = (String) getVariableData("SourceExecutionID");    
+            String sourceAppUserName = (String) getVariableData("SourceAppUserName");    
+            String executionInput = (String) getVariableData("ExecutionInput");    
+            String instanceID = (String) getVariableData("InstanceID");    
+            String bussinessKey = (String) getVariableData("BusinessKey");    
+    
+            com.dimensions.mw.utils.loggerManagement.LoggerManager    
+               .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,    
+                                      executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);    
+        } catch (Exception exc) {    
+ addAuditTrailEntry(exc);   
+                    exc.printStackTrace();  
+        }]]>
+               </bpelx:exec>
+         </extensionActivity>
+         <scope name="Scope1">
+            <faultHandlers>
+               <catchAll>
+                  <sequence name="Sequence3">
+                     <extensionActivity>
+                        <bpelx:exec name="Java_ManageError" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                              <![CDATA[try {                         
+                      String faultStr = (String)getVariableData("FaultStr");                         
+                      String faultCode = (String)getVariableData("FaultCode");                         
+                      String techSystemOperation = (String)getVariableData("TechSystemOperation");                         
+                      String techSystem = (String)getVariableData("TechSystem");                 
+                      String compositeName = (String)getVariableData("CompositeName");             
+                                   
+                      com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean errorDefinitionBean =                         
+                          new com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean();                         
+                                   
+                      com.dimensions.mw.utils.errorManagement.ErrorManager errorManager = new com.dimensions.mw.utils.errorManagement.ErrorManager();                         
+                                   
+                      errorDefinitionBean = errorManager.getErrorInformation(faultCode+" "+faultStr,techSystem,techSystemOperation,compositeName);                          
+                           
+                      setVariableData("outputVariable", "payload", "//ns1:ErrorBusCode",errorDefinitionBean.getErrorBussinessCode() );                  
+                      setVariableData("outputVariable", "payload", "//ns1:ErrorBusMessage", errorDefinitionBean.getErrorBussinessMessage());                  
+                      setVariableData("outputVariable", "payload", "//ns1:ErrorTechCode",errorDefinitionBean.getErrorTechCode());                  
+                      setVariableData("outputVariable", "payload", "//ns1:ErrorTechMessage",errorDefinitionBean.getErrorTechMessage());              
+                      setVariableData("outputVariable", "payload", "//ns1:ErrorTechDetails",techSystem+" | "+techSystemOperation+" | "+ errorDefinitionBean.getErrorTechDetails());        
+                      
+                                  
+              } catch (Exception exc) {     
+                    addAuditTrailEntry(exc);   
+                    exc.printStackTrace();  
+              }]]>
+                           </bpelx:exec>
+                     </extensionActivity>
+                  </sequence>
+               </catchAll>
+            </faultHandlers>
+               <sequence name="Sequence4">
+                  <assign name="Assign_TransactionInquiry">
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:FromBranchID</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_BRANCH_FROM_ID</to>
+                     </copy>
+                     <copy>
+                        <from>'CBS'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$TechSystem</to>
+                     </copy>
+                     <copy>
+                        <from>'TRANSDETAILSEARCH'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$TechSystemOperation</to>
+                     </copy>
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:ToBranchID</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_BRANCH_TO_ID</to>
+                     </copy>
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:FromDate</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_DATE_FROM</to>
+                     </copy>
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:ToDate</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_DATE_TO</to>
+                     </copy>
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:FromCardID</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_CARD_FROM_ID</to>
+                     </copy>
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:ToCardID</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_CARD_TO_ID</to>
+                     </copy>
+                     <copy>
+                        <from>$inputVariable.payload/ns1:MessageBody/ns1:InquiryInformation/ns1:FromCardHolderNationalNum</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_TransactionInquiry_InputVariable.InputParameters/ns3:P_NATIONAL_NUMBER</to>
+                     </copy>
+                  </assign>
+                  <invoke name="Invoke_TransactionInquiry"
+                          partnerLink="TransactionInquiryReference" portType="ns2:TransactionInquiryReference_ptt"
+                          operation="TransactionInquiryReference"
+                          inputVariable="Invoke_TransactionInquiry_InputVariable"
+                          outputVariable="Invoke_TransactionInquiry_OutputVariable" bpelx:invokeAsDetail="no"/>
+                  <assign name="Assign1">
+                     <copy>
+                        <from>$Invoke_TransactionInquiry_OutputVariable.OutputParameters</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.OutputParameters</to>
+                     </copy>
+                  </assign>
+               </sequence>
+            </scope>
+         <extensionActivity>
+            <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+                  <![CDATA[try {    
+            String executionID = (String) getVariableData("ExecutionID");    
+            String executionStatus = (String) getVariableData("ExecutionStatus");    
+            String sourceExecutionID = (String) getVariableData("SourceExecutionID");    
+            String executionOutput = (String) getVariableData("ExecutionOutput");    
+            String compositeName = (String) getVariableData("CompositeName");    
+    
+            com.dimensions.mw.utils.loggerManagement.LoggerManager    
+               .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);    
+        } catch (Exception exc) {    
+            addAuditTrailEntry(exc);   
+                    exc.printStackTrace();  
+        }]]>
+               </bpelx:exec>
+         </extensionActivity>
+      </sequence>
+      <else>
+         <documentation>
+            <![CDATA[No]]>
+         </documentation>
+         <sequence name="Sequence2">
+               <empty name="Empty1"/>
+            </sequence>
+      </else>
+   </if><!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="TransactionInquiry" portType="client:TransactionInquiry_ptt"
+           operation="TransactionInquiry" variable="outputVariable"/>
+  </sequence>
+</process>

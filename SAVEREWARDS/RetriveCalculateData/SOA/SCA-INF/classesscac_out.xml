@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:component[@name='RetriveDataProcess']</loc>
+      <line>24</line>
+      <col>54</col>
+      <file>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\RetriveCalculateData\SOA\composite.xml</file>
+      <name>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\RetriveCalculateData\SOA\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "RetriveCalculteDataReference":"{RetriveCalculteDataReference}RetriveCalculteDataReference_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:component[@name='RetriveDataProcess']</loc>
+      <line>24</line>
+      <col>54</col>
+      <file>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\RetriveCalculateData\SOA\composite.xml</file>
+      <name>F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\RetriveCalculateData\SOA\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "RetriveCalculteDataReference":"{RetriveCalculteDataReference}RetriveCalculteDataReference_pt" in WSDL Manager</msg>
+   </Fault>
+</Faults>

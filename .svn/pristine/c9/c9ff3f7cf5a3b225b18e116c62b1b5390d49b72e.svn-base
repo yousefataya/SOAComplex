@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='AssignCUT_OFF_DATE']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='copy'][3]/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='from']</loc>
+      <line>194</line>
+      <col/>
+      <file>BPEL/EmpAddressRep.bpel</file>
+      <name>BPEL/EmpAddressRep.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns3:item" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='AssignLAST_CALL_DATE']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='extensionAssignOperation']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='insertAfter']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='from']</loc>
+      <line>209</line>
+      <col/>
+      <file>BPEL/EmpAddressRep.bpel</file>
+      <name>BPEL/EmpAddressRep.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns3:item" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='process']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='sequence'][@name='main']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='assign'][@name='AssignCURRENT_CALL_DATE']/*[namespace-uri()='http://docs.oasis-open.org/wsbpel/2.0/process/executable'][local-name()='extensionAssignOperation']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='insertAfter']/*[namespace-uri()='http://schemas.oracle.com/bpel/extension'][local-name()='from']</loc>
+      <line>225</line>
+      <col/>
+      <file>BPEL/EmpAddressRep.bpel</file>
+      <name>BPEL/EmpAddressRep.bpel</name>
+      <fix>Add a predicate to select an element from the sequence.</fix>
+      <msg>The XPath segment "child::ns3:item" selects a sequence of elements - a predicate MAY be needed to correctly select an element.</msg>
+   </Fault>
+</Faults>

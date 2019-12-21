@@ -1,0 +1,138 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Thu May 10 11:31:04 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Subprocess
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<bpelx:subProcess name="ResignationProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/ResignationProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServicesA/ResignationProcess"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xsi:type="bpel:tProcess" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess"
+                  xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMCloudServicesA/StagedbReference"
+                  xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+                  xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+                  xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+                  xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+                  xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+                  xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                  xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                  xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+                  xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+                  xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+                  xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/StagedbReference"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <partnerLink name="ResginationSOAPRef" partnerLinkType="ns1:WorkerProcess" partnerRole="WorkerProcessProvider"/>
+    <partnerLink name="StagedbReference" partnerLinkType="ns2:StagedbReference_plt"
+                 partnerRole="StagedbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="InvokeStageDb_StagedbReference_InputVariable" messageType="ns2:args_in_msg"/>
+    <variable name="InvokeStageDb_StagedbReference_OutputVariable" messageType="ns2:args_out_msg"/>
+    
+    <variable name="Variable1" type="xsd:string"/>
+     <variable name="vStatusMode" type="xsd:integer"/>
+    <variable name="vAPIResult" type="xsd:string"/>
+    <variable name="batchNumber" type="xsd:string"/>
+    <variable name="requestType" type="xsd:string"/>
+    <variable name="Variable2" type="xsd:string"/>
+    <variable name="InitialStageAssign_process_InputVariable" messageType="ns1:WorkerProcessRequestMessage"/>
+  </variables>
+  <sequence name="main">
+   <assign name="AssignLinkId">
+      <copy>
+        <from>11</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeStageDb_StagedbReference_InputVariable.InputParameters/ns3:PLINK_ID</to>
+      </copy>
+      <copy>
+        <from>'1'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vStatusMode</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeStageDb" bpelx:invokeAsDetail="no" partnerLink="StagedbReference"
+            portType="ns2:StagedbReference_ptt" operation="StagedbReference"
+            inputVariable="InvokeStageDb_StagedbReference_InputVariable"
+            outputVariable="InvokeStageDb_StagedbReference_OutputVariable"/>
+    <while name="WhileStatusMode">
+      <condition>$vStatusMode &lt; 3</condition>
+      <sequence>
+        <assign name="InitialStageAssign">
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PCOMPOSITE_NAME</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:compositeName</to>
+          </copy>
+          <copy>
+            <from>$vStatusMode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:status</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PCSF_KEY</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:key</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PCSF_MAP</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:map</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PCOMPOSITE_LINK</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:compositeLink</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PLSR_DATE</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:lsrDate</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PENDPOINTWSDL</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:wsdlLink</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PENDPOINTURI</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:URI</to>
+          </copy>
+          <copy>
+            <from>$requestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:requestType</to>
+          </copy>
+          <copy>
+            <from>$batchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:batchNumber</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PSTAGE_SOA_LINK_URI</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:vSTAGEURI</to>
+          </copy>
+          <copy>
+            <from>$InvokeStageDb_StagedbReference_OutputVariable.OutputParameters/ns3:PSTAGE_LINK</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InitialStageAssign_process_InputVariable.payload/ns1:vSTAGEWSDL</to>
+          </copy>
+        </assign>
+        <invoke name="InitialStageAssign" bpelx:invokeAsDetail="no" partnerLink="ResginationSOAPRef"
+                portType="ns1:WorkerProcess" operation="process"
+                inputVariable="InitialStageAssign_process_InputVariable"/>
+        <assign name="AssignMax">
+          <copy>
+            <from>$vStatusMode + 1</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vStatusMode</to>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+  </sequence>
+</bpelx:subProcess>

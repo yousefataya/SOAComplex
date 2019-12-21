@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+    
+     targetNamespace="http://tempuri.org/"
+     xmlns:s="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:tns="http://tempuri.org/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+            <s:element name="echo">
+                <s:complexType/>
+            </s:element>
+            <s:element name="echoResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="1" maxOccurs="1" name="echoResult" type="s:int"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="push">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="bank_user" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="action" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="branch_no" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="due_date" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="guaranteed_name" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="guaranty_no" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="guaranty_value" type="s:double"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="issue_date" type="s:string"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="new_date" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="new_value" type="s:double"/>
+                        <s:element minOccurs="0" maxOccurs="1" name="purpose" type="s:string"/>
+                        <s:element minOccurs="1" maxOccurs="1" name="stamps" type="s:double"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="pushResponse">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="pushResult" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="int" type="s:int"/>
+            <s:element name="string" nillable="true" type="s:string"/>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="echoSoapIn">
+        <wsdl:part name="parameters" element="tns:echo"/>
+    </wsdl:message>
+    <wsdl:message name="echoSoapOut">
+        <wsdl:part name="parameters" element="tns:echoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="pushSoapIn">
+        <wsdl:part name="parameters" element="tns:push"/>
+    </wsdl:message>
+    <wsdl:message name="pushSoapOut">
+        <wsdl:part name="parameters" element="tns:pushResponse"/>
+    </wsdl:message>
+    <wsdl:message name="echoHttpGetIn"/>
+    <wsdl:message name="echoHttpGetOut">
+        <wsdl:part name="Body" element="tns:int"/>
+    </wsdl:message>
+    <wsdl:message name="pushHttpGetIn">
+        <wsdl:part name="bank_user" type="s:string"/>
+        <wsdl:part name="password" type="s:string"/>
+        <wsdl:part name="action" type="s:string"/>
+        <wsdl:part name="branch_no" type="s:string"/>
+        <wsdl:part name="due_date" type="s:string"/>
+        <wsdl:part name="guaranteed_name" type="s:string"/>
+        <wsdl:part name="guaranty_no" type="s:string"/>
+        <wsdl:part name="guaranty_value" type="s:string"/>
+        <wsdl:part name="issue_date" type="s:string"/>
+        <wsdl:part name="new_date" type="s:string"/>
+        <wsdl:part name="new_value" type="s:string"/>
+        <wsdl:part name="purpose" type="s:string"/>
+        <wsdl:part name="stamps" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="pushHttpGetOut">
+        <wsdl:part name="Body" element="tns:string"/>
+    </wsdl:message>
+    <wsdl:message name="echoHttpPostIn"/>
+    <wsdl:message name="echoHttpPostOut">
+        <wsdl:part name="Body" element="tns:int"/>
+    </wsdl:message>
+    <wsdl:message name="pushHttpPostIn">
+        <wsdl:part name="bank_user" type="s:string"/>
+        <wsdl:part name="password" type="s:string"/>
+        <wsdl:part name="action" type="s:string"/>
+        <wsdl:part name="branch_no" type="s:string"/>
+        <wsdl:part name="due_date" type="s:string"/>
+        <wsdl:part name="guaranteed_name" type="s:string"/>
+        <wsdl:part name="guaranty_no" type="s:string"/>
+        <wsdl:part name="guaranty_value" type="s:string"/>
+        <wsdl:part name="issue_date" type="s:string"/>
+        <wsdl:part name="new_date" type="s:string"/>
+        <wsdl:part name="new_value" type="s:string"/>
+        <wsdl:part name="purpose" type="s:string"/>
+        <wsdl:part name="stamps" type="s:string"/>
+    </wsdl:message>
+    <wsdl:message name="pushHttpPostOut">
+        <wsdl:part name="Body" element="tns:string"/>
+    </wsdl:message>
+    <wsdl:portType name="ServiceSoap">
+        <wsdl:operation name="echo">
+            <wsdl:input message="tns:echoSoapIn"/>
+            <wsdl:output message="tns:echoSoapOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <wsdl:input message="tns:pushSoapIn"/>
+            <wsdl:output message="tns:pushSoapOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="ServiceHttpGet">
+        <wsdl:operation name="echo">
+            <wsdl:input message="tns:echoHttpGetIn"/>
+            <wsdl:output message="tns:echoHttpGetOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <wsdl:input message="tns:pushHttpGetIn"/>
+            <wsdl:output message="tns:pushHttpGetOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="ServiceHttpPost">
+        <wsdl:operation name="echo">
+            <wsdl:input message="tns:echoHttpPostIn"/>
+            <wsdl:output message="tns:echoHttpPostOut"/>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <wsdl:input message="tns:pushHttpPostIn"/>
+            <wsdl:output message="tns:pushHttpPostOut"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="echo">
+            <soap:operation style="document" soapAction="http://tempuri.org/echo"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <soap:operation style="document" soapAction="http://tempuri.org/push"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="echo">
+            <soap12:operation style="document" soapAction="http://tempuri.org/echo" soapActionRequired="false"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <soap12:operation style="document" soapAction="http://tempuri.org/push" soapActionRequired="false"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceHttpGet" type="tns:ServiceHttpGet">
+        <http:binding verb="GET"/>
+        <wsdl:operation name="echo">
+            <http:operation location="/echo"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <http:operation location="/push"/>
+            <wsdl:input>
+                <http:urlEncoded/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ServiceHttpPost" type="tns:ServiceHttpPost">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="echo">
+            <http:operation location="/echo"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="push">
+            <http:operation location="/push"/>
+            <wsdl:input>
+                <mime:content type="application/x-www-form-urlencoded"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:mimeXml part="Body"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Service">
+        <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+            <soap:address location="https://epermits.customs.gov.jo/Banks/Services/Guarantees/Service.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+            <soap12:address location="https://epermits.customs.gov.jo/Banks/Services/Guarantees/Service.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceHttpGet" binding="tns:ServiceHttpGet">
+            <http:address location="https://epermits.customs.gov.jo/Banks/Services/Guarantees/Service.asmx"/>
+        </wsdl:port>
+        <wsdl:port name="ServiceHttpPost" binding="tns:ServiceHttpPost">
+            <http:address location="https://epermits.customs.gov.jo/Banks/Services/Guarantees/Service.asmx"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

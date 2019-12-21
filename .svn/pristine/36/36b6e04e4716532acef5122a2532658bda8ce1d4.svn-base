@@ -1,0 +1,147 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Jan 10 12:48:48 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="AllCardsInquiryProcess"
+         targetNamespace="http://xmlns.oracle.com/CARD_MANAGEMENT/AllCardsInquiryJson/AllCardsInquiryProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/CARD_MANAGEMENT/AllCardsInquiryJson/AllCardsInquiryProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/CARD_MANAGEMENT/AllCardsInquiryJson/getAllCardsReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getAllCardsReference"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         suppressJoinFailure="no" exitOnStandardFault="no" xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns4="http://xmlns.fact.com/ws/ACI" xmlns:ns5="http://TargetNamespace.com/nxsdschema"
+         xmlns:ns6="http://www.example.org" expressionLanguage="javascript">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://www.example.org" location="../Schemas/untitled1.xsd"
+            importType="http://www.w3.org/2001/XMLSchema"/>
+    <import namespace="http://xmlns.fact.com/ws/ACI" location="../Schemas/AllCards.xsd"
+            importType="http://www.w3.org/2001/XMLSchema"/>
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/CARD_MANAGEMENT/AllCardsInquiryJson/getAllCardsReference"
+            location="../WSDLs/getAllCardsReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="AllCardsInquiryService" bpelx:wadl="yes"/>
+        <partnerLink name="getAllCardsReference" partnerLinkType="ns2:getAllCardsReference_plt"
+                     partnerRole="getAllCardsReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke_getAllCards_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="Invoke_getAllCards_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="outputVariable" bpelx:json="array"/>
+        <variable name="cardID" type="xsd:string"/>
+        <variable name="cardNatNo" type="xsd:string"/>
+        <variable name="cardFullName" type="xsd:string"/>
+        <variable name="Variable1" type="xsd:int"/>
+        <variable name="ob" bpelx:json="object"/>
+    </variables>
+    <sequence name="main">
+        <receive name="receiveInput" partnerLink="AllCardsInquiryService" variable="inputVar" bpelx:method="getAllCards"
+                 createInstance="yes"/>
+        <invoke name="Invoke_getAllCards" partnerLink="getAllCardsReference"
+                portType="ns2:getAllCardsReference_ptt" operation="getAllCardsReference"
+                outputVariable="Invoke_getAllCards_OutputVariable" bpelx:invokeAsDetail="no"
+                inputVariable="Invoke_getAllCards_InputVariable"/>
+        <forEach parallel="no" counterName="ForEachCounter" name="ForEach">
+            <startCounterValue>1</startCounterValue>
+            <finalCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">ora:countNodes($Invoke_getAllCards_OutputVariable.OutputParameters/ns3:IO_CURSOR/ns3:IO_CURSOR_Row)</finalCounterValue>
+            <scope name="Scope1">
+                <sequence name="Sequence1">
+                    <assign name="Assign3">
+                        <copy>
+                            <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ForEachCounter</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Variable1</to>
+                        </copy>
+                    </assign>
+                    <extensionActivity>
+                        <bpelx:exec name="Java_Embedding1">
+                            <![CDATA[try { 
+            org.w3c.dom.NodeList listOfCards = 
+                ((org.w3c.dom.Element) getVariableData("Invoke_getAllCards_OutputVariable", "OutputParameters", 
+                                                       "//ns3:IO_CURSOR")).getChildNodes(); 
+ 
+            int forEachCounter = (int)getVariableData("ForEachCounter"); 
+  
+                org.w3c.dom.Element cardNodeElement = (org.w3c.dom.Element) listOfCards.item(forEachCounter); 
+                setVariableData("cardID", cardNodeElement.getElementsByTagName("CARD_ID") 
+                                                         .item(0) 
+                                                         .getTextContent()); 
+                setVariableData("cardFullName", cardNodeElement.getElementsByTagName("CARD_B_FULL_NAME") 
+                                                               .item(0) 
+                                                               .getTextContent()); 
+                setVariableData("cardNatNo", cardNodeElement.getElementsByTagName("CARD_NATIONAL_NO") 
+                                                            .item(0) 
+                                                            .getTextContent()); 
+ 
+        } catch (Exception exc) { 
+            addAuditTrailEntry(exc.toString()); 
+            exc.printStackTrace(); 
+        }]]>
+                        </bpelx:exec>
+                    </extensionActivity>
+                    <assign name="Assign2">
+                        <copy>
+                            <from>$cardID</from>
+                            <to expressionLanguage="javascript">process.ob.CardID</to>
+                        </copy>
+                        <copy>
+                            <from>$cardNatNo</from>
+                            <to expressionLanguage="javascript">process.ob.CardNationalNumber</to>
+                        </copy>
+                        <copy>
+                            <from>$cardFullName</from>
+                            <to expressionLanguage="javascript">process.ob.CardFullName</to>
+                        </copy>
+                    </assign>
+                    <extensionActivity>
+                        <bpelx:js name="Javascript2">
+                            <![CDATA[var newObject = new Object();  
+newObject.CardID = process.ob.CardID;  
+newObject.CardFullName = process.ob.CardFullName;  
+newObject.CardNationalNumber = process.ob.CardNationalNumber; 
+process.outputVariable[(process.Variable1)-1] = newObject;]]>
+                        </bpelx:js>
+                    </extensionActivity>
+                </sequence>
+            </scope>
+        </forEach>
+        <assign name="Assign_finalOutput">
+            <copy>
+                <from expressionLanguage="javascript">process.outputVariable</from>
+                <to expressionLanguage="javascript">process.outputVar.Cards</to>
+            </copy>
+        </assign>
+        <reply name="replyOutput" partnerLink="AllCardsInquiryService" variable="outputVar" bpelx:method="getAllCards"/>
+    </sequence>
+</process>

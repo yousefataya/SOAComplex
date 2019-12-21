@@ -1,0 +1,72 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SCT="http://xmlns.fact.com/ws/SCT"
+            targetNamespace="http://xmlns.fact.com/ws/SCT" elementFormDefault="qualified">
+  <xsd:element name="SamahaCancelTransactionInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="SCT:InputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="SCT:InputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="SamahaCancelTransactionOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="SCT:OutputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="SCT:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="InputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionInformation" type="SCT:InputTransactionInformationComplex"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputTransactionInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="SourceRegCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="SourceBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="SourceBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="VoucherText" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="TransactionAmount" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CustomerIDNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>    
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="StatusInformation" type="SCT:StatusInformationComplex"/>
+      <xsd:element name="ErrorInformation" type="SCT:ErrorInformaitonComplex" minOccurs="0"/>
+      <xsd:element name="TransactionInformation" type="SCT:TransactionInformationComplex" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="StatusInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformaitonComplex">
+    <xsd:sequence>
+      <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TransactionInformationComplex">
+    <xsd:sequence>
+    <xsd:element name="ResponseCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

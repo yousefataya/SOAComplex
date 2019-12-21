@@ -1,0 +1,14 @@
+<adapter-config name="vacTypeDBReference" adapter="db" wsdlLocation="../WSDLs/vacTypeDBReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hcmHr" location="eis/DB/hrHCM"/>
+  <endpoint-interaction portType="vacTypeDBReference_ptt" operation="vacTypeDBReferenceSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="vacTypeDBReference.HcmVacationType"/>
+      <property name="QueryName" value="vacTypeDBReferenceSelect"/>
+      <property name="MappingsMetaDataURL" value="vacTypeDBReference-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

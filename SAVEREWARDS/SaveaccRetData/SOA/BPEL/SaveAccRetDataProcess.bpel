@@ -1,0 +1,135 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Mon Feb 05 14:28:52 EET 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="SaveAccRetDataProcess"
+         targetNamespace="http://xmlns.oracle.com/SaveaccRetData/SaveaccRetData/SaveAccRetDataProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SaveaccRetData/SaveaccRetData/SaveAccRetDataProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SaveaccRetData/SaveaccRetData/cbsdbReference"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/cbsdbReference"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer" queryLanguage="javascript" expressionLanguage="javascript">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SaveaccRetData/SaveaccRetData/cbsdbReference"
+            location="../WSDLs/cbsdbReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"
+            ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="SaveaccRetData" bpelx:wadl="yes"/>
+        <partnerLink name="cbsdbReference" partnerLinkType="ns2:cbsdbReference_plt" partnerRole="cbsdbReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke1_cbsdbReference_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="Invoke1_cbsdbReference_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="v_count" type="xsd:int"/>
+        <variable name="v_brch" type="xsd:string"/>
+        <variable name="v_account" type="xsd:string"/>
+        <variable name="array" bpelx:json="array"/>
+        <variable name="object" bpelx:json="object"/>
+        <variable name="V_exit" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="Receive1" partnerLink="SaveaccRetData" variable="inputVar" bpelx:method="SaveaccRetData"
+                 createInstance="yes"/>
+        <assign name="Assign1">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.p_brch_code</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_cbsdbReference_InputVariable.InputParameters/ns3:P_BRCH_CODE</to>
+            </copy>
+        </assign>
+        <extensionActivity>
+            <bpelx:js name="Javascript1">
+                <![CDATA[var arrayJson = [];]]>
+            </bpelx:js>
+        </extensionActivity>
+        <invoke name="Invoke1" partnerLink="cbsdbReference" portType="ns2:cbsdbReference_ptt" operation="cbsdbReference"
+                inputVariable="Invoke1_cbsdbReference_InputVariable"
+                outputVariable="Invoke1_cbsdbReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+        <forEach parallel="no" counterName="ForEachCounter" name="ForEach">
+            <bpelx:skipCondition expressionLanguage="javascript"> var i = 0;
+while (i &lt; 5) {
+i++;
+    if (i == 3) {
+        break;
+    }
+}
+ 
+ 
+</bpelx:skipCondition>
+            <startCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">1</startCounterValue>
+            <finalCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">ora:countNodes($Invoke1_cbsdbReference_OutputVariable.OutputParameters/ns3:P_SAV_STMT/ns3:P_SAV_STMT_Row)</finalCounterValue>
+            <scope name="Scope1">
+                <sequence>
+                    <assign name="Assign6">
+                        <copy>
+                            <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ForEachCounter</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$v_count</to>
+                        </copy>
+                    </assign>
+                    <assign name="Assign3">
+                        <copy ignoreMissingFromData="yes">
+                            <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_cbsdbReference_OutputVariable.OutputParameters/ns3:P_SAV_STMT/ns3:P_SAV_STMT_Row[$ForEachCounter]/ns3:BRCH_CODE</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$v_brch</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes">
+                            <from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke1_cbsdbReference_OutputVariable.OutputParameters/ns3:P_SAV_STMT/ns3:P_SAV_STMT_Row[$ForEachCounter]/ns3:CACC_NUM</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$v_account</to>
+                        </copy>
+                    </assign>
+                    <assign name="Assign8">
+                        <copy ignoreMissingFromData="yes">
+                            <from>$v_brch</from>
+                            <to expressionLanguage="javascript">process.object.v_brch</to>
+                        </copy>
+                        <copy ignoreMissingFromData="yes">
+                            <from>$v_account</from>
+                            <to expressionLanguage="javascript">process.object.v_account</to>
+                        </copy>
+                    </assign>
+                    <extensionActivity>
+                        <bpelx:js name="Javascript2">
+                            <![CDATA[arrayJson[process.v_count] = process.object]]>
+                        </bpelx:js>
+                    </extensionActivity>
+                </sequence>
+            </scope>
+        </forEach>
+        <assign name="Assign7">
+            <copy>
+                <from expressionLanguage="javascript">arrayJson</from>
+                <to expressionLanguage="javascript">process.outputVar.result</to>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="SaveaccRetData" variable="outputVar" bpelx:method="SaveaccRetData"/>
+    </sequence>
+</process>

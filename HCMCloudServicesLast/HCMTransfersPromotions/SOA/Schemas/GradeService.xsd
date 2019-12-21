@@ -1,0 +1,601 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/types/"
+     xmlns:ns0="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+     xmlns:ns1="http://xmlns.oracle.com/adf/svc/types/" xmlns:tns="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/types/"
+     xmlns="http://www.w3.org/2001/XMLSchema">
+    <import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+         schemaLocation="GradeStepTranslation.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+         schemaLocation="Grade.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+         schemaLocation="GradeTranslation.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+         schemaLocation="GradeStep.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/workStructures/grades/gradeServiceV2/"
+         schemaLocation="GradeFlattened.xsd"/>
+    <element name="createGrade">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeAsync">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeStep">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeStepResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeId">
+        <complexType>
+            <sequence>
+                <element name="gradeId" type="long"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepId">
+        <complexType>
+            <sequence>
+                <element name="gradeStepId" type="long"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKey">
+        <complexType>
+            <sequence>
+                <element name="gradeCode" type="string"/>
+                <element name="setCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGrade">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeStep">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeStepResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGrade">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStep">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepTranslation">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" minOccurs="0" name="gradeStepTranslationRows" type="ns0:GradeStepTranslation"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepTranslationResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeTranslation">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" minOccurs="0" name="gradeTranslationRows" type="ns0:GradeTranslation"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeTranslationResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeCode" type="string"/>
+                <element name="setCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeTranslationAsync">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" minOccurs="0" name="gradeTranslationRows" type="ns0:GradeTranslation"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeTranslationAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeAsync">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeAsync">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepTranslationAsync">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" minOccurs="0" name="gradeStepTranslationRows" type="ns0:GradeStepTranslation"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateGradeStepTranslationAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeId" type="long"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeStepAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeStepAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStepId" type="long"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeStepAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergeGradeStepAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdTranslation">
+        <complexType>
+            <sequence>
+                <element name="gradeId" type="long"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdTranslationResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdTranslation">
+        <complexType>
+            <sequence>
+                <element name="gradeStepId" type="long"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdTranslationResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepUserKeyTranslation">
+        <complexType>
+            <sequence>
+                <element name="gradeStepName" type="string"/>
+                <element name="gradeCode" type="string"/>
+                <element name="setCode" type="string"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepUserKeyTranslationResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyTranslation">
+        <complexType>
+            <sequence>
+                <element name="gradeCode" type="string"/>
+                <element name="setCode" type="string"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyTranslationResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyTranslationAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeCode" type="string"/>
+                <element name="setCode" type="string"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeUserKeyTranslationAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepUserKeyTranslationAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStepName" type="string"/>
+                <element name="gradeCode" type="string"/>
+                <element name="setCode" type="string"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepUserKeyTranslationAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdTranslationAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeId" type="long"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeIdTranslationAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdTranslationAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStepId" type="long"/>
+                <element name="language" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findByGradeStepIdTranslationAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeStepTranslationResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deleteGradeStep">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deleteGradeStepResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deleteGradeStepAsync">
+        <complexType>
+            <sequence>
+                <element name="gradeStep" type="ns0:GradeStep"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deleteGradeStepAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deleteGrade">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deleteGradeResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deleteGradeAsync">
+        <complexType>
+            <sequence>
+                <element name="grade" type="ns0:Grade"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deleteGradeAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="findAllGradesBySet">
+        <complexType>
+            <sequence>
+                <element name="setCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesBySetResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesByDate">
+        <complexType>
+            <sequence>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesByDateResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesBySetAsync">
+        <complexType>
+            <sequence>
+                <element name="setCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesBySetAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesByDateAsync">
+        <complexType>
+            <sequence>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findAllGradesByDateAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeFlattened">
+        <complexType>
+            <sequence>
+                <element name="atr" type="ns0:GradeFlattened"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeFlattenedResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeFlattenedResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeFlattenedAsync">
+        <complexType>
+            <sequence>
+                <element name="atr" type="ns0:GradeFlattened"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createGradeFlattenedAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:GradeFlattenedResult"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

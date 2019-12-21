@@ -1,0 +1,20 @@
+2018-08-28 13:57:58.719/1.491 Oracle Coherence 12.2.1.1.0 <Info> (thread=main, member=n/a): Loaded operational configuration from "jar:file:/F:/Oracle/soa/coherence/lib/coherence.jar!/tangosol-coherence.xml"
+2018-08-28 13:57:58.753/1.524 Oracle Coherence 12.2.1.1.0 <Info> (thread=main, member=n/a): Loaded operational overrides from "jar:file:/F:/Oracle/soa/coherence/lib/coherence.jar!/tangosol-coherence-override-dev.xml"
+2018-08-28 13:57:58.754/1.526 Oracle Coherence 12.2.1.1.0 <D5> (thread=main, member=n/a): Optional configuration override "/tangosol-coherence-override.xml" is not specified
+2018-08-28 13:57:58.757/1.528 Oracle Coherence 12.2.1.1.0 <D5> (thread=main, member=n/a): Optional configuration override "cache-factory-config.xml" is not specified
+2018-08-28 13:57:58.758/1.529 Oracle Coherence 12.2.1.1.0 <D5> (thread=main, member=n/a): Optional configuration override "cache-factory-builder-config.xml" is not specified
+2018-08-28 13:57:58.759/1.530 Oracle Coherence 12.2.1.1.0 <D5> (thread=main, member=n/a): Optional configuration override "/custom-mbeans.xml" is not specified
+
+Oracle Coherence Version 12.2.1.1.0 Build 63073
+ Grid Edition: Development mode
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+2018-08-28 13:57:58.869/1.641 Oracle Coherence GE 12.2.1.1.0 <Info> (thread=main, member=n/a): Created cache factory com.tangosol.net.DefaultConfigurableCacheFactory
+2018-08-28 13:57:59.329/2.101 Oracle Coherence GE 12.2.1.1.0 <Info> (thread=main, member=n/a): The cluster name has not been configured, a value of "Mshkeeb's cluster" has been automatically generated
+ÂÈ 28, 2018 1:57:59 ã oracle.soa.scac.ValidateComposite loadWSDLs
+WARNING: Validating WSDLs from WSDLManager....  with option UseSoaInfraMds:false
+ÂÈ 28, 2018 1:57:59 ã oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+INFO: XMLSchema incremental build enabled.
+WARNING: Failed to load WSDL from RetriveCalculteDataReference.wsdl due to: Error in getting XML input stream: file:/F:/DDISK/SOA/jdevlopermyworkbackup/SaveRewardsProject/backup/saveRewards/SAVEREWARDS/RetriveCalculateData/SOA/RetriveCalculteDataReference.wsdl: F:\DDISK\SOA\jdevlopermyworkbackup\SaveRewardsProject\backup\saveRewards\SAVEREWARDS\RetriveCalculateData\SOA\RetriveCalculteDataReference.wsdl (The system cannot find the file specified)
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option PermSize=32m; support was removed in 8.0
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0

@@ -1,0 +1,322 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:ns1="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDFF/"
+     xmlns:ns2="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:ns3="http://xmlns.oracle.com/apps/financials/generalLedger/accounts/codeCombinations/publicFlex/Account/"
+     xmlns:ns4="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+     xmlns:ns5="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentExtraInfoEFF/Category/"
+     xmlns:sdo="commonj.sdo" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Work Terms Version 2</name>
+            <description>It is the second level of the employment model and may be used to capture terms and conditions that are associated with one or many assignments.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment : HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Specifies the action performed on the particular record. For example: HIRE, ADD PENDING WORKER, MANAGER CHANGE, etc."
+                     name="ActionCode"/>
+                <oer:attribute description="ASSIGNMENT_ID" name="AssignmentId"/>
+                <oer:attribute description="Name of the Assignment." name="AssignmentName"/>
+                <oer:attribute description="Assignment Number. Uniquely identifies an assignment."
+                     name="AssignmentNumber"/>
+                <oer:attribute description="ASSIGNMENT_STATUS_TYPE" name="AssignmentStatusTypeCode"/>
+                <oer:attribute description="Foreign Key to PER_ASSIGNMENT_STATUS_TYPES table." name="AssignmentStatusTypeId"/>
+                <oer:attribute description="ASSIGNMENT_TYPE" name="AssignmentType"/>
+                <oer:attribute description="Code of the bargaining unit." name="BargainingUnitCode"/>
+                <oer:attribute description="BILLING_TITLE" name="BillingTitle"/>
+                <oer:attribute description="Foreign key to HRW_BUSINESS_UNITS table." name="BusinessUnitId"/>
+                <oer:attribute description="Name of the Business Unit" name="BusinessUnitShortCode"/>
+                <oer:attribute description="Collective agreement for the assignment or employment terms."
+                     name="CollectiveAgreementId"/>
+                <oer:attribute description="CONTRACT_ID" name="ContractId"/>
+                <oer:attribute description="DATE_PROBATION_END" name="DateProbationEnd"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Date Effective Entity: &apos;Y&apos; indicates that this row represents the latest change in the day."
+                     name="EffectiveLatestChange"/>
+                <oer:attribute description="Date Effective Entity: indicates the order of different changes made during a day. The lowest value represents the earliest change in the day."
+                     name="EffectiveSequence"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="EMPLOYEE_CATEGORY" name="WorkerCategory"/>
+                <oer:attribute description="EMPLOYMENT_CATEGORY" name="AssignmentCategory"/>
+                <oer:attribute description="ESTABLISHMENT_ID" name="EstablishmentId"/>
+                <oer:attribute description="Organization used for reporting required by government agencies."
+                     name="ReportingEstablishment"/>
+                <oer:attribute description="EXPENSE_CHECK_ADDRESS" name="ExpenseCheckSendToAddress"/>
+                <oer:attribute description="Foreign Key to PER_GRADES_F table." name="GradeId"/>
+                <oer:attribute description="Valid Grade Code. Code is the unique identifier of the grade."
+                     name="GradeCode"/>
+                <oer:attribute description="GRADE_LADDER_PGM_ID" name="GradeLadderPgmId"/>
+                <oer:attribute description="Grade ladder program name" name="GradeLadderPgmName"/>
+                <oer:attribute description="HOURLY_SALARIED_CODE" name="HourlySalariedCode"/>
+                <oer:attribute description="INTERNAL_BUILDING" name="InternalBuilding"/>
+                <oer:attribute description="INTERNAL_FLOOR" name="InternalFloor"/>
+                <oer:attribute description="INTERNAL_LOCATION" name="InternalLocation"/>
+                <oer:attribute description="INTERNAL_MAILSTOP" name="InternalMailstop"/>
+                <oer:attribute description="INTERNAL_OFFICE_NUMBER" name="InternalOfficeNumber"/>
+                <oer:attribute description="Foreign Key to PER_JOBS_F table." name="JobId"/>
+                <oer:attribute description="Code of the job." name="JobCode"/>
+                <oer:attribute description="Labour union member flag. Accepts values of &apos;Y&apos; or &apos;N&apos;."
+                     name="LabourUnionMemberFlag"/>
+                <oer:attribute description="Foreign Key to PER_LOCATIONS table." name="LocationId"/>
+                <oer:attribute description="Code of the location." name="LocationCode"/>
+                <oer:attribute description="Indicates whether the person is a manager or not." name="ManagerFlag"/>
+                <oer:attribute description="NORMAL_HOURS" name="NormalHours"/>
+                <oer:attribute description="Frequency of normal working hours - week, month, year. Sourced from FREQUENCY lookup type."
+                     name="Frequency"/>
+                <oer:attribute description="NOTICE_PERIOD" name="NoticePeriod"/>
+                <oer:attribute description="Specifies whether the notice period is in days, weeks, months, or years."
+                     name="NoticePeriodUOM"/>
+                <oer:attribute description="ORGANIZATION_ID" name="OrganizationId"/>
+                <oer:attribute description="Name of the department." name="DepartmentName"/>
+                <oer:attribute description="Identifies the employment level." name="PeriodOfServiceId"/>
+                <oer:attribute description="PERSON_ID" name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Start date for the work terms." name="DateStart"/>
+                <oer:attribute description="Determines whether it is a period of service for an Employee, or Contingent worker: ?E? or ?C?, or ?N?: non-worker."
+                     name="WorkerType"/>
+                <oer:attribute description="Name of the Legal Employer." name="LegalEmployerName"/>
+                <oer:attribute description="A user-defined person type id that is associated with a system person type."
+                     name="PersonTypeId"/>
+                <oer:attribute description="A user-defined person type that is associated with a system person type."
+                     name="PersonTypeCode"/>
+                <oer:attribute description="Foreign Key to HR_ALL_POSITIONS_F table." name="PositionId"/>
+                <oer:attribute description="Code of the position." name="PositionCode"/>
+                <oer:attribute description="POSITION_OVERRIDE_FLAG" name="PositionOverrideFlag"/>
+                <oer:attribute description="PRIMARY_WORK_TERMS_FLAG" name="PrimaryWorkTermsFlag"/>
+                <oer:attribute description="The probation period of the employee." name="ProbationPeriod"/>
+                <oer:attribute description="Unit of measure for the probation period, such as months or years."
+                     name="ProbationUnit"/>
+                <oer:attribute description="PROJECTED_ASSIGNMENT_END" name="ProjectedEndDate"/>
+                <oer:attribute description="PROJECTED_START_DATE" name="ProjectedStartDate"/>
+                <oer:attribute description="PROPOSED_WORKER_TYPE" name="ProposedWorkerType"/>
+                <oer:attribute description="Anticipated person type" name="ProposedUserPersonType"/>
+                <oer:attribute description="Specifies the reason for the action performed on the record."
+                     name="ReasonCode"/>
+                <oer:attribute description="RETIREMENT_AGE" name="RetirementAge"/>
+                <oer:attribute description="RETIREMENT_DATE" name="RetirementDate"/>
+                <oer:attribute description="SPECIAL_CEILING_STEP_ID" name="SpecialCeilingStepId"/>
+                <oer:attribute description="Name of the special grade step for th employment terms that a worker can progress in a grade in their career growth."
+                     name="SpecialCeilingStep"/>
+                <oer:attribute description="STEP_ENTRY_DATE" name="StepEntryDate"/>
+                <oer:attribute description="System name for the PersonType" name="SystemPersonType"/>
+                <oer:attribute description="TAX_ADDRESS_ID" name="TaxAddressId"/>
+                <oer:attribute description="TIME_NORMAL_FINISH" name="EndTime"/>
+                <oer:attribute description="TIME_NORMAL_START" name="StartTime"/>
+                <oer:attribute description="VENDOR_SITE_ID" name="VendorSiteId"/>
+                <oer:attribute description="WORK_AT_HOME" name="WorkAtHomeFlag"/>
+                <oer:attribute description="WORK_TERMS_ASSIGNMENT_ID" name="WorkTermsAssignmentId"/>
+                <oer:attribute description="VENDOR_ID" name="VendorId"/>
+                <oer:attribute description="FREEZE_START_DATE" name="FreezeStartDate"/>
+                <oer:attribute description="FREEZE_UNTIL_DATE" name="FreezeUntilDate"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="Specifies the starting sequence number for the range operation and is MCPD (Multiple Changes Per Day) only."
+                     name="RangeStartSequence"/>
+                <oer:attribute description="Specifies the end sequence number for the range operation and is MCPD (Multiple Changes Per Day) only."
+                     name="RangeEndSequence"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="Category Code" name="CategoryCode"/>
+                <oer:attribute description="OrganizationId of Tax Reporting Unit." name="TaxReportingUnitId"/>
+                <oer:attribute description="Name of the organization to which taxes will get reported."
+                     name="TaxReportingUnit"/>
+                <oer:attribute description="People group flexfield attribute." name="PeopleGroup"/>
+                <oer:attribute description="Defines an employment as being full time or part time."
+                     name="FullPartTime"/>
+                <oer:attribute description="Defines whether the employment is regular or temporary."
+                     name="PermanentTemporary"/>
+                <oer:attribute description="Identification code for the collective agreement." name="CollectiveAgreementIdCode"/>
+                <oer:attribute description="Account flex attribute used for capturing the default Expense Account."
+                     name="DefaultExpenseAccount"/>
+                <oer:attribute description="Name of the assignment. The assignment is a definition of a person&apos;s role, duties, and responsibilities"
+                     name="Assignment"/>
+                <oer:attribute description="Name of the contract." name="Contract"/>
+                <oer:attribute description="This stores the supervisors associated to a particular employment terms record. This supports different relationships established between a person and a particular supervisor. One person could have one functional manager (line manager who has absolute control over the person) and a project manager (project leader who controls a project and organizes resources and people)"
+                     name="WorkTermsSupervisor"/>
+                <oer:attribute description="This object holds information for work terms about the HR budget values for a work terms record. Work terms may be budgeted using headcount, FTE (full time equivalent), points or any other user defined units."
+                     name="WorkTermsWorkMeasure"/>
+                <oer:attribute description="Steps that are associated with a grade." name="WorkTermsGradeSteps"/>
+                <oer:attribute description="Customer Flexfield for Base Worker Assignment." name="BaseWorkerAsgDFF"/>
+                <oer:attribute description="Customer Flexfield for Base Worker Assignment Legislative."
+                     name="BaseWorkerAsgLegDDF"/>
+                <oer:attribute description="Account Number" name="Account"/>
+                <oer:attribute description="People Group flex field for work terms." name="WorkTermsPeopleGroup"/>
+                <oer:attribute description="The extra information field that may be maintained for a work term."
+                     name="j_AssignmentEitCategoryWT"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDFF/"
+         schemaLocation="BaseWorkerAsgDFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+         schemaLocation="BaseWorkerAsgLegDDF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/financials/generalLedger/accounts/codeCombinations/publicFlex/Account/"
+         schemaLocation="Account.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+         schemaLocation="PeopleGroupKFF.xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/assignmentExtraInfoEFF/Category/"
+         schemaLocation="j_AssignmentEitCategory.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:import namespace="commonj.sdo" schemaLocation="sdoModel_1.xsd"/>
+    <xsd:include schemaLocation="Assignment.xsd"/>
+    <xsd:include schemaLocation="Contract.xsd"/>
+    <xsd:include schemaLocation="WorkTermsSupervisor.xsd"/>
+    <xsd:include schemaLocation="WorkTermsWorkMeasure.xsd"/>
+    <xsd:include schemaLocation="WorkTermsGradeSteps.xsd"/>
+    <xsd:complexType name="WorkTerms">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ActionCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="AssignmentName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentStatusTypeCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentStatusTypeId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="AssignmentType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BargainingUnitCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BillingTitle" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="BusinessUnitId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="BusinessUnitShortCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CollectiveAgreementId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="ContractId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="DateProbationEnd" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveLatestChange" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EffectiveSequence" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="WorkerCategory" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentCategory" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EstablishmentId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="ReportingEstablishment" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExpenseCheckSendToAddress" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="GradeCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GradeLadderPgmId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="GradeLadderPgmName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="HourlySalariedCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternalBuilding" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternalFloor" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternalLocation" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternalMailstop" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="InternalOfficeNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="JobId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="JobCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LabourUnionMemberFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="LocationId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="LocationCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ManagerFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="NormalHours" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="Frequency" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NoticePeriod" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="NoticePeriodUOM" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="OrganizationId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="DepartmentName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PeriodOfServiceId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DateStart" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="WorkerType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegalEmployerName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonTypeId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PersonTypeCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PositionId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PositionCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PositionOverrideFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="PrimaryWorkTermsFlag" type="xsd:boolean" sdoXML:dataType="sdoJava:BooleanObject"/>
+            <xsd:element minOccurs="0" name="ProbationPeriod" nillable="true" type="xsd:decimal"/>
+            <xsd:element minOccurs="0" name="ProbationUnit" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ProjectedEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ProjectedStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ProposedWorkerType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ProposedUserPersonType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ReasonCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RetirementAge" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="RetirementDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="SpecialCeilingStepId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="SpecialCeilingStep" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="StepEntryDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="SystemPersonType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TaxAddressId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="EndTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="StartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="VendorSiteId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="WorkAtHomeFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="WorkTermsAssignmentId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="VendorId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="FreezeStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="FreezeUntilDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartSequence" nillable="true" type="xsd:int"/>
+            <xsd:element minOccurs="0" name="RangeEndSequence" nillable="true" type="xsd:int"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CategoryCode" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="TaxReportingUnitId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="TaxReportingUnit" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PeopleGroup" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FullPartTime" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PermanentTemporary" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CollectiveAgreementIdCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DefaultExpenseAccount" nillable="true" type="xsd:string"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="Assignment" type="Assignment"/>
+            <xsd:element minOccurs="0" name="Contract" type="Contract"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkTermsSupervisor" type="WorkTermsSupervisor"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkTermsWorkMeasure" type="WorkTermsWorkMeasure"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="WorkTermsGradeSteps" type="WorkTermsGradeSteps"/>
+            <xsd:element minOccurs="0" name="BaseWorkerAsgDFF" type="ns1:BaseWorkerAsgDFF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="BaseWorkerAsgLegDDF" type="ns2:BaseWorkerAsgLegDDF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="Account" type="ns3:Account" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="WorkTermsPeopleGroup" type="ns4:PeopleGroupKFF" sdoXML:dataType="sdo:DataObject"/>
+            <xsd:element minOccurs="0" name="j_AssignmentEitCategoryWT" type="ns5:j_AssignmentEitCategory"
+                 sdoXML:dataType="sdo:DataObject"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="WorkTermsResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="WorkTerms"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="workTermsResult" type="WorkTermsResult"/>
+    <xsd:element name="workTerms" type="WorkTerms"/>
+</xsd:schema>

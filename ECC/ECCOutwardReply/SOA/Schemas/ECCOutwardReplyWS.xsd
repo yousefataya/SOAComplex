@@ -1,0 +1,87 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:EOR="http://xmlns.fact.com/ws/EOR"
+            targetNamespace="http://xmlns.fact.com/ws/EOR" elementFormDefault="qualified">
+  <xsd:element name="ECCOutwardReplyMessageInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="EOR:InputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="EOR:InputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="ECCOutwardReplyMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageHeader" type="EOR:OutputMessageHeaderComplex"/>
+        <xsd:element name="MessageBody" type="EOR:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="InputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionInformation" type="EOR:InputInquiryInformationComplex"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InputInquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="IntReferance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ChequeSequence" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="BFDAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="BFDBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="BFDBankCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="PayAccountNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="PayBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="PayBank" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ChequeSerial" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ReasonCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="BeneficiaryBranchCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="UserID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="PaymentMethod" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="AppID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="StatusInformation" type="EOR:StatusInformationComplex"/>
+      <xsd:element name="ErrorInformation" type="EOR:ErrorInformaitonComplex" minOccurs="0"/>
+      <xsd:element name="TransactionInformation" type="EOR:InquiryInformationComplex" minOccurs="0"/>
+      
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="StatusInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformaitonComplex">
+    <xsd:sequence>
+      <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Transaction" type="EOR:TransactionComplex" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TransactionComplex">
+    <xsd:sequence>
+      <xsd:element name="ResponseStatus" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="ResponseDescription" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

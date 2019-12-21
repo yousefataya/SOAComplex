@@ -1,0 +1,4 @@
+1. please place "ClientConfig.properties" within the same directory you place "ATMTest.jar" , since all configuration is Dependant on it
+2. please edit "ClientConfig.properties" contents using notepad and change "JAVA SERVER PROPERTIES " values as needed
+3. Also you can change the input to be sent to Java server
+

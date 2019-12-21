@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="EmpDepRep"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpDepRep/EmpDepRep"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpDepRep/EmpDepRep"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="EmpDepRep">
+        <plnk:role name="EmpDepRepProvider" portType="client:EmpDepRep"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpDepRep/EmpDepRep"
+                 schemaLocation="../Schemas/EmpDepRep.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="EmpDepRepRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="EmpDepRepResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="EmpDepRep">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:EmpDepRepRequestMessage"/>
+            <wsdl:output message="client:EmpDepRepResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

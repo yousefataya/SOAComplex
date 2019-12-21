@@ -1,0 +1,22 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/ICBS/BF_SAVEACC_PRZ_PRP/SAVEACC_TRX/" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/ICBS/BF_SAVEACC_PRZ_PRP/SAVEACC_TRX/" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CR_BRCH" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_CR_CACC" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_DB_CACC" type="string" db:index="3" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_AMNT" type="decimal" db:index="4" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_PRZ_B_DESC" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_PRZ_S_DESC" type="string" db:index="6" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_TRSH_NUM" type="decimal" db:index="7" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_RESPONSE" type="string" db:index="8" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+</schema>

@@ -1,0 +1,33 @@
+<wsdl:definitions
+     name="CardBalanceInquiryReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/CARD_MANAGEMENT/CardBalanceInquiry/CardBalanceInquiryReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/CARD_MANAGEMENT/CardBalanceInquiry/CardBalanceInquiryReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CardBalanceInquiryReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="CardBalanceInquiryReference_plt" >
+    <plt:role name="CardBalanceInquiryReference_role" >
+      <plt:portType name="tns:CardBalanceInquiryReference_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+     <schema xmlns="http://www.w3.org/2001/XMLSchema">
+       <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CardBalanceInquiryReference"
+               schemaLocation="../Schemas/CardBalanceInquiryReference_sp.xsd" />
+     </schema>
+    </wsdl:types>
+    <wsdl:message name="args_in_msg">
+        <wsdl:part name="InputParameters" element="db:InputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="db:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="CardBalanceInquiryReference_ptt">
+        <wsdl:operation name="CardBalanceInquiryReference">
+            <wsdl:input message="tns:args_in_msg"/>
+            <wsdl:output message="tns:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

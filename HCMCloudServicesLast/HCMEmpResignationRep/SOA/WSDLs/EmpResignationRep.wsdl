@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="EmpResignationRep"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpResignationRep/EmpResignationRep"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpResignationRep/EmpResignationRep"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="EmpResignationRep">
+        <plnk:role name="EmpResignationRepProvider" portType="client:EmpResignationRep"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpResignationRep/EmpResignationRep"
+                 schemaLocation="../Schemas/EmpResignationRep.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="EmpResignationRepRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="EmpResignationRepResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="EmpResignationRep">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:EmpResignationRepRequestMessage"/>
+            <wsdl:output message="client:EmpResignationRepResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

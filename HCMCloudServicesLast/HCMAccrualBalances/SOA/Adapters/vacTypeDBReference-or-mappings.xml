@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" version="Eclipse Persistence Services - 2.6.3.v20160526-8f41838">
+   <name>vacTypeDBReference-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>vacTypeDBReference.HcmVacationType</class>
+         <alias>HCM_VACATION_TYPE</alias>
+         <primary-key>
+            <field table="HCM_VACATION_TYPE" name="CODE" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="vacTypeDBReferenceSelect" xsi:type="read-all-query">
+                  <reference-class>vacTypeDBReference.HcmVacationType</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>code</attribute-name>
+               <field table="HCM_VACATION_TYPE" name="CODE" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>vacationArabic</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="HCM_VACATION_TYPE" name="VACATION_ARABIC" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>vacationForeign</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="HCM_VACATION_TYPE" name="VACATION_FOREIGN" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>createdBy</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="HCM_VACATION_TYPE" name="CREATED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateCreated</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="HCM_VACATION_TYPE" name="DATE_CREATED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>modifiedBy</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="HCM_VACATION_TYPE" name="MODIFIED_BY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>dateModified</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="HCM_VACATION_TYPE" name="DATE_MODIFIED" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="HCM_VACATION_TYPE"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

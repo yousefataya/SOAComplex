@@ -1,0 +1,13 @@
+<adapter-config name="RetriveCalculteDataReference" adapter="db" wsdlLocation="../WSDLs/RetriveCalculteDataReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="Connection1" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="RetriveCalculteDataReference_ptt" operation="RetriveCalculteDataReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BF_SAVEACC_PRZ_PRP"/>
+      <property name="ProcedureName" value="SAVEACC_RET_DATA"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

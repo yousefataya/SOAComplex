@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpProfileRep/HCMEmpProfileRep"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+	<element name="process">
+		<complexType>
+			<sequence>
+                                <element name="ReportPath" type="string"/>
+                                <element name="wsdlLink" type="string"/><!--wsdlLink-->
+                                <element name="URI" type="string"/><!--URI-->
+                                <element name="requestType" type="string"/><!--1:requestType -->
+                                <element name="batchNumber" type="string"/><!--batchNumber-->
+                                <element name="CUT_OFF_DATE" type="string"/><!--Date/Time of cutting-off and starting integration-->
+                                <element name="LAST_CALL_DATE" type="string"/><!--1:Date/Time of Last successful call of the related Api -->
+                          <!--  <element name="CURRENT_CALL_DATE" type="string"/>--><!--Date/Time of starting of the current call-->
+			</sequence>
+		</complexType>
+	</element>
+	<element name="processResponse">
+		<complexType>
+			<sequence>
+				<element name="result" type="string"/>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

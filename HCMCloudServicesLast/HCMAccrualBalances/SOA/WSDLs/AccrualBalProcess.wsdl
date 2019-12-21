@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="AccrualBalProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMAccrualBalances/AccrualBalProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMAccrualBalances/AccrualBalProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="AccrualBalProcess">
+        <plnk:role name="AccrualBalProcessProvider" portType="client:AccrualBalProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMAccrualBalances/AccrualBalProcess"
+                 schemaLocation="../Schemas/AccrualBalProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="AccrualBalProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="AccrualBalProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="AccrualBalProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:AccrualBalProcessRequestMessage"/>
+            <wsdl:output message="client:AccrualBalProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

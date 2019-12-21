@@ -1,0 +1,37 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonContactRelLegDDFIN.xsd" xml:id="PersonContactRelLegDDFIN-xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDFAU.xsd" xml:id="PersonContactRelLegDDFAU-xsd"/>
+    <xsd:include schemaLocation="UnitedStatesOfAmericaContactIn.xsd" xml:id="UnitedStatesOfAmericaContactIn-xsd"/>
+    <xsd:include schemaLocation="OraHrxQa_1.xsd" xml:id="OraHrxQa-xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDFKW.xsd" xml:id="PersonContactRelLegDDFKW-xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDFSA.xsd" xml:id="PersonContactRelLegDDFSA-xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDFAE.xsd" xml:id="PersonContactRelLegDDFAE-xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDFCH.xsd" xml:id="PersonContactRelLegDDFCH-xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDFORA_5FHRX_5FBE.xsd" xml:id="PersonContactRelLegDDFORA_5FHRX_5FBE-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="PersonContactRelLegDDF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContactRelationshipId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ContactRelationshipId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personContactRelLegDDF" type="PersonContactRelLegDDF"/>
+</xsd:schema>

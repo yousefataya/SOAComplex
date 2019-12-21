@@ -1,0 +1,1946 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu Dec 20 07:23:20 EET 2018
+  Author:  Amour
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="ECCServiceProcess"
+               targetNamespace="http://xmlns.oracle.com/ECC/ECCSERVICE/ECCServiceProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/ECC/ECCSERVICE/ECCServiceProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="urn:ECCService"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ui="http://xmlns.oracle.com/soa/designer"
+         xmlns:ns2="http://xmlns.oracle.com/ECC/CustomerSignInfo/CustomerSignInfoBPEL"
+         xmlns:ns3="http://xmlns.oracle.com/ECC/CustomerOldSignInfo/CustomerOldSignInfoBPEL"
+         xmlns:ns4="http://xmlns.oracle.com/ECC/ECCPosting1/ECCPosting1Process"
+         xmlns:ns5="http://xmlns.fact.com/ws/EALL" xmlns:ns6="http://xmlns.fact.com/ws/ECPO"
+         xmlns:ns7="http://xmlns.oracle.com/ECC/ECCPosting2/ECCPosting2Process"
+         xmlns:ns8="http://xmlns.fact.com/ws/ECPT" xmlns:ns9="http://xmlns.oracle.com/ECC/ECCPosting/ECCPostingBEPL"
+         xmlns:ns10="http://xmlns.fact.com/ws/ECCP" xmlns:ns11="http://xmlns.fact.com/ws/CSI"
+         xmlns:ns12="http://xmlns.fact.com/ws/COSI" xmlns:ns13="http://xmlns.oracle.com/ECC/ECCPDCAdd/ECCPDCAddProcess"
+         xmlns:ns14="http://xmlns.fact.com/ws/EPDA"
+         xmlns:ns15="http://xmlns.oracle.com/ECC/ECCAccountRequest/ECCAccountRequestProcess"
+         xmlns:ns16="http://xmlns.fact.com/ws/EAR"
+         xmlns:ns17="http://xmlns.oracle.com/ECC/ECCAutoReply/ECCAutoReplyProcess"
+         xmlns:ns18="http://xmlns.fact.com/ws/EAUR"
+         xmlns:ns19="http://xmlns.oracle.com/ECC/ECCCAAccountRequest/ECCCAAccountRequestProcess"
+         xmlns:ns20="http://xmlns.fact.com/ws/CAAR"
+         xmlns:ns21="http://xmlns.oracle.com/ECC/ECCExtendSessionRequest/ECCExtendSessionRequestBPEL"
+         xmlns:ns22="http://xmlns.fact.com/ws/EESR"
+         xmlns:ns23="http://xmlns.oracle.com/ECC/ECCOutwardPresentment/ECCOutwardPresentmentBPEL"
+         xmlns:ns24="http://xmlns.fact.com/ws/EOP"
+         xmlns:ns25="http://xmlns.oracle.com/ECC/ECCOutwardReply/ECCOutwardReplyProcess"
+         xmlns:ns26="http://xmlns.fact.com/ws/EOR"
+         xmlns:ns27="http://xmlns.oracle.com/ECC/ECCPDCDelete/ECCPCDDeleteProcess"
+         xmlns:ns28="http://xmlns.fact.com/ws/EPDD"
+         xmlns:ns29="http://xmlns.oracle.com/ECC/ECCPDCUpdate/ECCPDCUpdateProcess"
+         xmlns:ns30="http://xmlns.fact.com/ws/EPDU">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <import namespace="urn:ECCService" location="../WSDLs/ECCSERVICEWrapper.wsdl"
+          importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="eccserviceprocess_client" partnerLinkType="ns1:ECCServiceProcess" myRole="ECCServicePortType"/>
+    <partnerLink name="EccPosting1Ref" partnerLinkType="ns4:ECCPosting1Process"
+                 partnerRole="ECCPosting1ProcessProvider"/>
+    <partnerLink name="EccPosting2Reference" partnerLinkType="ns7:ECCPosting2Process"
+                 partnerRole="ECCPosting2ProcessProvider"/>
+    <partnerLink name="EccPostingReference" partnerLinkType="ns9:ECCPostingBEPL" partnerRole="ECCPostingBEPLProvider"/>
+    <partnerLink name="CustomerSignInfoReference" partnerLinkType="ns2:CustomerSignInfoBPEL"
+                 partnerRole="CustomerSignInfoBPELProvider"/>
+    <partnerLink name="CustomerOldSignInfoReference" partnerLinkType="ns3:CustomerOldSignInfoBPEL"
+                 partnerRole="CustomerOldSignInfoBPELProvider"/>
+    <partnerLink name="EccPDCAddPReference" partnerLinkType="ns13:ECCPDCAddProcess"
+                 partnerRole="ECCPDCAddProcessProvider"/>
+    <partnerLink name="EccAccountRequestReference" partnerLinkType="ns15:ECCAccountRequestProcess"
+                 partnerRole="ECCAccountRequestProcessProvider"/>
+    <partnerLink name="ECCAutoReplyReference" partnerLinkType="ns17:ECCAutoReplyProcess"
+                 partnerRole="ECCAutoReplyProcessProvider"/>
+    <partnerLink name="ECCCAAccountRequestReference" partnerLinkType="ns19:ECCCAAccountRequestProcess"
+                 partnerRole="ECCCAAccountRequestProcessProvider"/>
+    <partnerLink name="ECCExtendSessionRequestReference" partnerLinkType="ns21:ECCExtendSessionRequestBPEL"
+                 partnerRole="ECCExtendSessionRequestBPELProvider"/>
+    <partnerLink name="ECCOutwardPresentmentReference" partnerLinkType="ns23:ECCOutwardPresentmentBPEL"
+                 partnerRole="ECCOutwardPresentmentBPELProvider"/>
+    <partnerLink name="ECCOutwardReplyReference" partnerLinkType="ns25:ECCOutwardReplyProcess"
+                 partnerRole="ECCOutwardReplyProcessProvider"/>
+    <partnerLink name="ECCPDCDeleteReference" partnerLinkType="ns27:ECCPCDDeleteProcess"
+                 partnerRole="ECCPCDDeleteProcessProvider"/>
+    <partnerLink name="ECCPDCUpdateReference" partnerLinkType="ns29:ECCPDCUpdateProcess"
+                 partnerRole="ECCPDCUpdateProcessProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:ECCPDCAddMessageInput"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:ECCPDCAddMessageOutput"/>
+    <variable name="OnMessage_ECCPDCADD_InputVariable" messageType="ns1:ECCPDCAddMessageInput"/>
+    <variable name="OnMessage_ECCPosting2_InputVariable" messageType="ns1:ECCPosting2MessageInput"/>
+    <variable name="OnMessage_ECCPosting1_InputVariable" messageType="ns1:ECCPosting1MessageInput"/>
+    <variable name="OnMessage_CustomerOldSignInfo_InputVariable" messageType="ns1:CustomerOldSignInfoMessageInput"/>
+    <variable name="OnMessage_CustomerSignInfo_InputVariable" messageType="ns1:CustomerSignInfoMessageInput"/>
+    <variable name="OnMessage_ECCAccountRequest_InputVariable" messageType="ns1:ECCAccountRequestMessageInput"/>
+    <variable name="OnMessage_ECCAutoReply_InputVariable" messageType="ns1:ECCAutoReplyMessageInput"/>
+    <variable name="OnMessage_ECCCAAccountRequest_InputVariable" messageType="ns1:ECCCAAccountRequestMessageInput"/>
+    <variable name="OnMessage_ECCExtendSessionRequest_InputVariable"
+              messageType="ns1:CECCExtendSessionRequestMessageInput"/>
+    <variable name="OnMessage_ECCOutwardPresentment_InputVariable" messageType="ns1:ECCOutwardPresentmentMessageInput"/>
+    <variable name="OnMessage_ECCOutwardReply_InputVariable" messageType="ns1:ECCOutwardReplyMessageInput"/>
+    <variable name="OnMessage_ECCPDCDelete_InputVariable" messageType="ns1:ECCPCDDeleteMessageInput"/>
+    <variable name="OnMessage_ECCPDCUpdate_InputVariable" messageType="ns1:ECCPCDUpdateMessageInput"/>
+    <variable name="OnMessage_ECCPosting_InputVariable" messageType="ns1:ECCPostingMessageInput"/>
+    <variable name="Invoke_EccPosting1_process_InputVariable" messageType="ns4:ECCPosting1ProcessRequestMessage"/>
+    <variable name="Invoke_EccPosting1_process_OutputVariable" messageType="ns4:ECCPosting1ProcessResponseMessage"/>
+    <variable name="Reply1_ECCPosting1_OutputVariable" messageType="ns1:ECCPosting1MessageOutput"/>
+    <variable name="Invoke_EccPosting2_process_InputVariable" messageType="ns7:ECCPosting2ProcessRequestMessage"/>
+    <variable name="Invoke_EccPosting2_process_OutputVariable" messageType="ns7:ECCPosting2ProcessResponseMessage"/>
+    <variable name="Reply2_ECCPosting2_OutputVariable" messageType="ns1:ECCPosting2MessageOutput"/>
+    <variable name="Invoke_EccPosting_process_InputVariable" messageType="ns9:ECCPostingBEPLRequestMessage"/>
+    <variable name="Invoke_EccPosting_process_OutputVariable" messageType="ns9:ECCPostingBEPLResponseMessage"/>
+    <variable name="Reply3_ECCPosting_OutputVariable" messageType="ns1:ECCPostingMessageOutput"/>
+    <variable name="Invoke_CustomerSignInfo_process_InputVariable"
+              messageType="ns2:CustomerSignInfoBPELRequestMessage"/>
+    <variable name="Invoke_CustomerSignInfo_process_OutputVariable"
+              messageType="ns2:CustomerSignInfoBPELResponseMessage"/>
+    <variable name="Reply4_CustomerSignInfo_OutputVariable" messageType="ns1:CustomerSignInfoMessageOutput"/>
+    <variable name="Invoke_CustomerOldSignInfo_process_InputVariable"
+              messageType="ns3:CustomerOldSignInfoBPELRequestMessage"/>
+    <variable name="Invoke_CustomerOldSignInfo_process_OutputVariable"
+              messageType="ns3:CustomerOldSignInfoBPELResponseMessage"/>
+    <variable name="Reply5_CustomerOldSignInfo_OutputVariable" messageType="ns1:CustomerOldSignInfoMessageOutput"/>
+    <variable name="Invoke_EccPDCAdd_process_InputVariable" messageType="ns13:ECCPDCAddProcessRequestMessage"/>
+    <variable name="Invoke_EccPDCAdd_process_OutputVariable" messageType="ns13:ECCPDCAddProcessResponseMessage"/>
+    <variable name="Reply6_ECCPDCADD_OutputVariable" messageType="ns1:ECCPDCAddMessageOutput"/>
+    <variable name="Invoke_ECCAccountRequest_process_InputVariable"
+              messageType="ns15:ECCAccountRequestProcessRequestMessage"/>
+    <variable name="Invoke_ECCAccountRequest_process_OutputVariable"
+              messageType="ns15:ECCAccountRequestProcessResponseMessage"/>
+    <variable name="Reply7_ECCAccountRequest_OutputVariable" messageType="ns1:ECCAccountRequestMessageOutput"/>
+    <variable name="InvokeECCAutoReply_process_InputVariable" messageType="ns17:ECCAutoReplyProcessRequestMessage"/>
+    <variable name="InvokeECCAutoReply_process_OutputVariable" messageType="ns17:ECCAutoReplyProcessResponseMessage"/>
+    <variable name="Reply8_ECCAutoReply_OutputVariable" messageType="ns1:ECCAutoReplyMessageOutput"/>
+    <variable name="Invoke_ECCCAAccountRequest_process_InputVariable"
+              messageType="ns19:ECCCAAccountRequestProcessRequestMessage"/>
+    <variable name="Invoke_ECCCAAccountRequest_process_OutputVariable"
+              messageType="ns19:ECCCAAccountRequestProcessResponseMessage"/>
+    <variable name="Reply9_ECCCAAccountRequest_OutputVariable" messageType="ns1:ECCCAAccountRequestMessageOutput"/>
+    <variable name="Invoke_ECCExtendSessionRequest_process_InputVariable"
+              messageType="ns21:ECCExtendSessionRequestBPELRequestMessage"/>
+    <variable name="Invoke_ECCExtendSessionRequest_process_OutputVariable"
+              messageType="ns21:ECCExtendSessionRequestBPELResponseMessage"/>
+    <variable name="Reply10_ECCExtendSessionRequest_OutputVariable"
+              messageType="ns1:CECCExtendSessionRequestMessageOutput"/>
+    <variable name="Invoke_ECCOutwardPresentment_process_InputVariable"
+              messageType="ns23:ECCOutwardPresentmentBPELRequestMessage"/>
+    <variable name="Invoke_ECCOutwardPresentment_process_OutputVariable"
+              messageType="ns23:ECCOutwardPresentmentBPELResponseMessage"/>
+    <variable name="Reply11_ECCOutwardPresentment_OutputVariable" messageType="ns1:ECCOutwardPresentmentMessageOutput"/>
+    <variable name="Invoke_ECCOutwardReply_process_InputVariable"
+              messageType="ns25:ECCOutwardReplyProcessRequestMessage"/>
+    <variable name="Invoke_ECCOutwardReply_process_OutputVariable"
+              messageType="ns25:ECCOutwardReplyProcessResponseMessage"/>
+    <variable name="Reply12_ECCOutwardReply_OutputVariable" messageType="ns1:ECCOutwardReplyMessageOutput"/>
+    <variable name="Invoke_ECCPDCDelete_process_InputVariable" messageType="ns27:ECCPCDDeleteProcessRequestMessage"/>
+    <variable name="Invoke_ECCPDCDelete_process_OutputVariable" messageType="ns27:ECCPCDDeleteProcessResponseMessage"/>
+    <variable name="Reply13_ECCPDCDelete_OutputVariable" messageType="ns1:ECCPCDDeleteMessageOutput"/>
+    <variable name="Invoke_ECCPDCUpdate_process_InputVariable" messageType="ns29:ECCPDCUpdateProcessRequestMessage"/>
+    <variable name="Invoke_ECCPDCUpdate_process_OutputVariable" messageType="ns29:ECCPDCUpdateProcessResponseMessage"/>
+    <variable name="Reply14_ECCPDCUpdate_OutputVariable" messageType="ns1:ECCPCDUpdateMessageOutput"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in ECCServiceProcess.wsdl) -->
+
+    <!-- Generate reply to synchronous request -->
+    <pick name="PickAction" createInstance="yes">
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCPDCADD_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPDCADD" bpelx:name="ECCPDCAdd">
+        <sequence name="Sequence6">
+          <assign name="Assign_EccPDCAdd_input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageHeader/ns14:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageHeader/ns14:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageHeader/ns14:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PostingDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:PostingDate</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCADD_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPDCAdd_process_InputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_EccPDCAdd" bpelx:invokeAsDetail="no" partnerLink="EccPDCAddPReference"
+                  portType="ns13:ECCPDCAddProcess" operation="process"
+                  inputVariable="Invoke_EccPDCAdd_process_InputVariable"
+                  outputVariable="Invoke_EccPDCAdd_process_OutputVariable"/>
+          <assign name="Assign_EccPDCAddOutput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageHeader/ns14:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:StatusInformation/ns14:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:ErrorInformation/ns14:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:ErrorInformation/ns14:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:ErrorInformation/ns14:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:ErrorInformation/ns14:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:ErrorInformation/ns14:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:Transaction/ns14:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPDCAdd_process_OutputVariable.payload/ns14:MessageBody/ns14:TransactionInformation/ns14:Transaction/ns14:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply6_ECCPDCADD_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply6" partnerLink="eccserviceprocess_client" variable="Reply6_ECCPDCADD_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPDCADD"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCPosting2_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPosting2" bpelx:name="ECCPosting2">
+        <sequence name="Sequence2">
+          <assign name="Assign_EccPosting2_input">
+            <copy ignoreMissingFromData="no" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageHeader/ns8:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageHeader/ns8:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageHeader/ns8:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:ReasonCode</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PaymentMethod</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:PaymentMethod</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BeneficiaryBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:BeneficiaryBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting2_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting2_process_InputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_EccPosting2" bpelx:invokeAsDetail="no" partnerLink="EccPosting2Reference"
+                  portType="ns7:ECCPosting2Process" operation="process"
+                  inputVariable="Invoke_EccPosting2_process_InputVariable"
+                  outputVariable="Invoke_EccPosting2_process_OutputVariable"/>
+          <assign name="Assign_EccPosting2_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageHeader/ns8:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:StatusInformation/ns8:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:ErrorInformation/ns8:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:ErrorInformation/ns8:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:ErrorInformation/ns8:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:ErrorInformation/ns8:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:ErrorInformation/ns8:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:Transaction/ns8:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting2_process_OutputVariable.payload/ns8:MessageBody/ns8:TransactionInformation/ns8:Transaction/ns8:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply2_ECCPosting2_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply2" partnerLink="eccserviceprocess_client" variable="Reply2_ECCPosting2_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPosting2"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCPosting1_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPosting1" bpelx:name="ECCPosting1">
+        <sequence name="Sequence1">
+          <assign name="Assign_EccPosting1_Input">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageHeader/ns6:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageHeader/ns6:ApplicationCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageHeader/ns6:ApplicationUserName</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:IntReferance</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:ChequeSequence</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:BFDAccountNumber</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:BFDBranchCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:BFDBankCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:PayAccountNumber</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:PayBranchCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:PayBank</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:ChequeAmount</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:CurrencyCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" keepSrcElementName="no" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:ReasonCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:PaymentMethod</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:PaymentMethod</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:UserID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:BenBech</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:BenBech</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting1_InputVariable.part/ns5:ECCPosting1MessageBody/ns5:ECCPosting1TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting1_process_InputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_EccPosting1" bpelx:invokeAsDetail="no" partnerLink="EccPosting1Ref"
+                  portType="ns4:ECCPosting1Process" operation="process"
+                  inputVariable="Invoke_EccPosting1_process_InputVariable"
+                  outputVariable="Invoke_EccPosting1_process_OutputVariable"/>
+          <assign name="Assign_EccPostingOutput">
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:Transaction/ns6:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1TransactionInformationO/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:Transaction/ns6:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1TransactionInformationO/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:Transaction/ns6:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1TransactionInformationO/ns5:Transaction/ns5:ReasonCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:Transaction/ns6:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1TransactionInformationO/ns5:Transaction/ns5:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:TransactionInformation/ns6:Transaction/ns6:Action</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1TransactionInformationO/ns5:Transaction/ns5:Action</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:ErrorInformation/ns6:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:ErrorInformation/ns6:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:ErrorInformation/ns6:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:ErrorInformation/ns6:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:ErrorInformation/ns6:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageBody/ns6:StatusInformation/ns6:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageBodyO/ns5:ECCPosting1StatusInformation/ns5:Status</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_EccPosting1_process_OutputVariable.payload/ns6:MessageHeader/ns6:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply1_ECCPosting1_OutputVariable.part/ns5:ECCPosting1MessageHeaderO/ns5:TransactionID</to>
+            </copy>
+          </assign>
+          <reply name="Reply1" partnerLink="eccserviceprocess_client" variable="Reply1_ECCPosting1_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPosting1"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_CustomerOldSignInfo_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="CustomerOldSignInfo">
+        <sequence name="Sequence5">
+          <assign name="Assign_CustomerOldSignInfo_Input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageHeader/ns12:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageHeader/ns12:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageHeader/ns12:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserId</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:UserId</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CustomerNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:CustomerNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:MemberId</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:MemberId</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerOldSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CheckNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerOldSignInfo_process_InputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:CheckNumber</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_CustomerOldSignInfo" bpelx:invokeAsDetail="no"
+                  partnerLink="CustomerOldSignInfoReference" portType="ns3:CustomerOldSignInfoBPEL"
+                  operation="process" inputVariable="Invoke_CustomerOldSignInfo_process_InputVariable"
+                  outputVariable="Invoke_CustomerOldSignInfo_process_OutputVariable"/>
+          <assign name="Assign_CustomerOldSignInfo_Output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:StatusInformation/ns12:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:ErrorInformation/ns12:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:ErrorInformation/ns12:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:ErrorInformation/ns12:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:ErrorInformation/ns12:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:ErrorInformation/ns12:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:Transaction/ns12:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:Transaction/ns12:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:SignImageInfo/ns12:SequenceOfOldSignature</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignImageInfo/ns5:SequenceOfOldSignature</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:SignImageInfo/ns12:ExpiryDateOfOldSignature</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignImageInfo/ns5:ExpiryDateOfOldSignature</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:SignImageInfo/ns12:ImageOfOldSignature</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignImageInfo/ns5:ImageOfOldSignature</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerOldSignInfo_process_OutputVariable.payload/ns12:MessageBody/ns12:TransactionInformation/ns12:SignImageInfo/ns12:NotesOfOldSignature</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply5_CustomerOldSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignImageInfo/ns5:NotesOfOldSignature</to>
+            </copy>
+          </assign>
+          <reply name="Reply5" partnerLink="eccserviceprocess_client"
+                 variable="Reply5_CustomerOldSignInfo_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="CustomerOldSignInfo"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" portType="ns1:ECCServicePortType" operation="CustomerSignInfo"
+                 variable="OnMessage_CustomerSignInfo_InputVariable">
+        <sequence name="Sequence4">
+          <assign name="Assign_CustomerSignInfoInput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageHeader/ns11:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageHeader/ns11:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageHeader/ns11:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserId</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:UserId</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_CustomerSignInfo_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CheckNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_CustomerSignInfo_process_InputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:CheckNumber</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_CustomerSignInfo" bpelx:invokeAsDetail="no" partnerLink="CustomerSignInfoReference"
+                  portType="ns2:CustomerSignInfoBPEL" operation="process"
+                  inputVariable="Invoke_CustomerSignInfo_process_InputVariable"
+                  outputVariable="Invoke_CustomerSignInfo_process_OutputVariable"/>
+          <assign name="Assign_CustomerSignInfooutput">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageHeader/ns11:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:StatusInformation/ns11:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:ErrorInformation/ns11:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:ErrorInformation/ns11:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:ErrorInformation/ns11:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:ErrorInformation/ns11:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:ErrorInformation/ns11:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:Transaction/ns11:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:Transaction/ns11:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:Transaction/ns11:CustomerName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:CustomerName</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:Transaction/ns11:AccountNotes</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountNotes</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:Transaction/ns11:ecc_ref</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ecc_ref</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:CustomerId</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:CustomerId</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:CustomerSignMemberId</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:CustomerSignMemberId</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:CustomerSignSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:CustomerSignSequence</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:CustomerSignSequenceInternal</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:CustomerSignSequenceInternal</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:ImageOfSignature</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:ImageOfSignature</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:NameOfAuthorizedSignatory</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:NameOfAuthorizedSignatory</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:NotesOfSignature</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:NotesOfSignature</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_CustomerSignInfo_process_OutputVariable.payload/ns11:MessageBody/ns11:TransactionInformation/ns11:SignInfo/ns11:OldSignatureIndicator</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply4_CustomerSignInfo_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:SignInfo/ns5:OldSignatureIndicator</to>
+            </copy>
+          </assign>
+          <reply name="Reply4" partnerLink="eccserviceprocess_client"
+                 variable="Reply4_CustomerSignInfo_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="CustomerSignInfo"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCAccountRequest_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCAccountRequest">
+        <sequence name="Sequence7">
+          <assign name="Assign_ECCAccountRequest_Input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageHeader/ns16:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageHeader/ns16:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageHeader/ns16:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReference</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:IntReference</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:AccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:BranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Direction</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Direction</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BeneficiaryBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:BeneficiaryBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ModificationFlag</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:ModificationFlag</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CycleNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:CycleNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BtchRef</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:BtchRef</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BtchAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:BtchAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCAccountRequest_process_InputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCAccountRequest" bpelx:invokeAsDetail="no" partnerLink="EccAccountRequestReference"
+                  portType="ns15:ECCAccountRequestProcess" operation="process"
+                  inputVariable="Invoke_ECCAccountRequest_process_InputVariable"
+                  outputVariable="Invoke_ECCAccountRequest_process_OutputVariable"/>
+          <assign name="Assign_ECCAccountRequest_output">
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageHeader/ns16:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:StatusInformation/ns16:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:ErrorInformation/ns16:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:ErrorInformation/ns16:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:ErrorInformation/ns16:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:ErrorInformation/ns16:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:ErrorInformation/ns16:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:AccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountNumber</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:AccountName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountName</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:AccountStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:ProceedFlag</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ProceedFlag</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:AccountAddress</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountAddress</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCAccountRequest_process_OutputVariable.payload/ns16:MessageBody/ns16:TransactionInformation/ns16:Transaction/ns16:AccountDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply7_ECCAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply7" partnerLink="eccserviceprocess_client"
+                 variable="Reply7_ECCAccountRequest_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="ECCAccountRequest"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCAutoReply_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCAutoReply">
+        <sequence name="Sequence8">
+          <assign name="Assign_ECCAutoReply_Input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageHeader/ns18:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageHeader/ns18:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageHeader/ns18:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReference</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:IntReference</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:ReasonCode</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ExpectedReplyDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:ExpectedReplyDate</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:UserID</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_ECCAutoReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeECCAutoReply_process_InputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="InvokeECCAutoReply" bpelx:invokeAsDetail="no" partnerLink="ECCAutoReplyReference"
+                  portType="ns17:ECCAutoReplyProcess" operation="process"
+                  inputVariable="InvokeECCAutoReply_process_InputVariable"
+                  outputVariable="InvokeECCAutoReply_process_OutputVariable"/>
+          <assign name="Assign_ECCAutoReply_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageHeader/ns18:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:StatusInformation/ns18:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:ErrorInformation/ns18:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:ErrorInformation/ns18:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:ErrorInformation/ns18:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:ErrorInformation/ns18:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:ErrorInformation/ns18:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:Transaction/ns18:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ChequeSequence</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:Transaction/ns18:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:Transaction/ns18:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$InvokeECCAutoReply_process_OutputVariable.payload/ns18:MessageBody/ns18:TransactionInformation/ns18:Transaction/ns18:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply8_ECCAutoReply_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ReasonCode</to>
+            </copy>
+          </assign>
+          <reply name="Reply8" partnerLink="eccserviceprocess_client" variable="Reply8_ECCAutoReply_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCAutoReply"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCCAAccountRequest_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCCAAccountRequest">
+        <sequence name="Sequence9">
+          <assign name="Assign_ECCCAAccountRequest_Input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageHeader/ns20:TransactionID</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageHeader/ns20:ApplicationCode</to>
+            </copy>
+            <copy>
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageHeader/ns20:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReference</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:IntReference</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:AccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:BranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Direction</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Direction</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ModificationFlag</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:ModificationFlag</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CycleNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:CycleNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChqRef</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:ChqRef</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChqAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:ChqAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCCAAccountRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCCAAccountRequest_process_InputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCCAAccountRequest" bpelx:invokeAsDetail="no"
+                  partnerLink="ECCCAAccountRequestReference" portType="ns19:ECCCAAccountRequestProcess"
+                  operation="process" inputVariable="Invoke_ECCCAAccountRequest_process_InputVariable"
+                  outputVariable="Invoke_ECCCAAccountRequest_process_OutputVariable"/>
+          <assign name="Assign_ECCCAAccountRequest_Output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageHeader/ns20:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:StatusInformation/ns20:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:ErrorInformation/ns20:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:ErrorInformation/ns20:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:ErrorInformation/ns20:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:ErrorInformation/ns20:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:ErrorInformation/ns20:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:AccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountNumber</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:AccountName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountName</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:AccountStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:ProceedFlag</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ProceedFlag</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes" ignoreMissingFromData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:AccountAddress</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountAddress</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:AvailableBalance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AvailableBalance</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:NonClearBalance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:NonClearBalance</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:ReservedBalance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ReservedBalance</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:TotalBalance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:TotalBalance</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCCAAccountRequest_process_OutputVariable.payload/ns20:MessageBody/ns20:TransactionInformation/ns20:Transaction/ns20:AccountDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply9_ECCCAAccountRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:AccountDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply9" partnerLink="eccserviceprocess_client"
+                 variable="Reply9_ECCCAAccountRequest_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="ECCCAAccountRequest"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCExtendSessionRequest_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCExtendSessionRequest">
+        <sequence name="Sequence10">
+          <assign name="Assign_ECCExtendSessionRequest_input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageHeader/ns22:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageHeader/ns22:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageHeader/ns22:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:OldValueDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:OldValueDate</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:NewValueDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:NewValueDate</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Currency</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:Currency</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCExtendSessionRequest_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCExtendSessionRequest_process_InputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCExtendSessionRequest" bpelx:invokeAsDetail="no"
+                  partnerLink="ECCExtendSessionRequestReference" portType="ns21:ECCExtendSessionRequestBPEL"
+                  operation="process" inputVariable="Invoke_ECCExtendSessionRequest_process_InputVariable"
+                  outputVariable="Invoke_ECCExtendSessionRequest_process_OutputVariable"/>
+          <assign name="Assign_ECCExtendSessionRequest_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageHeader/ns22:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:StatusInformation/ns22:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:ErrorInformation/ns22:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:ErrorInformation/ns22:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:ErrorInformation/ns22:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:ErrorInformation/ns22:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:ErrorInformation/ns22:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:Transaction/ns22:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCExtendSessionRequest_process_OutputVariable.payload/ns22:MessageBody/ns22:TransactionInformation/ns22:Transaction/ns22:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply10_ECCExtendSessionRequest_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply10" partnerLink="eccserviceprocess_client"
+                 variable="Reply10_ECCExtendSessionRequest_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="ECCExtendSessionRequest"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCOutwardPresentment_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCOutwardPresentment">
+        <sequence name="Sequence11">
+          <assign name="Assign_ECCOutwardPresentment_input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageHeader/ns24:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageHeader/ns24:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageHeader/ns24:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PaymentType</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:PaymentType</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Urgency</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:Urgency</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ExpectedReplyDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:ExpectedReplyDate</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:WasPDC</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:WasPDC</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BeneficiaryBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:BeneficiaryBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:AppID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardPresentment_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PaymentMethod</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardPresentment_process_InputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:PaymentMethod</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCOutwardPresentment" bpelx:invokeAsDetail="no"
+                  partnerLink="ECCOutwardPresentmentReference" portType="ns23:ECCOutwardPresentmentBPEL"
+                  operation="process" inputVariable="Invoke_ECCOutwardPresentment_process_InputVariable"
+                  outputVariable="Invoke_ECCOutwardPresentment_process_OutputVariable"/>
+          <assign name="Assign_ECCOutwardPresentment_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageHeader/ns24:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:StatusInformation/ns24:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:ErrorInformation/ns24:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:ErrorInformation/ns24:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:ErrorInformation/ns24:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:ErrorInformation/ns24:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:ErrorInformation/ns24:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:Transaction/ns24:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardPresentment_process_OutputVariable.payload/ns24:MessageBody/ns24:TransactionInformation/ns24:Transaction/ns24:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply11_ECCOutwardPresentment_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply11" partnerLink="eccserviceprocess_client"
+                 variable="Reply11_ECCOutwardPresentment_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="ECCOutwardPresentment"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCOutwardReply_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCOutwardReply">
+        <sequence name="Sequence12">
+          <assign name="Assign_ECCOutwardReply_input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageHeader/ns26:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageHeader/ns26:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageHeader/ns26:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:ReasonCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BeneficiaryBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:BeneficiaryBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PaymentMethod</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:PaymentMethod</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCOutwardReply_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCOutwardReply_process_InputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCOutwardReply" partnerLink="ECCOutwardReplyReference"
+                  portType="ns25:ECCOutwardReplyProcess" operation="process"
+                  inputVariable="Invoke_ECCOutwardReply_process_InputVariable"
+                  outputVariable="Invoke_ECCOutwardReply_process_OutputVariable"
+                  bpelx:invokeAsDetail="no"/>
+          <assign name="Assign_ECCOutwardReply_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageHeader/ns26:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:StatusInformation/ns26:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:ErrorInformation/ns26:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:ErrorInformation/ns26:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:ErrorInformation/ns26:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:ErrorInformation/ns26:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:ErrorInformation/ns26:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:Transaction/ns26:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCOutwardReply_process_OutputVariable.payload/ns26:MessageBody/ns26:TransactionInformation/ns26:Transaction/ns26:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply12_ECCOutwardReply_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply12" partnerLink="eccserviceprocess_client"
+                 variable="Reply12_ECCOutwardReply_OutputVariable" portType="ns1:ECCServicePortType"
+                 operation="ECCOutwardReply"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCPDCDelete_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPDCDelete">
+        <sequence name="Sequence13">
+          <assign name="Assign_ECCPDCDelete_input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageHeader/ns28:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageHeader/ns28:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageHeader/ns28:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PostingDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:PostingDate</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCDelete_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCDelete_process_InputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCPDCDelete" bpelx:invokeAsDetail="no" partnerLink="ECCPDCDeleteReference"
+                  portType="ns27:ECCPCDDeleteProcess" operation="process"
+                  inputVariable="Invoke_ECCPDCDelete_process_InputVariable"
+                  outputVariable="Invoke_ECCPDCDelete_process_OutputVariable"/>
+          <assign name="Assign_ECCPDCDelete_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageHeader/ns28:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:StatusInformation/ns28:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:ErrorInformation/ns28:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:ErrorInformation/ns28:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:ErrorInformation/ns28:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:ErrorInformation/ns28:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:ErrorInformation/ns28:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:Transaction/ns28:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCDelete_process_OutputVariable.payload/ns28:MessageBody/ns28:TransactionInformation/ns28:Transaction/ns28:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply13_ECCPDCDelete_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply13" partnerLink="eccserviceprocess_client" variable="Reply13_ECCPDCDelete_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPDCDelete"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCPDCUpdate_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPDCUpdate">
+        <sequence name="Sequence14">
+          <assign name="Assign_ECCPDCUpdate_input">
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageHeader/ns30:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageHeader/ns30:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageHeader/ns30:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PostingDate</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:PostingDate</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPDCUpdate_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_ECCPDCUpdate_process_InputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_ECCPDCUpdate" bpelx:invokeAsDetail="no" partnerLink="ECCPDCUpdateReference"
+                  portType="ns29:ECCPDCUpdateProcess" operation="process"
+                  inputVariable="Invoke_ECCPDCUpdate_process_InputVariable"
+                  outputVariable="Invoke_ECCPDCUpdate_process_OutputVariable"/>
+          <assign name="Assign_ECCPDCUpdate_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageHeader/ns30:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageHeader/ns5:TransactionID</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:StatusInformation/ns30:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:ErrorInformation/ns30:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:ErrorInformation/ns30:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:ErrorInformation/ns30:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:ErrorInformation/ns30:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:ErrorInformation/ns30:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:Transaction/ns30:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_ECCPDCUpdate_process_OutputVariable.payload/ns30:MessageBody/ns30:TransactionInformation/ns30:Transaction/ns30:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply14_ECCPDCUpdate_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+          </assign>
+          <reply name="Reply14" partnerLink="eccserviceprocess_client" variable="Reply14_ECCPDCUpdate_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPDCUpdate"/>
+        </sequence>
+      </onMessage>
+      <onMessage partnerLink="eccserviceprocess_client" variable="OnMessage_ECCPosting_InputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPosting">
+        <sequence name="Sequence3">
+          <assign name="Assign_EccPosting_input">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageHeader/ns5:TransactionID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageHeader/ns10:TransactionID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageHeader/ns5:ApplicationCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageHeader/ns10:ApplicationCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageHeader/ns5:ApplicationUserName</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageHeader/ns10:ApplicationUserName</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:IntReferance</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:IntReferance</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:ChequeSequence</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeSerial</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:ChequeSerial</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:PayAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:PayBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PayBank</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:PayBank</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDAccountNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:BFDAccountNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:BFDBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BFDBankCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:BFDBankCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ChequeAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:ChequeAmount</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CurrencyCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:CurrencyCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:CycleNumber</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:CycleNumber</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:ModificationFlag</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:ModificationFlag</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:PaymentMethod</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:PaymentMethod</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:UserID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:UserID</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:BeneficiaryBranchCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:BeneficiaryBranchCode</to>
+            </copy>
+            <copy bpelx:insertMissingToData="yes">
+              <from>$OnMessage_ECCPosting_InputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:AppID</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_EccPosting_process_InputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:AppID</to>
+            </copy>
+          </assign>
+          <invoke name="Invoke_EccPosting" bpelx:invokeAsDetail="no" partnerLink="EccPostingReference"
+                  portType="ns9:ECCPostingBEPL" operation="process"
+                  inputVariable="Invoke_EccPosting_process_InputVariable"
+                  outputVariable="Invoke_EccPosting_process_OutputVariable"/>
+          <assign name="Assign_EccPosting_output">
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:StatusInformation/ns10:Status</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:StatusInformation/ns5:Status</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:ErrorInformation/ns10:ErrorBusCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:ErrorInformation/ns10:ErrorBusMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorBusMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:ErrorInformation/ns10:ErrorTechCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:ErrorInformation/ns10:ErrorTechMessage</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechMessage</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:ErrorInformation/ns10:ErrorTechDetails</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:ErrorInformation/ns5:ErrorTechDetails</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:ResponseStatus</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseStatus</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:ResponseDescription</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ResponseDescription</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:ReasonCode</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ReasonCode</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:BranchCategory</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:BranchCategory</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:OverdraftAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:OverdraftAmount</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:ChequeSequence</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:ChequeSequence</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:OverdraftAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:OverdraftAmount</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:OverdraftAmount</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:OverdraftAmount</to>
+            </copy>
+            <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+              <from>$Invoke_EccPosting_process_OutputVariable.payload/ns10:MessageBody/ns10:TransactionInformation/ns10:Transaction/ns10:P_REASONS</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Reply3_ECCPosting_OutputVariable.part/ns5:MessageBody/ns5:TransactionInformation/ns5:Transaction/ns5:P_REASONS</to>
+            </copy>
+          </assign>
+          <reply name="Reply3" partnerLink="eccserviceprocess_client" variable="Reply3_ECCPosting_OutputVariable"
+                 portType="ns1:ECCServicePortType" operation="ECCPosting"/>
+        </sequence>
+      </onMessage>
+      
+    </pick>
+  </sequence>
+</process>

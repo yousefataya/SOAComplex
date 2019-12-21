@@ -1,0 +1,72 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_COMPANY_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_STATUS" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_FROM_DUE_DATE" type="decimal" db:index="3" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TO_DUE_DATE" type="decimal" db:index="4" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_FROM_MOD_DATE" type="decimal" db:index="5" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TO_MOD_DATE" type="decimal" db:index="6" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_FROM_UP_DATE" type="decimal" db:index="7" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TO_UP_DATE" type="decimal" db:index="8" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_FROM_SAL_AMNT" type="decimal" db:index="9" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TO_SAL_AMNT" type="decimal" db:index="10" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_UPLOADER_ID" type="decimal" db:index="11" db:type="NUMBER" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RECORD" type="db:P_RECORD_RowSet" db:index="12" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_RECORD_RowSet">
+      <sequence>
+         <element name="P_RECORD_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="SEQUENCE_NO" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="FILE_CODE" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="FILE_NAME" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="STATUS" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DATE_OF_PAYMENT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="NO_OF_SALARIES" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="SALARY_AMOUNT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="UPLOAD_DATE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="UPLOAD_TIME" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="LAST_MODIFICATION_DATE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="LAST_MODIFICATION_TIME" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="PERVIOUS_SEQ" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="COMPANY_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="UPLOADER_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="COVER_FILE_NAME" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="SALARY_FILE_TYPE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="BRCH_CODE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CACC_NUM" type="db:string16" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="FILE_SOURCE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="MONTH_NUM" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CMPN_B_DESC" type="db:string40" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string16">
+      <restriction base="string">
+         <maxLength value="16"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string40">
+      <restriction base="string">
+         <maxLength value="40"/>
+      </restriction>
+   </simpleType>
+</schema>

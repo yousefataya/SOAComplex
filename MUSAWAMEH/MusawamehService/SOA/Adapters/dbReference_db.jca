@@ -1,0 +1,13 @@
+<adapter-config name="dbReference" adapter="db" wsdlLocation="../WSDLs/dbReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="cbsConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="dbReference_ptt" operation="dbReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BF_WEB_FCILITY"/>
+      <property name="ProcedureName" value="BF_GET_CUST_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

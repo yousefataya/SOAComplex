@@ -1,0 +1,1832 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/types/"
+     xmlns:ns0="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" xmlns:ns1="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:tns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/types/"
+     xmlns="http://www.w3.org/2001/XMLSchema">
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="Termination.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="Contract.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="AssignmentWorkMeasure.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="PersonTypeUsage.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkerDetails.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkTermsGradeSteps.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="AssignmentSupervisor.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="Worker.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="Person.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="PersonContact.xsd"/>
+    <import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkTerms.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkRelationshipUserKey.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="Assignment.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkRelationship.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkTermsSupervisor.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="ActionsList.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="WorkTermsWorkMeasure.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="AssignmentGradeSteps.xsd"/>
+    <import namespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/" schemaLocation="PersonContactRelationship.xsd"/>
+    <element name="findPersonContactRelationship">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonContactRelationshipResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonTypeUsage">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonTypeUsageResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonTypeUsageAsync">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonTypeUsageAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonContactRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonContactRelationshipAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonTypeUsage">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonTypeUsage"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonTypeUsageResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonContactRelationship">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContactRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonContactRelationshipResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonTypeUsage">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonTypeUsage"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonTypeUsageResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonContactRelationship">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContactRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonContactRelationshipResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonTypeUsage">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonTypeUsage"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonTypeUsageResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonTypeUsageAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonTypeUsage"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonTypeUsageAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonTypeUsageAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonTypeUsage"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonTypeUsageAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonContactRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContactRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonContactRelationshipAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonTypeUsageAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonTypeUsage"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonTypeUsageAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonTypeUsageResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonContactRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContactRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonContactRelationshipAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactRelationship">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContactRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactRelationshipResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContactRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactRelationshipAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePerson">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:Person"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePerson">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:Person"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:Person"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="mergePersonAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:Person"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updatePersonAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPerson">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonAsync">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findPersonAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContact">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContact"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactAsync">
+        <complexType>
+            <sequence>
+                <element name="attributeList" type="ns0:PersonContact"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createPersonContactAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:PersonContactResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonCitizenship">
+        <complexType>
+            <sequence>
+                <element name="citizenshipId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonCitizenshipResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonDeliveryMethod">
+        <complexType>
+            <sequence>
+                <element name="deliveryMethodId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="commDlvryMethod" type="string"/>
+                <element name="preferredOrder" type="long"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonDeliveryMethodResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonDriversLicence">
+        <complexType>
+            <sequence>
+                <element name="driversLicenceId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="licenseType" type="string"/>
+                <element name="licenseNumber" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonDriversLicenceResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonEmail">
+        <complexType>
+            <sequence>
+                <element name="emailAddressId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="emailType" type="string"/>
+                <element name="emailAddress" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonEmailResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonEthnicity">
+        <complexType>
+            <sequence>
+                <element name="ethnicityId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="ethnicity" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonEthnicityResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonImage">
+        <complexType>
+            <sequence>
+                <element name="imageId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="imageName" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonImageResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonNationalIdentifier">
+        <complexType>
+            <sequence>
+                <element name="nationalIdentifierId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="nationalIdentifierType" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonNationalIdentifierResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonPassport">
+        <complexType>
+            <sequence>
+                <element name="passportId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="passportType" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonPassportResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonPhone">
+        <complexType>
+            <sequence>
+                <element name="phoneId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="phoneNumber" type="string"/>
+                <element name="phoneType" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonPhoneResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonReligion">
+        <complexType>
+            <sequence>
+                <element name="religionId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="religion" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonReligionResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonCitizenshipAsync">
+        <complexType>
+            <sequence>
+                <element name="citizenshipId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonCitizenshipAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonEthnicityAsync">
+        <complexType>
+            <sequence>
+                <element name="ethnicityId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="ethnicity" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonEthnicityAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonPhoneAsync">
+        <complexType>
+            <sequence>
+                <element name="phoneId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="phoneNumber" type="string"/>
+                <element name="phoneType" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonPhoneAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonEmailAsync">
+        <complexType>
+            <sequence>
+                <element name="emailAddressId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="emailType" type="string"/>
+                <element name="emailAddress" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonEmailAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonNationalIdentifierAsync">
+        <complexType>
+            <sequence>
+                <element name="nationalIdentifierId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="nationalIdentifierType" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonNationalIdentifierAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonPassportAsync">
+        <complexType>
+            <sequence>
+                <element name="passportId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="passportType" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonPassportAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonDriversLicenceAsync">
+        <complexType>
+            <sequence>
+                <element name="driversLicenceId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="licenseType" type="string"/>
+                <element name="licenseNumber" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonDriversLicenceAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonDeliveryMethodAsync">
+        <complexType>
+            <sequence>
+                <element name="deliveryMethodId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="commDlvryMethod" type="string"/>
+                <element name="preferredOrder" type="long"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonDeliveryMethodAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonReligionAsync">
+        <complexType>
+            <sequence>
+                <element name="religionId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="religion" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonReligionAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonImageAsync">
+        <complexType>
+            <sequence>
+                <element name="imageId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="imageName" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonImageAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="createAssignmentGradeSteps">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentGradeStepsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentGradeSteps">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentGradeStepsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentGradeStepsAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentGradeStepsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentGradeStepsAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentGradeStepsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsGradeSteps">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsGradeStepsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsGradeSteps">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsGradeStepsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsGradeStepsAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsGradeStepsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsGradeStepsAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsGradeSteps"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsGradeStepsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsGradeStepsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignment">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:Assignment"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:Assignment"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentSupervisor">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentSupervisorResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentWorkMeasure">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentWorkMeasure"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentWorkMeasureResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsSupervisor">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsSupervisorResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsWorkMeasure">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsWorkMeasure"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsWorkMeasureResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentSupervisorAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentSupervisorAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsWorkMeasureAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsWorkMeasure"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsWorkMeasureAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsSupervisorAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsSupervisorAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentWorkMeasureAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentWorkMeasure"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentWorkMeasureAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentSupervisor">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentSupervisorResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentWorkMeasure">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentWorkMeasure"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentWorkMeasureResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsSupervisor">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsSupervisorResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsWorkMeasure">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsWorkMeasure"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsWorkMeasureResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsWorkMeasureAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsWorkMeasure"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsWorkMeasureAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentWorkMeasureAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentWorkMeasure"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentWorkMeasureAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentWorkMeasureResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentSupervisorAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:AssignmentSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentSupervisorAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsSupervisorAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTermsSupervisor"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsSupervisorAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsSupervisorResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkRelationship">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkRelationship"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkRelationshipResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTerms">
+        <complexType>
+            <sequence>
+                <element name="pWorkTermsAL" type="ns0:WorkTerms"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorker">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:Worker"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkerResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTerms">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTerms"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkRelationship"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkRelationshipAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsAsync">
+        <complexType>
+            <sequence>
+                <element name="pWorkTermsAL" type="ns0:WorkTerms"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkTermsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkTerms"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkTermsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkTermsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkerAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:Worker"/>
+                <element name="pActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createWorkerAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="reverseTerminateWorkRelationship">
+        <complexType>
+            <sequence>
+                <element name="WorkRelationshipUserKey" type="ns0:WorkRelationshipUserKey"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="reverseTerminateWorkRelationshipResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="terminateWorkRelationship">
+        <complexType>
+            <sequence>
+                <element name="WorkRelationshipUserKey" type="ns0:WorkRelationshipUserKey"/>
+                <element name="TerminationDetails" type="ns0:Termination"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="terminateWorkRelationshipResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="reverseTerminateWorkRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="WorkRelationshipUserKey" type="ns0:WorkRelationshipUserKey"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="reverseTerminateWorkRelationshipAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="terminateWorkRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="WorkRelationshipUserKey" type="ns0:WorkRelationshipUserKey"/>
+                <element name="TerminationDetails" type="ns0:Termination"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="terminateWorkRelationshipAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="correctWorkRelationshipTermination">
+        <complexType>
+            <sequence>
+                <element name="WorkRelationshipUserKey" type="ns0:WorkRelationshipUserKey"/>
+                <element name="TerminationDetails" type="ns0:Termination"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="correctWorkRelationshipTerminationResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByAssignmentNumber">
+        <complexType>
+            <sequence>
+                <element name="assignmentNumber" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByAssignmentNumberResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerDetailsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByPersonNumber">
+        <complexType>
+            <sequence>
+                <element name="personNumber" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByPersonNumberResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerDetailsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByUserName">
+        <complexType>
+            <sequence>
+                <element name="userName" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByUserNameResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerDetailsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByUserNameAsync">
+        <complexType>
+            <sequence>
+                <element name="userName" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByUserNameAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerDetailsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByAssignmentNumberAsync">
+        <complexType>
+            <sequence>
+                <element name="assignmentNumber" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByAssignmentNumberAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerDetailsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByPersonNumberAsync">
+        <complexType>
+            <sequence>
+                <element name="personNumber" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getWorkerInformationByPersonNumberAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerDetailsResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="correctWorkRelationshipTerminationAsync">
+        <complexType>
+            <sequence>
+                <element name="WorkRelationshipUserKey" type="ns0:WorkRelationshipUserKey"/>
+                <element name="TerminationDetails" type="ns0:Termination"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="correctWorkRelationshipTerminationAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="cancelWorkRelationship">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkRelationshipUserKey"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="cancelWorkRelationshipResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="cancelWorkRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkRelationshipUserKey"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="cancelWorkRelationshipAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="createAssignmentTwoTierSCSA">
+        <complexType>
+            <sequence>
+                <element name="Assignment" type="ns0:Assignment"/>
+                <element name="Contract" type="ns0:Contract"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentTwoTierSCSAResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentTwoTierSCSAAsync">
+        <complexType>
+            <sequence>
+                <element name="Assignment" type="ns0:Assignment"/>
+                <element name="Contract" type="ns0:Contract"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="createAssignmentTwoTierSCSAAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonAddress">
+        <complexType>
+            <sequence>
+                <element name="personAddrUsageId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="addressType" type="string"/>
+                <element name="addressLine1" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonAddressResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonContactRelationship">
+        <complexType>
+            <sequence>
+                <element name="contactRelationshipId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="contactPersonId" type="long"/>
+                <element name="contactPersonNumber" type="string"/>
+                <element name="contactType" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonContactRelationshipResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonLegislativeData">
+        <complexType>
+            <sequence>
+                <element name="personLegislativeId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonLegislativeDataResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonName">
+        <complexType>
+            <sequence>
+                <element name="personNameId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="nameType" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonNameResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonTypeUsage">
+        <complexType>
+            <sequence>
+                <element name="personTypeUsageId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="userPersonType" type="string"/>
+                <element name="systemPersonType" type="string"/>
+                <element name="legalEmployerName" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonTypeUsageResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonVisa">
+        <complexType>
+            <sequence>
+                <element name="visaPermitId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="visaPermitType" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonVisaResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonNameAsync">
+        <complexType>
+            <sequence>
+                <element name="personNameId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="nameType" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonNameAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonAddressAsync">
+        <complexType>
+            <sequence>
+                <element name="personAddrUsageId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="addressType" type="string"/>
+                <element name="addressLine1" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonAddressAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonVisaAsync">
+        <complexType>
+            <sequence>
+                <element name="visaPermitId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="visaPermitType" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonVisaAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonLegislativeDataAsync">
+        <complexType>
+            <sequence>
+                <element name="personLegislativeId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="legislationCode" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonLegislativeDataAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonTypeUsageAsync">
+        <complexType>
+            <sequence>
+                <element name="personTypeUsageId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="userPersonType" type="string"/>
+                <element name="systemPersonType" type="string"/>
+                <element name="legalEmployerName" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonTypeUsageAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonContactRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="contactRelationshipId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="contactPersonId" type="long"/>
+                <element name="contactPersonNumber" type="string"/>
+                <element name="contactType" type="string"/>
+                <element name="effectiveDate" type="ns1:date-Date"/>
+                <element name="rangeMode" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonContactRelationshipAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="updateAssignment">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:Assignment"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:Assignment"/>
+                <element name="ActionList" type="ns0:ActionsList"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateAssignmentAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:AssignmentResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkRelationship">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkRelationshipResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkRelationshipAsync">
+        <complexType>
+            <sequence>
+                <element name="AL" type="ns0:WorkRelationship"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="updateWorkRelationshipAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkRelationshipResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findWorker">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findWorkerResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findWorkerAsync">
+        <complexType>
+            <sequence>
+                <element name="findCriteria" type="ns1:FindCriteria"/>
+                <element name="findControl" type="ns1:FindControl"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="findWorkerAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns0:WorkerResult"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonIdentifier">
+        <complexType>
+            <sequence>
+                <element name="externalIdentifierId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="externalIdentifierSequence" type="long"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonIdentifierResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="deletePersonIdentifierAsync">
+        <complexType>
+            <sequence>
+                <element name="externalIdentifierId" type="long"/>
+                <element name="personId" type="long"/>
+                <element name="personNumber" type="string"/>
+                <element name="externalIdentifierSequence" type="long"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="deletePersonIdentifierAsyncResponse">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="getDfltObjAttrHints">
+        <complexType>
+            <sequence>
+                <element name="viewName" type="string"/>
+                <element name="localeName" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getDfltObjAttrHintsResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns1:ObjAttrHints"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getServiceLastUpdateTime">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="getServiceLastUpdateTimeResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns1:dateTime-Timestamp"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getEntityList">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="getEntityListResponse">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" minOccurs="0" name="result" type="ns1:ServiceViewInfo"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getServiceLastUpdateTimeAsync">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="getServiceLastUpdateTimeAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns1:dateTime-Timestamp"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getDfltObjAttrHintsAsync">
+        <complexType>
+            <sequence>
+                <element name="viewName" type="string"/>
+                <element name="localeName" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getDfltObjAttrHintsAsyncResponse">
+        <complexType>
+            <sequence>
+                <element name="result" type="ns1:ObjAttrHints"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="getEntityListAsync">
+        <complexType>
+            <sequence/>
+        </complexType>
+    </element>
+    <element name="getEntityListAsyncResponse">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" minOccurs="0" name="result" type="ns1:ServiceViewInfo"/>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

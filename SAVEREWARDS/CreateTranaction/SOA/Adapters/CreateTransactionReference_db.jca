@@ -1,0 +1,13 @@
+<adapter-config name="CreateTransactionReference" adapter="db" wsdlLocation="../WSDLs/CreateTransactionReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="cbsConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CreateTransactionReference_ptt" operation="CreateTransactionReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="BF_SAVEACC_PRZ_PRP"/>
+      <property name="ProcedureName" value="SAVEACC_TRX"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GBT="http://xmlns.fact.com/ws/GBT" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="GenerateBarcodeTransaction">GenerateBarcodeTransaction</doc>
+   <grammars>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.fact.com/ws/GBT" schemaLocation="../Schemas/GenerateBarcodeTransaction.xsd"/>
+        </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/">
+         <method name="GET" soa:wsdlOperation="GenerateBarcodeTransaction">
+            <request soa:paramElement="pns:TransactionsInquiryMessageInput" xmlns:pns="http://xmlns.fact.com/ws/GBT">
+               <param name="TransactionID" style="query" soa:expression="$msg.request/GBT:MessageHeader/GBT:TransactionID" type="xsd:string"/>
+               <param name="ApplicationCode" style="query" soa:expression="$msg.request/GBT:MessageHeader/GBT:ApplicationCode" type="xsd:string"/>
+               <param name="ApplicationUserName" style="query" soa:expression="$msg.request/GBT:MessageHeader/GBT:ApplicationUserName" type="xsd:string"/>
+               <param name="BarcodeType" style="query" soa:expression="$msg.request/GBT:MessageBody/GBT:TransactionInformation/GBT:BarcodeType" type="xsd:string"/>
+               <param name="BarcodeString" style="query" soa:expression="$msg.request/GBT:MessageBody/GBT:TransactionInformation/GBT:BarcodeString" type="xsd:string"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:TransactionsInquiryMessageOutput" xmlns:cns="http://xmlns.fact.com/ws/GBT"/>
+               <representation mediaType="application/json" element="cns:TransactionsInquiryMessageOutput" xmlns:cns="http://xmlns.fact.com/ws/GBT"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

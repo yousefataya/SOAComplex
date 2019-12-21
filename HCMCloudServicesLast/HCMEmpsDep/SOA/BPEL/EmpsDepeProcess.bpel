@@ -1,0 +1,658 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sat Mar 31 11:46:12 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="EmpsDepeProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsDep/EmpsDepeProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsDep/EmpsDepeProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsDep/EmpsRestReference"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ns2="http://TargetNamespace.com/EmpsRestReference_GetEmps_response"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpsDep/StagedbReference"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/StagedbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns5="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+         xmlns:ns7="http://xmlns.oracle.com/adf/svc/types/"
+         xmlns:ns6="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/types/"
+         xmlns:ns9="http://xmlns.oracle.com/apps/hcm/people/core/flex/contactRelshipDFF/"
+         xmlns:ns8="http://xmlns.oracle.com/adf/svc/errors/"
+         xmlns:ns10="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/"
+         xmlns:ns16="http://xmlns.oracle.com/apps/hcm/people/core/flex/driversLicenseTypeDFF/"
+         xmlns:ns28="http://xmlns.oracle.com/apps/hcm/people/core/flex/personAddressUsageDFF/"
+         xmlns:ns23="http://xmlns.oracle.com/apps/hcm/people/core/flex/personPassportLegDDF/"
+         xmlns:ns24="http://xmlns.oracle.com/apps/hcm/people/core/flex/phoneDFF/"
+         xmlns:ns22="http://xmlns.oracle.com/apps/hcm/people/core/flex/nationalIdentifierDFF/"
+         xmlns:ns11="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDFF/"
+         xmlns:ns19="http://xmlns.oracle.com/apps/hcm/people/core/flex/imageDFF/"
+         xmlns:ns20="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfoDFF/"
+         xmlns:ns26="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+         xmlns:ns27="http://xmlns.oracle.com/apps/hcm/people/core/flex/visaPermitDFF/"
+         xmlns:ns13="http://xmlns.oracle.com/apps/hcm/people/core/flex/citizenshipsDFF/"
+         xmlns:ns17="http://xmlns.oracle.com/apps/hcm/people/core/flex/emailAddressDFF/"
+         xmlns:ns14="http://xmlns.oracle.com/apps/hcm/people/core/flex/deliveryMethodDFF/"
+         xmlns:ns12="http://xmlns.oracle.com/apps/hcm/people/core/flex/personEITEFF/base/"
+         xmlns:ns21="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+         xmlns:ns15="http://xmlns.oracle.com/apps/hcm/people/core/flex/personDriversLicenseLegDDF/"
+         xmlns:ns18="http://xmlns.oracle.com/apps/hcm/people/core/flex/ethnicityDFF/"
+         xmlns:ns25="http://xmlns.oracle.com/apps/hcm/people/core/flex/religionDFF/"
+         xmlns:ns29="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpsDep/PersonTrackerDBRef"
+         xmlns:ns30="http://xmlns.oracle.com/pcbpel/adapter/db/sp/PersonTrackerDBRef"
+         xmlns:ns31="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMEmpsDep/AuditDbReference"
+         xmlns:ns32="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditDbReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpsDep/EmpsDepeProcess" location="../WSDLs/EmpsDepeProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="empsdepeprocess_client" partnerLinkType="client:EmpsDepeProcess" myRole="EmpsDepeProcessProvider"/>
+    <partnerLink name="EmpsRestReference" partnerLinkType="ns1:EmpsRestReference"
+                 partnerRole="EmpsRestReferenceProvider"/>
+    <partnerLink name="StagedbReference" partnerLinkType="ns3:StagedbReference_plt"
+                 partnerRole="StagedbReference_role"/>
+    <partnerLink name="SOAPReference" partnerLinkType="ns5:WorkerService" partnerRole="WorkerServiceProvider"
+                 myRole="WorkerServiceRequestor"/>
+    <partnerLink name="PersonTrackerDBRef" partnerLinkType="ns29:PersonTrackerDBRef_plt"
+                 partnerRole="PersonTrackerDBRef_role"/>
+    <partnerLink name="AuditDbReference" partnerLinkType="ns31:AuditDbReference_plt"
+                 partnerRole="AuditDbReference_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:EmpsDepeProcessRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:EmpsDepeProcessResponseMessage"/>
+    <variable name="InvokeEmpsRestRef_GetEmps_InputVariable" messageType="ns1:Rest_EmptyMessage"/>
+    <variable name="InvokeEmpsRestRef_GetEmps_OutputVariable" messageType="ns1:GetEmps_outputMessage"/>
+    
+     <variable name="vLinkQuery" type="xsd:string"/>
+    <variable name="hcmKey" type="xsd:string"/>
+    <variable name="hcmMap" type="xsd:string"/>
+    
+      <variable name="vLFirstName" type="xsd:string"/>
+    <variable name="vLSecoundName" type="xsd:string"/>
+    <variable name="vLthirdName" type="xsd:string"/>
+    <variable name="vLFamilyName" type="xsd:string"/>
+    
+    
+    <variable name="vFFirstName" type="xsd:string"/>
+    <variable name="vFSecoundName" type="xsd:string"/>
+    <variable name="vFthirdName" type="xsd:string"/>
+    <variable name="vFFamilyName" type="xsd:string"/>
+    <variable name="Variable1" type="xsd:string"/>
+    <variable name="InvokeInsertEmpsDepend_insert_InputVariable"
+              messageType="ns3:HcmEmployeeDependenciesCollection_msg"/>
+ 
+    
+     <variable name="vCSFKey" type="xsd:string"/>
+    <variable name="vCSFMap" type="xsd:string"/>
+      <variable name="vCompositeName" type="xsd:string"/>
+    <variable name="vCompositeLink" type="xsd:string"/>
+    <variable name="vLastSRequest" type="xsd:string"/>
+    <variable name="vOperationType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    <variable name="hasMore" type="xsd:boolean"/>
+    <variable name="offset" type="xsd:int"/>
+    <variable name="restConnection" type="xsd:string"/>
+      <variable name="status" type="xsd:string"/>
+      <variable name="vWSDLLink" type="xsd:string"/>
+    <variable name="vURI" type="xsd:string"/>
+    
+    <variable name="version" type="xsd:string"/>
+
+    
+    <variable name="InvokePersonRef_findPerson_InputVariable_1" messageType="ns5:WorkerService_findPerson"/>
+    <variable name="InvokePersonRef_findPerson_OutputVariable_1" messageType="ns5:WorkerService_findPersonResponse"/>
+    <variable name="findPersonContactRelationship_InputVariable_1"
+              messageType="ns5:WorkerService_findPersonContactRelationship"/>
+    <variable name="findPersonContactRelationship_OutputVariable_1"
+              messageType="ns5:WorkerService_findPersonContactRelationshipResponse"/>
+    <variable name="getPersonNumberTracker_PersonTrackerDBRef_InputVariable" messageType="ns29:args_in_msg"/>
+    <variable name="getPersonNumberTracker_PersonTrackerDBRef_OutputVariable" messageType="ns29:args_out_msg"/>
+    <variable name="queryTracker" type="xsd:string"/>
+    <variable name="InvokeAuditDone_AuditDbReference_InputVariable" messageType="ns31:args_in_msg"/>
+    <variable name="InvokeFault_AuditDbReference_InputVariable" messageType="ns31:args_in_msg"/>
+  </variables>
+  
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence5">
+        <assign name="AssignFault">
+          <copy>
+            <from>'F'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PID</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:compositeName</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PCOMPOSITE_NAME</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:batchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PBATCH_NUM</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:requestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PREQUEST_TYPE</to>
+          </copy>
+          <copy>
+            <from>$inputVariable.payload/client:lsrDate</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PLSR_DATE</to>
+          </copy>
+          <copy>
+            <from>concat($status,'-','F')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns40:PRESPONCE_STATUS</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeFault" partnerLink="AuditDbReference"
+                portType="ns31:AuditDbReference_ptt" operation="AuditDbReference"
+                inputVariable="InvokeFault_AuditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in EmpsDepeProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="empsdepeprocess_client" portType="client:EmpsDepeProcess" operation="process" variable="inputVariable"
+             createInstance="yes"/>
+    <assign name="AssignInitials">
+      <copy>
+        <from>$inputVariable.payload/client:status</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+      </copy>
+      <copy>
+        <from>'2'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$version</to>
+      </copy>
+      <copy>
+        <from>'close'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$restConnection</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:wsdlLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vWSDLLink</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:URI</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI</to>
+      </copy>
+      <copy>
+        <from>0</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vRequestType</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vBatchNumber</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:lsrDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLastSRequest</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:key</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFKey</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:map</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFMap</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeName</to>
+      </copy>
+      <copy>
+        <from>true()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$getPersonNumberTracker_PersonTrackerDBRef_InputVariable.InputParameters/ns30:BATCHNUM</to>
+      </copy>
+    </assign>
+    <invoke name="getPersonNumberTracker" partnerLink="PersonTrackerDBRef"
+            portType="ns29:PersonTrackerDBRef_ptt" operation="PersonTrackerDBRef"
+            inputVariable="getPersonNumberTracker_PersonTrackerDBRef_InputVariable"
+            outputVariable="getPersonNumberTracker_PersonTrackerDBRef_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="InitialQuery">
+      <copy>
+        <from>$getPersonNumberTracker_PersonTrackerDBRef_OutputVariable.OutputParameters/ns30:PERSONSNUM</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$queryTracker</to>
+      </copy>
+    </assign>
+    <while name="WhileHasMore">
+      <condition>$hasMore</condition>
+      <sequence>
+        <assign name="AssignInitialValues">
+          <copy>
+            <from>concat($inputVariable.payload/client:compositeLink,'?expand=all&amp;onlyData=true&amp;limit=50','&amp;offset=',$offset,'&amp;q=PersonNumber%20in(',$queryTracker,')')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeEmpsRestRef" partnerLink="EmpsRestReference" portType="ns1:EmpsRestReference_ptt"
+                operation="GetEmps" inputVariable="InvokeEmpsRestRef_GetEmps_InputVariable"
+                outputVariable="InvokeEmpsRestRef_GetEmps_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="csf-key">$vCSFKey</bpelx:toProperty>
+            <bpelx:toProperty name="csf.map">$vCSFMap</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.requestURI">$vCompositeLink</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.Connection">$restConnection</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.REST-Framework-Version">$version</bpelx:toProperty>
+          </bpelx:toProperties>
+        </invoke>
+        <forEach parallel="no" counterName="ForEachEmps" name="ForEachEmps">
+          <startCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">1</startCounterValue>
+          <finalCounterValue expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeEmpsRestRef_GetEmps_OutputVariable.reply/ns2:count</finalCounterValue>
+          <scope name="Scope1">
+            <sequence name="Sequence1">
+            
+              <forEach parallel="no" counterName="ForEachLastAssigments" name="ForEachLastAssigments">
+                <startCounterValue>1</startCounterValue>
+                <finalCounterValue>count($InvokeEmpsRestRef_GetEmps_OutputVariable.reply/ns2:items[$ForEachEmps]/ns2:assignments)</finalCounterValue>
+                <scope name="Scope2">
+                  <assign name="AssignAssignmentStatus">
+                    <copy ignoreMissingFromData="yes" bpelx:insertMissingToData="yes">
+                      <from>$InvokeEmpsRestRef_GetEmps_OutputVariable.reply/ns2:items[$ForEachEmps]/ns2:assignments[$ForEachLastAssigments]/ns2:AssignmentStatus</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:activeFlag</to>
+                    </copy>
+                  </assign>
+                </scope>
+              </forEach>
+              <assign name="AssignPersonContactRelCrit">
+                <copy>
+                  <from>'0'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:fetchStart</to>
+                </copy>
+                <copy>
+                  <from>'-1'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:fetchSize</to>
+                </copy>
+                <copy>
+                  <from>'And'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:conjunction</to>
+                </copy>
+                <copy>
+                  <from>'And'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:conjunction</to>
+                </copy>
+                <copy>
+                  <from>'false'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:upperCaseCompare</to>
+                </copy>
+                <copy>
+                  <from>'And'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:conjunction</to>
+                </copy>
+                <copy>
+                  <from>'false'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:upperCaseCompare</to>
+                </copy>
+                <copy>
+                  <from>'RelatedPersonId'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:attribute</to>
+                </copy>
+                <copy>
+                  <from>'='</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:operator</to>
+                </copy>
+                <copy>
+                  <from>$InvokeEmpsRestRef_GetEmps_OutputVariable.reply/ns2:items[$ForEachEmps]/ns2:PersonId</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$findPersonContactRelationship_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:value</to>
+                </copy>
+              </assign>
+              <invoke name="InvokePersonContactRel" partnerLink="SOAPReference"
+                      portType="ns5:WorkerService" operation="findPersonContactRelationship"
+                      inputVariable="findPersonContactRelationship_InputVariable_1"
+                      outputVariable="findPersonContactRelationship_OutputVariable_1" bpelx:invokeAsDetail="no">
+                       <bpelx:toProperties>
+                  <bpelx:toProperty name="endpointWSDL">$vWSDLLink</bpelx:toProperty>
+                  <bpelx:toProperty name="endpointURI">$vURI</bpelx:toProperty>
+ </bpelx:toProperties> 
+                      </invoke>
+              <forEach parallel="no" counterName="ForEachPersonRel" name="ForEachPersonRel">
+                <startCounterValue>1</startCounterValue>
+                <finalCounterValue>count($findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value)</finalCounterValue>
+                <scope name="Scope3">
+                  <sequence name="Sequence2">
+                    <assign name="AssignPersonRelType">
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:ContactType</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:relationshipType</to>
+                      </copy>
+                    </assign>
+                    <assign name="AssignCriteria">
+                      <copy>
+                        <from>'0'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:fetchStart</to>
+                      </copy>
+                      <copy>
+                        <from>'-1'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:fetchSize</to>
+                      </copy>
+                      <copy>
+                        <from>'And'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:conjunction</to>
+                      </copy>
+                      <copy>
+                        <from>'And'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:conjunction</to>
+                      </copy>
+                      <copy>
+                        <from>'false'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:upperCaseCompare</to>
+                      </copy>
+                      <copy>
+                        <from>'And'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:conjunction</to>
+                      </copy>
+                      <copy>
+                        <from>'false'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:upperCaseCompare</to>
+                      </copy>
+                      <copy>
+                        <from>'PersonId'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:attribute</to>
+                      </copy>
+                      <copy>
+                        <from>'='</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:operator</to>
+                      </copy>
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:ContactPersonId</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokePersonRef_findPerson_InputVariable_1.parameters/ns6:findCriteria/ns7:filter/ns7:group/ns7:item/ns7:value</to>
+                      </copy>
+                    </assign>
+                    <invoke name="InvokePersonRef" partnerLink="SOAPReference"
+                            portType="ns5:WorkerService" operation="findPerson"
+                            inputVariable="InvokePersonRef_findPerson_InputVariable_1"
+                            outputVariable="InvokePersonRef_findPerson_OutputVariable_1" bpelx:invokeAsDetail="no">
+                          <bpelx:toProperties>
+                  <bpelx:toProperty name="endpointWSDL">$vWSDLLink</bpelx:toProperty>
+                  <bpelx:toProperty name="endpointURI">$vURI</bpelx:toProperty>
+                </bpelx:toProperties>   
+                     </invoke>       
+                            
+                    <assign name="AssignPersonNumber">
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:ContactPersonId</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:dependentCode</to>
+                      </copy>
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:ContactRelshipDFF/ns9:insurancedate</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:insBeginDate</to>
+                      </copy>
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:ContactRelshipDFF/ns9:dateofsuspension</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:suspendDate</to>
+                      </copy>
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:ContactRelshipDFF/ns9:MarriageDate</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:dobDomarg</to>
+                      </copy>
+                      <copy>
+                        <from>$findPersonContactRelationship_OutputVariable_1.parameters/ns6:result/ns5:Value[$ForEachPersonRel]/ns5:RelatedPersonId</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:empAcntNo</to>
+                      </copy>
+                    </assign>
+                    <assign name="RestAssign">
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFirstName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLSecoundName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLthirdName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFamilyName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFirstName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFSecoundName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFthirdName</to>
+                      </copy>
+                      <copy>
+                        <from>''</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFamilyName</to>
+                      </copy>
+                    </assign>
+                    <forEach parallel="no" counterName="ForEachName" name="ForEachName">
+                      <startCounterValue>1</startCounterValue>
+                      <finalCounterValue>count($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName)</finalCounterValue>
+                      <scope name="Scope3">
+                        <sequence name="Sequence3">
+                          <if name="If1">
+                            <documentation>
+                              <![CDATA[Arabic]]>
+                            </documentation>
+                            <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:CharSetContext,'AR')</condition>
+                            <sequence name="Sequence4">
+                              <assign name="AssignNameArabic">
+                                <copy ignoreMissingFromData="no">
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:FirstName</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFirstName</to>
+                                </copy>
+                                <copy ignoreMissingFromData="no">
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:LastName</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFFamilyName</to>
+                                </copy>
+                                <copy>
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:NameInformation1</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFSecoundName</to>
+                                </copy>
+                                <copy>
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:NameInformation2</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vFthirdName</to>
+                                </copy>
+                              </assign>
+                            </sequence>
+                            <elseif>
+                              <documentation>
+                                <![CDATA[English]]>
+                              </documentation>
+                              <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:CharSetContext,'EN') or contains($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:CharSetContext,'US') or contains($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:CharSetContext,'UK')</condition>
+                              <assign name="AssignNameEnglish">
+                                <copy>
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:FirstName</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFirstName</to>
+                                </copy>
+                                <copy>
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:MiddleNames</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLFamilyName</to>
+                                </copy>
+                                <copy>
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:NameInformation1</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLSecoundName</to>
+                                </copy>
+                                <copy>
+                                  <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonName[$ForEachName]/ns5:NameInformation2</from>
+                                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLthirdName</to>
+                                </copy>
+                              </assign>
+                            </elseif>
+                            <else>
+                              <documentation>
+                                <![CDATA[English]]>
+                              </documentation>
+                              <empty name="Empty1"/>
+                            </else>
+                          </if>
+                          <assign name="AssignNames">
+                            <copy>
+                              <from>concat($vFFirstName,' ',$vFSecoundName,' ',$vFthirdName,' ',$vFFamilyName)</from>
+                              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:lname</to>
+                            </copy>
+                          </assign>
+                        </sequence>
+                      </scope>
+                    </forEach>
+                    <forEach parallel="no" counterName="ForEachPersonDetails" name="ForEachPersonDetails">
+                      <startCounterValue>1</startCounterValue>
+                      <finalCounterValue>count($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonDetails)</finalCounterValue>
+                      <scope name="Scope4">
+                        <assign name="AssignDateOfB">
+                          <copy ignoreMissingFromData="yes">
+                            <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonDetails[$ForEachPersonDetails]/ns5:DateOfBirth</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:dateOfBirth</to>
+                          </copy>
+                        </assign>
+                      </scope>
+                    </forEach>
+                    <forEach parallel="no" counterName="ForEachPersonLegislativeData"
+                             name="ForEachPersonLegislativeData">
+                      <startCounterValue>1</startCounterValue>
+                      <finalCounterValue>count($InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonLegislativeData)</finalCounterValue>
+                      <scope name="Scope5">
+                        <assign name="AssignSex">
+                          <copy ignoreMissingFromData="yes">
+                            <from>$InvokePersonRef_findPerson_OutputVariable_1.parameters/ns6:result/ns5:Value/ns5:PersonLegislativeData[$ForEachPersonLegislativeData]/ns5:Sex</from>
+                            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:gender</to>
+                          </copy>
+                        </assign>
+                      </scope>
+                    </forEach>
+                    <assign name="AssignBatches">
+                      <copy>
+                        <from>$vRequestType</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:requestType</to>
+                      </copy>
+                      <copy>
+                        <from>$vBatchNumber</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertEmpsDepend_insert_InputVariable.HcmEmployeeDependenciesCollection/ns4:HcmEmployeeDependencies/ns4:batchNum</to>
+                      </copy>
+                    </assign>
+                    <invoke name="InvokeInsertEmpsDepend" bpelx:invokeAsDetail="no" partnerLink="StagedbReference"
+                            portType="ns3:StagedbReference_ptt" operation="insert"
+                            inputVariable="InvokeInsertEmpsDepend_insert_InputVariable"/>
+                  </sequence>
+                </scope>
+              </forEach>
+               <assign name="AssignOffset">
+                <copy>
+                  <from>$InvokeEmpsRestRef_GetEmps_OutputVariable.reply/ns2:hasMore</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+                </copy>
+                <copy>
+                  <from>''</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+                </copy>
+                <copy>
+                  <from>$offset + $InvokeEmpsRestRef_GetEmps_OutputVariable.reply/ns2:count</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+                </copy>
+              </assign>
+            </sequence>
+          </scope>
+        </forEach>
+        <assign name="AssignDone">
+          <copy>
+            <from>'S'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:result</to>
+          </copy>
+        </assign>
+        <wait name="Wait1">
+          <for>'PT1S'</for>
+        </wait>
+      </sequence>
+    </while>
+    <assign name="AssignDone">
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PID</to>
+      </copy>
+      <copy>
+        <from>$vCompositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PCOMPOSITE_NAME</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>concat($status,'-','S')</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PRESPONCE_STATUS</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:lsrDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeAuditDone_AuditDbReference_InputVariable.InputParameters/ns40:PREQUEST_TYPE</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeAuditDone" partnerLink="AuditDbReference"
+            portType="ns31:AuditDbReference_ptt" operation="AuditDbReference"
+            inputVariable="InvokeAuditDone_AuditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="empsdepeprocess_client" portType="client:EmpsDepeProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

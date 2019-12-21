@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="CreateTransactionService">RestService</doc>
+   <resources>
+      <resource path="/">
+         <method name="POST" soa:name="CreateTranasaction">
+            <request>
+               <param name="P_CR_BRCH" style="query" type="xsd:int"/>
+               <param name="P_CR_CACC" style="query" type="xsd:string"/>
+               <param name="P_DB_CACC" style="query" type="xsd:string"/>
+               <param name="P_AMNT" style="query" type="xsd:decimal"/>
+               <param name="P_PRZ_B_DESC" style="query" type="xsd:string"/>
+               <param name="P_PRZ_S_DESC" style="query" type="xsd:string"/>
+               <representation mediaType="application/json"/>
+               <representation mediaType="application/x-www-form-urlencoded"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json"/>
+            </response>
+            <response status="500">
+               <representation mediaType="application/json"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

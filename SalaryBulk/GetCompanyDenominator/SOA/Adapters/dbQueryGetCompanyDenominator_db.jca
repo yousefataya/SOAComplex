@@ -1,0 +1,13 @@
+<adapter-config name="dbQueryGetCompanyDenominator" adapter="db" wsdlLocation="../WSDLs/dbQueryGetCompanyDenominator.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="Devt11g" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="dbQueryGetCompanyDenominator_ptt" operation="dbQueryGetCompanyDenominator">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="ICBS_SALARY_BULK_PKG"/>
+      <property name="ProcedureName" value="GET_COMPANY_DENOMINATOR"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

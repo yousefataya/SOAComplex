@@ -1,0 +1,67 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Work Relationship User Key Values</name>
+            <description>List of user Key values for a worker&apos;s work relationship.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment :
+                    HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Effective Start Date of logical record." name="StartDate"/>
+                <oer:attribute description="Determines whether it is a period of service for an Employee, or Contingent worker: ?E? or ?C?, or ?N?: non-worker."
+                     name="WorkerType"/>
+                <oer:attribute description="Name of the Legal Employer." name="LegalEmployerName"/>
+                <oer:attribute description="Internal Identifier of the work relationship" name="PeriodOfServiceId"/>
+                <oer:attribute description="Flag indicating whether work relationship is primary."
+                     name="PrimaryFlag"/>
+                <oer:attribute description="The date used when changing the start date of a person&apos;s contact."
+                     name="NewStartDate"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:complexType name="WorkRelationshipUserKeyResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="WorkRelationshipUserKey"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="WorkRelationshipUserKey">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonNumber</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="StartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="WorkerType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegalEmployerName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PeriodOfServiceId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PrimaryFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="NewStartDate" nillable="true" type="ns0:date-Date"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="workRelationshipUserKeyResult" type="WorkRelationshipUserKeyResult"/>
+    <xsd:element name="workRelationshipUserKey" type="WorkRelationshipUserKey"/>
+</xsd:schema>

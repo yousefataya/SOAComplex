@@ -1,0 +1,33 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personLegislativeInfo/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:include schemaLocation="PersonLegislative.xsd"/>
+    <xsd:complexType name="PersonLegislativeUS">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonLegislativeId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonLegislative">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="VeteranSelfIdentification" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="VeteranSelfIdentification_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="disableveteran" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="activedutywartime" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="armedForcesServiceMedal" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="recentlySeparatedVeteran" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="militaryDischargeDate" nillable="true" type="ns0:date-Date"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personLegislativeUS" type="PersonLegislativeUS"/>
+</xsd:schema>

@@ -1,0 +1,26 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="RefreshAllDataservice"
+     targetNamespace="http://oracle.com/sca/soapservice/OFMInMemoryUtilities/RefreshAllDataservice/RefreshAllDataservice"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:inp1="http://xmlns.oracle.com/ws/RADS"
+     xmlns:tns="http://oracle.com/sca/soapservice/OFMInMemoryUtilities/RefreshAllDataservice/RefreshAllDataservice"
+    >
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://xmlns.oracle.com/ws/RADS" schemaLocation="xsd/ws/RefreshAllWS.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="requestMessage">
+        <wsdl:part name="RefreshAllDataserviceInput" element="inp1:input"/>
+    </wsdl:message>
+    <wsdl:message name="replyMessage">
+        <wsdl:part name="RefreshAllDataserviceOutput" element="inp1:output"/>
+    </wsdl:message>
+    <wsdl:portType name="RefreshAllDataservice_ptt">
+        <wsdl:operation name="RefreshAllDataservice">
+            <wsdl:input message="tns:requestMessage"/>
+            <wsdl:output message="tns:replyMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

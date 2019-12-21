@@ -1,0 +1,13 @@
+<adapter-config name="CBSPCDDeleteReference" adapter="db" wsdlLocation="../WSDLs/CBSPCDDeleteReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="devConnection" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="CBSPCDDeleteReference_ptt" operation="CBSPCDDeleteReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="ProcedureName" value="GET_ECC_PDC_DELETE"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="PackageName" value="ECC_INT_PKG"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

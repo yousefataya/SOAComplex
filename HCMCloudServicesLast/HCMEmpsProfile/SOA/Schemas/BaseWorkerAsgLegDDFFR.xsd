@@ -1,0 +1,36 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDF.xsd"/>
+    <xsd:complexType name="BaseWorkerAsgLegDDFFR">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BaseWorkerAsgLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_WORKING_DAYS_ANNUAL" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="_NUMBER_OF_DAYS_WORK_HOME" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="_TELEWORKING_TIME_UNIT" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_TELEWORKING_TIME_UNIT_Display" nillable="true"
+                         type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_TRAINING_DURATION_HOURS" nillable="true" type="xsd:decimal"/>
+                    <xsd:element minOccurs="0" name="_JOB_POPULATION_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_JOB_POPULATION_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_FR_ACTIVITY_MODE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_FR_ACTIVITY_MODE_Display" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="baseWorkerAsgLegDDFFR" type="BaseWorkerAsgLegDDFFR"/>
+</xsd:schema>

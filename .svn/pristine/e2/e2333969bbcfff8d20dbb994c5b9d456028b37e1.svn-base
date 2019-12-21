@@ -1,0 +1,13 @@
+<adapter-config name="CustomerReference" adapter="db" wsdlLocation="../WSDLs/CustomerReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="Customerconnecation" location="eis/DB/factSamahaDatabase"/>
+  <endpoint-interaction portType="CustomerReference_ptt" operation="CustomerReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="CRE"/>
+      <property name="PackageName" value="FACT_ICBS_FIN"/>
+      <property name="ProcedureName" value="GET_CUS_FIN_ALL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,78 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Termination List of Values</name>
+            <description>List of values to terminate a worker&apos;s work relationship.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment : HcmEmploymentCore-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="Actual date of termination of employment." name="ActualTerminationDate"/>
+                <oer:attribute description="Date when the termination of employment was noted." name="NotifiedTerminationDate"/>
+                <oer:attribute description="Last Date Worked (for terminated workers)." name="LastWorkingDate"/>
+                <oer:attribute description="If rehire recommendation is ?yes?, then reason from recommending person is tracked via this field."
+                     name="RehireReason"/>
+                <oer:attribute description="Accepts Yes or No values. If Yes, person is recommended for re-hiring."
+                     name="RehireRecommendation"/>
+                <oer:attribute description="This stores a comment associated with termination of work relationship."
+                     name="Comments"/>
+                <oer:attribute description="Number of the person who gave a reason not to rehire a worker at the time of terminating worker relationship."
+                     name="RehireAuthorizerPersonNumber"/>
+                <oer:attribute description="Option to revoke user access when the work relationship is terminated."
+                     name="RevokeUserAccess"/>
+                <oer:attribute description="OBSOLETE - Please dont use this attribute" name="DateOfDeath"/>
+                <oer:attribute description="Date of death of the person." name="WorkerDateOfDeath"/>
+                <oer:attribute description="Hide until date for the terminate work relationship."
+                     name="HideUntilDate"/>
+                <oer:attribute description="Projected Date of Termination." name="ProjectedTerminationDate"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:complexType name="Termination">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ActualTerminationDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ActualTerminationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="NotifiedTerminationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="LastWorkingDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RehireReason" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RehireRecommendation" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Comments" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RehireAuthorizerPersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="RevokeUserAccess" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DateOfDeath" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="WorkerDateOfDeath" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="HideUntilDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ProjectedTerminationDate" nillable="true" type="ns0:date-Date"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TerminationResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="Termination"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="termination" type="Termination"/>
+    <xsd:element name="terminationResult" type="TerminationResult"/>
+</xsd:schema>

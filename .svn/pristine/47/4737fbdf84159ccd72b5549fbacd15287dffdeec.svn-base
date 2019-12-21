@@ -1,0 +1,12 @@
+<adapter-config name="BF_sharesInfoReference" adapter="db" wsdlLocation="../WSDLs/BF_sharesInfoReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="SH" location="eis/DB/factSHDatabase"/>
+  <endpoint-interaction portType="BF_sharesInfoReference_ptt" operation="BF_sharesInfoReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="CRE"/>
+      <property name="ProcedureName" value="BF_SHARES_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

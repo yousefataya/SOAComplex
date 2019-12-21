@@ -1,0 +1,32 @@
+<wsdl:definitions
+     name="vacTypeDBReference"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMGeneralLeaveReport/vacTypeDBReference"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMGeneralLeaveReport/vacTypeDBReference"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/vacTypeDBReference"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="vacTypeDBReference_plt" >
+    <plt:role name="vacTypeDBReference_role" >
+      <plt:portType name="tns:vacTypeDBReference_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/vacTypeDBReference" schemaLocation="../Schemas/vacTypeDBReference_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="vacTypeDBReferenceSelect_inputParameters">
+        <wsdl:part name="vacTypeDBReferenceSelect_inputParameters" element="top:vacTypeDBReferenceSelectInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="HcmVacationTypeCollection_msg">
+        <wsdl:part name="HcmVacationTypeCollection" element="top:HcmVacationTypeCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="vacTypeDBReference_ptt">
+        <wsdl:operation name="vacTypeDBReferenceSelect">
+            <wsdl:input message="tns:vacTypeDBReferenceSelect_inputParameters"/>
+            <wsdl:output message="tns:HcmVacationTypeCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

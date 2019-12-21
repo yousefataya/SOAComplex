@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="UnpaidLeaveProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMUnpaidLeaveReport/UnpaidLeaveProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMUnpaidLeaveReport/UnpaidLeaveProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMUnpaidLeaveReport!1.3/WSDLs/UnpaidLeaveProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="UnpaidLeaveProcess">
+        <plnk:role name="UnpaidLeaveProcessProvider" portType="client:UnpaidLeaveProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="unpaidleaveprocess_client_ep_WSDL_ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMUnpaidLeaveReport/UnpaidLeaveProcess"
+                 schemaLocation="../Schemas/UnpaidLeaveProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="UnpaidLeaveProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="UnpaidLeaveProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="UnpaidLeaveProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:UnpaidLeaveProcessRequestMessage"/>
+            <wsdl:output message="client:UnpaidLeaveProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="UnpaidLeaveProcessBinding" type="client:UnpaidLeaveProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="unpaidleaveprocess_client_ep">
+        <wsdl:port name="UnpaidLeaveProcess_pt" binding="client:UnpaidLeaveProcessBinding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMUnpaidLeaveReport/unpaidleaveprocess_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

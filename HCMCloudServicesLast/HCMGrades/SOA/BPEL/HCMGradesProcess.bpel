@@ -1,0 +1,391 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Mar 06 16:01:08 EET 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="HCMGradesProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/HCMGradesProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/HCMGradesProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/HCMGradesRestRef"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMGrades/InsertGradesDbReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMGrades/InsertGradesDDbReference"
+         xmlns:ns4="http://TargetNamespace.com/HCMGradesRestRef_GetGrades_response"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/top/InsertGradesDbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/InsertGradesDDbReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMGrades/HCMGradesProcess" location="../WSDLs/HCMGradesProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="hcmgradesprocess_service" partnerLinkType="client:HCMGradesProcess" myRole="HCMGradesProcessProvider"/>
+    <partnerLink name="HCMGradesRestRef" partnerLinkType="ns1:HCMGradesRestRef" partnerRole="HCMGradesRestRefProvider"/>
+    <partnerLink name="InsertGradesDbReference" partnerLinkType="ns2:InsertGradesDbReference_plt"
+                 partnerRole="InsertGradesDbReference_role"/>
+    <partnerLink name="InsertGradesDDbReference" partnerLinkType="ns3:InsertGradesDDbReference_plt"
+                 partnerRole="InsertGradesDDbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="inputVariable" messageType="client:HCMGradesProcessRequestMessage"/>
+    <variable name="outputVariable" messageType="client:HCMGradesProcessResponseMessage"/>
+    <variable name="InvokeInsertGraeds_GetGrades_InputVariable" messageType="ns1:Rest_EmptyMessage"/>
+    <variable name="InvokeInsertGraeds_GetGrades_OutputVariable" messageType="ns1:GetGrades_outputMessage"/>
+    
+    
+    <variable name="vCompositeName" type="xsd:string"/>
+    <variable name="vCompositeLink" type="xsd:string"/>
+    <variable name="vLastSRequest" type="xsd:string"/>
+    <variable name="vCSFKey" type="xsd:string"/>
+    <variable name="vCSFMap" type="xsd:string"/>
+    <variable name="status" type="xsd:string"/>
+    <variable name="vOperationType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    
+  
+    
+    <variable name="hasMore" type="xsd:boolean"/>
+    <variable name="offset" type="xsd:int"/>
+    <variable name="restConnection" type="xsd:string"/>
+    
+    <variable name="InvokeInsertGradesM_insert_InputVariable" messageType="ns2:HcmGradeMCollection_msg"/>
+    <variable name="InvokeGradesD_insert_InputVariable" messageType="ns3:HcmGradeDCollection_msg"/>
+  </variables>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in HCMGradesProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="hcmgradesprocess_service" portType="client:HCMGradesProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    
+    <assign name="AssignInitials">
+      <copy>
+        <from>$inputVariable.payload/client:status</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+      </copy>
+      <copy>
+        <from>true()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+      </copy>
+      <copy>
+        <from>0</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+      </copy>
+      <copy>
+        <from>'close'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$restConnection</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vRequestType</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vBatchNumber</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:lsrDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLastSRequest</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:key</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFKey</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:map</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFMap</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeName</to>
+      </copy>
+    </assign>
+    <while name="WhileHasMore">
+      <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</condition>
+      <sequence>
+        <if name="IfOperationIsInsert">
+          <documentation>
+            <![CDATA[Insert]]>
+          </documentation>
+          <condition>$status = '1'</condition>
+          <assign name="AssignInsert">
+            <copy>
+              <from>'CreationDate%3E'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+            </copy>
+          </assign>
+          <else>
+            <documentation>
+              <![CDATA[Update]]>
+            </documentation>
+            <sequence>
+              <assign name="AssignUpdate">
+                <copy>
+                  <from>'LastUpdateDate%3E'</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+                </copy>
+              </assign>
+            </sequence>
+          </else>
+        </if>
+        <assign name="AssignInitialValuesremove">
+          <copy>
+            <from>concat($inputVariable.payload/client:compositeLink,$vOperationType,$vLastSRequest,'&amp;expand=all&amp;limit=200','&amp;offset=',$offset)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeInsertGraeds" partnerLink="HCMGradesRestRef" portType="ns1:HCMGradesRestRef_ptt"
+                operation="GetGrades" inputVariable="InvokeInsertGraeds_GetGrades_InputVariable"
+                outputVariable="InvokeInsertGraeds_GetGrades_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="rest.binding.requestURI">$vCompositeLink</bpelx:toProperty>
+            <bpelx:toProperty name="csf-key">$vCSFKey</bpelx:toProperty>
+            <bpelx:toProperty name="csf.map">$vCSFMap</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.Connection" variable="restConnection"/>
+          </bpelx:toProperties>
+        </invoke>
+        <forEach parallel="no" counterName="ForEachGrades" name="ForEachGrades">
+          <startCounterValue>1</startCounterValue>
+          <finalCounterValue>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:count</finalCounterValue>
+          <scope name="Scope1">
+            <sequence>
+              <if name="IfStatusInsert">
+                <documentation>
+                  <![CDATA[Insert]]>
+                </documentation>
+                <condition>contains($inputVariable.payload/client:status,'1')</condition>
+                <assign name="AssignStatusInsert">
+                  <copy>
+                    <from>'1'</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                  </copy>
+                </assign>
+                <else>
+                  <documentation>
+                    <![CDATA[Update]]>
+                  </documentation>
+                  <assign name="AssignStatusUpdate">
+                    <copy>
+                      <from>'2'</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                    </copy>
+                  </assign>
+                </else>
+              </if>
+              <if name="IfActionStatus">
+                <documentation>
+                  <![CDATA[InsertUpdate]]>
+                </documentation>
+                <condition>contains($InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:ActiveStatus,'A')</condition>
+                <empty name="Empty1"/>
+                <else>
+                  <documentation>
+                    <![CDATA[Delete]]>
+                  </documentation>
+                  <assign name="AssignDeleteValues">
+                    <copy>
+                      <from>'3'</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                    </copy>
+                  </assign>
+                </else>
+              </if>
+              <assign name="AssignGradesM">
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeId</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:id</to>
+                </copy>
+                <copy>
+                  <from>$status</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:status</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:englishname</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:eDesc</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:numberofdays</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:vacDay</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:childCode</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:childCode</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:parentCode</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:parentCode</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeName</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:aDesc</to>
+                </copy>
+                <copy>
+                  <from>$vBatchNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:batchNum</to>
+                </copy>
+                <copy>
+                  <from>$vRequestType</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:requestType</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:CreationDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:dateCreated</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:LastUpdateDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:dateModified</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:insuranceDegree  </from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:insDegree</to>
+                </copy>
+                <copy>
+                  <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCode</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertGradesM_insert_InputVariable.HcmGradeMCollection/ns5:HcmGradeM/ns5:code</to>
+                </copy>
+              </assign>
+              <invoke name="InvokeInsertGradesM" partnerLink="InsertGradesDbReference"
+                      portType="ns2:InsertGradesDbReference_ptt" operation="insert"
+                      inputVariable="InvokeInsertGradesM_insert_InputVariable" bpelx:invokeAsDetail="no">
+                <bpelx:toProperties>
+                  <bpelx:toProperty name="rest.binding.requestURI">$vCompositeLink</bpelx:toProperty>
+                  <bpelx:toProperty name="csf-key">$vCSFKey</bpelx:toProperty>
+                  <bpelx:toProperty name="csf.map">$vCSFMap</bpelx:toProperty>
+                  <bpelx:toProperty name="rest.binding.http.Connection">$restConnection</bpelx:toProperty>
+                </bpelx:toProperties>
+              </invoke>
+              <if name="IfGradesIsNotNull">
+                <documentation>
+                  <![CDATA[NotNull]]>
+                </documentation>
+                <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">($InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:grade1 &gt;= 0) or ($InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:grade2 &gt;= 0) or ($InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:grade3 &gt;= 0)</condition>
+                <sequence>
+                  <assign name="AssignGradesD">
+                    <copy>
+                      <from>'3-13-7'</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradesD_insert_InputVariable.HcmGradeDCollection/ns6:HcmGradeD/ns6:alwCode</to>
+                    </copy>
+                    <copy>
+                      <from>$vRequestType</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradesD_insert_InputVariable.HcmGradeDCollection/ns6:HcmGradeD/ns6:requestType</to>
+                    </copy>
+                    <copy>
+                      <from>$vBatchNumber</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradesD_insert_InputVariable.HcmGradeDCollection/ns6:HcmGradeD/ns6:batchNum</to>
+                    </copy>
+                    <copy ignoreMissingFromData="yes">
+                      <from>$status</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradesD_insert_InputVariable.HcmGradeDCollection/ns6:HcmGradeD/ns6:status</to>
+                    </copy>
+                    <copy ignoreMissingFromData="yes">
+                      <from>concat($InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:grade1,'-',$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:grade2,'-',$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCustomerFlex/ns4:grade3)</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradesD_insert_InputVariable.HcmGradeDCollection/ns6:HcmGradeD/ns6:alwValue</to>
+                    </copy>
+                    <copy ignoreMissingFromData="yes">
+                      <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:items[$ForEachGrades]/ns4:GradeCode</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeGradesD_insert_InputVariable.HcmGradeDCollection/ns6:HcmGradeD/ns6:gradeCode</to>
+                    </copy>
+                  </assign>
+                  <invoke name="InvokeGradesD" bpelx:invokeAsDetail="no" partnerLink="InsertGradesDDbReference"
+                          portType="ns3:InsertGradesDDbReference_ptt" operation="insert"
+                          inputVariable="InvokeGradesD_insert_InputVariable"/>
+                </sequence>
+                <else>
+                  <documentation>
+                    <![CDATA[Null]]>
+                  </documentation>
+                  <empty name="Empty2"/>
+                </else>
+              </if>
+            </sequence>
+          </scope>
+        </forEach>
+        <assign name="AssignOffset">
+          <copy>
+            <from>$InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:hasMore</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+          </copy>
+          <copy>
+            <from>$offset + $InvokeInsertGraeds_GetGrades_OutputVariable.reply/ns4:count</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+          </copy>
+          <copy>
+            <from>''</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <wait name="Wait1">
+      <for>'PT1S'</for>
+    </wait>
+    <!--<assign name="Transformation">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/Transformation_1.xsl", $InvokeInsertGraeds_GetGrades_OutputVariable.reply)</from>
+        <to variable="InvokeInsertGradesM_insert_InputVariable" part="HcmGradeMCollection"/>
+      </copy>
+    </assign>-->
+    <!--<assign name="TransformationDet">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/TransformationDet_1.xsl", $InvokeInsertGraeds_GetGrades_OutputVariable.reply)</from>
+        <to variable="InvokeGradesD_insert_InputVariable" part="HcmGradeDCollection"/>
+      </copy>
+    </assign>-->
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="hcmgradesprocess_service" portType="client:HCMGradesProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

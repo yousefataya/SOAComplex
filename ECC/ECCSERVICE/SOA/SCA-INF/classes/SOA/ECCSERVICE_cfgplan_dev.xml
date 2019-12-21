@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAConfigPlan xmlns="http://schemas.oracle.com/soa/configplan" xmlns:edl="http://schemas.oracle.com/events/edl" xmlns:jca="http://platform.integration.oracle/blocks/adapter/fw/metadata" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+   <composite name="ECCSERVICE">
+      <!--Add search and replace rules for the import section of a composite
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>-->
+      <import>
+         <searchReplace>
+            <search/>
+            <replace/>
+         </searchReplace>
+      </import>
+      <service name="ECCSERVICEService">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://oracle.com/sca/soapservice/IVRDataService/ECCSERVICE/ECCSERVICEService#wsdl.endpoint(ECCSERVICEService/ECCSERVICE_pt)</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>NEVER</replace>
+            </property>
+         </binding>
+      </service>
+      <!--Add search and replace rules for the component properties
+	For components and service/reference bindings, you can add policy references.
+	Example:
+	<component name="*">
+		<wsp:PolicyReference orawsp:category="management" orawsp:status="enabled" URI="oracle/log_policy"/>
+	</component>-->
+      <component name="ECCSERVICEProcess">
+         <property name="bpel.config.transaction">
+            <replace>required</replace>
+         </property>
+         <property name="bpel.config.completionPersistPolicy">
+            <replace>faulted</replace>
+         </property>
+         <property name="bpel.config.inMemoryOptimization">
+            <replace>false</replace>
+         </property>
+      </component>
+      <reference name="GetAccountDataReference">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://oslee.orga.com/bsg/ra/ws/service/account#wsdl.endpoint(GetAccountDataService/GetAccountDataPort)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>goldAccountManagement.wsdl</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+      </reference>
+      <reference name="GetPRAccountDataReference">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://oslee.orga.com/bsg/ra/ws/wmp#wsdl.endpoint(GetPRAccountDataService/GetPRAccountDataPort)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>CustomerManagement.wsdl</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+      </reference>
+      <reference name="GetRealtimeBalanceDataReference">
+         <!--Add search and replace rules for the binding properties-->
+         <binding type="ws">
+            <attribute name="port">
+               <replace>http://oslee.orga.com/bsg/ra/ws/service/account#wsdl.endpoint(GetRealtimeBalanceDataService/GetRealtimeBalanceDataPort)</replace>
+            </attribute>
+            <attribute name="location">
+               <replace>goldAccountManagement.wsdl</replace>
+            </attribute>
+            <property name="weblogic.wsee.wsat.transaction.flowOption">
+               <replace>WSDLDriven</replace>
+            </property>
+         </binding>
+      </reference>
+   </composite>
+   <!--To configure monitor.config: 
+	<property name="enabled"><replace>true</replace></property>
+	<property name="dataObjectsFolder"><searchReplace><search>mydev</search><replace>myproduction</replace></searchReplace></property>
+	
+	sample properties to configure for adapter: 
+	<jca:property name="QueueName"><replace>medmq1</replace></jca:property>
+	
+	To add search and replace rules for wsdls, xsd and jca files
+	Example:
+	<searchReplace>
+		<search>http://my-dev-server</search>
+		<replace>http://my-test-server</replace>
+	<searchReplace>
+	<searchReplace>
+		<search>8888</search>
+		<replace>8889</replace>
+	<searchReplace>
+	-->
+   <wsdlAndSchema name="CustomerManagement.wsdl|CustomerManagementWrapper.wsdl|goldAccountManagement.wsdl|goldAccountManagementWrapper.wsdl|goldAccountManagementWrapper1.wsdl|ECCSERVICEProcess.wsdl|ECCSERVICEService.wsdl|xsd/BPEL/ECCSERVICEBPEL.xsd|xsd/BSG/Account.xsd|xsd/BSG/Billing.xsd|xsd/BSG/Common.xsd|xsd/BSG/Fault.xsd|xsd/BSG/Payment.xsd|xsd/BSG/Product.xsd|xsd/BSG/SimpleTypes.xsd|xsd/BSG/wmp.xsd|xsd/WS/ECCSERVICEWS.xsd">
+      
+   <searchReplace>
+ <search/>
+ <replace/>
+</searchReplace>
+</wsdlAndSchema>
+</SOAConfigPlan>

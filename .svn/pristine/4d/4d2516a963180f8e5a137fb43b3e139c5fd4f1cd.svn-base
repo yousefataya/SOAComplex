@@ -1,0 +1,40 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:TI="http://xmlns.fact.com/ws/TI"
+            targetNamespace="http://xmlns.fact.com/ws/TI" elementFormDefault="qualified">
+  <xsd:element name="TransactionsInquiryMessageOutput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="MessageBody" type="TI:OutputMessageBodyComplex"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="OutputMessageHeaderComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OutputMessageBodyComplex">
+    <xsd:sequence>
+      <xsd:element name="InquiryInformation" type="TI:InquiryInformationComplex" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InquiryInformationComplex">
+    <xsd:sequence>
+      <xsd:element name="Transaction" type="TI:TransactionComplex" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TransactionComplex">
+    <xsd:sequence>
+      <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Date" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="TransactionTypeID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="TransactionTypeName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="DebitCreditIndicator" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="DebitValue" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CreditValue" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CardHolderName" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Balance" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CardHolderNationalNum" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="CardID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

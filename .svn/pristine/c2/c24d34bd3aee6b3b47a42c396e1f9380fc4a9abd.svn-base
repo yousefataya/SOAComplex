@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="ECCOutwardPresentmentBPEL"
+     targetNamespace="http://xmlns.oracle.com/ECC/ECCOutwardPresentment/ECCOutwardPresentmentBPEL"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/ECC/ECCOutwardPresentment/ECCOutwardPresentmentBPEL"
+     xmlns:ns1="http://xmlns.fact.com/ws/EOP"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://172.20.5.204:7003/soa-infra/services/ECC/ECCOutwardPresentment!1.0/WSDLs/ECCOutwardPresentmentBPEL.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="ECCOutwardPresentmentBPEL">
+        <plnk:role name="ECCOutwardPresentmentBPELProvider" portType="client:ECCOutwardPresentmentBPEL"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.fact.com/ws/EOP" schemaLocation="../Schemas/ECCOutwardPresentmentWS.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ECCOutwardPresentmentBPELRequestMessage">
+        <wsdl:part name="payload" element="ns1:ECCOutwardPresentmentMessageInput"/>
+    </wsdl:message>
+    <wsdl:message name="ECCOutwardPresentmentBPELResponseMessage">
+        <wsdl:part name="payload" element="ns1:ECCOutwardPresentmentMessageOutput"/>
+    </wsdl:message>
+    <wsdl:portType name="ECCOutwardPresentmentBPEL">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:ECCOutwardPresentmentBPELRequestMessage"/>
+            <wsdl:output message="client:ECCOutwardPresentmentBPELResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ECCOutwardPresentmentBPELBinding" type="client:ECCOutwardPresentmentBPEL">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="eccoutwardpresentmentbpel_client_ep">
+        <wsdl:port name="ECCOutwardPresentmentBPEL_pt" binding="client:ECCOutwardPresentmentBPELBinding">
+            <soap:address location="http://172.20.5.204:7003/soa-infra/services/ECC/ECCOutwardPresentment/eccoutwardpresentmentbpel_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,211 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person Name Version 2</name>
+            <description>The common core and legislative-specific name components for a
+                person. Also includes names represented in different character
+                sets. For example last_name, first_name,middle_names, and so
+                forth, and the same in another character set.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_PERSON-Person</value>
+                <value>HCM-HCM : PER-Global Human Resources :
+                    PER_PERSON_CONTACT-Person Contact</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated part of the primary key. Surrogate key."
+                     name="PersonNameId"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the beginning of the date range within which the row is effective."
+                     name="EffectiveStartDate"/>
+                <oer:attribute description="Date Effective Entity: indicates the date at the end of the date range within which the row is effective."
+                     name="EffectiveEndDate"/>
+                <oer:attribute description="Effective Start Date of logical record." name="RangeStartDate"/>
+                <oer:attribute description="Requested effective End Date of logical record." name="RangeEndDate"/>
+                <oer:attribute description="RangeMode controls certain Date Effective behaviour for the update or delete of an existing logical row. See service documentation for further details."
+                     name="RangeMode"/>
+                <oer:attribute description="Internal identifier for the person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Country context for the Name data." name="LegislationCode"/>
+                <oer:attribute description="This column tells us whether the name is Global or Local."
+                     name="NameType"/>
+                <oer:attribute description="Person&apos;s First name" name="FirstName"/>
+                <oer:attribute description="Person&apos;s middle name" name="MiddleNames"/>
+                <oer:attribute description="Person&apos;s Last Name" name="LastName"/>
+                <oer:attribute description="Higher qualification forming part of a person&apos;s name."
+                     name="Honors"/>
+                <oer:attribute description="Preferred first name for the user." name="KnownAs"/>
+                <oer:attribute description="Prefix to a person&apos;s last name, generally not considered when sorting"
+                     name="PreNameAdjunct"/>
+                <oer:attribute description="Rank in military service" name="MilitaryRank"/>
+                <oer:attribute description="Previous Last Name of the person if any." name="PreviousLastName"/>
+                <oer:attribute description="Part of name appended to the last name" name="Suffix"/>
+                <oer:attribute description="Person&apos;s title, means of addressing person." name="Title"/>
+                <oer:attribute description="Used to store the language of the person name record."
+                     name="CharSetContext"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation1"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation2"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation3"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation4"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation5"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation6"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation7"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation8"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation9"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation10"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation11"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation12"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation13"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation14"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation15"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation16"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation17"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation18"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation19"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation20"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation21"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation22"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation23"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation24"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation25"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation26"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation27"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation28"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation29"/>
+                <oer:attribute description="Descriptive Flexfield: segment of the user descriptive flexfield."
+                     name="NameInformation30"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:complexType name="PersonName">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonNameId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonNameId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeStartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeEndDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="RangeMode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LegislationCode" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="FirstName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MiddleNames" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="LastName" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Honors" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="KnownAs" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PreNameAdjunct" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="MilitaryRank" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="PreviousLastName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Suffix" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="Title" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CharSetContext" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation1" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation2" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation3" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation4" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation5" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation6" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation7" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation8" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation9" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation10" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation11" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation12" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation13" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation14" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation15" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation16" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation17" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation18" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation19" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation20" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation21" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation22" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation23" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation24" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation25" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation26" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation27" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation28" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation29" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NameInformation30" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="PersonNameResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonName"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personNameResult" type="PersonNameResult"/>
+    <xsd:element name="personName" type="PersonName"/>
+</xsd:schema>

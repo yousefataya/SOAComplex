@@ -1,0 +1,36 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/contractDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="ContractLegDDF.xsd"/>
+    <xsd:complexType name="ContractLegDDFORA_5FHRX_5FBE">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContractId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="ContractLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_END_CONTRACT_TYPE" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_END_CONTRACT_TYPE_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_END_CONTRACT_REASON" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_END_CONTRACT_REASON_Display" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_MANDATORY_REPLACEMENT" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_END_MANDATORY_DATE" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_REPLACING_PERSON_NO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_REPLACING_CONTRACT_NO" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_WORKING_SCHEDULE_PATTERN" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_WORKING_SCHEDULE_PATTERN_Display" nillable="true"
+                         type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="contractLegDDFORA_5FHRX_5FBE" type="ContractLegDDFORA_5FHRX_5FBE"/>
+</xsd:schema>

@@ -1,0 +1,86 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person User Information SDO Version 2</name>
+            <description>This View Object contains information required for provisioning
+                a user account associated with a person.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_USER-User</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated primary key. Surrogate key." name="PersonUserInformationId"/>
+                <oer:attribute description="Internal identifier for the person." name="PersonId"/>
+                <oer:attribute description="Number assigned to the person, to identify the person uniquely in any context, not dependent on being an employee, contingent worker, etc."
+                     name="PersonNumber"/>
+                <oer:attribute description="Effective Start Date of logical record." name="StartDate"/>
+                <oer:attribute description="Foreign-key reference to new user_guid of fnd_user view (from new XS system)"
+                     name="UserGUID"/>
+                <oer:attribute description="The username of the user the request is for (if not auto generated)"
+                     name="UserName"/>
+                <oer:attribute description="Indicates if a username and password notification (eg:email) should be sent ot not.If not set, will default to &quot;Y&quot;."
+                     name="SendCredentialsEmailFlag"/>
+                <oer:attribute description="Set this column If you want to send the credentials email to another email address."
+                     name="CredentialsEmailAddress"/>
+                <oer:attribute description="Indicates if a user account should be created or not.If not set, will default to &quot;Y&quot;."
+                     name="GeneratedUserAccountFlag"/>
+                <oer:attribute description="Flag for user name matching" name="UsernameMatchingFlag"/>
+                <oer:attribute description="E-mail address of the person." name="EmailAddress"/>
+                <oer:attribute description="Flag for Email matching" name="EmailMatchingFlag"/>
+                <oer:attribute description="Flag to indicate whether to create a user if no matching Email is found."
+                     name="CreateUserIfNoMatchingEmailFlag"/>
+                <oer:attribute description="The Name of the Role used as display in the FUSION HCM UI. This attribute is case sensitive and should provide an exact match."
+                     name="PersonUserManualRoles"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:include schemaLocation="PersonUserManualRoles.xsd"/>
+    <xsd:complexType name="PersonUserInformationResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonUserInformation"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PersonUserInformation">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>PersonUserInformationId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="PersonUserInformationId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PersonId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="StartDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="UserGUID" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="UserName" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SendCredentialsEmailFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="CredentialsEmailAddress" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GeneratedUserAccountFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="UsernameMatchingFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="EmailAddress" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="EmailMatchingFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element minOccurs="0" name="CreateUserIfNoMatchingEmailFlag" nillable="true" type="xsd:boolean"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="PersonUserManualRoles" type="PersonUserManualRoles"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personUserInformationResult" type="PersonUserInformationResult"/>
+    <xsd:element name="personUserInformation" type="PersonUserInformation"/>
+</xsd:schema>

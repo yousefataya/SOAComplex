@@ -1,0 +1,12 @@
+<adapter-config name="getSharesProfitInfoReference" adapter="db" wsdlLocation="../WSDLs/getSharesProfitInfoReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="CRE" location="eis/DB/factSHDatabase"/>
+  <endpoint-interaction portType="getSharesProfitInfoReference_ptt" operation="getSharesProfitInfoReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="CRE"/>
+      <property name="ProcedureName" value="BF_SHARES_PROFIT_INFO"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

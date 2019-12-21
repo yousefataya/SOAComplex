@@ -1,0 +1,392 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Mar 06 12:53:24 EET 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="HCMJobsProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMJobs/HCMJobsProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMJobs/HCMJobsProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns1="http://xmlns.oracle.com/HCMCloudServices/HCMJobs/HCMJobsRestRef"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema" queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMJobs/InsertJobsDbReference"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/InsertJobsDbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns3="http://TargetNamespace.com/HCMJobsRestRef_GetJobs_response"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMJobs/AuditDbReference"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/sp/AuditDbReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMJobs/HCMJobsProcess" location="../WSDLs/HCMJobsProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="hcmjobsprocess_service" partnerLinkType="client:HCMJobsProcess" myRole="HCMJobsProcessProvider"/>
+    <partnerLink name="HCMJobsRestRef" partnerLinkType="ns1:HCMJobsRestRef" partnerRole="HCMJobsRestRefProvider"/>
+    <partnerLink name="InsertJobsDbReference" partnerLinkType="ns2:InsertJobsDbReference_plt"
+                 partnerRole="InsertJobsDbReference_role"/>
+    <partnerLink name="AuditDbReference" partnerLinkType="ns5:AuditDbReference_plt"
+                 partnerRole="AuditDbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="inputVariable" messageType="client:HCMJobsProcessRequestMessage"/>
+    <variable name="outputVariable" messageType="client:HCMJobsProcessResponseMessage"/>
+ 
+    <variable name="InvokeHCMJobsRef_GetJobs_InputVariable" messageType="ns1:Rest_EmptyMessage"/>
+    <variable name="InvokeHCMJobsRef_GetJobs_OutputVariable" messageType="ns1:GetJobs_outputMessage"/>
+    <variable name="InvokeInsertJobs_insert_InputVariable" messageType="ns2:HcmJobMCollection_msg"/>
+    
+    <variable name="ReplyError_process_OutputVariable" messageType="client:HCMJobsProcessResponseMessage"/>
+   
+    
+    <variable name="vRetrunStatus" type="xsd:string"/>
+    <variable name="vCompositeName" type="xsd:string"/>
+    <variable name="vCompositeLink" type="xsd:string"/>
+    <variable name="vLastSRequest" type="xsd:string"/>
+    <variable name="vCSFKey" type="xsd:string"/>
+    <variable name="vCSFMap" type="xsd:string"/>
+    <variable name="status" type="xsd:string"/>
+    <variable name="vOperationType" type="xsd:string"/>
+    <variable name="vBatchNumber" type="xsd:string"/>
+    <variable name="vRequestType" type="xsd:string"/>
+    
+    <variable name="hasMore" type="xsd:boolean"/>
+    <variable name="offset" type="xsd:int"/>
+    <variable name="restConnection" type="xsd:string"/>
+    <variable name="InvokeDone_AuditDbReference_InputVariable" messageType="ns5:args_in_msg"/>
+    <variable name="InvokeFault_AuditDbReference_InputVariable" messageType="ns5:args_in_msg"/>
+  </variables>
+  <faultHandlers>
+    <catchAll>
+      <sequence name="Sequence1">
+        <assign name="FinalErrorAssign">
+          <copy>
+            <from>'F'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:RequestResult</to>
+          </copy>
+          <copy>
+            <from>ora:getFlowId()</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns6:PID</to>
+          </copy>
+          <copy>
+            <from>concat($status,'-','F')</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns6:PRESPONCE_STATUS</to>
+          </copy>
+          <copy>
+            <from>$vCompositeName</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns6:PCOMPOSITE_NAME</to>
+          </copy>
+          <copy>
+            <from>$vBatchNumber</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns6:PBATCH_NUM</to>
+          </copy>
+          <copy>
+            <from>$vRequestType</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns6:PREQUEST_TYPE</to>
+          </copy>
+          <copy>
+            <from>$vLastSRequest</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeFault_AuditDbReference_InputVariable.InputParameters/ns6:PLSR_DATE</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeFault" partnerLink="AuditDbReference"
+                portType="ns5:AuditDbReference_ptt" operation="AuditDbReference"
+                inputVariable="InvokeFault_AuditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+        <reply name="replyErrorOutput" partnerLink="hcmjobsprocess_service" variable="outputVariable"
+               portType="client:HCMJobsProcess" operation="process"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in HCMJobsProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="hcmjobsprocess_service" portType="client:HCMJobsProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    
+    <assign name="AssignInitials">
+      <copy>
+        <from>$inputVariable.payload/client:status</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+      </copy>
+      <copy>
+        <from>0</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+      </copy>
+      <copy>
+        <from>'close'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$restConnection</to>
+      </copy>
+      <copy>
+        <from>true()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vRequestType</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vBatchNumber</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:lsrDate</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vLastSRequest</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:key</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFKey</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:map</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCSFMap</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeLink</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/client:compositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeName</to>
+      </copy>
+    </assign>
+    <while name="WhileHasMore">
+      <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</condition>
+      <sequence>
+        <if name="IfOperationIsInsert">
+          <documentation>
+            <![CDATA[Insert]]>
+          </documentation>
+          <condition>$inputVariable.payload/client:status = '1'</condition>
+          <assign name="AssignInsert">
+            <copy>
+              <from>'CreationDate%3E'</from>
+              <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+            </copy>
+          </assign>
+          <else>
+            <documentation>
+              <![CDATA[Update]]>
+            </documentation>
+            <assign name="AssignUpdate">
+              <copy>
+                <from>'LastUpdateDate%3E'</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vOperationType</to>
+              </copy>
+            </assign>
+          </else>
+        </if>
+        <assign name="AssignInitialValues">
+          <copy>
+            <from>concat($inputVariable.payload/client:compositeLink,$vOperationType,$vLastSRequest,'&amp;expand=all&amp;limit=200','&amp;offset=',$offset)</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+          </copy>
+        </assign>
+        <invoke name="InvokeHCMJobsRef" partnerLink="HCMJobsRestRef" portType="ns1:HCMJobsRestRef_ptt"
+                operation="GetJobs" inputVariable="InvokeHCMJobsRef_GetJobs_InputVariable"
+                outputVariable="InvokeHCMJobsRef_GetJobs_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+            <bpelx:toProperty name="csf-key" variable="vCSFKey"/>
+            <bpelx:toProperty name="csf.map" variable="vCSFMap"/>
+            <bpelx:toProperty name="rest.binding.requestURI">$vCompositeLink</bpelx:toProperty>
+            <bpelx:toProperty name="rest.binding.http.Connection">$restConnection</bpelx:toProperty>
+          </bpelx:toProperties>
+        </invoke>
+        <forEach parallel="no" counterName="ForEachJobs" name="ForEachJobs">
+          <startCounterValue>1</startCounterValue>
+          <finalCounterValue>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:count</finalCounterValue>
+          <scope name="Scope1">
+            <sequence>
+            <if name="IfStatusInsert">
+                <documentation>
+                  <![CDATA[Insert]]>
+                </documentation>
+                <condition>contains($inputVariable.payload/client:status,'1')</condition>
+                <assign name="AssignStatusInsert">
+                  <copy>
+                    <from>'1'</from>
+                    <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                  </copy>
+                </assign>
+                <else>
+                  <documentation>
+                    <![CDATA[update]]>
+                  </documentation>
+                  <assign name="AssignStatusUpdate">
+                    <copy>
+                      <from>'2'</from>
+                      <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                    </copy>
+                  </assign>
+                </else>
+              </if>
+              <if name="IfActionStatus">
+                <documentation>
+                  <![CDATA[updateORinsert]]>
+                </documentation>
+                <condition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">contains($InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:ActiveStatus,'A')</condition>
+                <empty name="Empty"/>
+                <else>
+                  <documentation>
+                    <![CDATA[delete]]>
+                  </documentation>
+                  <sequence name="Sequence2">
+                    <assign name="AssignDeleteValues">
+                      <copy>
+                        <from>'3'</from>
+                        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$status</to>
+                      </copy>
+                    </assign>
+                  </sequence>
+                </else>
+              </if>
+              <assign name="AssignJobs">
+                <copy ignoreMissingFromData="yes">
+                  <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:JobId</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:jobId</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:JobCode</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:code</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:Name</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:jobDesc</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$status</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:status</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$vBatchNumber</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:batchNum</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$vRequestType</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:requestType</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:CreationDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:dateCreated</to>
+                </copy>
+                <copy ignoreMissingFromData="yes">
+                  <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:LastUpdateDate</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:dateModified</to>
+                </copy>
+                <copy ignoreMissingFromData="no">
+                  <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:items[$ForEachJobs]/ns3:JobCustomerFlex/ns3:dangerjob</from>
+                  <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeInsertJobs_insert_InputVariable.HcmJobMCollection/ns4:HcmJobM/ns4:dangerFlag</to>
+                </copy>
+              </assign>
+              <invoke name="InvokeInsertJobs" partnerLink="InsertJobsDbReference"
+                      portType="ns2:InsertJobsDbReference_ptt" operation="insert"
+                      inputVariable="InvokeInsertJobs_insert_InputVariable" bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </scope>
+        </forEach>
+        <assign name="FinalAssign">
+          <copy>
+            <from>'S'</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/client:RequestResult</to>
+          </copy>
+          <copy>
+            <from>$offset+$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:count</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$offset</to>
+          </copy>
+          <copy>
+            <from>$InvokeHCMJobsRef_GetJobs_OutputVariable.reply/ns3:hasMore</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$hasMore</to>
+          </copy>
+          <copy>
+            <from>''</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vCompositeLink</to>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <wait name="Wait1">
+      <for>'PT1S'</for>
+    </wait>
+    <assign name="AssignDone">
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns6:PID</to>
+      </copy>
+      <copy>
+        <from>$vCompositeName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns6:PCOMPOSITE_NAME</to>
+      </copy>
+      <copy>
+        <from>$vLastSRequest</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns6:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>$vBatchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns6:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>$vRequestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns6:PREQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>concat($status,'-','S')</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDone_AuditDbReference_InputVariable.InputParameters/ns6:PRESPONCE_STATUS</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeDone" partnerLink="AuditDbReference"
+            portType="ns5:AuditDbReference_ptt" operation="AuditDbReference"
+            inputVariable="InvokeDone_AuditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+    <!--<assign name="TransformationInsertJobs">
+      <bpelx:annotation>
+        <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from>ora:doXSLTransformForDoc("../Transformations/TransformationInsertJobs_1.xsl", $InvokeHCMJobsRef_GetJobs_OutputVariable.reply)</from>
+        <to variable="InvokeInsertJobs_insert_InputVariable" part="HcmJobMCollection"/>
+      </copy>
+    </assign>-->
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="hcmjobsprocess_service" portType="client:HCMJobsProcess" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

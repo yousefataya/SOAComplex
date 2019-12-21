@@ -1,0 +1,88 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Thu May 03 09:28:01 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="WorkerProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/ResignationProcess"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+  <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/WorkerProcess" location="../WSDLs/WorkerProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="workerprocess_client" partnerLinkType="client:WorkerProcess" myRole="WorkerProcessProvider"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:WorkerProcessRequestMessage"/>
+
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in WorkerProcess.wsdl) -->
+    <receive name="receiveInput" partnerLink="workerprocess_client" portType="client:WorkerProcess" operation="process" variable="inputVariable" createInstance="yes"/>
+    <extensionActivity>
+      <bpelx:call name="CallResignation"
+                  xmlns:sp1="http://xmlns.oracle.com/HCMCloudServices/HCMResignationActionOneWay/ResignationProcess"
+                  target="sp1:ResignationProcess">
+        <bpelx:param name="Vstatus" copyByValue="yes">$inputVariable.payload/client:status</bpelx:param>
+        <bpelx:param name="VlsrDate" copyByValue="yes">$inputVariable.payload/client:lsrDate</bpelx:param>
+        <bpelx:param name="Vkey" copyByValue="yes">$inputVariable.payload/client:key</bpelx:param>
+        <bpelx:param name="Vmap" copyByValue="yes">$inputVariable.payload/client:map</bpelx:param>
+        <bpelx:param name="VcompositeLink" copyByValue="yes">$inputVariable.payload/client:compositeLink</bpelx:param>
+        <bpelx:param name="VcompositeName" copyByValue="yes">$inputVariable.payload/client:compositeName</bpelx:param>
+        <bpelx:param name="VrequestType" copyByValue="yes">$inputVariable.payload/client:requestType</bpelx:param>
+        <bpelx:param name="VbatchNumber" copyByValue="yes">$inputVariable.payload/client:batchNumber</bpelx:param>
+        <bpelx:param name="VwsdlLink" copyByValue="yes">$inputVariable.payload/client:wsdlLink</bpelx:param>
+        <bpelx:param name="VURI" copyByValue="yes">$inputVariable.payload/client:URI</bpelx:param>
+      </bpelx:call>
+    </extensionActivity>
+  </sequence>
+</process>

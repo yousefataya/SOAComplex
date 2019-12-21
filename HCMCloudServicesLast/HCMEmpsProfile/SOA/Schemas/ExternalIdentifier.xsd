@@ -1,0 +1,95 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person External Identifier Version 2</name>
+            <description>It defines the person identifiers for external applications of a
+                particular type for a person or assignment. For example, Time
+                Clock Badge ID,  Third-Party Payroll ID, or Third-Party Payroll
+                Additional ID. Person number,  assignment number, and assignment
+                name are defined separately.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment</value>
+                <value>HcmTop-HcmTop : HcmEmploymentTop-Employment :
+                    HcmEmploymentSetup-Employment Setup</value>
+            </oer:category>
+            <oer:category name="lbo">
+                <value>HCM-HCM</value>
+                <value>HCM-HCM : PER-Global Human Resources</value>
+                <value>HCM-HCM : PER-Global Human Resources : PER_WORKER-Worker</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="System generated part of the primary key. Surrogate key."
+                     name="ExternalIdentifierId"/>
+                <oer:attribute description="A unique number for each person&apos;s identifier that is used as part of the alternate key for services."
+                     name="ExternalIdentifierSequence"/>
+                <oer:attribute description="Person Id .Person  Surrogate key." name="PersonId"/>
+                <oer:attribute description="Person Number" name="PersonNumber"/>
+                <oer:attribute description="The details that identify a person in an external application, such as time clock or third-party payroll applications."
+                     name="ExternalIdentifierNumber"/>
+                <oer:attribute description="The type of external application identifier.  For example, Time Clock Badge ID,  Third-Party Payroll ID, or Third-Party Payroll Additional ID."
+                     name="ExternalIdentifierType"/>
+                <oer:attribute description="Assignment Id" name="AssignmentId"/>
+                <oer:attribute description="Assignment Number" name="AssignmentNumber"/>
+                <oer:attribute description="A person may have several person identifiers. This date and time is when a specific person identifier begins to apply to a person or assignment."
+                     name="DateFrom"/>
+                <oer:attribute description="A person may have several person identifiers. This date and time is when a specific person identifier ceases to apply to a person or assignment."
+                     name="DateTo"/>
+                <oer:attribute description="A description entered to specify details about the person identifier.  For example, a person identifier has been added because a person lost their original time clock badge."
+                     name="Comments"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Unique identifier (character-based) from the source system. Note that this value cannot change. If you change this value in the source system, the integration will fail."
+                     name="SourceSystemId"/>
+                <oer:attribute description="Specify a value to identify the source system, for example PSFT-UK. If you have more than one instance of a source system, then you can uniquely identify each one."
+                     name="SourceSystemOwner"/>
+                <oer:attribute description="The GUID (globally unique identifier) is generated in Fusion by the system and is used to provide integration key resolution."
+                     name="GUID"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="ExternalIdentifierResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="ExternalIdentifier"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="ExternalIdentifier">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ExternalIdentifierId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="ExternalIdentifierId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ExternalIdentifierSequence" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PersonNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExternalIdentifierNumber" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ExternalIdentifierType" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="AssignmentId" nillable="true" type="xsd:long"/>
+            <xsd:element minOccurs="0" name="AssignmentNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="DateFrom" type="ns0:dateTime-Timestamp"/>
+            <xsd:element minOccurs="0" name="DateTo" nillable="true" type="ns0:dateTime-Timestamp"/>
+            <xsd:element minOccurs="0" name="Comments" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="SourceSystemId" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="SourceSystemOwner" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="GUID" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="externalIdentifierResult" type="ExternalIdentifierResult"/>
+    <xsd:element name="externalIdentifier" type="ExternalIdentifier"/>
+</xsd:schema>

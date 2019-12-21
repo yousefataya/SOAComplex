@@ -1,0 +1,382 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Oct 04 16:05:23 IDT 2017
+  Author:  Usaid
+  Type: BPEL 2.0 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="CustomerDetailsInquiryBPEL"
+               targetNamespace="http://xmlns.oracle.com/CAM_INQUIRY/CustomerDetailsInquiry/CustomerDetailsInquiryBPEL"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/CAM_INQUIRY/CustomerDetailsInquiry/CustomerDetailsInquiryBPEL"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns1="http://xmlns.fact.com/ws/CDI"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/CAM_INQUIRY/CustomerDetailsInquiry/SamahaReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/SamahaReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/CAM_INQUIRY/CustomerDetailsInquiry/CustomerReference">
+
+    <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/CAM_INQUIRY/CustomerDetailsInquiry/CustomerDetailsInquiryBPEL" location="../WSDLs/CustomerDetailsInquiryBPEL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="customerdetailsinquirybpel_Service" partnerLinkType="client:CustomerDetailsInquiryBPEL" myRole="CustomerDetailsInquiryBPELProvider"/>
+    <partnerLink name="CustomerReference" partnerLinkType="ns4:CustomerReference_plt"
+                 partnerRole="CustomerReference_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:CustomerDetailsInquiryBPELRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:CustomerDetailsInquiryBPELResponseMessage"/>
+    <variable name="CompositeName" type="xsd:string"/>
+        <variable name="InstanceID" type="xsd:string"/>
+        <variable name="SourceExecutionID" type="xsd:string"/>
+        <variable name="SourceAppUserName" type="xsd:string"/>
+        <variable name="ExecutionInput" type="xsd:string"/>
+        <variable name="ExecutionStatus" type="xsd:string"/>
+        <variable name="SourceAppCode" type="xsd:string"/>
+        <variable name="FaultStr" type="xsd:string"/>
+        <variable name="FaultCode" type="xsd:string"/>
+        <variable name="ExecutionOutput" type="xsd:string"/>
+        <variable name="ErrorBusCode" type="xsd:string"/>
+        <variable name="ErrorBusMessage" type="xsd:string"/>
+        <variable name="ErrorTechCode" type="xsd:string"/>
+        <variable name="ErrorTechMessage" type="xsd:string"/>
+        <variable name="ErrorTechDetails" type="xsd:string"/>
+        <variable name="BusinessKey" type="xsd:string"/>
+        <variable name="TechSystemOperation" type="xsd:string"/>
+        <variable name="TechSystem" type="xsd:string"/>
+        <variable name="ClientIPAddress" type="xsd:string"/>
+        <variable name="ExecutionID" type="xsd:string"/>
+    <variable name="Invoke_CustomerDetailsTransaction_InputVariable" messageType="ns4:args_in_msg"/>
+    <variable name="Invoke_CustomerDetailsTransaction_OutputVariable" messageType="ns4:args_out_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CustomerDetailsInquiryBPEL.wsdl) --><receive name="receiveInput" partnerLink="customerdetailsinquirybpel_Service" portType="client:CustomerDetailsInquiryBPEL" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="Assign_DefualtVariables" xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+        <from>$inputVariable.payload/ns1:MessageHeader/ns1:TransactionID</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceExecutionID</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns1:MessageHeader/ns1:TransactionID</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageHeader/ns1:TransactionID</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns1:MessageHeader/ns1:ApplicationUserName</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppUserName</to>
+      </copy>
+      <copy>
+        <from>$inputVariable.payload/ns1:MessageHeader/ns1:ApplicationCode</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$SourceAppCode</to>
+      </copy>
+      <copy>
+        <from>'CustomerDetailsInquiry'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$CompositeName</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InstanceID</to>
+      </copy>
+      <copy>
+        <from>ora:toCDATA($inputVariable.payload)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionInput</to>
+      </copy>
+      <copy>
+        <from>'S'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy>
+      <copy>
+        <from>'Success'</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:StatusInformation/ns1:Status</to>
+      </copy>
+    </assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_validation" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {
+            java.net.InetAddress ipAddress = java.net
+                                                 .InetAddress
+                                                 .getLocalHost();
+            String clientIp = (ipAddress.getHostAddress()).trim();
+
+            String compositeName = (String) getVariableData("CompositeName");
+            String transactionID =
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns1:TransactionID"))
+                .getTextContent();
+            String applicationCode =
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns1:ApplicationCode"))
+                .getTextContent();
+            String applicationUserName =
+                ((org.w3c.dom.Element) getVariableData("inputVariable", "payload", "//ns1:ApplicationUserName"))
+                .getTextContent();
+            
+            String MandatoryField = null;
+
+            if (transactionID.equals("")) {
+                MandatoryField = "TransactionID";
+            } else if (applicationCode.equals("")) {
+                MandatoryField = "ApplicationCode";
+            } else if (applicationUserName.equals("")) {
+                MandatoryField = "ApplicationUserName";
+            }
+
+            if (MandatoryField != null) {
+                setVariableData("ExecutionStatus", "F");
+                setVariableData("outputVariable", "payload", "//ns1:Status", "Failed");
+                setVariableData("ErrorBusCode", "VF0001");
+                setVariableData("ErrorBusMessage",
+                                "Validation Fault : Unable to FulFill Transaction, Entry [ " + MandatoryField +
+                                " ] is Mandatory.");
+                setVariableData("ErrorTechCode", "OFM-VAL-0001");
+                setVariableData("ErrorTechMessage", "Entry [ " + MandatoryField + " ] is Mandatory.");
+            } else {
+                com.dimensions.mw.utils.validationManagement.ValidationManager validationManager =
+                    new com.dimensions.mw.utils.validationManagement.ValidationManager();
+                String validationCheck =
+                    validationManager.ApplyValidation(applicationCode, compositeName, "isAllowedSource",
+                                                      compositeName + "###" + applicationCode + "###" + clientIp +
+                                                      "###" + "token" + "###" + applicationUserName);
+
+                if (validationCheck == null) {
+
+                } else {
+                    setVariableData("ExecutionStatus", "F");
+                    setVariableData("outputVariable", "payload", "//ns1:Status", "Failed");
+                    setVariableData("ErrorBusCode", validationCheck.split("#")[0]);
+                    setVariableData("ErrorBusMessage", validationCheck.split("#")[1].split("##")[0]);
+                    setVariableData("ErrorTechCode", validationCheck.split("##")[1].split("###")[0]);
+                    setVariableData("ErrorTechMessage", validationCheck.split("###")[1].split("###-")[0]);
+                    setVariableData("ErrorTechDetails", validationCheck.split("###-")[1].split("#####")[0]);
+                }
+            }
+
+        } catch (Exception exc) {
+            addAuditTrailEntry(exc);
+        }]]></bpelx:exec>
+   </extensionActivity>
+    <if name="If_validationSuccessfull">
+      <documentation>
+        <![CDATA[Yes]]>
+      </documentation>
+      <condition>$ExecutionStatus = 'S'</condition><sequence name="Sequence2"><sequence name="Sequence1"><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_DBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <![CDATA[try {          
+                  String weblogicDomainName = "Unknown";          
+                  String serverName = "Unknown";          
+                  javax.naming.InitialContext ctx = null;          
+                  ctx = new javax.naming.InitialContext();          
+                  javax.management.MBeanServer beanServer =          
+                      (javax.management.MBeanServer) ctx.lookup("java:comp/env/jmx/runtime");          
+                  javax.management.ObjectName runtimeService =          
+                      new javax.management.ObjectName("com.bea:Name=RuntimeService,Type=weblogic.management.mbeanservers.runtime.RuntimeServiceMBean");          
+                  javax.management.ObjectName domainCFG =          
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "DomainConfiguration");          
+                  weblogicDomainName = (String) beanServer.getAttribute(domainCFG, "Name");          
+                  javax.management.ObjectName serverCFG =          
+                      (javax.management.ObjectName) beanServer.getAttribute(runtimeService, "ServerConfiguration");          
+                  serverName = (String) beanServer.getAttribute(serverCFG, "Name");          
+                
+                  String executionID = com.dimensions.mw.utils.compositeManagement.CompositeManager.getUniqueId();          
+                  setVariableData("ExecutionID", executionID);          
+                  String compositeName = (String) getVariableData("CompositeName");      
+                  String sourceAppCode = (String) getVariableData("SourceAppCode");          
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");          
+                  String sourceAppUserName = (String) getVariableData("SourceAppUserName");          
+                  String executionInput = (String) getVariableData("ExecutionInput");          
+                  String instanceID = (String) getVariableData("InstanceID");          
+                  String bussinessKey = (String) getVariableData("BusinessKey");          
+                
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager          
+                     .insertProcessInstance(compositeName, executionID, sourceAppCode, sourceExecutionID, sourceAppUserName,          
+                                            executionInput, instanceID, weblogicDomainName, serverName, bussinessKey);          
+              } catch (Exception exc) {          
+         addAuditTrailEntry(exc);       
+              }]]>
+      </bpelx:exec>
+   </extensionActivity><scope name="Scope1"><faultHandlers><catchAll><sequence name="Sequence3"><assign name="Assign_Fault"
+                                                                                                        xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   <copy>
+         <from>ora:getFaultAsString()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultStr</to>
+      </copy><copy>
+         <from>ora:getFaultName()</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$FaultCode</to>
+      </copy><copy>
+         <from>'Failed'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:StatusInformation/ns1:Status</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorBusCode</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorBusMessage</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorTechCode</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorTechMessage</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>''</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorTechDetails</to>
+      </copy><copy>
+         <from>'F'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionStatus</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_ManageError" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         
+      <![CDATA[try {                             
+    String faultStr = (String)getVariableData("FaultStr");                             
+    String faultCode = (String)getVariableData("FaultCode");                             
+    String techSystemOperation = (String)getVariableData("TechSystemOperation");                             
+    String techSystem = (String)getVariableData("TechSystem");                     
+    String compositeName = (String)getVariableData("CompositeName");          
+  
+                                 
+    com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean errorDefinitionBean =                             
+            new com.dimensions.mw.utils.errorManagement.inMemoryData.ErrorDefinitionBean();                             
+                                 
+    com.dimensions.mw.utils.errorManagement.ErrorManager errorManager = new com.dimensions.mw.utils.errorManagement.ErrorManager();                             
+                                 
+    errorDefinitionBean = errorManager.getErrorInformation(faultCode+" "+faultStr,techSystem,techSystemOperation,compositeName);                              
+                 
+    setVariableData("outputVariable", "payload", "//ns1:ErrorBusCode",errorDefinitionBean.getErrorBussinessCode() );                      
+    setVariableData("outputVariable", "payload", "//ns1:ErrorBusMessage", errorDefinitionBean.getErrorBussinessMessage());                      
+    setVariableData("outputVariable", "payload", "//ns1:ErrorTechCode",errorDefinitionBean.getErrorTechCode());                      
+    setVariableData("outputVariable", "payload", "//ns1:ErrorTechMessage",errorDefinitionBean.getErrorTechMessage());                  
+    setVariableData("outputVariable", "payload", "//ns1:ErrorTechDetails",techSystem+" | "+techSystemOperation+" | "+ errorDefinitionBean.getErrorTechDetails());            
+        
+} catch (Exception exc) {        
+}]]></bpelx:exec>
+   </extensionActivity></sequence></catchAll></faultHandlers>
+            <sequence name="Sequence4">
+              <invoke name="Invoke_CustomerDetailsTransaction"
+                      partnerLink="CustomerReference" portType="ns4:CustomerReference_ptt"
+                      operation="CustomerReference" inputVariable="Invoke_CustomerDetailsTransaction_InputVariable"
+                      outputVariable="Invoke_CustomerDetailsTransaction_OutputVariable" bpelx:invokeAsDetail="no"/>
+              <assign name="Transformation">
+                <bpelx:annotation>
+                  <bpelx:pattern patternName="bpelx:transformation"></bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from>ora:doXSLTransformForDoc("../Transformations/Transformation.xsl", $Invoke_CustomerDetailsTransaction_OutputVariable.OutputParameters)</from>
+                  <to variable="outputVariable" part="payload"/>
+                </copy>
+              </assign>
+              <assign name="Assign_TransactionID_Status"
+                               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+      
+   <copy ignoreMissingFromData="no" bpelx:insertMissingToData="yes"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>$inputVariable.payload/ns1:MessageHeader/ns1:TransactionID</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageHeader/ns1:TransactionID</to>
+      </copy><copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <from>'Success'</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:StatusInformation/ns1:Status</to>
+      </copy></assign></sequence>
+          </scope></sequence><assign name="Assign_FinalOutput"
+                                                                            xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      
+   <copy>
+         <from>ora:toCDATA($outputVariable.payload)</from>
+         <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$ExecutionOutput</to>
+      </copy></assign><extensionActivity xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+      <bpelx:exec name="Java_FinalDBLog" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+         <![CDATA[try {      
+                  String executionID = (String) getVariableData("ExecutionID");      
+                  String executionStatus = (String) getVariableData("ExecutionStatus");      
+                  String sourceExecutionID = (String) getVariableData("SourceExecutionID");      
+                  String executionOutput = (String) getVariableData("ExecutionOutput");      
+                  String compositeName = (String) getVariableData("CompositeName");      
+            
+                  com.dimensions.mw.utils.loggerManagement.LoggerManager      
+                     .updateProcessInstance(executionID, executionOutput, executionStatus, compositeName);      
+              } catch (Exception exc) {      
+         addAuditTrailEntry(exc);   
+              }]]>
+      </bpelx:exec>
+   </extensionActivity></sequence><else>
+        <documentation>
+          <![CDATA[No]]>
+        </documentation><assign name="Assign_validationError"
+                                xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
+          <copy xmlns:bpelx="http://schemas.oracle.com/bpel/extension" bpelx:insertMissingToData="yes">
+            <from>$ErrorBusCode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorBusCode</to>
+          </copy>
+          <copy xmlns:bpelx="http://schemas.oracle.com/bpel/extension" bpelx:insertMissingToData="yes">
+            <from>$ErrorBusMessage</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorBusMessage</to>
+          </copy>
+          <copy xmlns:bpelx="http://schemas.oracle.com/bpel/extension" bpelx:insertMissingToData="yes">
+            <from>$ErrorTechCode</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorTechCode</to>
+          </copy>
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorTechMessage</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorTechMessage</to>
+          </copy>
+          <copy bpelx:insertMissingToData="yes" xmlns:bpelx="http://schemas.oracle.com/bpel/extension">
+            <from>$ErrorTechDetails</from>
+            <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$outputVariable.payload/ns1:MessageBody/ns1:ErrorInformation/ns1:ErrorTechDetails</to>
+          </copy>
+        </assign></else>
+    </if>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="customerdetailsinquirybpel_Service" portType="client:CustomerDetailsInquiryBPEL" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

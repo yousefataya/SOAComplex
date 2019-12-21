@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+     name="TransPromotionOneWayProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMTransfersPromotions/TransPromotionOneWayProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMTransfersPromotions/TransPromotionOneWayProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>
+        <abstractWSDL>http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMTransfersPromotions!1.4/WSDLs/TransPromotionOneWayProcess.wsdl</abstractWSDL>
+    </wsdl:documentation>
+    <plnk:partnerLinkType name="TransPromotionOneWayProcess">
+        <plnk:role name="TransPromotionOneWayProcessProvider" portType="client:TransPromotionOneWayProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMTransfersPromotions/TransPromotionOneWayProcess"
+                 schemaLocation="../Schemas/TransPromotionOneWayProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="TransPromotionOneWayProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:portType name="TransPromotionOneWayProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:TransPromotionOneWayProcessRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="TransPromotionOneWayProcessBinding" type="client:TransPromotionOneWayProcess">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="transpromotiononewayprocess_service_ep">
+        <wsdl:port name="TransPromotionOneWayProcess_pt" binding="client:TransPromotionOneWayProcessBinding">
+            <soap:address location="http://FACT-MALHAJ.fact.com.jo:7101/soa-infra/services/default/HCMTransfersPromotions/transpromotiononewayprocess_service_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,50 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/saveLoanRequestReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/saveLoanRequestReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_CUST_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_CUST_NAME" type="string" db:index="2" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_PHPR_SEX" type="decimal" db:index="3" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_PHPR_BIRTH_DATE" type="string" db:index="4" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_PHPR_NATIONAL_NBR" type="string" db:index="5" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_DCNT_CODE" type="decimal" db:index="6" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_PHPR_ID_DOC_NUM" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_CACC_NUM" type="string" db:index="8" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_BRCH_CODE" type="decimal" db:index="9" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_COND_SEQUENCE" type="string" db:index="11" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_CURR_CODE" type="decimal" db:index="12" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_RCPM_GOODS_AMNT" type="decimal" db:index="13" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_RCPM_DOWN_PYMNT" type="decimal" db:index="14" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_RCPM_DOWN_PYMNT_PRCNT" type="decimal" db:index="15" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ILOP_GRACE_PERIOD" type="decimal" db:index="16" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_NO_MONTHS" type="decimal" db:index="18" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_TOT_AMNT" type="decimal" db:index="19" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_MONTH_AMNT" type="decimal" db:index="20" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_WEB_USER_ID" type="string" db:index="21" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="I_GOOD_CODE" type="db:ICBS.NUMBER_GOOD" db:index="24" db:type="Array" minOccurs="0" nillable="true"/>
+            <element name="I_GOOD_AMNT" type="db:ICBS.NUMBER_AMNT" db:index="25" db:type="Array" minOccurs="0" nillable="true"/>
+            <element name="P_TIME_STAMP" type="string" db:index="26" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RCPM_APPLY_DATE" type="string" db:index="10" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+            <element name="P_RCPM_WEB_REFERENCE" type="decimal" db:index="17" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRCODE" type="decimal" db:index="22" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_ERRMSG" type="string" db:index="23" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="ICBS.NUMBER_GOOD">
+      <sequence>
+         <element name="I_GOOD_CODE_ITEM" type="decimal" db:type="NUMBER" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+   <complexType name="ICBS.NUMBER_AMNT">
+      <sequence>
+         <element name="I_GOOD_AMNT_ITEM" type="decimal" db:type="NUMBER" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+      </sequence>
+   </complexType>
+</schema>

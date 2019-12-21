@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="HCMJobsRestRef">RestReference</doc>
+   <grammars>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMJobs/HCMJobsRestRef" elementFormDefault="qualified">
+            <element name="empty">
+                <complexType/>
+            </element>
+        </schema>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://TargetNamespace.com/HCMJobsRestRef_GetJobs_response" schemaLocation="../Schemas/nxsd_schema1.xsd"/>
+        </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/hcmCoreSetupApi/resources/11.12.1.0/jobs">
+         <method name="GET" soa:wsdlOperation="GetJobs">
+            <request/>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:Root-Element" xmlns:cns="http://TargetNamespace.com/HCMJobsRestRef_GetJobs_response"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>

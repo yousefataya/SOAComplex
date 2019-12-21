@@ -1,0 +1,41 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="TransactionInquiry"
+     targetNamespace="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry"
+     xmlns:ns1="http://xmlns.fact.com/ws/TI"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/TransactionInquiryReference"
+    >
+    <plnk:partnerLinkType name="TransactionInquiry">
+        <plnk:role name="TransactionInquiryProvider" portType="client:TransactionInquiry_ptt"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry"
+             xmlns:ns1="http://xmlns.fact.com/ws/TI" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+             xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/TransactionInquiryReference">
+            <import namespace="http://xmlns.fact.com/ws/TI" schemaLocation="../Schemas/TransactionInquiryWS.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/TRANSACTION_MANAGEMENT/TransactionInquiry/TransactionInquiry"
+             xmlns:ns1="http://xmlns.fact.com/ws/TI" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+             xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/sp/TransactionInquiryReference">
+            <xsd:import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/TransactionInquiryReference"
+                 schemaLocation="../Schemas/TransactionInquiryReference_sp.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="TransactionInquiryRequestMessage">
+        <wsdl:part name="payload" element="ns1:TransactionsInquiryMessageInput"/>
+    </wsdl:message>
+    <wsdl:message name="args_out_msg">
+        <wsdl:part name="OutputParameters" element="ns2:OutputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="TransactionInquiry_ptt">
+        <wsdl:operation name="TransactionInquiry">
+            <wsdl:input message="client:TransactionInquiryRequestMessage"/>
+            <wsdl:output message="client:args_out_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

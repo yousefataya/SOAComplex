@@ -1,0 +1,32 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CustomerReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/CustomerReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <!--Empty Parameter List-->
+      <complexType/>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_RECORD" type="db:P_RECORD_RowSet" db:index="1" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="P_RECORD_RowSet">
+      <sequence>
+         <element name="P_RECORD_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="CUS_ID_NO" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CUS_LNAME" type="db:string400" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="REM_TOTAL_FAMOUNT" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DUE_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string400">
+      <restriction base="string">
+         <maxLength value="400"/>
+      </restriction>
+   </simpleType>
+</schema>

@@ -1,0 +1,29 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personContactRelLegDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:include schemaLocation="PersonContactRelLegDDF.xsd"/>
+    <xsd:complexType name="PersonContactRelLegDDFIN">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>ContactRelationshipId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PersonContactRelLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_GUARDIAN_NAME" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_GUARDIAN_BIRTH_DATE" nillable="true" type="ns0:date-Date"/>
+                    <xsd:element minOccurs="0" name="_GUARDIAN_ADDRESS" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_GUARDIAN_TELEPHONE" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="personContactRelLegDDFIN" type="PersonContactRelLegDDFIN"/>
+</xsd:schema>

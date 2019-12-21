@@ -1,0 +1,13 @@
+<adapter-config name="dbQueryGetCompanyName" adapter="db" wsdlLocation="../WSDLs/dbQueryGetCompanyName.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="Devt11g" location="eis/DB/factCBSDatabase"/>
+  <endpoint-interaction portType="dbQueryGetCompanyName_ptt" operation="dbQueryGetCompanyName">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="ICBS"/>
+      <property name="PackageName" value="ICBS_SALARY_BULK_PKG"/>
+      <property name="ProcedureName" value="GET_COMPANY_NAME"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

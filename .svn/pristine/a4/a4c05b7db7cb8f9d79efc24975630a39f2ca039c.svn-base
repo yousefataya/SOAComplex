@@ -1,0 +1,13 @@
+<adapter-config name="getAllSpareEmployeeUnderEmployeeReference" adapter="db" wsdlLocation="../WSDLs/getAllSpareEmployeeUnderEmployeeReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getAllSpareEmployeeUnderEmployeeReference_ptt" operation="getAllSpareEmployeeUnderEmployeeReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_WORKFLOW_STRUCTURE"/>
+      <property name="ProcedureName" value="GET_ALL_SPARE_UNDER_EMP"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

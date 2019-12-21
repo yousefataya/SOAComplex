@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="eccserviceprocess_client_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="657" width="137" height="168">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="650" width="156" height="182">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="eccserviceprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="urn:ECCService#wsdl.interface(ECCServicePortType)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>ECCPDCADD</dgm:item>
+            <dgm:item>ECCPosting2</dgm:item>
+            <dgm:item>ECCPosting1</dgm:item>
+            <dgm:item>CustomerOldSignInfo</dgm:item>
+            <dgm:item>CustomerSignInfo</dgm:item>
+            <dgm:item>ECCAccountRequest</dgm:item>
+            <dgm:item>ECCAutoReply</dgm:item>
+            <dgm:item>ECCCAAccountRequest</dgm:item>
+            <dgm:item>ECCExtendSessionRequest</dgm:item>
+            <dgm:item>ECCOutwardPresentment</dgm:item>
+            <dgm:item>ECCOutwardReply</dgm:item>
+            <dgm:item>ECCPDCDelete</dgm:item>
+            <dgm:item>ECCPDCUpdate</dgm:item>
+            <dgm:item>ECCPosting</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="EccPosting1Ref">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="26" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="19" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EccPosting1Ref" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPosting1/ECCPosting1Process#wsdl.interface(ECCPosting1Process)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="EccPosting2Reference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="144" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="137" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EccPosting2Reference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPosting2/ECCPosting2Process#wsdl.interface(ECCPosting2Process)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="EccPostingReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="262" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="255" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EccPostingReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPosting/ECCPostingBEPL#wsdl.interface(ECCPostingBEPL)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="CustomerSignInfoReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="380" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="373" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="CustomerSignInfoReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/CustomerSignInfo/CustomerSignInfoBPEL#wsdl.interface(CustomerSignInfoBPEL)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="CustomerOldSignInfoReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="498" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="491" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="CustomerOldSignInfoReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/CustomerOldSignInfo/CustomerOldSignInfoBPEL#wsdl.interface(CustomerOldSignInfoBPEL)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="EccPDCAddPReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="616" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="609" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EccPDCAddPReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPDCAdd/ECCPDCAddProcess#wsdl.interface(ECCPDCAddProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="EccAccountRequestReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="734" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="727" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EccAccountRequestReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCAccountRequest/ECCAccountRequestProcess#wsdl.interface(ECCAccountRequestProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCAutoReplyReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="852" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="845" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCAutoReplyReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCAutoReply/ECCAutoReplyProcess#wsdl.interface(ECCAutoReplyProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCCAAccountRequestReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="970" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="963" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCCAAccountRequestReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCCAAccountRequest/ECCCAAccountRequestProcess#wsdl.interface(ECCCAAccountRequestProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCExtendSessionRequestReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="1088" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="1081" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCExtendSessionRequestReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCExtendSessionRequest/ECCExtendSessionRequestBPEL#wsdl.interface(ECCExtendSessionRequestBPEL)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCOutwardPresentmentReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="1206" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="1199" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCOutwardPresentmentReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCOutwardPresentment/ECCOutwardPresentmentBPEL#wsdl.interface(ECCOutwardPresentmentBPEL)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCOutwardReplyReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="1324" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="1317" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCOutwardReplyReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCOutwardReply/ECCOutwardReplyProcess#wsdl.interface(ECCOutwardReplyProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCPDCDeleteReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="1442" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="1435" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCPDCDeleteReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPDCDelete/ECCPCDDeleteProcess#wsdl.interface(ECCPCDDeleteProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="ECCPDCUpdateReference">
+        <dgm:body borderWidth="2" arcRad="20" X="514" Y="1560" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="504" Y="1553" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="ECCPDCUpdateReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPDCUpdate/ECCPDCUpdateProcess#wsdl.interface(ECCPDCUpdateProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gComponent name="ECCServiceProcess">
+        <dgm:body borderWidth="2" arcRad="20" X="226" Y="642" width="130" height="386">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="216" Y="635" width="150" height="402">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="eccserviceprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="urn:ECCService#wsdl.interface(ECCServicePortType)"/>
+        <dgm:outputPort name="EccPosting1Ref" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPosting1/ECCPosting1Process#wsdl.interface(ECCPosting1Process)"/>
+        <dgm:outputPort name="EccPosting2Reference" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPosting2/ECCPosting2Process#wsdl.interface(ECCPosting2Process)"/>
+        <dgm:outputPort name="EccPostingReference" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPosting/ECCPostingBEPL#wsdl.interface(ECCPostingBEPL)"/>
+        <dgm:outputPort name="CustomerSignInfoReference" X="120" Y="90" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/CustomerSignInfo/CustomerSignInfoBPEL#wsdl.interface(CustomerSignInfoBPEL)"/>
+        <dgm:outputPort name="CustomerOldSignInfoReference" X="120" Y="115" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/CustomerOldSignInfo/CustomerOldSignInfoBPEL#wsdl.interface(CustomerOldSignInfoBPEL)"/>
+        <dgm:outputPort name="EccPDCAddPReference" X="120" Y="140" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPDCAdd/ECCPDCAddProcess#wsdl.interface(ECCPDCAddProcess)"/>
+        <dgm:outputPort name="EccAccountRequestReference" X="120" Y="165" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCAccountRequest/ECCAccountRequestProcess#wsdl.interface(ECCAccountRequestProcess)"/>
+        <dgm:outputPort name="ECCAutoReplyReference" X="120" Y="190" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCAutoReply/ECCAutoReplyProcess#wsdl.interface(ECCAutoReplyProcess)"/>
+        <dgm:outputPort name="ECCCAAccountRequestReference" X="120" Y="215" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCCAAccountRequest/ECCCAAccountRequestProcess#wsdl.interface(ECCCAAccountRequestProcess)"/>
+        <dgm:outputPort name="ECCExtendSessionRequestReference" X="120" Y="240" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCExtendSessionRequest/ECCExtendSessionRequestBPEL#wsdl.interface(ECCExtendSessionRequestBPEL)"/>
+        <dgm:outputPort name="ECCOutwardPresentmentReference" X="120" Y="265" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCOutwardPresentment/ECCOutwardPresentmentBPEL#wsdl.interface(ECCOutwardPresentmentBPEL)"/>
+        <dgm:outputPort name="ECCOutwardReplyReference" X="120" Y="290" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCOutwardReply/ECCOutwardReplyProcess#wsdl.interface(ECCOutwardReplyProcess)"/>
+        <dgm:outputPort name="ECCPDCDeleteReference" X="120" Y="315" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPDCDelete/ECCPCDDeleteProcess#wsdl.interface(ECCPCDDeleteProcess)"/>
+        <dgm:outputPort name="ECCPDCUpdateReference" X="120" Y="340" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/ECC/ECCPDCUpdate/ECCPDCUpdateProcess#wsdl.interface(ECCPDCUpdateProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="eccserviceprocess_client_ep" target="ECCServiceProcess/eccserviceprocess_client" width="2">
+        <dgm:gSegment X1="168" Y1="667" X2="216" Y2="667"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/EccPosting1Ref" target="EccPosting1Ref" width="2">
+        <dgm:gSegment X1="366" Y1="667" X2="390" Y2="667"/>
+        <dgm:gSegment X1="390" Y1="667" X2="390" Y2="36"/>
+        <dgm:gSegment X1="390" Y1="36" X2="504" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/EccPosting2Reference" target="EccPosting2Reference" width="2">
+        <dgm:gSegment X1="366" Y1="692" X2="405" Y2="692"/>
+        <dgm:gSegment X1="405" Y1="692" X2="405" Y2="154"/>
+        <dgm:gSegment X1="405" Y1="154" X2="504" Y2="154"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/EccPostingReference" target="EccPostingReference" width="2">
+        <dgm:gSegment X1="366" Y1="717" X2="420" Y2="717"/>
+        <dgm:gSegment X1="420" Y1="717" X2="420" Y2="272"/>
+        <dgm:gSegment X1="420" Y1="272" X2="504" Y2="272"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/CustomerSignInfoReference" target="CustomerSignInfoReference" width="2">
+        <dgm:gSegment X1="366" Y1="742" X2="435" Y2="742"/>
+        <dgm:gSegment X1="435" Y1="742" X2="435" Y2="390"/>
+        <dgm:gSegment X1="435" Y1="390" X2="504" Y2="390"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/CustomerOldSignInfoReference" target="CustomerOldSignInfoReference" width="2">
+        <dgm:gSegment X1="366" Y1="767" X2="450" Y2="767"/>
+        <dgm:gSegment X1="450" Y1="767" X2="450" Y2="508"/>
+        <dgm:gSegment X1="450" Y1="508" X2="504" Y2="508"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/EccPDCAddPReference" target="EccPDCAddPReference" width="2">
+        <dgm:gSegment X1="366" Y1="792" X2="465" Y2="792"/>
+        <dgm:gSegment X1="465" Y1="792" X2="465" Y2="626"/>
+        <dgm:gSegment X1="465" Y1="626" X2="504" Y2="626"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/EccAccountRequestReference" target="EccAccountRequestReference" width="2">
+        <dgm:gSegment X1="366" Y1="817" X2="480" Y2="817"/>
+        <dgm:gSegment X1="480" Y1="817" X2="480" Y2="744"/>
+        <dgm:gSegment X1="480" Y1="744" X2="504" Y2="744"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCAutoReplyReference" target="ECCAutoReplyReference" width="2">
+        <dgm:gSegment X1="366" Y1="842" X2="480" Y2="842"/>
+        <dgm:gSegment X1="480" Y1="842" X2="480" Y2="862"/>
+        <dgm:gSegment X1="480" Y1="862" X2="504" Y2="862"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCCAAccountRequestReference" target="ECCCAAccountRequestReference" width="2">
+        <dgm:gSegment X1="366" Y1="867" X2="465" Y2="867"/>
+        <dgm:gSegment X1="465" Y1="867" X2="465" Y2="980"/>
+        <dgm:gSegment X1="465" Y1="980" X2="504" Y2="980"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCExtendSessionRequestReference" target="ECCExtendSessionRequestReference" width="2">
+        <dgm:gSegment X1="366" Y1="892" X2="450" Y2="892"/>
+        <dgm:gSegment X1="450" Y1="892" X2="450" Y2="1098"/>
+        <dgm:gSegment X1="450" Y1="1098" X2="504" Y2="1098"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCOutwardPresentmentReference" target="ECCOutwardPresentmentReference" width="2">
+        <dgm:gSegment X1="366" Y1="917" X2="435" Y2="917"/>
+        <dgm:gSegment X1="435" Y1="917" X2="435" Y2="1216"/>
+        <dgm:gSegment X1="435" Y1="1216" X2="504" Y2="1216"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCOutwardReplyReference" target="ECCOutwardReplyReference" width="2">
+        <dgm:gSegment X1="366" Y1="942" X2="420" Y2="942"/>
+        <dgm:gSegment X1="420" Y1="942" X2="420" Y2="1334"/>
+        <dgm:gSegment X1="420" Y1="1334" X2="504" Y2="1334"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCPDCDeleteReference" target="ECCPDCDeleteReference" width="2">
+        <dgm:gSegment X1="366" Y1="967" X2="405" Y2="967"/>
+        <dgm:gSegment X1="405" Y1="967" X2="405" Y2="1452"/>
+        <dgm:gSegment X1="405" Y1="1452" X2="504" Y2="1452"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="ECCServiceProcess/ECCPDCUpdateReference" target="ECCPDCUpdateReference" width="2">
+        <dgm:gSegment X1="366" Y1="992" X2="390" Y2="992"/>
+        <dgm:gSegment X1="390" Y1="992" X2="390" Y2="1570"/>
+        <dgm:gSegment X1="390" Y1="1570" X2="504" Y2="1570"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

@@ -1,0 +1,52 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getTransactionsReference" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getTransactionsReference" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="P_BRANCH_FROM_ID" type="decimal" db:index="1" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_BRANCH_TO_ID" type="decimal" db:index="2" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_DATE_FROM" type="dateTime" db:index="3" db:type="DATE" minOccurs="0" nillable="true"/>
+            <element name="P_DATE_TO" type="dateTime" db:index="4" db:type="DATE" minOccurs="0" nillable="true"/>
+            <element name="P_CARD_FROM_ID" type="decimal" db:index="5" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_CARD_TO_ID" type="decimal" db:index="6" db:type="NUMBER" minOccurs="0" nillable="true"/>
+            <element name="P_NATIONAL_NUMBER" type="string" db:index="7" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="IO_CURSOR" type="db:IO_CURSOR_RowSet" db:index="8" db:type="RowSet" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="IO_CURSOR_RowSet">
+      <sequence>
+         <element name="IO_CURSOR_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="SERIAL_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TRANS_DATE" type="dateTime" db:type="DATE" minOccurs="0" nillable="true"/>
+                  <element name="TRANS_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="TRANS_B_DESC" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="DRCRNN_SIGN" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="DEBITVALUE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CREDITVALUE" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+                  <element name="CARD_B_FULL_NAME" type="db:string100" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CARD_NATIONAL_NO" type="db:string15" db:type="VARCHAR2" minOccurs="0" nillable="true"/>
+                  <element name="CARD_ID" type="decimal" db:type="NUMBER" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string100">
+      <restriction base="string">
+         <maxLength value="100"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string15">
+      <restriction base="string">
+         <maxLength value="15"/>
+      </restriction>
+   </simpleType>
+</schema>

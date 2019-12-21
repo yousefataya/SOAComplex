@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<composite name="ATMListener" revision="1.0" label="2017-09-24_15-47-16_528" mode="active" state="on" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:ui="http://xmlns.oracle.com/soa/designer/" xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/ATM/ATMListener/ATMReciveMsgReference" location="WSDLs/ATMReciveMsgReference.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket" location="WSDLs/ATMSocket.wsdl" importType="wsdl"/>
+   <service name="ATMSocket" ui:wsdlLocation="WSDLs/ATMSocket.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket#wsdl.interface(ATMInboundRequestReply_ptt)"/>
+      <binding.jca config="Adapters/ATMSocket_socket.jca">
+         <property name="useRejectedMessageRecovery" type="xs:string" many="false" override="may">true</property>
+      </binding.jca>
+   </service>
+   <property name="productVersion" type="xs:string" many="false">12.2.1.1.0.160608</property>
+   <property name="compositeID" type="xs:string" many="false">d43f83fd-dcc5-455b-a22e-45bf5aed95b1</property>
+   <component name="ATMListnerProcces" version="2.0">
+      <implementation.bpel src="BPEL/ATMListnerProcces.bpel"/>
+      <componentType>
+         <service name="ATMSocket" ui:wsdlLocation="WSDLs/ATMSocket.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/socket/ATM/ATMListener/ATMSocket#wsdl.interface(ATMInboundRequestReply_ptt)"/>
+         </service>
+         <reference name="ATMReciveMsgReference" ui:wsdlLocation="WSDLs/ATMReciveMsgReference.wsdl">
+            <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/ATM/ATMListener/ATMReciveMsgReference#wsdl.interface(ATMReciveMsgReference_ptt)"/>
+         </reference>
+      </componentType>
+      <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
+      <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">sync</property>
+   </component>
+   <reference name="ATMReciveMsgReference" ui:wsdlLocation="WSDLs/ATMReciveMsgReference.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/ATM/ATMListener/ATMReciveMsgReference#wsdl.interface(ATMReciveMsgReference_ptt)"/>
+      <binding.jca config="Adapters/ATMReciveMsgReference_db.jca"/>
+      <property name="jca.retry.count" type="xs:int" many="false" override="may">1</property>
+      <property name="jca.retry.interval" type="xs:int" many="false" override="may">1</property>
+      <property name="jca.retry.backoff" type="xs:int" many="false" override="may">2</property>
+      <property name="jca.retry.maxInterval" type="xs:int" many="false" override="may">30</property>
+   </reference>
+   <wire>
+      <source.uri>ATMSocket</source.uri>
+      <target.uri>ATMListnerProcces/ATMSocket</target.uri>
+   </wire>
+   <wire>
+      <source.uri>ATMListnerProcces/ATMReciveMsgReference</source.uri>
+      <target.uri>ATMReciveMsgReference</target.uri>
+   </wire>
+</composite>

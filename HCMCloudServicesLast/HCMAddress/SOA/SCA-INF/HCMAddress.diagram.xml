@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
+    <dgm:gService name="addressprocess_services_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="187" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="180" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="addressprocess_services_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMAddress/addressProcess#wsdl.interface(addressProcess)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>process</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gReference name="EmpsRestRef">
+        <dgm:body borderWidth="2" arcRad="20" X="652" Y="26" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="642" Y="19" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="EmpsRestRef" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMAddress/EmpsRestRef#wsdl.interface(EmpsRestRef_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/RestAdapterService20x20px.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:policyIcon URI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/locked_12x12.png" X="118" Y="8" width="12" height="12"/>
+        <dgm:operations>
+            <dgm:item>getAddres</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="WorkerSOAPRef">
+        <dgm:body borderWidth="2" arcRad="20" X="652" Y="144" width="136" height="168">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="642" Y="137" width="156" height="182">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="WorkerSOAPRef" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/#wsdl.interface(WorkerService)" callbackInterface="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/#wsdl.interface(WorkerServiceResponse)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/mft_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:policyIcon URI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/locked_12x12.png" X="118" Y="8" width="12" height="12"/>
+        <dgm:operations>
+            <dgm:item>findPersonContactRelationship</dgm:item>
+            <dgm:item>findPersonTypeUsage</dgm:item>
+            <dgm:item>findPersonTypeUsageAsync</dgm:item>
+            <dgm:item>findPersonContactRelationshipAsync</dgm:item>
+            <dgm:item>createPersonTypeUsage</dgm:item>
+            <dgm:item>mergePersonContactRelationship</dgm:item>
+            <dgm:item>mergePersonTypeUsage</dgm:item>
+            <dgm:item>updatePersonContactRelationship</dgm:item>
+            <dgm:item>updatePersonTypeUsage</dgm:item>
+            <dgm:item>updatePersonTypeUsageAsync</dgm:item>
+            <dgm:item>createPersonTypeUsageAsync</dgm:item>
+            <dgm:item>updatePersonContactRelationshipAsync</dgm:item>
+            <dgm:item>mergePersonTypeUsageAsync</dgm:item>
+            <dgm:item>mergePersonContactRelationshipAsync</dgm:item>
+            <dgm:item>createPersonContactRelationship</dgm:item>
+            <dgm:item>createPersonContactRelationshipAsync</dgm:item>
+            <dgm:item>updatePerson</dgm:item>
+            <dgm:item>mergePerson</dgm:item>
+            <dgm:item>mergePersonAsync</dgm:item>
+            <dgm:item>updatePersonAsync</dgm:item>
+            <dgm:item>findPerson</dgm:item>
+            <dgm:item>findPersonAsync</dgm:item>
+            <dgm:item>createPersonContact</dgm:item>
+            <dgm:item>createPersonContactAsync</dgm:item>
+            <dgm:item>deletePersonCitizenship</dgm:item>
+            <dgm:item>deletePersonDeliveryMethod</dgm:item>
+            <dgm:item>deletePersonDriversLicence</dgm:item>
+            <dgm:item>deletePersonEmail</dgm:item>
+            <dgm:item>deletePersonEthnicity</dgm:item>
+            <dgm:item>deletePersonImage</dgm:item>
+            <dgm:item>deletePersonNationalIdentifier</dgm:item>
+            <dgm:item>deletePersonPassport</dgm:item>
+            <dgm:item>deletePersonPhone</dgm:item>
+            <dgm:item>deletePersonReligion</dgm:item>
+            <dgm:item>deletePersonCitizenshipAsync</dgm:item>
+            <dgm:item>deletePersonEthnicityAsync</dgm:item>
+            <dgm:item>deletePersonPhoneAsync</dgm:item>
+            <dgm:item>deletePersonEmailAsync</dgm:item>
+            <dgm:item>deletePersonNationalIdentifierAsync</dgm:item>
+            <dgm:item>deletePersonPassportAsync</dgm:item>
+            <dgm:item>deletePersonDriversLicenceAsync</dgm:item>
+            <dgm:item>deletePersonDeliveryMethodAsync</dgm:item>
+            <dgm:item>deletePersonReligionAsync</dgm:item>
+            <dgm:item>deletePersonImageAsync</dgm:item>
+            <dgm:item>createAssignmentGradeSteps</dgm:item>
+            <dgm:item>updateAssignmentGradeSteps</dgm:item>
+            <dgm:item>updateAssignmentGradeStepsAsync</dgm:item>
+            <dgm:item>createAssignmentGradeStepsAsync</dgm:item>
+            <dgm:item>createWorkTermsGradeSteps</dgm:item>
+            <dgm:item>updateWorkTermsGradeSteps</dgm:item>
+            <dgm:item>updateWorkTermsGradeStepsAsync</dgm:item>
+            <dgm:item>createWorkTermsGradeStepsAsync</dgm:item>
+            <dgm:item>createAssignment</dgm:item>
+            <dgm:item>createAssignmentAsync</dgm:item>
+            <dgm:item>createAssignmentSupervisor</dgm:item>
+            <dgm:item>createAssignmentWorkMeasure</dgm:item>
+            <dgm:item>updateWorkTermsSupervisor</dgm:item>
+            <dgm:item>updateWorkTermsWorkMeasure</dgm:item>
+            <dgm:item>createAssignmentSupervisorAsync</dgm:item>
+            <dgm:item>updateWorkTermsWorkMeasureAsync</dgm:item>
+            <dgm:item>updateWorkTermsSupervisorAsync</dgm:item>
+            <dgm:item>createAssignmentWorkMeasureAsync</dgm:item>
+            <dgm:item>updateAssignmentSupervisor</dgm:item>
+            <dgm:item>updateAssignmentWorkMeasure</dgm:item>
+            <dgm:item>createWorkTermsSupervisor</dgm:item>
+            <dgm:item>createWorkTermsWorkMeasure</dgm:item>
+            <dgm:item>createWorkTermsWorkMeasureAsync</dgm:item>
+            <dgm:item>updateAssignmentWorkMeasureAsync</dgm:item>
+            <dgm:item>updateAssignmentSupervisorAsync</dgm:item>
+            <dgm:item>createWorkTermsSupervisorAsync</dgm:item>
+            <dgm:item>createWorkRelationship</dgm:item>
+            <dgm:item>createWorkTerms</dgm:item>
+            <dgm:item>createWorker</dgm:item>
+            <dgm:item>updateWorkTerms</dgm:item>
+            <dgm:item>createWorkRelationshipAsync</dgm:item>
+            <dgm:item>createWorkTermsAsync</dgm:item>
+            <dgm:item>updateWorkTermsAsync</dgm:item>
+            <dgm:item>createWorkerAsync</dgm:item>
+            <dgm:item>reverseTerminateWorkRelationship</dgm:item>
+            <dgm:item>terminateWorkRelationship</dgm:item>
+            <dgm:item>reverseTerminateWorkRelationshipAsync</dgm:item>
+            <dgm:item>terminateWorkRelationshipAsync</dgm:item>
+            <dgm:item>correctWorkRelationshipTermination</dgm:item>
+            <dgm:item>getWorkerInformationByAssignmentNumber</dgm:item>
+            <dgm:item>getWorkerInformationByPersonNumber</dgm:item>
+            <dgm:item>getWorkerInformationByUserName</dgm:item>
+            <dgm:item>getWorkerInformationByUserNameAsync</dgm:item>
+            <dgm:item>getWorkerInformationByAssignmentNumberAsync</dgm:item>
+            <dgm:item>getWorkerInformationByPersonNumberAsync</dgm:item>
+            <dgm:item>correctWorkRelationshipTerminationAsync</dgm:item>
+            <dgm:item>cancelWorkRelationship</dgm:item>
+            <dgm:item>cancelWorkRelationshipAsync</dgm:item>
+            <dgm:item>createAssignmentTwoTierSCSA</dgm:item>
+            <dgm:item>createAssignmentTwoTierSCSAAsync</dgm:item>
+            <dgm:item>deletePersonAddress</dgm:item>
+            <dgm:item>deletePersonContactRelationship</dgm:item>
+            <dgm:item>deletePersonLegislativeData</dgm:item>
+            <dgm:item>deletePersonName</dgm:item>
+            <dgm:item>deletePersonTypeUsage</dgm:item>
+            <dgm:item>deletePersonVisa</dgm:item>
+            <dgm:item>deletePersonNameAsync</dgm:item>
+            <dgm:item>deletePersonAddressAsync</dgm:item>
+            <dgm:item>deletePersonVisaAsync</dgm:item>
+            <dgm:item>deletePersonLegislativeDataAsync</dgm:item>
+            <dgm:item>deletePersonTypeUsageAsync</dgm:item>
+            <dgm:item>deletePersonContactRelationshipAsync</dgm:item>
+            <dgm:item>updateAssignment</dgm:item>
+            <dgm:item>updateAssignmentAsync</dgm:item>
+            <dgm:item>updateWorkRelationship</dgm:item>
+            <dgm:item>updateWorkRelationshipAsync</dgm:item>
+            <dgm:item>findWorker</dgm:item>
+            <dgm:item>findWorkerAsync</dgm:item>
+            <dgm:item>deletePersonIdentifier</dgm:item>
+            <dgm:item>deletePersonIdentifierAsync</dgm:item>
+            <dgm:item>getDfltObjAttrHints</dgm:item>
+            <dgm:item>getServiceLastUpdateTime</dgm:item>
+            <dgm:item>getEntityList</dgm:item>
+            <dgm:item>getServiceLastUpdateTimeAsync</dgm:item>
+            <dgm:item>getDfltObjAttrHintsAsync</dgm:item>
+            <dgm:item>getEntityListAsync</dgm:item>
+            <dgm:item>onFault</dgm:item>
+            <dgm:item>findPersonTypeUsageAsyncResponse</dgm:item>
+            <dgm:item>findPersonContactRelationshipAsyncResponse</dgm:item>
+            <dgm:item>updatePersonTypeUsageAsyncResponse</dgm:item>
+            <dgm:item>createPersonTypeUsageAsyncResponse</dgm:item>
+            <dgm:item>updatePersonContactRelationshipAsyncResponse</dgm:item>
+            <dgm:item>mergePersonTypeUsageAsyncResponse</dgm:item>
+            <dgm:item>mergePersonContactRelationshipAsyncResponse</dgm:item>
+            <dgm:item>createPersonContactRelationshipAsyncResponse</dgm:item>
+            <dgm:item>mergePersonAsyncResponse</dgm:item>
+            <dgm:item>updatePersonAsyncResponse</dgm:item>
+            <dgm:item>findPersonAsyncResponse</dgm:item>
+            <dgm:item>createPersonContactAsyncResponse</dgm:item>
+            <dgm:item>deletePersonCitizenshipAsyncResponse</dgm:item>
+            <dgm:item>deletePersonEthnicityAsyncResponse</dgm:item>
+            <dgm:item>deletePersonPhoneAsyncResponse</dgm:item>
+            <dgm:item>deletePersonEmailAsyncResponse</dgm:item>
+            <dgm:item>deletePersonNationalIdentifierAsyncResponse</dgm:item>
+            <dgm:item>deletePersonPassportAsyncResponse</dgm:item>
+            <dgm:item>deletePersonDriversLicenceAsyncResponse</dgm:item>
+            <dgm:item>deletePersonDeliveryMethodAsyncResponse</dgm:item>
+            <dgm:item>deletePersonReligionAsyncResponse</dgm:item>
+            <dgm:item>deletePersonImageAsyncResponse</dgm:item>
+            <dgm:item>updateAssignmentGradeStepsAsyncResponse</dgm:item>
+            <dgm:item>createAssignmentGradeStepsAsyncResponse</dgm:item>
+            <dgm:item>updateWorkTermsGradeStepsAsyncResponse</dgm:item>
+            <dgm:item>createWorkTermsGradeStepsAsyncResponse</dgm:item>
+            <dgm:item>createAssignmentAsyncResponse</dgm:item>
+            <dgm:item>createAssignmentSupervisorAsyncResponse</dgm:item>
+            <dgm:item>updateWorkTermsWorkMeasureAsyncResponse</dgm:item>
+            <dgm:item>updateWorkTermsSupervisorAsyncResponse</dgm:item>
+            <dgm:item>createAssignmentWorkMeasureAsyncResponse</dgm:item>
+            <dgm:item>createWorkTermsWorkMeasureAsyncResponse</dgm:item>
+            <dgm:item>updateAssignmentWorkMeasureAsyncResponse</dgm:item>
+            <dgm:item>updateAssignmentSupervisorAsyncResponse</dgm:item>
+            <dgm:item>createWorkTermsSupervisorAsyncResponse</dgm:item>
+            <dgm:item>createWorkRelationshipAsyncResponse</dgm:item>
+            <dgm:item>createWorkTermsAsyncResponse</dgm:item>
+            <dgm:item>updateWorkTermsAsyncResponse</dgm:item>
+            <dgm:item>createWorkerAsyncResponse</dgm:item>
+            <dgm:item>reverseTerminateWorkRelationshipAsyncResponse</dgm:item>
+            <dgm:item>terminateWorkRelationshipAsyncResponse</dgm:item>
+            <dgm:item>getWorkerInformationByUserNameAsyncResponse</dgm:item>
+            <dgm:item>getWorkerInformationByAssignmentNumberAsyncResponse</dgm:item>
+            <dgm:item>getWorkerInformationByPersonNumberAsyncResponse</dgm:item>
+            <dgm:item>correctWorkRelationshipTerminationAsyncResponse</dgm:item>
+            <dgm:item>cancelWorkRelationshipAsyncResponse</dgm:item>
+            <dgm:item>createAssignmentTwoTierSCSAAsyncResponse</dgm:item>
+            <dgm:item>deletePersonNameAsyncResponse</dgm:item>
+            <dgm:item>deletePersonAddressAsyncResponse</dgm:item>
+            <dgm:item>deletePersonVisaAsyncResponse</dgm:item>
+            <dgm:item>deletePersonLegislativeDataAsyncResponse</dgm:item>
+            <dgm:item>deletePersonTypeUsageAsyncResponse</dgm:item>
+            <dgm:item>deletePersonContactRelationshipAsyncResponse</dgm:item>
+            <dgm:item>updateAssignmentAsyncResponse</dgm:item>
+            <dgm:item>updateWorkRelationshipAsyncResponse</dgm:item>
+            <dgm:item>findWorkerAsyncResponse</dgm:item>
+            <dgm:item>deletePersonIdentifierAsyncResponse</dgm:item>
+            <dgm:item>getServiceLastUpdateTimeAsyncResponse</dgm:item>
+            <dgm:item>getDfltObjAttrHintsAsyncResponse</dgm:item>
+            <dgm:item>getEntityListAsyncResponse</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gReference name="dbReference">
+        <dgm:body borderWidth="2" arcRad="20" X="652" Y="346" width="136" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="642" Y="339" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="dbReference" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMAddress/dbReference#wsdl.interface(dbReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>insert</dgm:item>
+        </dgm:operations>
+    </dgm:gReference>
+    <dgm:gComponent name="addressProcess">
+        <dgm:body borderWidth="2" arcRad="20" X="340" Y="172" width="130" height="111">
+            <dgm:borderColor r="69" g="113" b="140"/>
+            <dgm:lightBgColor r="166" g="208" b="230"/>
+            <dgm:darkBgColor r="99" g="162" b="201"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="330" Y="165" width="150" height="127">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="addressprocess_services" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMAddress/addressProcess#wsdl.interface(addressProcess)"/>
+        <dgm:outputPort name="EmpsRestRef" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/HCMCloudServices/HCMAddress/EmpsRestRef#wsdl.interface(EmpsRestRef_ptt)"/>
+        <dgm:outputPort name="WorkerSOAPRef" X="120" Y="40" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/#wsdl.interface(WorkerService)" callbackInterface="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/#wsdl.interface(WorkerServiceResponse)"/>
+        <dgm:outputPort name="dbReference" X="120" Y="65" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMAddress/dbReference#wsdl.interface(dbReference_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="addressprocess_services_ep" target="addressProcess/addressprocess_services" width="2">
+        <dgm:gSegment X1="168" Y1="197" X2="330" Y2="197"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="addressProcess/EmpsRestRef" target="EmpsRestRef" width="2">
+        <dgm:gSegment X1="480" Y1="197" X2="504" Y2="197"/>
+        <dgm:gSegment X1="504" Y1="197" X2="504" Y2="36"/>
+        <dgm:gSegment X1="504" Y1="36" X2="642" Y2="36"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="addressProcess/WorkerSOAPRef" target="WorkerSOAPRef" width="2">
+        <dgm:gSegment X1="480" Y1="222" X2="519" Y2="222"/>
+        <dgm:gSegment X1="519" Y1="222" X2="519" Y2="154"/>
+        <dgm:gSegment X1="519" Y1="154" X2="642" Y2="154"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="addressProcess/dbReference" target="dbReference" width="2">
+        <dgm:gSegment X1="480" Y1="247" X2="504" Y2="247"/>
+        <dgm:gSegment X1="504" Y1="247" X2="504" Y2="356"/>
+        <dgm:gSegment X1="504" Y1="356" X2="642" Y2="356"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+</dgm:gDiagram>

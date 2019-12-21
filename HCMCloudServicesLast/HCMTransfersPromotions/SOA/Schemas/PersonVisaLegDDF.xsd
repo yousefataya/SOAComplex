@@ -1,0 +1,34 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/"
+     xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml"
+     xmlns="http://xmlns.oracle.com/apps/hcm/people/core/flex/personVisaLegDDF/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PersonVisaLegDDFSG.xsd" xml:id="PersonVisaLegDDFSG-xsd"/>
+    <xsd:include schemaLocation="PersonVisaLegDDFCH.xsd" xml:id="PersonVisaLegDDFCH-xsd"/>
+    <xsd:include schemaLocation="OraHrxQa.xsd" xml:id="OraHrxQa-xsd"/>
+    <xsd:include schemaLocation="PersonVisaLegDDFAE.xsd" xml:id="PersonVisaLegDDFAE-xsd"/>
+    <xsd:include schemaLocation="PersonVisaLegDDFKW.xsd" xml:id="PersonVisaLegDDFKW-xsd"/>
+    <xsd:include schemaLocation="PersonVisaLegDDFSA.xsd" xml:id="PersonVisaLegDDFSA-xsd"/>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava_1.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML_1.xsd"/>
+    <xsd:complexType name="PersonVisaLegDDF">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>VisaPermitId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="VisaPermitId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="EffectiveStartDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="EffectiveEndDate" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="__FLEX_Context_DisplayValue" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="_FLEX_NumOfSegments" nillable="true" type="xsd:int"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personVisaLegDDF" type="PersonVisaLegDDF"/>
+</xsd:schema>

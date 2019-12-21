@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="windows-1256" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:EPI="http://xmlns.fact.com/ws/EPI"
+            targetNamespace="http://xmlns.fact.com/ws/EPI" elementFormDefault="qualified">
+    
+     <xsd:element name="EmployeeProfileInquiryMessageInput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MessageHeader" type="EPI:InputMessageHeaderComplex"/>
+                <xsd:element name="MessageBody" type="EPI:InputMessageBodyComplex"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    
+    
+    <xsd:element name="EmployeeProfileInquiryMessageOutput">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="MessageHeader" type="EPI:OutputMessageHeaderComplex"/>
+                <xsd:element name="MessageBody" type="EPI:OutputMessageBodyComplex"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+        
+     <xsd:complexType name="InputMessageHeaderComplex">
+        <xsd:sequence>
+            <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>  
+            <xsd:element name="ApplicationCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>  
+            <xsd:element name="ApplicationUserName" type="xsd:string" minOccurs="1" maxOccurs="1"/>  
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+     <xsd:complexType name="InputMessageBodyComplex">
+        <xsd:sequence>
+            <xsd:element name="InquiryInformation" type="EPI:InputInquiryInformationComplex" minOccurs="1" maxOccurs="1"/>  
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <xsd:complexType name="InputInquiryInformationComplex">
+        <xsd:sequence>
+            <xsd:element name="EmployeeNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>  
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    
+    <xsd:complexType name="OutputMessageHeaderComplex">
+        <xsd:sequence>
+            <xsd:element name="TransactionID" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="OutputMessageBodyComplex">
+        <xsd:sequence>
+            <xsd:element name="StatusInformation" type="EPI:StatusInformationComplex" minOccurs="1"/>
+            <xsd:element name="ErrorInformation" type="EPI:ErrorInformationComplex" minOccurs="0"/>
+            <xsd:element name="InquiryInformation" type="EPI:OutputInquiryInformationComplex" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="OutputInquiryInformationComplex">
+        <xsd:sequence>
+            <xsd:element name="EmployeeNumber" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="EmploymentDate" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="BasicSalary" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="DOB" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="StatusInformationComplex">
+        <xsd:sequence>
+            <xsd:element name="Status" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ErrorInformationComplex">
+        <xsd:sequence>
+            <xsd:element name="ErrorBusCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ErrorBusMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ErrorTechCode" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ErrorTechMessage" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="ErrorTechDetails" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

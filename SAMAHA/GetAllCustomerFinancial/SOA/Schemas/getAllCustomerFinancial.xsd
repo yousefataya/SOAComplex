@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:GACF="http://www.example.org"
+            targetNamespace="http://www.example.org" elementFormDefault="qualified">
+  <xsd:element name="Request">
+    <xsd:complexType>
+      <xsd:sequence>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="Result">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Customers" type="GACF:CustomersComplex" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="CustomersComplex">
+  <xsd:sequence>
+  <xsd:element name="Customer" type="GACF:CustomerComplex" minOccurs="0" maxOccurs="unbounded"/>
+  </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CustomerComplex">
+      <xsd:sequence>
+        <xsd:element name="CusIdNumber" type="xsd:int"/>
+        <xsd:element name="CusName" type="xsd:string"/>
+        <xsd:element name="TotalAmount" type="xsd:int"/>
+        <xsd:element name="Date" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

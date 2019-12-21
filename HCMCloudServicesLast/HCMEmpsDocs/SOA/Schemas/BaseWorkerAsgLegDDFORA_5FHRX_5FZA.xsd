@@ -1,0 +1,29 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/flex/baseWorkerAssignmentDDF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="BaseWorkerAsgLegDDF.xsd"/>
+    <xsd:complexType name="BaseWorkerAsgLegDDFORA_5FHRX_5FZA">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>AssignmentId</attribute>
+                    <attribute>EffectiveStartDate</attribute>
+                    <attribute>EffectiveEndDate</attribute>
+                    <attribute>EffectiveSequence</attribute>
+                    <attribute>EffectiveLatestChange</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="BaseWorkerAsgLegDDF">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="_ORA_HRX_ZA_NATURE_OF_PERSON" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="_ORA_HRX_ZA_NATURE_OF_PERSON_Display" nillable="true"
+                         type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="baseWorkerAsgLegDDFORA_5FHRX_5FZA" type="BaseWorkerAsgLegDDFORA_5FHRX_5FZA"/>
+</xsd:schema>

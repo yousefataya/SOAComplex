@@ -1,0 +1,13 @@
+<adapter-config name="getTransferNoteReference" adapter="db" wsdlLocation="../WSDLs/getTransferNoteReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hrConnection" location="eis/DB/factHRDatabase"/>
+  <endpoint-interaction portType="getTransferNoteReference_ptt" operation="getTransferNoteReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HR10G"/>
+      <property name="PackageName" value="HRS_PKG_EVALUATION"/>
+      <property name="ProcedureName" value="GET_TRANSPORTATION"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

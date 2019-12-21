@@ -1,0 +1,89 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/InsertGradesDDbReference" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/InsertGradesDDbReference" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="HcmGradeDCollection" type="HcmGradeDCollection"/>
+   <xs:complexType name="HcmGradeDCollection">
+      <xs:sequence>
+         <xs:element name="HcmGradeD" type="HcmGradeD" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="HcmGradeD">
+      <xs:sequence>
+         <xs:element name="gradeCode" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwCode" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwValue" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwStatus" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="overtimeFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwMonthOfY" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwType" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="percentFlg" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="value" type="xs:string" minOccurs="0" nillable="true"/>
+         <xs:element name="dedFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwPayment" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="dateType" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="discountFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="tempFlg" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="arapFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="compValue" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="healthFlg" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="salFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="clsFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="dedSal" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="extraMonthNo" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="permissionPeriod" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="punFlag" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwDedIndicator" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwDedStatus" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="alwIndicator" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="dedIndicator" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="maxAmnt" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="caccNum" type="string20" minOccurs="0" nillable="true"/>
+         <xs:element name="minAmount" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="depYear" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="status" type="string30" minOccurs="0" nillable="true"/>
+         <xs:element name="createdBy" type="string30" minOccurs="0" nillable="true"/>
+         <xs:element name="dateCreated" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="modifiedBy" type="string30" minOccurs="0" nillable="true"/>
+         <xs:element name="dateModified" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="stageObject" type="string250" minOccurs="0" nillable="true"/>
+         <xs:element name="stageObjectId" type="string1" minOccurs="0" nillable="true"/>
+         <xs:element name="id" type="string2000" nillable="true"/>
+         <xs:element name="requestType" type="string10" minOccurs="0" nillable="true"/>
+         <xs:element name="batchNum" type="string3000" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:simpleType name="string1">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="1"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string20">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="20"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string30">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="30"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string250">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="250"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string2000">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="2000"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string10">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="10"/>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="string3000">
+      <xs:restriction base="xs:string">
+         <xs:maxLength value="3000"/>
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>

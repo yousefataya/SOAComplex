@@ -1,0 +1,13 @@
+<adapter-config name="StagesDbReference" adapter="db" wsdlLocation="../WSDLs/StagesDbReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="hcmHr" location="eis/DB/hrHCM"/>
+  <endpoint-interaction portType="StagesDbReference_ptt" operation="StagesDbReference">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="HCM_STAGE"/>
+      <property name="PackageName" value="HCM_STAGING_PKG"/>
+      <property name="ProcedureName" value="HCM_INS_ACR_SOA"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

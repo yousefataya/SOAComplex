@@ -1,0 +1,66 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     sdoJava:package="oracle.apps.hcm.employment.core.workerServiceV2" xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+     xmlns:sdoJava="commonj.sdo/java" xmlns:sdoXML="commonj.sdo/xml" xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/workerServiceV2/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:annotation>
+        <xsd:documentation xmlns:oer="http://xmlns.oracle.com/oer">
+            <name>Person National Identifier Details Version 2</name>
+            <description>A unique identifier for a person that is specific to a
+                legislation, for example, Social Security Number in US
+                legislation and National Insurance Number in UK legislation.</description>
+            <oer:category name="lba">
+                <value>HcmTop-HcmTop</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People</value>
+                <value>HcmTop-HcmTop : HcmPeopleTop-People : HcmPeopleCore-Personal
+                    Information</value>
+            </oer:category>
+            <oer:attributes>
+                <oer:attribute description="National identification number. Not marked as mandatory in order to always allow creation of a first row for every person even when NID is not provided."
+                     name="NationalIdentifierNumber"/>
+                <oer:attribute description="System generated part of primary key. Surrogate key."
+                     name="NationalIdentifierId"/>
+                <oer:attribute description="Used to implement optimistic locking. This number is incremented every time that the row is updated. The number is compared at the start and end of a transaction to detect whether another session has updated the row since it was queried."
+                     name="ObjectVersionNumber"/>
+                <oer:attribute description="Type of National Identifier" name="NationalIdentifierType"/>
+                <oer:attribute description="Date of Issue" name="IssueDate"/>
+                <oer:attribute description="Expiration date of the national identifier" name="ExpirationDate"/>
+                <oer:attribute description="Person for whom the NID is recorded." name="PersonId"/>
+                <oer:attribute description="Place where the NID is issued." name="PlaceOfIssue"/>
+            </oer:attributes>
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:import namespace="http://xmlns.oracle.com/adf/svc/types/" schemaLocation="BC4JService.xsd"/>
+    <xsd:import namespace="commonj.sdo/java" schemaLocation="sdoJava.xsd"/>
+    <xsd:import namespace="commonj.sdo/xml" schemaLocation="sdoXML.xsd"/>
+    <xsd:complexType name="PersonNidDetailsResult">
+        <xsd:complexContent>
+            <xsd:extension base="ns0:MethodResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Value" type="PersonNidDetails"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="PersonNidDetails">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>NationalIdentifierId</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="NationalIdentifierNumber" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="NationalIdentifierId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="ObjectVersionNumber" type="xsd:int" sdoXML:dataType="sdoJava:IntObject"/>
+            <xsd:element minOccurs="0" name="NationalIdentifierType" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="IssueDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="ExpirationDate" nillable="true" type="ns0:date-Date"/>
+            <xsd:element minOccurs="0" name="PersonId" type="xsd:long" sdoXML:dataType="sdoJava:LongObject"/>
+            <xsd:element minOccurs="0" name="PlaceOfIssue" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="personNidDetails" type="PersonNidDetails"/>
+    <xsd:element name="personNidDetailsResult" type="PersonNidDetailsResult"/>
+</xsd:schema>

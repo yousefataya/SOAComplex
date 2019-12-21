@@ -1,0 +1,2408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    
+     targetNamespace="http://employee.fact"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns="http://employee.fact"
+     xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+     xmlns:ns1="http://org.apache.axis2/xsd"
+     xmlns:ax238="http://dao.fact/xsd"
+     xmlns:ax227="http://salarySlip.bean.fact/xsd"
+     xmlns:ax217="http://leave.bean.fact/xsd"
+     xmlns:ax236="http://email.bean.fact/xsd"
+     xmlns:ax214="http://employeeInfoDetails.bean.fact/xsd"
+     xmlns:ax28="http://evaluation.bean.fact/xsd"
+     xmlns:ax224="http://employment.bean.fact/xsd"
+     xmlns:ax221="http://employee.bean.fact/xsd"
+     xmlns:ax211="http://employeeFinancial.bean.fact/xsd"
+     xmlns:ax233="http://utility.bean.fact/xsd"
+     xmlns:ax230="http://WorkFlowStructure.bean.fact/xsd"
+     xmlns:ax25="http://overTime.bean.fact/xsd"
+     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+     xmlns:ax22="http://common.bean.fact/xsd"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+     xmlns:ax21="http://vacation.bean.fact/xsd"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:documentation>Please Type your service description here</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax225="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://employment.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="EmploymentInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax225:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="approvedDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="branch" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="contractType" type="xs:long"/>
+                            <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employmentCustodies"
+                                 nillable="true" type="ax224:EmploymentCustody"/>
+                            <xs:element minOccurs="0" name="employmentType" type="xs:long"/>
+                            <xs:element minOccurs="0" name="hireDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="insuranceDegree" type="xs:long"/>
+                            <xs:element minOccurs="0" name="jobTitle" type="xs:long"/>
+                            <xs:element minOccurs="0" name="lastPromotion" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="majorDegree" type="xs:long"/>
+                            <xs:element minOccurs="0" name="managerName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="managerNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="organizationalStructure" type="xs:long"/>
+                            <xs:element minOccurs="0" name="profession" type="xs:long"/>
+                            <xs:element minOccurs="0" name="region" type="xs:long"/>
+                            <xs:element minOccurs="0" name="rightSign" type="xs:long"/>
+                            <xs:element minOccurs="0" name="socialSecurityDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="socialSecurityNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="taxNumber" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmploymentCustody">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="amount" type="xs:long"/>
+                    <xs:element minOccurs="0" name="backDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="custodyDetails" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="custodyType" type="xs:long"/>
+                    <xs:element minOccurs="0" name="receiptDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://email.bean.fact/xsd">
+            <xs:complexType name="EmployeeListResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="arrEmailListIn" nillable="true"
+                         type="ax236:EmailList"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="arrEmailListOut" nillable="true"
+                         type="ax236:EmailList"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmailList">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="strEmployeeName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strEmployeeNumber" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax23="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://vacation.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="VacationHistoryResponse">
+                <xs:complexContent>
+                    <xs:extension base="ax23:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="vacationHistories" nillable="true"
+                                 type="ax21:VacationHistory"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="VacationHistory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netBalance" type="xs:float"/>
+                    <xs:element minOccurs="0" name="remainingBalance" type="xs:float"/>
+                    <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vacationCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="vacationNote" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VacationResponse">
+                <xs:complexContent>
+                    <xs:extension base="ax23:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="errorCode" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="errorMessage" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="number" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax219="http://leave.bean.fact/xsd" xmlns:ax216="http://employeeInfoDetails.bean.fact/xsd"
+             xmlns:ax239="http://dao.fact/xsd" xmlns:ax226="http://employment.bean.fact/xsd"
+             xmlns:ax27="http://overTime.bean.fact/xsd" xmlns:ax223="http://employee.bean.fact/xsd"
+             xmlns:ax24="http://vacation.bean.fact/xsd" xmlns:ax220="http://common.bean.fact/xsd"
+             xmlns:ax229="http://salarySlip.bean.fact/xsd" xmlns:ax237="http://email.bean.fact/xsd"
+             xmlns:ax213="http://employeeFinancial.bean.fact/xsd" xmlns:ax235="http://utility.bean.fact/xsd"
+             xmlns:ax210="http://evaluation.bean.fact/xsd" xmlns:ax232="http://WorkFlowStructure.bean.fact/xsd"
+             attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://employee.fact">
+            <xs:import namespace="http://vacation.bean.fact/xsd"/>
+            <xs:import namespace="http://overTime.bean.fact/xsd"/>
+            <xs:import namespace="http://evaluation.bean.fact/xsd"/>
+            <xs:import namespace="http://employeeFinancial.bean.fact/xsd"/>
+            <xs:import namespace="http://employeeInfoDetails.bean.fact/xsd"/>
+            <xs:import namespace="http://leave.bean.fact/xsd"/>
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:import namespace="http://employee.bean.fact/xsd"/>
+            <xs:import namespace="http://employment.bean.fact/xsd"/>
+            <xs:import namespace="http://salarySlip.bean.fact/xsd"/>
+            <xs:import namespace="http://WorkFlowStructure.bean.fact/xsd"/>
+            <xs:import namespace="http://utility.bean.fact/xsd"/>
+            <xs:import namespace="http://email.bean.fact/xsd"/>
+            <xs:import namespace="http://dao.fact/xsd"/>
+            <xs:element name="main">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="args" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getVacationHistory">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getVacationHistoryResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:VacationHistoryResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addValidateOverTime">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="state" type="xs:int"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="overTimeDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="overTimeStart" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="overTimeEnd" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="bookNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="overTimeReason" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="projectCode" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addValidateOverTimeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax27:AddValidateOverTimeResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getOverTimeProject">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getOverTimeProjectResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax27:OverTimeTypeResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCommitteeInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCommitteeInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:CommitteeInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeFinancialInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeFinancialInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax213:EmployeeFinancialInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeInfoDetail">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeInfoDetailResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax216:EmployeeInfoDetail"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="validateEmployeeLeave">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="leaveDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveStartTime" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveEndTime" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveDuration" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveReason" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="validateEmployeeLeaveResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax219:LeaveResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeVacationToYear">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeVacationToYearResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:VacationResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeVacationToDate">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="calculationDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeVacationToDateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:VacationResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeVacationDuration">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationStart" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationEnd" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationType" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeVacationDurationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax24:VacationResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addValidateEmployeeVacation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="state" type="xs:int"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="vacationRelatedType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="vacationStart" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationEnd" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationDuration" type="xs:long"/>
+                        <xs:element minOccurs="0" name="vacationReason" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vacationAddress" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="employeeSpare" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addValidateEmployeeVacationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpDocument">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="status" type="xs:long"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="docTypeId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="docTypeNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="issuancePlaceDoc" type="xs:long"/>
+                        <xs:element minOccurs="0" name="issuanceOfficeDoc" type="xs:long"/>
+                        <xs:element minOccurs="0" name="issuanceStardDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="issuanceEndDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="seqId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpDocumentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeInfoById">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeInfoByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax223:Employee"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateMaritalStatus">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="maritalStatusId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateMaritalStatusResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmployeeAddress">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="status" type="xs:int"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="stateCode" type="xs:int"/>
+                        <xs:element minOccurs="0" name="poBox" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="postal" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="mobile" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmployeeAddressResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpDependenciesKids">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="status" type="xs:long"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="birthDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="dependentCode" type="xs:long"/>
+                        <xs:element minOccurs="0" name="localName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="maritalStatus" type="xs:long"/>
+                        <xs:element minOccurs="0" name="gender" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="inusranceSuspendDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="nationalNumber" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpDependenciesKidsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpDependency">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="status" type="xs:long"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="nationality" type="xs:long"/>
+                        <xs:element minOccurs="0" name="suspendDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="wifeWorkFlag" type="xs:long"/>
+                        <xs:element minOccurs="0" name="birthDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="marryDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="dependentCode" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="nationalNumber" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpDependencyResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmploymentInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmploymentInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax226:EmploymentInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpScientificDegree">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="status" type="xs:long"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="degreeSerialNumber" type="xs:long"/>
+                        <xs:element minOccurs="0" name="scientificDegree" type="xs:long"/>
+                        <xs:element minOccurs="0" name="specialization" type="xs:long"/>
+                        <xs:element minOccurs="0" name="empGradeSide" type="xs:long"/>
+                        <xs:element minOccurs="0" name="degreeDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="averageText" type="xs:long"/>
+                        <xs:element minOccurs="0" name="digitalBrand" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="schoolName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateEmpScientificDegreeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateVocationalCertificate">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="status" type="xs:long"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="vocCode" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="certDescription" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="institute" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="gotCertDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="sessionHours" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUpdateVocationalCertificateResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addEmployeeLeave">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="leaveDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveStartTime" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveEndTime" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveDuration" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="leaveReason" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="spareEmployeeId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addEmployeeLeaveResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax220:TransactionResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmpPayslip">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="employeeId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="date" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmpPayslipResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax229:EmployeeSalarySlip"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="checkHoliday">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="checkHolidayResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllEmployee">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="allFlag" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllEmployeeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlowStructureResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGradeList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="ManagerFlage" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGradeListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:EvaluationGrade"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCommiteFlage">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCommiteFlageResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:CommiteFlageResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeTitle">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeTitleResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax223:EmployeeTitle"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getTransferNote">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getTransferNoteResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:TransferInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBranches">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBranchesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:BranchResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="isGeneralManager">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="isGeneralManagerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:GeneralManagerFlageResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllEmployeeUnderManager">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="branchId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllEmployeeUnderManagerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlowStructureResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getFinanciaPerspective">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="jobCode" type="xs:int"/>
+                        <xs:element minOccurs="0" name="branchCode" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getFinanciaPerspectiveResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:FinanciaPerspectiveResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmpEvaluationInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmpEvaluationInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:EvaluationResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEvaluationNote">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEvaluationNoteResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:EvaluationNoteResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUnpayedDecisionMakerInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="branchId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="strVacationStart" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUnpayedDecisionMakerInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlow"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllSpareEmployeeUnderEmployee">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllSpareEmployeeUnderEmployeeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlowStructureResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEvaluationHistory">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEvaluationHistoryResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:EvaluationHistory"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveEvaluationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="arrEvaluationSavedCumulativeDataRequest"
+                             nillable="true" type="ax28:EvaluationSavedCumulativeDataRequest"/>
+                        <xs:element minOccurs="0" name="objEvaluationSavedDataRequest" nillable="true"
+                             type="ax28:EvaluationSavedDataRequest"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveEvaluationRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:DBResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEvaluationPerspective">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strEmployeeId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEvaluationPerspectiveResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:EvaluationPerspectiveResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeByWorkFlowLevel">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="level" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="operationType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="branchId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeByWorkFlowLevelResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeStructure">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="manager" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeStructureResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:EmployeeStructureResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeStructureLevel">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="structureLevel" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeeStructureLevelResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:EmpStructureLevelResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDecisionMakerInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="level" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="operationType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="branchId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDecisionMakerInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlow"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNumberOfLevelsForEmployee">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="operationType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="branchId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNumberOfLevelsForEmployeeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmailRestrictionUsers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="intRequestType" type="xs:int"/>
+                        <xs:element minOccurs="0" name="intSubRequestType" type="xs:int"/>
+                        <xs:element minOccurs="0" name="strEmployeeNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="requestStatus" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmailRestrictionUsersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax236:EmployeeListResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGradeRatioList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="gradeFlage" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGradeRatioListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:EvaluationGradeRatio"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDeputyGeneralManager">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDeputyGeneralManagerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlowStructureResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllApprovedManager">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strYear" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllApprovedManagerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax232:WorkFlowStructureResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllEmployeeUnderWorkflow">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="managerId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="routingManagerId" nillable="true" type="xs:string"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="arrEmployeesWorkflowInfo"
+                             nillable="true" type="ax232:EmployeesWorkflowInfo"/>
+                        <xs:element minOccurs="0" name="allFlag" type="xs:int"/>
+                        <xs:element minOccurs="0" name="branchCode" type="xs:int"/>
+                        <xs:element minOccurs="0" name="requestParam" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllEmployeeUnderWorkflowResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax232:SpareEmployeeUnderWorkflow"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSelectedEmployeePermission">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strEmployeeNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="operationTypeId" type="xs:int"/>
+                        <xs:element minOccurs="0" name="branchId" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSelectedEmployeePermissionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getManagerInfoByBranchId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="intBranchNumber" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getManagerInfoByBranchIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:ManagerInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeesByBranchDepartment">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="branchId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="departmentId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getEmployeesByBranchDepartmentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax232:SelectedEmployeePermissionInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGradeEvaluationGradeCount">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="BranchCode" type="xs:int"/>
+                        <xs:element minOccurs="0" name="DepartmentCode" type="xs:int"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getGradeEvaluationGradeCountResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax238:EvaluationGradeDetailes"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getManagerPositionInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="strEmployeeNumber" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getManagerPositionInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:ManagerPositionInfo"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBranchesManager">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getBranchesManagerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:BranchesManagerResponse"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAdministrationDepartments">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="reqUserName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="reqPassword" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAdministrationDepartmentsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax28:AdministrationDepartments"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns:ax231="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://WorkFlowStructure.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="WorkFlowStructureResponse">
+                <xs:complexContent>
+                    <xs:extension base="ax231:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="workFlowStructures" nillable="true"
+                                 type="ax230:WorkFlowStructure"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="WorkFlowStructure">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="employeeAcountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="employeeName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="WorkFlow">
+                <xs:complexContent>
+                    <xs:extension base="ax231:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="strDecisionMaker" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strEditableFlage" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmployeesWorkflowInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="branchId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="managerId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SpareEmployeeUnderWorkflow">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="employeeId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="employeeName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="SelectedEmployeePermissionInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="branchCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="branchDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="departmentCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="departmentDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="employeeName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="employeeNumber" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax212="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://employeeFinancial.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="EmployeeFinancialInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax212:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="amount" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="bankBranchNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="empBasicSalary" type="xs:float"/>
+                            <xs:element minOccurs="0" name="empTaxFlag" type="xs:long"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeBonusesInfos"
+                                 nillable="true" type="ax211:EmployeeBonusesInfo"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeDeductionsInfos"
+                                 nillable="true" type="ax211:EmployeeDeductionsInfo"/>
+                            <xs:element minOccurs="0" name="familyHelpFlag" type="xs:long"/>
+                            <xs:element minOccurs="0" name="socialSecurityFlag" type="xs:long"/>
+                            <xs:element minOccurs="0" name="wifeWorkFlag" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmployeeBonusesInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bonusDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="bonusValue" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeDeductionsInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deductionDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deductionValue" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax26="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://overTime.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="AddValidateOverTimeResult">
+                <xs:complexContent>
+                    <xs:extension base="ax26:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="amount" type="xs:float"/>
+                            <xs:element minOccurs="0" name="errorCode" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="errorMessage" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="overTimeType" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="OverTimeTypeResult">
+                <xs:complexContent>
+                    <xs:extension base="ax26:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="overTimeList" nillable="true"
+                                 type="ax25:OverTimeType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="OverTimeType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax215="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://employeeInfoDetails.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="EmployeeInfoDetail">
+                <xs:complexContent>
+                    <xs:extension base="ax215:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeDependancies"
+                                 nillable="true" type="ax214:EmployeeDependancy"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeDependanciesKids"
+                                 nillable="true" type="ax214:EmployeeDependancyKids"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeDocuments"
+                                 nillable="true" type="ax214:EmployeeDocument"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeUpdateDegrees"
+                                 nillable="true" type="ax214:EmployeeUpdateDegree"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeVocationalCertificates"
+                                 nillable="true" type="ax214:EmployeeVocationalCertificate"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmployeeDependancy">
+                <xs:complexContent>
+                    <xs:extension base="ax215:Person">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="attachment" nillable="true" type="xs:base64Binary"/>
+                            <xs:element minOccurs="0" name="dependentCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="insuranceBeginDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="insuranceDegree" type="xs:long"/>
+                            <xs:element minOccurs="0" name="insuranceEndDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="marryDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="nationalityNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="relationshipType" type="xs:long"/>
+                            <xs:element minOccurs="0" name="suspendedDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="wifeWorkFlag" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmployeeDependancyKids">
+                <xs:complexContent>
+                    <xs:extension base="ax215:Person">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="attachment" nillable="true" type="xs:base64Binary"/>
+                            <xs:element minOccurs="0" name="dependentCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="gender" type="xs:long"/>
+                            <xs:element minOccurs="0" name="insuranceBeginDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="insuranceDegree" type="xs:long"/>
+                            <xs:element minOccurs="0" name="insuranceSuspendDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="maritalStatus" type="xs:long"/>
+                            <xs:element minOccurs="0" name="nationalityNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="relationshipType" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmployeeDocument">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="attachment" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="cityCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="coutryCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="docNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="docSequence" type="xs:long"/>
+                    <xs:element minOccurs="0" name="docType" type="xs:long"/>
+                    <xs:element minOccurs="0" name="empAccountNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="expiryDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="releaseDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeUpdateDegree">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="attachment" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="averageDigital" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="averageText" type="xs:long"/>
+                    <xs:element minOccurs="0" name="degreeDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="degreeId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empGraduatedSide" type="xs:long"/>
+                    <xs:element minOccurs="0" name="schoolName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="scientificDegree" type="xs:long"/>
+                    <xs:element minOccurs="0" name="spcCode" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeVocationalCertificate">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="attachment" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="certificateDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="code" type="xs:long"/>
+                    <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="getCertificateDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="hoursOfCertificate" type="xs:long"/>
+                    <xs:element minOccurs="0" name="institute" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax234="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://utility.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="BranchResult">
+                <xs:complexContent>
+                    <xs:extension base="ax234:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="branchList" nillable="true"
+                                 type="ax233:Branch"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="Branch">
+                <xs:complexContent>
+                    <xs:extension base="ax234:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="DBResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="intCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strDescription" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://dao.fact/xsd">
+            <xs:complexType name="EvaluationGradeDetailes">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="arrEvaluationGradeCountGM" nillable="true"
+                         type="ax238:EvaluationGradeCount"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="arrEvaluationGradeCountP3"
+                         nillable="true" type="ax238:EvaluationGradeCount"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationGradeCount">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="branchId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="employeeCountByGrade" type="xs:double"/>
+                    <xs:element minOccurs="0" name="gradeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax228="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://salarySlip.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="EmployeeSalarySlip">
+                <xs:complexContent>
+                    <xs:extension base="ax228:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="arabicName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="basicSalary" type="xs:float"/>
+                            <xs:element minOccurs="0" name="basicSalaryCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="branch" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="computerAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="computerAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="extraBasicSalary" type="xs:float"/>
+                            <xs:element minOccurs="0" name="extraBasicSalaryCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="extraFamilyAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="extraFamilyAllowanceCode" type="xs:long"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="familyAllowance"
+                                 nillable="true" type="ax227:MainAllowance"/>
+                            <xs:element minOccurs="0" name="grade" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="managementAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="managementAllowanceCode" type="xs:long"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="moveAllowance" nillable="true"
+                                 type="ax227:MainAllowance"/>
+                            <xs:element minOccurs="0" name="netSalary" type="xs:float"/>
+                            <xs:element minOccurs="0" name="netSalaryCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="netSalaryDescription" nillable="true" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="otherAllowance" nillable="true"
+                                 type="ax227:MainAllowance"/>
+                            <xs:element minOccurs="0" name="otherDeduction" type="xs:float"/>
+                            <xs:element minOccurs="0" name="otherDeductionCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="overTimeAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="overTimeAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="salarySlipDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="socialDeduction" type="xs:float"/>
+                            <xs:element minOccurs="0" name="socialDeductionCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="specialAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="specialAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="taxDeduction" type="xs:float"/>
+                            <xs:element minOccurs="0" name="taxDeductionCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="tellerAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="tellerAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="totalAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="totalAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="totalDeduction" type="xs:float"/>
+                            <xs:element minOccurs="0" name="totalDeductionCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="totalFamilyAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="totalFamilyAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="totalMoveAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="totalMoveAllowanceCode" type="xs:long"/>
+                            <xs:element minOccurs="0" name="totalOtherAllowance" type="xs:float"/>
+                            <xs:element minOccurs="0" name="totalOtherAllowanceCode" type="xs:long"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="MainAllowance">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="key" type="xs:long"/>
+                    <xs:element minOccurs="0" name="value" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://common.bean.fact/xsd">
+            <xs:complexType name="ResponseStatus">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="webServiceResponseMessage" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Person">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="birthDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nationality" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TransactionResponse">
+                <xs:complexContent>
+                    <xs:extension base="ax22:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="errorCode" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="errorMessage" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax218="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://leave.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="LeaveResponse">
+                <xs:complexContent>
+                    <xs:extension base="ax218:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="currentBalance" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="errorCode" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="errorMessage" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="managerMessage" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="usedBalance" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax29="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://evaluation.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="CommitteeInfo">
+                <xs:complexContent>
+                    <xs:extension base="ax29:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="employeeName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="employeeNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="jobDesc" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="jobId" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EvaluationGrade">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="colorCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="gradeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeMaxValue" type="xs:double"/>
+                    <xs:element minOccurs="0" name="gradeMinValue" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CommiteFlageResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="flage" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TransferInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="strCurrentBranchCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strCurrentBranchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strCurrentProfessionCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strCurrentProfessionName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strOldBranchCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strOldBranchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strOldProfessionCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strOldProfessionName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strTransferDate" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="GeneralManagerFlageResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="flage" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FinanciaPerspectiveResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="financiaPerspectiveInfo" nillable="true"
+                         type="ax28:FinanciaPerspectiveInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="FinanciaPerspectiveInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="branchId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="branchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dblPerspectiveRate" type="xs:double"/>
+                    <xs:element minOccurs="0" name="lngCategoryCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lngCategoryMaxRate" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lngCategoryRate" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lngPerspectiveMaxRate" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lngQuestionSeq" type="xs:long"/>
+                    <xs:element minOccurs="0" name="strCategoryDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strQuestion" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="evaluationInfo" nillable="true"
+                         type="ax28:EvaluationInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="admBranchDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="administrationCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="administrationDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="alwValue" type="xs:double"/>
+                    <xs:element minOccurs="0" name="cpfDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empBirthdateDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empHireDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empNameA" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="employeeTypeCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="employeeTypeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="evaluationDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="evaluationDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeMajorDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastPromotion" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="scientificDegreeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="specializationDescription" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationNoteResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="evaluationNote" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="noteDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="noteDescription" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationHistory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="strEvaluationText" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strEvaluationYear" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationSavedCumulativeDataRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="dealersPerspective" type="xs:double"/>
+                    <xs:element minOccurs="0" name="employeeNumber" type="xs:double"/>
+                    <xs:element minOccurs="0" name="finalDecisionId" type="xs:double"/>
+                    <xs:element minOccurs="0" name="growthAndDevelopmentPerspective" type="xs:double"/>
+                    <xs:element minOccurs="0" name="operationsPerspective" type="xs:double"/>
+                    <xs:element minOccurs="0" name="performanceCategory" type="xs:double"/>
+                    <xs:element minOccurs="0" name="personalCategory" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationSavedDataRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="intBranchNumber" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intGMDecision" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strEmplloyeeNumber" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationPerspectiveResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="evaluationPerspectiveInfo" nillable="true"
+                         type="ax28:EvaluationPerspectiveInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationPerspectiveInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="codeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="evalDegree" type="xs:long"/>
+                    <xs:element minOccurs="0" name="evalFlag" type="xs:int"/>
+                    <xs:element minOccurs="0" name="evalFlagDesc" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="evaluationYear" type="xs:long"/>
+                    <xs:element minOccurs="0" name="groupCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="groupDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="perspectiveCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="perspectiveDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="questionOrder" type="xs:long"/>
+                    <xs:element minOccurs="0" name="wieghtRate" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeStructureResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeStructureInfo" nillable="true"
+                         type="ax28:EmployeeStructureInfo"/>
+                    <xs:element minOccurs="0" name="jobDescrition" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeStructureInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="administrationCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="administrationDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="branchCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="branchManagerId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="branchManagerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="branchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="currentBranchId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="currentBranchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="currentDepartmentCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="currentDepartmentName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="departmentManagerId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="departmentManagerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="destinationManager" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="destinationManagerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="evaluationDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="groupDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobGroupId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="managerType" type="xs:long"/>
+                    <xs:element minOccurs="0" name="oldDepartmentCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="oldDepartmentName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="professionCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="professionDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="structureLevel" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmpStructureLevelResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="empName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobId" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EvaluationGradeRatio">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="gradeCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="gradeDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gradeRatio" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ManagerInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="strEmployeeName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strEmployeeNumber" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ManagerPositionInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="branchId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="branchName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="departmentId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="departmentName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="BranchesManagerResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="branchCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="branchDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managerName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="managerNumber" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AdministrationDepartments">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="administrationCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="administrationDescrption" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax222="http://common.bean.fact/xsd" attributeFormDefault="qualified" elementFormDefault="qualified"
+             targetNamespace="http://employee.bean.fact/xsd">
+            <xs:import namespace="http://common.bean.fact/xsd"/>
+            <xs:complexType name="Employee">
+                <xs:complexContent>
+                    <xs:extension base="ax222:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="arabicName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="birthDate" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="blood" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="branchId" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="degreeMark" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="departmentId" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="empAccountNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="empId" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="empOldNumber" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="empPicture" nillable="true" type="xs:base64Binary"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeAddresses"
+                                 nillable="true" type="ax221:EmployeeAddress"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="employeeExperiences"
+                                 nillable="true" type="ax221:EmployeeExperience"/>
+                            <xs:element minOccurs="0" name="englishName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="graduationDate" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="holidayGroup" type="xs:long"/>
+                            <xs:element minOccurs="0" name="localName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="maritalStateId" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="maritalStateName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="motherName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="nationalNumber" type="xs:long"/>
+                            <xs:element minOccurs="0" name="nationality" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="professionId" type="xs:long"/>
+                            <xs:element minOccurs="0" name="scientificDegree" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="specialist" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="EmployeeAddress">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="addressDetails" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cityCode" type="xs:long"/>
+                    <xs:element minOccurs="0" name="employeeSequence" type="xs:long"/>
+                    <xs:element minOccurs="0" name="mobile" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="poBox" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="postal" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="telephone" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeExperience">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bankExperience" type="xs:long"/>
+                    <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="jobTitle" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="place" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="quiteReason" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="salary" type="xs:float"/>
+                    <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="EmployeeTitle">
+                <xs:complexContent>
+                    <xs:extension base="ax222:ResponseStatus">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="strCode" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strDescription" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strEmployeeId" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="strEmployeeTitle" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="addUpdateEmpDocumentRequest">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpDocument"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpDocumentResponse">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpDocumentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpDependenciesKidsRequest">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpDependenciesKids"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpDependenciesKidsResponse">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpDependenciesKidsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEvaluationHistoryRequest">
+        <wsdl:part name="parameters" element="ns:getEvaluationHistory"/>
+    </wsdl:message>
+    <wsdl:message name="getEvaluationHistoryResponse">
+        <wsdl:part name="parameters" element="ns:getEvaluationHistoryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeVacationDurationRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeVacationDuration"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeVacationDurationResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeVacationDurationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeByWorkFlowLevelRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeByWorkFlowLevel"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeByWorkFlowLevelResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeByWorkFlowLevelResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmploymentInfoRequest">
+        <wsdl:part name="parameters" element="ns:getEmploymentInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getEmploymentInfoResponse">
+        <wsdl:part name="parameters" element="ns:getEmploymentInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getBranchesManagerRequest">
+        <wsdl:part name="parameters" element="ns:getBranchesManager"/>
+    </wsdl:message>
+    <wsdl:message name="getBranchesManagerResponse">
+        <wsdl:part name="parameters" element="ns:getBranchesManagerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="mainRequest">
+        <wsdl:part name="parameters" element="ns:main"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeeUnderWorkflowRequest">
+        <wsdl:part name="parameters" element="ns:getAllEmployeeUnderWorkflow"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeeUnderWorkflowResponse">
+        <wsdl:part name="parameters" element="ns:getAllEmployeeUnderWorkflowResponse"/>
+    </wsdl:message>
+    <wsdl:message name="validateEmployeeLeaveRequest">
+        <wsdl:part name="parameters" element="ns:validateEmployeeLeave"/>
+    </wsdl:message>
+    <wsdl:message name="validateEmployeeLeaveResponse">
+        <wsdl:part name="parameters" element="ns:validateEmployeeLeaveResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getGradeListRequest">
+        <wsdl:part name="parameters" element="ns:getGradeList"/>
+    </wsdl:message>
+    <wsdl:message name="getGradeListResponse">
+        <wsdl:part name="parameters" element="ns:getGradeListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getBranchesRequest">
+        <wsdl:part name="parameters" element="ns:getBranches"/>
+    </wsdl:message>
+    <wsdl:message name="getBranchesResponse">
+        <wsdl:part name="parameters" element="ns:getBranchesResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeStructureLevelRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeStructureLevel"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeStructureLevelResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeStructureLevelResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getOverTimeProjectRequest">
+        <wsdl:part name="parameters" element="ns:getOverTimeProject"/>
+    </wsdl:message>
+    <wsdl:message name="getOverTimeProjectResponse">
+        <wsdl:part name="parameters" element="ns:getOverTimeProjectResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEvaluationNoteRequest">
+        <wsdl:part name="parameters" element="ns:getEvaluationNote"/>
+    </wsdl:message>
+    <wsdl:message name="getEvaluationNoteResponse">
+        <wsdl:part name="parameters" element="ns:getEvaluationNoteResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getDeputyGeneralManagerRequest">
+        <wsdl:part name="parameters" element="ns:getDeputyGeneralManager"/>
+    </wsdl:message>
+    <wsdl:message name="getDeputyGeneralManagerResponse">
+        <wsdl:part name="parameters" element="ns:getDeputyGeneralManagerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getDecisionMakerInfoRequest">
+        <wsdl:part name="parameters" element="ns:getDecisionMakerInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getDecisionMakerInfoResponse">
+        <wsdl:part name="parameters" element="ns:getDecisionMakerInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="isGeneralManagerRequest">
+        <wsdl:part name="parameters" element="ns:isGeneralManager"/>
+    </wsdl:message>
+    <wsdl:message name="isGeneralManagerResponse">
+        <wsdl:part name="parameters" element="ns:isGeneralManagerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getNumberOfLevelsForEmployeeRequest">
+        <wsdl:part name="parameters" element="ns:getNumberOfLevelsForEmployee"/>
+    </wsdl:message>
+    <wsdl:message name="getNumberOfLevelsForEmployeeResponse">
+        <wsdl:part name="parameters" element="ns:getNumberOfLevelsForEmployeeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="updateMaritalStatusRequest">
+        <wsdl:part name="parameters" element="ns:updateMaritalStatus"/>
+    </wsdl:message>
+    <wsdl:message name="updateMaritalStatusResponse">
+        <wsdl:part name="parameters" element="ns:updateMaritalStatusResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getManagerInfoByBranchIdRequest">
+        <wsdl:part name="parameters" element="ns:getManagerInfoByBranchId"/>
+    </wsdl:message>
+    <wsdl:message name="getManagerInfoByBranchIdResponse">
+        <wsdl:part name="parameters" element="ns:getManagerInfoByBranchIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addValidateOverTimeRequest">
+        <wsdl:part name="parameters" element="ns:addValidateOverTime"/>
+    </wsdl:message>
+    <wsdl:message name="addValidateOverTimeResponse">
+        <wsdl:part name="parameters" element="ns:addValidateOverTimeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getCommitteeInfoRequest">
+        <wsdl:part name="parameters" element="ns:getCommitteeInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getCommitteeInfoResponse">
+        <wsdl:part name="parameters" element="ns:getCommitteeInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getManagerPositionInfoRequest">
+        <wsdl:part name="parameters" element="ns:getManagerPositionInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getManagerPositionInfoResponse">
+        <wsdl:part name="parameters" element="ns:getManagerPositionInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmployeeAddressRequest">
+        <wsdl:part name="parameters" element="ns:addUpdateEmployeeAddress"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmployeeAddressResponse">
+        <wsdl:part name="parameters" element="ns:addUpdateEmployeeAddressResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeStructureRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeStructure"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeStructureResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeStructureResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeInfoByIdRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeInfoById"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeInfoByIdResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeInfoByIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="checkHolidayRequest">
+        <wsdl:part name="parameters" element="ns:checkHoliday"/>
+    </wsdl:message>
+    <wsdl:message name="checkHolidayResponse">
+        <wsdl:part name="parameters" element="ns:checkHolidayResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeVacationToYearRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeVacationToYear"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeVacationToYearResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeVacationToYearResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addEmployeeLeaveRequest">
+        <wsdl:part name="parameters" element="ns:addEmployeeLeave"/>
+    </wsdl:message>
+    <wsdl:message name="addEmployeeLeaveResponse">
+        <wsdl:part name="parameters" element="ns:addEmployeeLeaveResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpScientificDegreeRequest">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpScientificDegree"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpScientificDegreeResponse">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpScientificDegreeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeVacationToDateRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeVacationToDate"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeVacationToDateResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeVacationToDateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getCommiteFlageRequest">
+        <wsdl:part name="parameters" element="ns:getCommiteFlage"/>
+    </wsdl:message>
+    <wsdl:message name="getCommiteFlageResponse">
+        <wsdl:part name="parameters" element="ns:getCommiteFlageResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeTitleRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeTitle"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeTitleResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeTitleResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeeUnderManagerRequest">
+        <wsdl:part name="parameters" element="ns:getAllEmployeeUnderManager"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeeUnderManagerResponse">
+        <wsdl:part name="parameters" element="ns:getAllEmployeeUnderManagerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmpPayslipRequest">
+        <wsdl:part name="parameters" element="ns:getEmpPayslip"/>
+    </wsdl:message>
+    <wsdl:message name="getEmpPayslipResponse">
+        <wsdl:part name="parameters" element="ns:getEmpPayslipResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getFinanciaPerspectiveRequest">
+        <wsdl:part name="parameters" element="ns:getFinanciaPerspective"/>
+    </wsdl:message>
+    <wsdl:message name="getFinanciaPerspectiveResponse">
+        <wsdl:part name="parameters" element="ns:getFinanciaPerspectiveResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpDependencyRequest">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpDependency"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateEmpDependencyResponse">
+        <wsdl:part name="parameters" element="ns:addUpdateEmpDependencyResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getUnpayedDecisionMakerInfoRequest">
+        <wsdl:part name="parameters" element="ns:getUnpayedDecisionMakerInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getUnpayedDecisionMakerInfoResponse">
+        <wsdl:part name="parameters" element="ns:getUnpayedDecisionMakerInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAdministrationDepartmentsRequest">
+        <wsdl:part name="parameters" element="ns:getAdministrationDepartments"/>
+    </wsdl:message>
+    <wsdl:message name="getAdministrationDepartmentsResponse">
+        <wsdl:part name="parameters" element="ns:getAdministrationDepartmentsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getGradeEvaluationGradeCountRequest">
+        <wsdl:part name="parameters" element="ns:getGradeEvaluationGradeCount"/>
+    </wsdl:message>
+    <wsdl:message name="getGradeEvaluationGradeCountResponse">
+        <wsdl:part name="parameters" element="ns:getGradeEvaluationGradeCountResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEvaluationPerspectiveRequest">
+        <wsdl:part name="parameters" element="ns:getEvaluationPerspective"/>
+    </wsdl:message>
+    <wsdl:message name="getEvaluationPerspectiveResponse">
+        <wsdl:part name="parameters" element="ns:getEvaluationPerspectiveResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeInfoDetailRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeInfoDetail"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeInfoDetailResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeInfoDetailResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getTransferNoteRequest">
+        <wsdl:part name="parameters" element="ns:getTransferNote"/>
+    </wsdl:message>
+    <wsdl:message name="getTransferNoteResponse">
+        <wsdl:part name="parameters" element="ns:getTransferNoteResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getGradeRatioListRequest">
+        <wsdl:part name="parameters" element="ns:getGradeRatioList"/>
+    </wsdl:message>
+    <wsdl:message name="getGradeRatioListResponse">
+        <wsdl:part name="parameters" element="ns:getGradeRatioListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSelectedEmployeePermissionRequest">
+        <wsdl:part name="parameters" element="ns:getSelectedEmployeePermission"/>
+    </wsdl:message>
+    <wsdl:message name="getSelectedEmployeePermissionResponse">
+        <wsdl:part name="parameters" element="ns:getSelectedEmployeePermissionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmpEvaluationInfoRequest">
+        <wsdl:part name="parameters" element="ns:getEmpEvaluationInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getEmpEvaluationInfoResponse">
+        <wsdl:part name="parameters" element="ns:getEmpEvaluationInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeesByBranchDepartmentRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeesByBranchDepartment"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeesByBranchDepartmentResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeesByBranchDepartmentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeeRequest">
+        <wsdl:part name="parameters" element="ns:getAllEmployee"/>
+    </wsdl:message>
+    <wsdl:message name="getAllEmployeeResponse">
+        <wsdl:part name="parameters" element="ns:getAllEmployeeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getVacationHistoryRequest">
+        <wsdl:part name="parameters" element="ns:getVacationHistory"/>
+    </wsdl:message>
+    <wsdl:message name="getVacationHistoryResponse">
+        <wsdl:part name="parameters" element="ns:getVacationHistoryResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeFinancialInfoRequest">
+        <wsdl:part name="parameters" element="ns:getEmployeeFinancialInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getEmployeeFinancialInfoResponse">
+        <wsdl:part name="parameters" element="ns:getEmployeeFinancialInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="saveEvaluationRequestRequest">
+        <wsdl:part name="parameters" element="ns:saveEvaluationRequest"/>
+    </wsdl:message>
+    <wsdl:message name="saveEvaluationRequestResponse">
+        <wsdl:part name="parameters" element="ns:saveEvaluationRequestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllApprovedManagerRequest">
+        <wsdl:part name="parameters" element="ns:getAllApprovedManager"/>
+    </wsdl:message>
+    <wsdl:message name="getAllApprovedManagerResponse">
+        <wsdl:part name="parameters" element="ns:getAllApprovedManagerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addValidateEmployeeVacationRequest">
+        <wsdl:part name="parameters" element="ns:addValidateEmployeeVacation"/>
+    </wsdl:message>
+    <wsdl:message name="addValidateEmployeeVacationResponse">
+        <wsdl:part name="parameters" element="ns:addValidateEmployeeVacationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateVocationalCertificateRequest">
+        <wsdl:part name="parameters" element="ns:addUpdateVocationalCertificate"/>
+    </wsdl:message>
+    <wsdl:message name="addUpdateVocationalCertificateResponse">
+        <wsdl:part name="parameters" element="ns:addUpdateVocationalCertificateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllSpareEmployeeUnderEmployeeRequest">
+        <wsdl:part name="parameters" element="ns:getAllSpareEmployeeUnderEmployee"/>
+    </wsdl:message>
+    <wsdl:message name="getAllSpareEmployeeUnderEmployeeResponse">
+        <wsdl:part name="parameters" element="ns:getAllSpareEmployeeUnderEmployeeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getEmailRestrictionUsersRequest">
+        <wsdl:part name="parameters" element="ns:getEmailRestrictionUsers"/>
+    </wsdl:message>
+    <wsdl:message name="getEmailRestrictionUsersResponse">
+        <wsdl:part name="parameters" element="ns:getEmailRestrictionUsersResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="EmployeeServicePortType">
+        <wsdl:operation name="addUpdateEmpDocument">
+            <wsdl:input message="ns:addUpdateEmpDocumentRequest" wsaw:Action="urn:addUpdateEmpDocument"/>
+            <wsdl:output message="ns:addUpdateEmpDocumentResponse" wsaw:Action="urn:addUpdateEmpDocumentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addUpdateEmpDependenciesKids">
+            <wsdl:input message="ns:addUpdateEmpDependenciesKidsRequest" wsaw:Action="urn:addUpdateEmpDependenciesKids"/>
+            <wsdl:output message="ns:addUpdateEmpDependenciesKidsResponse" wsaw:Action="urn:addUpdateEmpDependenciesKidsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEvaluationHistory">
+            <wsdl:input message="ns:getEvaluationHistoryRequest" wsaw:Action="urn:getEvaluationHistory"/>
+            <wsdl:output message="ns:getEvaluationHistoryResponse" wsaw:Action="urn:getEvaluationHistoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeVacationDuration">
+            <wsdl:input message="ns:getEmployeeVacationDurationRequest" wsaw:Action="urn:getEmployeeVacationDuration"/>
+            <wsdl:output message="ns:getEmployeeVacationDurationResponse" wsaw:Action="urn:getEmployeeVacationDurationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeByWorkFlowLevel">
+            <wsdl:input message="ns:getEmployeeByWorkFlowLevelRequest" wsaw:Action="urn:getEmployeeByWorkFlowLevel"/>
+            <wsdl:output message="ns:getEmployeeByWorkFlowLevelResponse" wsaw:Action="urn:getEmployeeByWorkFlowLevelResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmploymentInfo">
+            <wsdl:input message="ns:getEmploymentInfoRequest" wsaw:Action="urn:getEmploymentInfo"/>
+            <wsdl:output message="ns:getEmploymentInfoResponse" wsaw:Action="urn:getEmploymentInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getBranchesManager">
+            <wsdl:input message="ns:getBranchesManagerRequest" wsaw:Action="urn:getBranchesManager"/>
+            <wsdl:output message="ns:getBranchesManagerResponse" wsaw:Action="urn:getBranchesManagerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="main">
+            <wsdl:input message="ns:mainRequest" wsaw:Action="urn:main"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllEmployeeUnderWorkflow">
+            <wsdl:input message="ns:getAllEmployeeUnderWorkflowRequest" wsaw:Action="urn:getAllEmployeeUnderWorkflow"/>
+            <wsdl:output message="ns:getAllEmployeeUnderWorkflowResponse" wsaw:Action="urn:getAllEmployeeUnderWorkflowResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="validateEmployeeLeave">
+            <wsdl:input message="ns:validateEmployeeLeaveRequest" wsaw:Action="urn:validateEmployeeLeave"/>
+            <wsdl:output message="ns:validateEmployeeLeaveResponse" wsaw:Action="urn:validateEmployeeLeaveResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getGradeList">
+            <wsdl:input message="ns:getGradeListRequest" wsaw:Action="urn:getGradeList"/>
+            <wsdl:output message="ns:getGradeListResponse" wsaw:Action="urn:getGradeListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getBranches">
+            <wsdl:input message="ns:getBranchesRequest" wsaw:Action="urn:getBranches"/>
+            <wsdl:output message="ns:getBranchesResponse" wsaw:Action="urn:getBranchesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeStructureLevel">
+            <wsdl:input message="ns:getEmployeeStructureLevelRequest" wsaw:Action="urn:getEmployeeStructureLevel"/>
+            <wsdl:output message="ns:getEmployeeStructureLevelResponse" wsaw:Action="urn:getEmployeeStructureLevelResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getOverTimeProject">
+            <wsdl:input message="ns:getOverTimeProjectRequest" wsaw:Action="urn:getOverTimeProject"/>
+            <wsdl:output message="ns:getOverTimeProjectResponse" wsaw:Action="urn:getOverTimeProjectResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEvaluationNote">
+            <wsdl:input message="ns:getEvaluationNoteRequest" wsaw:Action="urn:getEvaluationNote"/>
+            <wsdl:output message="ns:getEvaluationNoteResponse" wsaw:Action="urn:getEvaluationNoteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDeputyGeneralManager">
+            <wsdl:input message="ns:getDeputyGeneralManagerRequest" wsaw:Action="urn:getDeputyGeneralManager"/>
+            <wsdl:output message="ns:getDeputyGeneralManagerResponse" wsaw:Action="urn:getDeputyGeneralManagerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDecisionMakerInfo">
+            <wsdl:input message="ns:getDecisionMakerInfoRequest" wsaw:Action="urn:getDecisionMakerInfo"/>
+            <wsdl:output message="ns:getDecisionMakerInfoResponse" wsaw:Action="urn:getDecisionMakerInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="isGeneralManager">
+            <wsdl:input message="ns:isGeneralManagerRequest" wsaw:Action="urn:isGeneralManager"/>
+            <wsdl:output message="ns:isGeneralManagerResponse" wsaw:Action="urn:isGeneralManagerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getNumberOfLevelsForEmployee">
+            <wsdl:input message="ns:getNumberOfLevelsForEmployeeRequest" wsaw:Action="urn:getNumberOfLevelsForEmployee"/>
+            <wsdl:output message="ns:getNumberOfLevelsForEmployeeResponse" wsaw:Action="urn:getNumberOfLevelsForEmployeeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateMaritalStatus">
+            <wsdl:input message="ns:updateMaritalStatusRequest" wsaw:Action="urn:updateMaritalStatus"/>
+            <wsdl:output message="ns:updateMaritalStatusResponse" wsaw:Action="urn:updateMaritalStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getManagerInfoByBranchId">
+            <wsdl:input message="ns:getManagerInfoByBranchIdRequest" wsaw:Action="urn:getManagerInfoByBranchId"/>
+            <wsdl:output message="ns:getManagerInfoByBranchIdResponse" wsaw:Action="urn:getManagerInfoByBranchIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addValidateOverTime">
+            <wsdl:input message="ns:addValidateOverTimeRequest" wsaw:Action="urn:addValidateOverTime"/>
+            <wsdl:output message="ns:addValidateOverTimeResponse" wsaw:Action="urn:addValidateOverTimeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCommitteeInfo">
+            <wsdl:input message="ns:getCommitteeInfoRequest" wsaw:Action="urn:getCommitteeInfo"/>
+            <wsdl:output message="ns:getCommitteeInfoResponse" wsaw:Action="urn:getCommitteeInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getManagerPositionInfo">
+            <wsdl:input message="ns:getManagerPositionInfoRequest" wsaw:Action="urn:getManagerPositionInfo"/>
+            <wsdl:output message="ns:getManagerPositionInfoResponse" wsaw:Action="urn:getManagerPositionInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addUpdateEmployeeAddress">
+            <wsdl:input message="ns:addUpdateEmployeeAddressRequest" wsaw:Action="urn:addUpdateEmployeeAddress"/>
+            <wsdl:output message="ns:addUpdateEmployeeAddressResponse" wsaw:Action="urn:addUpdateEmployeeAddressResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeStructure">
+            <wsdl:input message="ns:getEmployeeStructureRequest" wsaw:Action="urn:getEmployeeStructure"/>
+            <wsdl:output message="ns:getEmployeeStructureResponse" wsaw:Action="urn:getEmployeeStructureResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeInfoById">
+            <wsdl:input message="ns:getEmployeeInfoByIdRequest" wsaw:Action="urn:getEmployeeInfoById"/>
+            <wsdl:output message="ns:getEmployeeInfoByIdResponse" wsaw:Action="urn:getEmployeeInfoByIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="checkHoliday">
+            <wsdl:input message="ns:checkHolidayRequest" wsaw:Action="urn:checkHoliday"/>
+            <wsdl:output message="ns:checkHolidayResponse" wsaw:Action="urn:checkHolidayResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeVacationToYear">
+            <wsdl:input message="ns:getEmployeeVacationToYearRequest" wsaw:Action="urn:getEmployeeVacationToYear"/>
+            <wsdl:output message="ns:getEmployeeVacationToYearResponse" wsaw:Action="urn:getEmployeeVacationToYearResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addEmployeeLeave">
+            <wsdl:input message="ns:addEmployeeLeaveRequest" wsaw:Action="urn:addEmployeeLeave"/>
+            <wsdl:output message="ns:addEmployeeLeaveResponse" wsaw:Action="urn:addEmployeeLeaveResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addUpdateEmpScientificDegree">
+            <wsdl:input message="ns:addUpdateEmpScientificDegreeRequest" wsaw:Action="urn:addUpdateEmpScientificDegree"/>
+            <wsdl:output message="ns:addUpdateEmpScientificDegreeResponse" wsaw:Action="urn:addUpdateEmpScientificDegreeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeVacationToDate">
+            <wsdl:input message="ns:getEmployeeVacationToDateRequest" wsaw:Action="urn:getEmployeeVacationToDate"/>
+            <wsdl:output message="ns:getEmployeeVacationToDateResponse" wsaw:Action="urn:getEmployeeVacationToDateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getCommiteFlage">
+            <wsdl:input message="ns:getCommiteFlageRequest" wsaw:Action="urn:getCommiteFlage"/>
+            <wsdl:output message="ns:getCommiteFlageResponse" wsaw:Action="urn:getCommiteFlageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeTitle">
+            <wsdl:input message="ns:getEmployeeTitleRequest" wsaw:Action="urn:getEmployeeTitle"/>
+            <wsdl:output message="ns:getEmployeeTitleResponse" wsaw:Action="urn:getEmployeeTitleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllEmployeeUnderManager">
+            <wsdl:input message="ns:getAllEmployeeUnderManagerRequest" wsaw:Action="urn:getAllEmployeeUnderManager"/>
+            <wsdl:output message="ns:getAllEmployeeUnderManagerResponse" wsaw:Action="urn:getAllEmployeeUnderManagerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmpPayslip">
+            <wsdl:input message="ns:getEmpPayslipRequest" wsaw:Action="urn:getEmpPayslip"/>
+            <wsdl:output message="ns:getEmpPayslipResponse" wsaw:Action="urn:getEmpPayslipResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getFinanciaPerspective">
+            <wsdl:input message="ns:getFinanciaPerspectiveRequest" wsaw:Action="urn:getFinanciaPerspective"/>
+            <wsdl:output message="ns:getFinanciaPerspectiveResponse" wsaw:Action="urn:getFinanciaPerspectiveResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addUpdateEmpDependency">
+            <wsdl:input message="ns:addUpdateEmpDependencyRequest" wsaw:Action="urn:addUpdateEmpDependency"/>
+            <wsdl:output message="ns:addUpdateEmpDependencyResponse" wsaw:Action="urn:addUpdateEmpDependencyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getUnpayedDecisionMakerInfo">
+            <wsdl:input message="ns:getUnpayedDecisionMakerInfoRequest" wsaw:Action="urn:getUnpayedDecisionMakerInfo"/>
+            <wsdl:output message="ns:getUnpayedDecisionMakerInfoResponse" wsaw:Action="urn:getUnpayedDecisionMakerInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAdministrationDepartments">
+            <wsdl:input message="ns:getAdministrationDepartmentsRequest" wsaw:Action="urn:getAdministrationDepartments"/>
+            <wsdl:output message="ns:getAdministrationDepartmentsResponse" wsaw:Action="urn:getAdministrationDepartmentsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getGradeEvaluationGradeCount">
+            <wsdl:input message="ns:getGradeEvaluationGradeCountRequest" wsaw:Action="urn:getGradeEvaluationGradeCount"/>
+            <wsdl:output message="ns:getGradeEvaluationGradeCountResponse" wsaw:Action="urn:getGradeEvaluationGradeCountResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEvaluationPerspective">
+            <wsdl:input message="ns:getEvaluationPerspectiveRequest" wsaw:Action="urn:getEvaluationPerspective"/>
+            <wsdl:output message="ns:getEvaluationPerspectiveResponse" wsaw:Action="urn:getEvaluationPerspectiveResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeInfoDetail">
+            <wsdl:input message="ns:getEmployeeInfoDetailRequest" wsaw:Action="urn:getEmployeeInfoDetail"/>
+            <wsdl:output message="ns:getEmployeeInfoDetailResponse" wsaw:Action="urn:getEmployeeInfoDetailResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getTransferNote">
+            <wsdl:input message="ns:getTransferNoteRequest" wsaw:Action="urn:getTransferNote"/>
+            <wsdl:output message="ns:getTransferNoteResponse" wsaw:Action="urn:getTransferNoteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getGradeRatioList">
+            <wsdl:input message="ns:getGradeRatioListRequest" wsaw:Action="urn:getGradeRatioList"/>
+            <wsdl:output message="ns:getGradeRatioListResponse" wsaw:Action="urn:getGradeRatioListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSelectedEmployeePermission">
+            <wsdl:input message="ns:getSelectedEmployeePermissionRequest" wsaw:Action="urn:getSelectedEmployeePermission"/>
+            <wsdl:output message="ns:getSelectedEmployeePermissionResponse" wsaw:Action="urn:getSelectedEmployeePermissionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmpEvaluationInfo">
+            <wsdl:input message="ns:getEmpEvaluationInfoRequest" wsaw:Action="urn:getEmpEvaluationInfo"/>
+            <wsdl:output message="ns:getEmpEvaluationInfoResponse" wsaw:Action="urn:getEmpEvaluationInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeesByBranchDepartment">
+            <wsdl:input message="ns:getEmployeesByBranchDepartmentRequest" wsaw:Action="urn:getEmployeesByBranchDepartment"/>
+            <wsdl:output message="ns:getEmployeesByBranchDepartmentResponse" wsaw:Action="urn:getEmployeesByBranchDepartmentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllEmployee">
+            <wsdl:input message="ns:getAllEmployeeRequest" wsaw:Action="urn:getAllEmployee"/>
+            <wsdl:output message="ns:getAllEmployeeResponse" wsaw:Action="urn:getAllEmployeeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getVacationHistory">
+            <wsdl:input message="ns:getVacationHistoryRequest" wsaw:Action="urn:getVacationHistory"/>
+            <wsdl:output message="ns:getVacationHistoryResponse" wsaw:Action="urn:getVacationHistoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmployeeFinancialInfo">
+            <wsdl:input message="ns:getEmployeeFinancialInfoRequest" wsaw:Action="urn:getEmployeeFinancialInfo"/>
+            <wsdl:output message="ns:getEmployeeFinancialInfoResponse" wsaw:Action="urn:getEmployeeFinancialInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="saveEvaluationRequest">
+            <wsdl:input message="ns:saveEvaluationRequestRequest" wsaw:Action="urn:saveEvaluationRequest"/>
+            <wsdl:output message="ns:saveEvaluationRequestResponse" wsaw:Action="urn:saveEvaluationRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllApprovedManager">
+            <wsdl:input message="ns:getAllApprovedManagerRequest" wsaw:Action="urn:getAllApprovedManager"/>
+            <wsdl:output message="ns:getAllApprovedManagerResponse" wsaw:Action="urn:getAllApprovedManagerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addValidateEmployeeVacation">
+            <wsdl:input message="ns:addValidateEmployeeVacationRequest" wsaw:Action="urn:addValidateEmployeeVacation"/>
+            <wsdl:output message="ns:addValidateEmployeeVacationResponse" wsaw:Action="urn:addValidateEmployeeVacationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addUpdateVocationalCertificate">
+            <wsdl:input message="ns:addUpdateVocationalCertificateRequest" wsaw:Action="urn:addUpdateVocationalCertificate"/>
+            <wsdl:output message="ns:addUpdateVocationalCertificateResponse" wsaw:Action="urn:addUpdateVocationalCertificateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllSpareEmployeeUnderEmployee">
+            <wsdl:input message="ns:getAllSpareEmployeeUnderEmployeeRequest" wsaw:Action="urn:getAllSpareEmployeeUnderEmployee"/>
+            <wsdl:output message="ns:getAllSpareEmployeeUnderEmployeeResponse" wsaw:Action="urn:getAllSpareEmployeeUnderEmployeeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getEmailRestrictionUsers">
+            <wsdl:input message="ns:getEmailRestrictionUsersRequest" wsaw:Action="urn:getEmailRestrictionUsers"/>
+            <wsdl:output message="ns:getEmailRestrictionUsersResponse" wsaw:Action="urn:getEmailRestrictionUsersResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

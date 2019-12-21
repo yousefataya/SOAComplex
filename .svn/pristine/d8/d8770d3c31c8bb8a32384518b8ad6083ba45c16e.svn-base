@@ -1,0 +1,183 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Wed Apr 18 09:24:41 EEST 2018
+  Author:  malhaj
+  Type: BPEL 2.0 Subprocess
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<bpelx:subProcess name="LocationsProcess"
+               targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/LocationsProcess"
+               xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMCloudServices/LocationsProcess"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:ui="http://xmlns.oracle.com/soa/designer"
+               xsi:type="bpel:tProcess" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMCloudServices/StagedbReference"
+                  xmlns:ns2="http://xmlns.oracle.com/HCMCloudServices/HCMLocations/HCMLocationsProcess"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/StagedbReference"
+                  xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+                  xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+                  xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+                  xmlns:ess="http://xmlns.oracle.com/scheduler" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+                  xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+                  xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+                  xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+                  xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+                  xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+                  xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+                  xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/HCMCloudServices/HCMCloudServices/auditDbReference"
+                  xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/sp/auditDbReference">
+   <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+  <partnerLinks>
+    <partnerLink name="StagedbReference" partnerLinkType="ns1:StagedbReference_plt"
+                 partnerRole="StagedbReference_role"/>
+    <partnerLink name="LocationsSOAPRef" partnerLinkType="ns2:HCMLocationsProcess"
+                 partnerRole="HCMLocationsProcessProvider"/>
+    <partnerLink name="auditDbReference" partnerLinkType="ns4:auditDbReference_plt"
+                 partnerRole="auditDbReference_role"/>
+  </partnerLinks>
+  <variables>
+    <variable name="Variable1" type="xsd:string"/>
+     <variable name="vStatusMode" type="xsd:integer"/>
+    <variable name="vAPIResult" type="xsd:string"/>
+    <variable name="batchNumber" type="xsd:string"/>
+    <variable name="requestType" type="xsd:string"/>
+    <variable name="InvokeDBGetDefValue_StagedbReference_InputVariable" messageType="ns1:args_in_msg"/>
+    <variable name="InvokeDBGetDefValue_StagedbReference_OutputVariable" messageType="ns1:args_out_msg"/>
+    <variable name="InvokeLocationStage_process_InputVariable" messageType="ns2:HCMLocationsProcessRequestMessage"/>
+    <variable name="InvokeLocationStage_process_OutputVariable" messageType="ns2:HCMLocationsProcessResponseMessage"/>
+    <variable name="InvokeDBAudit_auditDbReference_InputVariable" messageType="ns4:args_in_msg"/>
+    
+    <variable name="WSDLLink" type="xsd:string"/>
+    <variable name="vURI" type="xsd:string"/>
+
+    
+  </variables>
+  <sequence name="main">
+   <assign name="AssignLinkId">
+      <copy>
+        <from>3</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBGetDefValue_StagedbReference_InputVariable.InputParameters/ns3:PLINK_ID</to>
+      </copy>
+      <copy>
+        <from>1</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vStatusMode</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeDBGetDefValue" partnerLink="StagedbReference"
+            portType="ns1:StagedbReference_ptt" operation="StagedbReference"
+            inputVariable="InvokeDBGetDefValue_StagedbReference_InputVariable"
+            outputVariable="InvokeDBGetDefValue_StagedbReference_OutputVariable" bpelx:invokeAsDetail="no"/>
+    <assign name="InitialStageAssign">
+      <copy>
+        <from>$vStatusMode</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:status</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PSTAGE_LINK</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$WSDLLink</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PSTAGE_SOA_LINK_URI</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vURI</to>
+      </copy>
+      <copy bpelx:insertMissingToData="yes">
+        <from>$batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:batchNumber</to>
+      </copy>
+      <copy bpelx:insertMissingToData="yes">
+        <from>$requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:requestType</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PCOMPOSITE_NAME</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:compositeName</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PCSF_KEY</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:key</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PCSF_MAP</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:map</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PLSR_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:lsrDate</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PCOMPOSITE_LINK</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeLocationStage_process_InputVariable.payload/ns2:compositeLink</to>
+      </copy>
+    </assign>
+    <invoke name="InvokeLocationStage" partnerLink="LocationsSOAPRef" portType="ns2:HCMLocationsProcess"
+            operation="process" inputVariable="InvokeLocationStage_process_InputVariable"
+            outputVariable="InvokeLocationStage_process_OutputVariable" bpelx:invokeAsDetail="no">
+          <bpelx:toProperties>
+                  <bpelx:toProperty name="endpointWSDL">$WSDLLink</bpelx:toProperty>
+                  <bpelx:toProperty name="endpointURI">$vURI</bpelx:toProperty>
+ </bpelx:toProperties>  
+            
+    </invoke>        
+    <assign name="AssignResult">
+      <copy ignoreMissingFromData="yes">
+        <from>$InvokeLocationStage_process_OutputVariable.payload/ns2:result</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vAPIResult</to>
+      </copy>
+    </assign>
+    <assign name="AssignDBAudit">
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PCOMPOSITE_NAME</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:PCOMPOSITE_NAME</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:POLD_LSR_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:POLD_LSR_DATE</to>
+      </copy>
+      <copy>
+        <from>ora:getFlowId()</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:PID</to>
+      </copy>
+      <copy>
+        <from>$InvokeDBGetDefValue_StagedbReference_OutputVariable.OutputParameters/ns3:PLSR_DATE</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:PLSR_DATE</to>
+      </copy>
+      <copy>
+        <from>$batchNumber</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:PBATCH_NUM</to>
+      </copy>
+      <copy>
+        <from>$requestType</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:PREQUEST_TYPE</to>
+      </copy>
+      <copy>
+        <from>concat($vStatusMode,'-',$vAPIResult)</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$InvokeDBAudit_auditDbReference_InputVariable.InputParameters/ns5:PRESPONCE_STATUS</to>
+      </copy>
+    </assign>
+    
+    <invoke name="InvokeDBAudit" partnerLink="auditDbReference"
+            portType="ns4:auditDbReference_ptt" operation="auditDbReference"
+            inputVariable="InvokeDBAudit_auditDbReference_InputVariable" bpelx:invokeAsDetail="no"/>
+            
+         <assign name="AssignMax">
+      <copy>
+        <from>$vStatusMode + 1</from>
+        <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$vStatusMode</to>
+      </copy>
+    </assign>       
+            
+  </sequence>
+</bpelx:subProcess>

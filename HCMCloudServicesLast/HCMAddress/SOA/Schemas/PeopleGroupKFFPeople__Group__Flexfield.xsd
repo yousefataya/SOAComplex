@@ -1,0 +1,19 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<xsd:schema elementFormDefault="qualified" targetNamespace="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+     xmlns="http://xmlns.oracle.com/apps/hcm/employment/core/publicFlex/peopleGroupKFF/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:include schemaLocation="PeopleGroupKFF.xsd"/>
+    <xsd:complexType name="PeopleGroupKFFPeople__Group__Flexfield">
+        <xsd:annotation>
+            <xsd:appinfo source="http://xmlns.oracle.com/adf/svc/metadata/">
+                <key xmlns="http://xmlns.oracle.com/adf/svc/metadata/">
+                    <attribute>_PEOPLE_GROUP_ID</attribute>
+                </key>
+            </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="PeopleGroupKFF"/>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:element name="peopleGroupKFFPeople__Group__Flexfield" type="PeopleGroupKFFPeople__Group__Flexfield"/>
+</xsd:schema>

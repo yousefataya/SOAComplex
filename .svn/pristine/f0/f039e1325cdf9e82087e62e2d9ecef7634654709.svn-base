@@ -1,0 +1,71 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Sun Feb 04 14:40:49 EET 2018
+  Author:  Mshkeeb
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcess"
+         targetNamespace="http://xmlns.oracle.com/SAVEREWARDS/GetTChartOfAccount/BPELProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/SAVEREWARDS/GetTChartOfAccount/BPELProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/GetTChartOfAccount/dbReference"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/sp/dbReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="http://xmlns.oracle.com/soa/designer">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/SAVEREWARDS/GetTChartOfAccount/dbReference"
+            location="../WSDLs/dbReference.wsdl" importType="http://schemas.xmlsoap.org/wsdl/" ui:processWSDL="true"/>
+    <partnerLinks>
+        <partnerLink name="GetChartofAccountservice" bpelx:wadl="yes"/>
+        <partnerLink name="dbReference" partnerLinkType="ns2:dbReference_plt" partnerRole="dbReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object" />
+        <variable name="outputVar" bpelx:json="object" />
+        <variable name="dbReference_InputVariable" messageType="ns2:args_in_msg"/>
+        <variable name="dbReference_OutputVariable" messageType="ns2:args_out_msg"/>
+        <variable name="P_AcntNum" type="xsd:string"/>
+        <variable name="Coa_Desc" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="Receive1" partnerLink="GetChartofAccountservice" variable="inputVar" bpelx:method="GetAccount"
+                 createInstance="yes"/>
+        <assign name="AssignInputdata">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.P_AcntNum</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$dbReference_InputVariable.InputParameters/ns3:P_ACNTNUM</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke1" bpelx:invokeAsDetail="no" partnerLink="dbReference" portType="ns2:dbReference_ptt"
+                operation="dbReference" inputVariable="dbReference_InputVariable"
+                outputVariable="dbReference_OutputVariable"/>
+        <assign name="AssignOutput">
+            <copy>
+                <from>$dbReference_OutputVariable.OutputParameters/ns3:GET_COA_DESC</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Coa_Desc</to>
+            </copy>
+        </assign>
+        <assign name="AssignOut">
+            <copy>
+                <from>$Coa_Desc</from>
+                <to expressionLanguage="javascript">process.outputVar.result</to>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="GetChartofAccountservice" variable="outputVar" bpelx:method="GetAccount"/>
+    </sequence>
+</process>

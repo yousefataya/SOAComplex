@@ -1,0 +1,81 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer
+
+  Created: Sun Feb 04 14:59:37 IST 2018
+  Author:  User
+  Type: BPEL 2.0 Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="resetVoucherProcess"
+         targetNamespace="http://xmlns.oracle.com/FIXED_ASSETS/ResetVoucher/resetVoucherProcess"
+         xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:client="http://xmlns.oracle.com/FIXED_ASSETS/ResetVoucher/resetVoucherProcess"
+         xmlns:ora="http://schemas.oracle.com/xpath/extension"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns1="json" xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/ResetVoucher/cbcReference"
+         queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116"
+         suppressJoinFailure="no" exitOnStandardFault="no"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/FIXED_ASSETS/ResetVoucher/resetVoucherReference"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/sp/resetVoucherReference">
+
+    <!--
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       ORCHESTRATION LOGIC
+       Set of activities coordinating the flow of messages across the
+       services integrated within this business process
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <partnerLinks>
+        <partnerLink name="resetVoucher" bpelx:wadl="yes"/>
+        <partnerLink name="resetVoucherReference" partnerLinkType="ns3:resetVoucherReference_plt"
+                     partnerRole="resetVoucherReference_role"/>
+    </partnerLinks>
+    <variables>
+        <variable name="inputVar" bpelx:json="object"/>
+        <variable name="outputVar" bpelx:json="object"/>
+        <variable name="Invoke_resetVoucherReference_InputVariable" messageType="ns3:args_in_msg"/>
+        <variable name="Invoke_resetVoucherReference_OutputVariable" messageType="ns3:args_out_msg"/>
+        <variable name="transactionNumber" type="xsd:string"/>
+        <variable name="errorCode" type="xsd:string"/>
+    </variables>
+    <sequence name="main">
+        <receive name="Receive1" partnerLink="resetVoucher" variable="inputVar" bpelx:method="resetVoucher"
+                 createInstance="yes"/>
+        <assign name="Assign_input">
+            <copy>
+                <from expressionLanguage="javascript">process.inputVar.transactionNumber</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$Invoke_resetVoucherReference_InputVariable.InputParameters/ns4:P_TRSH_NUM</to>
+            </copy>
+        </assign>
+        <invoke name="Invoke" bpelx:invokeAsDetail="no" partnerLink="resetVoucherReference"
+                portType="ns3:resetVoucherReference_ptt" operation="resetVoucherReference"
+                inputVariable="Invoke_resetVoucherReference_InputVariable"
+                outputVariable="Invoke_resetVoucherReference_OutputVariable"/>
+        <assign name="Assign_semiOutput">
+            <copy>
+                <from>$Invoke_resetVoucherReference_OutputVariable.OutputParameters/ns4:P_TRSH_NUM</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$transactionNumber</to>
+            </copy>
+            <copy>
+                <from>$Invoke_resetVoucherReference_OutputVariable.OutputParameters/ns4:P_ERROR_CODE</from>
+                <to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">$errorCode</to>
+            </copy>
+        </assign>
+        <assign name="Assign_finalOutput">
+            <copy>
+                <from expressionLanguage="javascript">process.transactionNumber</from>
+                <to expressionLanguage="javascript">process.outputVar.transactionNumber</to>
+            </copy>
+            <copy>
+                <from expressionLanguage="javascript">process.errorCode</from>
+                <to expressionLanguage="javascript">process.outputVar.errorCode</to>
+            </copy>
+        </assign>
+        <reply name="Reply1" partnerLink="resetVoucher" variable="outputVar" bpelx:method="resetVoucher"/>
+    </sequence>
+</process>

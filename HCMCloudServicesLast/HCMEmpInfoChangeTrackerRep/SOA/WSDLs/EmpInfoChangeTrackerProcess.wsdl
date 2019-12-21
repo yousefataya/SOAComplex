@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="EmpInfoChangeTrackerProcess"
+     targetNamespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpInfoChangeTrackerRep/EmpInfoChangeTrackerProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/HCMCloudServices/HCMEmpInfoChangeTrackerRep/EmpInfoChangeTrackerProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://xmlns.oracle.com/oxp/service/PublicReportService"
+    >
+    <plnk:partnerLinkType name="EmpInfoChangeTrackerProcess">
+        <plnk:role name="EmpInfoChangeTrackerProcessProvider" portType="client:EmpInfoChangeTrackerProcess"/>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://xmlns.oracle.com/oxp/service/PublicReportService" location="ExternalReportWSSService.wsdl"/>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/HCMCloudServices/HCMEmpInfoChangeTrackerRep/EmpInfoChangeTrackerProcess"
+                 schemaLocation="../Schemas/EmpInfoChangeTrackerProcess.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="EmpInfoChangeTrackerProcessRequestMessage">
+        <wsdl:part name="payload" element="client:process"/>
+    </wsdl:message>
+    <wsdl:message name="EmpInfoChangeTrackerProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="EmpInfoChangeTrackerProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:EmpInfoChangeTrackerProcessRequestMessage"/>
+            <wsdl:output message="client:EmpInfoChangeTrackerProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

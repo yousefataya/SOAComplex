@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<adapter-config name="ATMReciveMsgReference" adapter="db" wsdlLocation="../WSDLs/ATMReciveMsgReference.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+   <connection-factory UIConnectionName="ICBS" location="eis/DB/factCBSDatabase"/>
+   <endpoint-interaction portType="ATMReciveMsgReference_ptt" operation="ATMReciveMsgReference">
+      <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+         <property name="SchemaName" value="ICBS"/>
+         <property name="PackageName" value="BF_POWERCARD_INTERFACE"/>
+         <property name="ProcedureName" value="RECEIVE_MESSAGE"/>
+         <property name="GetActiveUnitOfWork" value="false"/>
+      </interaction-spec>
+   </endpoint-interaction>
+</adapter-config>
